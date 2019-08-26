@@ -1,2 +1,2 @@
-##iTechArt JS Fullstack Students Lab
-The web part of Warehouse project
+## iTechArt JS Fullstack Students Lab
+The frontend part of Warehouse project
