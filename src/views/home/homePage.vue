@@ -1,14 +1,14 @@
 <template>
-  <div class="home">
+  <div class="homePage">
     <greetingSection msg="Welcome on Warehouse Online"/>
   </div>
 </template>
 
 <script>
-import greetingSection from './components/greetingSection';
+import greetingSection from './components/greetingSection/greetingSection';
 
 export default {
-  name: 'home',
+  name: 'homePage',
   components: {
     greetingSection
   }

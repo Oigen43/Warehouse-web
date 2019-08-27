@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '../views/Home';
-import WarehousesList from '../views/WarehousesList';
+import Home from '../views/home/homePage';
+import WarehousesList from '../views/warehousesList/warehousesListPage';
 
 Vue.use(Router);
 
