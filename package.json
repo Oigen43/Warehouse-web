@@ -42,9 +42,8 @@
     "pre-commit": "lint-staged"
   },
   "lint-staged": {
-    "*.{js,vue}": [
-      "vue-cli-service lint",
-      "git add"
+    "*.js": [
+      "npm run lint --max-warnings=0"
     ]
   }
 }
