@@ -1,5 +1,5 @@
 <template>
-  <div class='homePage'>
+  <div class='home-page'>
     <wh-greetingSection msg='Welcome on Warehouse Online'/>
   </div>
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <b-container class='greetingSection'>
+  <b-container class='greeting-section'>
     <b-row>
       <b-col><h1>{{ msg }}</h1></b-col>
     </b-row>

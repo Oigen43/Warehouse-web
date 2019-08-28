@@ -1,5 +1,5 @@
 <template>
-  <div class='warehousesList'>
+  <div class='warehouses-list'>
     <b-list-group>
       <b-list-group-item>IKEA</b-list-group-item>
       <b-list-group-item>NIKE</b-list-group-item>

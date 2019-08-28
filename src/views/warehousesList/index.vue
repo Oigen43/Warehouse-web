@@ -1,5 +1,5 @@
 <template>
-    <b-container class='warehousesListPage'>
+    <b-container class='warehouses-list-page'>
       <b-row>
         <b-col><h1>List of Warehouses</h1></b-col>
       </b-row>
