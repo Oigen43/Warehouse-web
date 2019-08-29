@@ -5,10 +5,6 @@ import store from './store';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
-import { LayoutPlugin, ListGroupPlugin } from 'bootstrap-vue';
-
-Vue.use(LayoutPlugin);
-Vue.use(ListGroupPlugin);
 
 Vue.config.productionTip = false;
 
