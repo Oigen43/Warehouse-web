@@ -1,0 +1,55 @@
+{
+  "parserOptions": {
+    "parser": "babel-eslint"
+  },
+  "extends": [
+    "@vue/eslint-config-standard",
+    "plugin:vue/essential"
+  ],
+  "root": true,
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
+  },
+  "rules": {
+    "comma-dangle": 0,
+    "comma-spacing": 1,
+    "indent": 0,
+    "no-extra-boolean-cast": 0,
+    "no-useless-return": 0,
+    "no-use-before-define": [
+      "error",
+      {
+        "functions": false,
+        "classes": true
+      }
+    ],
+    "no-unused-vars": 1,
+    "no-invalid-regexp": 2,
+    "valid-typeof": 2,
+    "no-console": 1,
+    "no-debugger": 1,
+    "padded-blocks": 1,
+    "no-multiple-empty-lines": 1,
+    "spaced-comment": 1,
+    "semi": [
+      "error",
+      "always"
+    ],
+    "space-before-function-paren": 0,
+    "standard/computed-property-even-spacing": 0,
+    "curly": [
+      2,
+      "all"
+    ],
+    "quotes": [
+      2,
+      "single",
+      {
+        "avoidEscape": true
+      }
+    ],
+  },
+  "globals": {}
+}
