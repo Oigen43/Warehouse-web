@@ -1,18 +1,12 @@
 <template>
   <div class='app'>
-    <w-navigation></w-navigation>
     <router-view />
   </div>
 </template>
 
 <script>
-  import WNavigation from '../components/WNavigation';
-
   export default {
-    name: 'app',
-    components: {
-      WNavigation
-    }
+    name: 'app'
   };
 </script>
 
