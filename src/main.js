@@ -5,13 +5,10 @@ import store from './store';
 
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
-import { LayoutPlugin, NavPlugin, ListGroupPlugin, TablePlugin, FormInputPlugin } from 'bootstrap-vue';
+import { LayoutPlugin, ListGroupPlugin } from 'bootstrap-vue';
 
 Vue.use(LayoutPlugin);
-Vue.use(NavPlugin);
 Vue.use(ListGroupPlugin);
-Vue.use(TablePlugin);
-Vue.use(FormInputPlugin);
 
 Vue.config.productionTip = false;
 

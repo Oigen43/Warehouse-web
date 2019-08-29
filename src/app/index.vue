@@ -1,17 +1,17 @@
 <template>
   <div class='app'>
-    <wh-navigation></wh-navigation>
+    <w-navigation></w-navigation>
     <router-view />
   </div>
 </template>
 
 <script>
-  import navigation from '../components/navigation';
+  import WNavigation from '../components/WNavigation';
 
   export default {
     name: 'app',
     components: {
-      'wh-navigation': navigation
+      WNavigation
     }
   };
 </script>

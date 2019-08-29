@@ -1,21 +1,25 @@
 <template>
-    <b-container class='warehouses-list-page'>
+    <b-container class='w-warehouses-list-page'>
       <b-row>
         <b-col><h1>List of Warehouses</h1></b-col>
       </b-row>
       <b-row>
-        <b-col><wh-list/></b-col>
+        <b-col><w-list/></b-col>
       </b-row>
     </b-container>
 </template>
 
 <script>
-  import list from './components/list';
+  import { BContainer, BRow, BCol } from 'bootstrap-vue';
+  import WList from './components/WList';
 
   export default {
-    name: 'warehousesListPage',
+    name: 'WWarehousesListPage',
     components: {
-      'wh-list': list
+      WList,
+      BContainer,
+      BRow,
+      BCol
     }
   };
 </script>

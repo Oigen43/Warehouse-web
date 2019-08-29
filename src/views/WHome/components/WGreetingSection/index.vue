@@ -1,5 +1,5 @@
 <template>
-  <b-container class='greeting-section'>
+  <b-container class='w-greeting-section'>
     <b-row>
       <b-col><h1>{{ msg }}</h1></b-col>
     </b-row>
@@ -10,10 +10,17 @@
 </template>
 
 <script>
+  import { BContainer, BRow, BCol } from 'bootstrap-vue';
+
   export default {
-    name: 'greetingSection',
+    name: 'WGreetingSection',
     props: {
       msg: String
+    },
+    components: {
+      BContainer,
+      BRow,
+      BCol
     }
   };
 </script>

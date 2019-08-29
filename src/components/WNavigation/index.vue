@@ -1,5 +1,5 @@
 <template>
-  <b-nav class='navigation'>
+  <b-nav class='w-navigation'>
     <b-nav-item>
       <router-link to='/'>Home</router-link>
     </b-nav-item>
@@ -10,8 +10,14 @@
 </template>
 
 <script>
+  import { BNav, BNavItem } from 'bootstrap-vue';
+
   export default {
-    name: 'navigation'
+    name: 'WNavigation',
+    components: {
+      BNav,
+      BNavItem
+    }
   };
 </script>
 

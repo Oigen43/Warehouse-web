@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Home from '../views/home';
-import WarehousesList from '../views/warehousesList';
+import WHome from '../views/WHome';
+import WarehousesList from '../views/WWarehousesList';
 
 Vue.use(Router);
 
@@ -11,7 +11,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: WHome
     },
     {
       path: '/warehouses-list',
