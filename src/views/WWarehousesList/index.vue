@@ -2,12 +2,12 @@
   <div class='w-warehouses-list-page'>
     <w-navigation></w-navigation>
     <h1>List of Warehouses</h1>
-    <p> {{ list }} </p>
+    <p> {{ companies }} </p>
   </div>
 </template>
 
 <script>
-  import { BContainer, BRow, BCol } from 'bootstrap-vue';
+  import { mapActions, mapGetters } from 'vuex';
   import WNavigation from '../../components/WNavigation';
 
   export default {
@@ -15,14 +15,23 @@
     components: {
       WNavigation
     },
-    mounted: function() {
-      this.$store.dispatch('commitWarehousesList');
-      this.list = this.$store.getters.getCompaniesList;
+    created: function() {
+      this.fetchWarehousesList();
+    },
+    methods: {
+      ...mapActions({
+        fetchWarehousesList: 'commitWarehousesList'
+      })
+    },
+    computed: {
+      ...mapGetters({
+      companies: 'getCompaniesList'
+    })
     },
     data: function() {
       return {
-        list: null
-      }
+        list: []
+      };
     }
   };
 </script>
