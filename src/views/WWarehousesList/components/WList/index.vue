@@ -30,7 +30,6 @@
     },
     data: function() {
       return {
-        list: [],
         fields: ['company_name', 'address', 'description', 'date']
       };
     }
