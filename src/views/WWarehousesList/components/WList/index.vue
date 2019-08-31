@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex';
+  import { mapActions, mapState } from 'vuex';
   import { BTable } from 'bootstrap-vue';
 
   export default {
@@ -24,9 +24,9 @@
       })
     },
     computed: {
-      ...mapGetters({
-      companies: 'getCompaniesList'
-    })
+      ...mapState([
+        'companies'
+      ])
     },
     data: function() {
       return {

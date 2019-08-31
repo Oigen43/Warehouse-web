@@ -1,5 +1,3 @@
-export default {
-    COMPANIES: (state, companies) => {
-      state.companies = companies;
-    }
+export const COMPANIES = (state, companies) => {
+  state.companies = companies;
 };
