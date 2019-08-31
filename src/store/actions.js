@@ -1,7 +1,9 @@
 import api from '../utils/api';
-import * as mutationTypes from './mutation-types';
+import * as types from './mutation-types';
 
-export const commitWarehousesList = async({ commit }) => {
+export default {
+  commitWarehousesList: async({ commit }) => {
     let req = await api.fetchData();
-    commit(mutationTypes.COMPANIES, req);
+    commit(types.COMPANIES, req);
+  }
 };
