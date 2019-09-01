@@ -1,21 +1,37 @@
 <template>
   <div class='w-warehouses-list'>
-    <b-list-group>
-      <b-list-group-item>IKEA</b-list-group-item>
-      <b-list-group-item>NIKE</b-list-group-item>
-      <b-list-group-item>AMAZON.COM</b-list-group-item>
-    </b-list-group>
+    <div>
+      <b-table head-variant="light" borderless hover :items="companies" :fields="fields"></b-table>
+    </div>
   </div>
 </template>
 
 <script>
-  import { BListGroup, BListGroupItem } from 'bootstrap-vue';
+  import { mapActions, mapState } from 'vuex';
+  import { BTable } from 'bootstrap-vue';
 
   export default {
     name: 'WList',
     components: {
-      BListGroup,
-      BListGroupItem
+      BTable
+    },
+    created: function() {
+      this.fetchWarehousesList();
+    },
+    methods: {
+      ...mapActions({
+        fetchWarehousesList: 'commitWarehousesList'
+      })
+    },
+    computed: {
+      ...mapState([
+        'companies'
+      ])
+    },
+    data: function() {
+      return {
+        fields: ['company_name', 'address', 'description', 'date']
+      };
     }
   };
 </script>
