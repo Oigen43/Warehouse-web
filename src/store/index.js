@@ -8,7 +8,8 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    companies: []
+    companies: [],
+    pageLimit: 1
   },
   getters,
   mutations,
