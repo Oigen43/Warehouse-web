@@ -1,6 +1,5 @@
 <template>
   <div class='w-warehouses-list'>
-    <b-button to="/companies/add">add company</b-button>
     <div>
       <b-table head-variant="light" borderless hover :items="companies" :fields="fields"></b-table>
     </div>
@@ -9,13 +8,12 @@
 
 <script>
     import { mapActions, mapState } from 'vuex';
-    import { BTable, BButton } from 'bootstrap-vue';
+    import { BTable } from 'bootstrap-vue';
 
     export default {
         name: 'WList',
         components: {
-            BTable,
-            BButton
+            BTable
         },
         created: function () {
             this.fetchWarehousesList();
