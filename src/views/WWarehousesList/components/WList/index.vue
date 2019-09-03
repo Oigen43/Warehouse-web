@@ -1,7 +1,13 @@
 <template>
   <div class='w-warehouses-list'>
     <div>
-      <b-table head-variant="light" borderless hover :items="companiesList" :fields="fields"></b-table>
+      <b-table
+        head-variant="light"
+        borderless
+        hover
+        :items="companiesList"
+        :fields="fields"
+        ></b-table>
     </div>
   </div>
 </template>
@@ -12,7 +18,7 @@
   export default {
     name: 'WList',
     components: {
-      BTable
+      BTable,
     },
     props: ['companiesList'],
     data: function() {
