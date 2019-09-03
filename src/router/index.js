@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import WHome from '../views/WHome';
-import WarehousesList from '../views/WWarehousesList';
+import WCompaniesList from '../views/WCompaniesList';
 
 Vue.use(Router);
 
@@ -14,9 +14,9 @@ export default new Router({
       component: WHome
     },
     {
-      path: '/warehouses-list',
-      name: 'warehouses-list',
-      component: WarehousesList
+      path: '/companies',
+      name: 'companies',
+      component: WCompaniesList
     }
   ]
 });
