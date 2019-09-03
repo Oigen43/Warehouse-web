@@ -1,7 +1,7 @@
 <template>
   <div class='w-warehouses-list-page'>
     <w-navigation></w-navigation>
-    <h1>List of Warehouses</h1>
+    <h1>List of Companies</h1>
     <w-list></w-list>
   </div>
 </template>
