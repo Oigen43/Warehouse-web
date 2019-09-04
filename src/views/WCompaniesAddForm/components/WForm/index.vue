@@ -4,7 +4,7 @@
       <b-form-input
         id="company-name-input"
         size="lg"
-        v-model="form.name"
+        v-model="form.companyName"
         required
         placeholder="Company name"
         class="w-companies-add-input"
@@ -36,8 +36,8 @@
       >
         ADD COMPANY
       </b-button>
-
     </b-form>
+
     <b-button
       variant="link"
       to="/companies"
@@ -48,33 +48,37 @@
 </template>
 
 <script>
-    import { BForm, BFormInput, BButton } from 'bootstrap-vue';
+  import { mapActions } from 'vuex';
+  import { BForm, BFormInput, BButton } from 'bootstrap-vue';
 
-    export default {
-        name: 'WForm',
-        components: {
-            BForm,
-            BFormInput,
-            BButton
+  export default {
+    name: 'WForm',
+    components: {
+      BForm,
+      BFormInput,
+      BButton
+    },
+    data: function () {
+      return {
+        form: {
+          companyName: '',
+          address: '',
+          description: null,
+          active: true
         },
-        data() {
-            return {
-                form: {
-                    name: '',
-                    address: '',
-                    description: null,
-                    active: true
-                },
-                show: true
-            };
-        },
-        methods: {
-            onSubmit(evt) {
-                evt.preventDefault();
-                alert(JSON.stringify(this.form));
-            }
-        }
-    };
+        show: true
+      };
+    },
+    methods: {
+      ...mapActions({
+        sendNewCompanyData: 'createCompany'
+      }),
+      onSubmit(evt) {
+        evt.preventDefault();
+        this.sendNewCompanyData(JSON.stringify(this.form));
+      }
+    }
+  };
 </script>
 
 <style lang="scss" scoped>
