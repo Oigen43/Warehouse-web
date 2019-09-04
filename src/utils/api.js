@@ -1,8 +1,8 @@
 import axios from 'axios';
 
-async function fetchData() {
-  const req = await axios.get('http://localhost:3000/companies');
-  return req.data;
-}
-
-export default { fetchData };
+export default {
+  fetchData: async(page, perPage) => {
+    const req = await axios.get(`http://localhost:3030/companies?page=${page}&per_page=${perPage}`);
+    return req.data;
+  }
+};
