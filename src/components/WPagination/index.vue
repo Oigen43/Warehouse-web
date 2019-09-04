@@ -1,5 +1,5 @@
 <template>
-  <div class='w-warehouses-list-pagination'>
+  <div>
       <b-button
         variant="outline-secondary"
         :disabled="onFirstPage"
@@ -10,7 +10,8 @@
       <b-button
         @click="changePage(prevPage)"
         :disabled = "current < 2"
-        variant="outline-secondary">Previous</b-button>
+        variant="outline-secondary">Previous
+      </b-button>
 
       <b-button
         v-for="page in pages"
@@ -18,13 +19,15 @@
         @click="changePage(page.name)"
         :class="{active: isPageActive(page.name)}"
         variant="outline-secondary">
-        {{ page.name }}</b-button>
+        {{ page.name }}
+      </b-button>
 
       <b-button
         @click="changePage(nextPage)"
         :disabled = "current === pageLimit"
         variant="outline-secondary">
-        Next</b-button>
+        Next
+      </b-button>
 
       <b-button
         variant="outline-secondary"

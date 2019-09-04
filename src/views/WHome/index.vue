@@ -1,5 +1,5 @@
 <template>
-  <div class='w-home-page'>
+  <div>
     <w-navigation></w-navigation>
     <w-greeting-section msg='Welcome on Warehouse Online'/>
   </div>
