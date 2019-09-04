@@ -1,7 +1,7 @@
 <template>
   <div class="w-companies-add-form">
     <w-navigation></w-navigation>
-    <h1>Company Add Form</h1>
+    <h1>Add a New Company</h1>
     <w-form></w-form>
   </div>
 </template>
