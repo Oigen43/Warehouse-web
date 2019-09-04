@@ -16,11 +16,11 @@
             BTable
         },
         created: function () {
-            this.fetchWarehousesList();
+            this.fetchCompaniesList();
         },
         methods: {
             ...mapActions({
-                fetchWarehousesList: 'commitWarehousesList'
+                fetchCompaniesList: 'commitCompaniesList'
             })
         },
         computed: {

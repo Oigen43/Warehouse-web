@@ -2,8 +2,8 @@ import api from '../utils/api';
 import * as types from './mutation-types';
 
 export default {
-  commitWarehousesList: async({ commit }) => {
-    let req = await api.fetchData();
+  commitCompaniesList: async({ commit }) => {
+    let req = await api.fetchCompaniesData();
     commit(types.COMPANIES, req);
   }
 };

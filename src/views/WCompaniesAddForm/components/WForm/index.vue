@@ -59,7 +59,7 @@
 </template>
 
 <script>
-    import { BForm, BFormGroup, BFormInput, BButton, BCard } from 'bootstrap-vue';
+    import { BForm, BFormGroup, BFormInput, BButton } from 'bootstrap-vue';
 
     export default {
         name: 'WForm',
@@ -67,8 +67,7 @@
             BForm,
             BFormGroup,
             BFormInput,
-            BButton,
-            BCard
+            BButton
         },
         data() {
             return {

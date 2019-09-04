@@ -1,8 +1,8 @@
 <template>
-  <div class='w-warehouses-list-page'>
+  <div class='w-companies-list-page'>
     <w-navigation></w-navigation>
     <h1>List of Companies</h1>
-    <b-button to="/companies/add">add company</b-button>
+    <b-button to="/companies/add" class="w-companies-add-button">add company</b-button>
     <w-list></w-list>
   </div>
 </template>
@@ -13,7 +13,7 @@
     import { BButton } from 'bootstrap-vue';
 
     export default {
-        name: 'WWarehousesListPage',
+        name: 'WCompaniesListPage',
         components: {
             WNavigation,
             WList,
