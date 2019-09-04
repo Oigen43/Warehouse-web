@@ -1,9 +1,7 @@
 <template>
   <div class='w-warehouses-list-pagination'>
-    <div>
-
       <b-button
-        variant="outline-primary"
+        variant="outline-secondary"
         :disabled="onFirstPage"
         @click="changePage(1)">
         First
@@ -12,36 +10,33 @@
       <b-button
         @click="changePage(prevPage)"
         :disabled = "current < 2"
-        variant="outline-primary">Previous</b-button>
+        variant="outline-secondary">Previous</b-button>
 
       <b-button
         v-for="page in pages"
         :key="page.name"
         @click="changePage(page.name)"
         :class="{active: isPageActive(page.name)}"
-        variant="outline-primary">
+        variant="outline-secondary">
         {{ page.name }}</b-button>
 
       <b-button
         @click="changePage(nextPage)"
         :disabled = "current === pageLimit"
-        variant="outline-primary">
+        variant="outline-secondary">
         Next</b-button>
 
       <b-button
-        variant="outline-primary"
+        variant="outline-secondary"
         :disabled="onLastPage"
         @click="changePage(pageLimit)">
         Last
       </b-button>
-
-    </div>
   </div>
 </template>
 
 <script>
   import { BButton } from 'bootstrap-vue';
-  import { mapState } from 'vuex';
 
   export default {
     name: 'WPagination',
@@ -58,11 +53,12 @@
         type: Number,
         default: 1
       },
+      pageLimit: {
+        type: Number,
+        default: 1
+      },
     },
     computed: {
-      ...mapState([
-      'pageLimit'
-      ]),
       onFirstPage() {
           return this.current === 1;
       },
@@ -111,7 +107,3 @@
     }
   };
 </script>
-
-<style lang='scss' scoped>
-  @import './styles.scss';
-</style>

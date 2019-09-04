@@ -1,2 +1,2 @@
 export const COMPANIES = 'COMPANIES';
-export const PAGE_LIMIT = 'PAGE_LIMIT';
+export const COMPANIES_PAGE_LIMIT = 'COMPANIES_PAGE_LIMIT';

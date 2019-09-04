@@ -2,7 +2,7 @@
   <div class='w-warehouses-list-page'>
     <w-navigation></w-navigation>
     <h1>List of Warehouses</h1>
-    <w-pagination :current="currentPage" @page-changed="sendRequest"></w-pagination>
+    <w-pagination :current="currentPage" :pageLimit="companiesPageLimit" @page-changed="sendRequest"></w-pagination>
     <w-list :companiesList="companies"></w-list>
   </div>
 </template>
@@ -11,7 +11,7 @@
   import { mapActions, mapState } from 'vuex';
   import WNavigation from '../../components/WNavigation';
   import WList from './components/WList';
-  import WPagination from './components/WPagination';
+  import WPagination from '../../components/WPagination';
 
   export default {
     name: 'WWarehousesListPage',
@@ -27,7 +27,8 @@
     },
     computed: {
       ...mapState([
-        'companies'
+        'companies',
+        'companiesPageLimit'
       ])
     },
     methods: {
