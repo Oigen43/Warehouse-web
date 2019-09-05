@@ -2,7 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import WHome from '../views/WHome';
 import WCompaniesList from '../views/WCompaniesList';
-import WCompaniesAddForm from '../views/WCompaniesAddForm';
+import WCompaniesAddForm from '../views/WCompaniesAdd';
 
 Vue.use(Router);
 
