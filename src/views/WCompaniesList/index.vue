@@ -36,7 +36,7 @@
     },
     methods: {
       ...mapActions({
-        fetchCompaniesList: 'commitCompaniesList'
+        fetchCompaniesList: 'fetchCompaniesList'
       }),
       sendRequest(page) {
         this.currentPage = page;
