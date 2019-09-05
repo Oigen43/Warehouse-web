@@ -48,37 +48,41 @@
 </template>
 
 <script>
-  import { mapActions } from 'vuex';
-  import { BForm, BFormInput, BButton } from 'bootstrap-vue';
+    import { mapActions } from 'vuex';
+    import { BForm, BFormInput, BButton } from 'bootstrap-vue';
 
-  export default {
-    name: 'WForm',
-    components: {
-      BForm,
-      BFormInput,
-      BButton
-    },
-    data: function () {
-      return {
-        form: {
-          companyName: '',
-          address: '',
-          description: null,
-          active: true
+    export default {
+        name: 'WForm',
+        components: {
+            BForm,
+            BFormInput,
+            BButton
         },
-        show: true
-      };
-    },
-    methods: {
-      ...mapActions({
-        sendNewCompanyData: 'createCompany'
-      }),
-      onSubmit(evt) {
-        evt.preventDefault();
-        this.sendNewCompanyData(this.form);
-      }
-    }
-  };
+        data: function () {
+            return {
+                form: {
+                    companyName: '',
+                    address: '',
+                    description: null,
+                    active: true
+                },
+                show: true
+            };
+        },
+        methods: {
+            ...mapActions({
+                sendNewCompanyData: 'createCompany'
+            }),
+            redirect() {
+                location.href = '/companies';
+            },
+            onSubmit(evt) {
+                evt.preventDefault();
+                this.sendNewCompanyData(this.form);
+                this.redirect();
+            }
+        }
+    };
 </script>
 
 <style lang="scss" scoped>

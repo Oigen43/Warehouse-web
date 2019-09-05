@@ -19,7 +19,7 @@
     props: ['companiesList'],
     data: function() {
       return {
-        fields: ['company_name', 'address', 'description', 'date']
+        fields: ['companyName', 'address', 'description', 'date']
       };
     }
   };
