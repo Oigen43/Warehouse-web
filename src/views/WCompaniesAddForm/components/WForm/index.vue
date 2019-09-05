@@ -75,7 +75,7 @@
       }),
       onSubmit(evt) {
         evt.preventDefault();
-        this.sendNewCompanyData(JSON.stringify(this.form));
+        this.sendNewCompanyData(this.form);
       }
     }
   };
