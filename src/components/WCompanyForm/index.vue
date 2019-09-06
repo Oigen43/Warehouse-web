@@ -1,5 +1,4 @@
 <template>
-  <div>
     <b-form @submit.prevent="onSubmit" class="w-companies-form">
       <b-form-input
         id="company-name-input"
@@ -37,14 +36,6 @@
         {{ submitButtonName }}
       </b-button>
     </b-form>
-
-    <b-button
-      variant="link"
-      to="/companies"
-      class="w-companies-form-link"
-    >Go Back
-    </b-button>
-  </div>
 </template>
 
 <script>

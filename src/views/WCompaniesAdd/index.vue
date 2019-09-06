@@ -9,6 +9,12 @@
       :address="address"
       :description="description"
     ></w-form>
+    <b-button
+      variant="link"
+      to="/companies"
+      class="w-companies-go-back-link"
+    >Go Back
+    </b-button>
   </div>
 </template>
 
@@ -16,12 +22,14 @@
     import { mapActions } from 'vuex';
     import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WCompanyForm';
+    import { BButton } from 'bootstrap-vue';
 
     export default {
         name: 'WCompaniesAddForm',
         components: {
             WNavigation,
-            WForm
+            WForm,
+            BButton
         },
         data: function () {
             return {
