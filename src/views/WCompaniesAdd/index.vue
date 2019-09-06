@@ -11,7 +11,7 @@
     ></w-form>
     <b-button
       variant="link"
-      to="/companies"
+      go="/companies"
       class="w-companies-go-back-link"
     >Go Back
     </b-button>
@@ -23,6 +23,7 @@
     import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WCompanyForm';
     import { BButton } from 'bootstrap-vue';
+    import router from '../../router';
 
     export default {
         name: 'WCompaniesAddForm',
@@ -43,11 +44,11 @@
                 sendNewCompanyData: 'createCompany'
             }),
             redirect() {
-                location.href = '/companies';
+                router.go(-1);
             },
             sendData(newCompany) {
                 this.sendNewCompanyData(newCompany);
-                // this.redirect();
+                this.redirect();
             }
         }
     };
