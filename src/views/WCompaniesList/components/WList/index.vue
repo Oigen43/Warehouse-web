@@ -4,22 +4,31 @@
     borderless
     hover
     :items="companiesList"
-    :fields="fields"
-  ></b-table>
+    :fields="fields">
+      <template
+        slot="[is_active]"
+        slot-scope="data">
+          <b-form-checkbox
+            v-model="data.value"
+            disabled>
+          </b-form-checkbox>
+      </template>
+  </b-table>
 </template>
 
 <script>
-  import { BTable } from 'bootstrap-vue';
+  import { BTable, BFormCheckbox } from 'bootstrap-vue';
 
   export default {
     name: 'WList',
     components: {
       BTable,
+      BFormCheckbox
     },
     props: ['companiesList'],
     data: function() {
       return {
-        fields: ['companyName', 'address', 'description', 'date']
+        fields: ['is_active', 'companyName', 'address', 'description', 'date']
       };
     }
   };
