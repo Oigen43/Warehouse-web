@@ -3,7 +3,7 @@
     <w-navigation></w-navigation>
     <h1>List of Companies</h1>
     <b-button to="/companies/add" class="w-companies-add-button">add company</b-button>
-    <w-pagination :current="currentPage" :pageLimit="companiesPageLimit" @page-changed="sendRequest"></w-pagination>
+    <w-pagination v-if="companiesPageLimit > 1" :current="currentPage" :pageLimit="companiesPageLimit" @page-changed="sendRequest"></w-pagination>
     <w-list :companiesList="companies"></w-list>
   </div>
 </template>
