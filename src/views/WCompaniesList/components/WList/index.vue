@@ -5,10 +5,10 @@
     hover
     responsive
     :items="companiesList"
-    :fields="fields"
-  >
+    :fields="fields">
+
     <template
-      slot="[is_active]"
+      slot="[active]"
       slot-scope="data">
       <b-form-checkbox
         v-model="data.value"
@@ -45,6 +45,7 @@
         ✕
       </b-button>
     </template>
+
   </b-table>
 </template>
 
@@ -64,7 +65,7 @@
         data: function () {
             return {
                 fields: [
-                    { key: 'is_active', label: 'Active' }, 'companyName', 'address', 'description', 'date',
+                    'active', 'companyName', 'address', 'description', 'date',
                     { key: 'warehouses', label: '' },
                     { key: 'update', label: '' },
                     { key: 'delete', label: '' }
