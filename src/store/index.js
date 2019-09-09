@@ -10,7 +10,8 @@ export default new Vuex.Store({
   state: {
     companies: [],
     companiesPageLimit: 1,
-    newCompany: {}
+    newCompany: {},
+    deletedCompany: {}
   },
   getters,
   mutations,

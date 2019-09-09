@@ -9,5 +9,8 @@ export default {
   },
   [types.CREATE_COMPANY](state, company) {
     state.newCompany = company;
+  },
+  [types.DELETE_COMPANY](state, company) {
+    state.deletedCompany = company;
   }
 };

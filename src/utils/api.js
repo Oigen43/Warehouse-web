@@ -7,5 +7,8 @@ export default {
   },
   sendNewCompanyData: async (req) => {
     await axios.post('http://localhost:3030/companies', req);
+  },
+  sendDeletedCompanyData: async (req) => {
+    await axios.delete('http://localhost:3030/companies', req);
   }
 };
