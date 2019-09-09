@@ -15,5 +15,7 @@ export default {
   },
   [types.DELETE_COMPANY](state, company) {
     state.deletedCompany = company;
+    const index = state.companies.findIndex(item => item.companyName === company.companyName);
+    state.companies.splice(index, 1);
   }
 };

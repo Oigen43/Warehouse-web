@@ -24,7 +24,6 @@
 
 <script>
     import { mapActions, mapState } from 'vuex';
-    import router from '../../router';
     import WNavigation from '../../components/WNavigation';
     import WList from './components/WList';
     import { BButton } from 'bootstrap-vue';
@@ -52,18 +51,16 @@
         methods: {
             ...mapActions({
                 fetchCompaniesList: 'fetchCompaniesList',
-                sendDeletedCompanyData: 'deleteCompany'
+                sendDeletedCompanyData: 'sendDeletedCompany',
+                deletedCompanyData: 'deleteCompany'
             }),
             sendRequest(page) {
                 this.currentPage = page;
                 this.fetchCompaniesList(this.currentPage);
             },
-            rerender() {
-                router.go(0);
-            },
             clickedDeleteButton(item) {
                 this.sendDeletedCompanyData(item);
-                this.rerender();
+                this.deletedCompanyData(item);
             }
         },
         created: function () {

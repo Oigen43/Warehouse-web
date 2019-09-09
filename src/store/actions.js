@@ -23,6 +23,8 @@ export default {
   },
   deleteCompany: async ({ commit }, req) => {
     commit(types.DELETE_COMPANY, req);
+  },
+  sendDeletedCompany: async ({ commit }, req) => {
     await api.sendDeletedCompanyData(req);
   }
 };
