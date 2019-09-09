@@ -14,6 +14,13 @@ export default {
     commit(types.CREATE_COMPANY, req);
     await api.sendNewCompanyData(req);
   },
+  saveUpdatedCompany: async ({ commit }, req) => {
+    commit(types.UPDATE_COMPANY, req);
+  },
+  updateCompany: async ({ commit }, req) => {
+    commit(types.UPDATE_COMPANY, req);
+    await api.sendUpdatedCompanyData(req);
+  },
   deleteCompany: async ({ commit }, req) => {
     commit(types.DELETE_COMPANY, req);
     await api.sendDeletedCompanyData(req);

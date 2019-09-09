@@ -11,7 +11,7 @@
     ></w-form>
     <b-button
       variant="link"
-      go="/companies"
+      to="/companies"
       class="w-companies-go-back-link"
     >Go Back
     </b-button>

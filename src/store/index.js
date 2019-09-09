@@ -11,6 +11,7 @@ export default new Vuex.Store({
     companies: [],
     companiesPageLimit: 1,
     newCompany: {},
+    updatedCompany: {},
     deletedCompany: {}
   },
   getters,

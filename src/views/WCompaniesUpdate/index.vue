@@ -4,14 +4,14 @@
     <h1>Update Company</h1>
     <w-form
       @form-submitted="sendData"
-      submitButtonName="ADD COMPANY"
+      submitButtonName="UPDATE COMPANY"
       :companyName="companyName"
       :address="address"
       :description="description"
     ></w-form>
     <b-button
       variant="link"
-      go="/companies"
+      to="/companies"
       class="w-companies-go-back-link"
     >Go Back
     </b-button>
@@ -20,13 +20,15 @@
 
 <script>
     import { mapActions } from 'vuex';
+    import store from '../../store';
+    import router from '../../router';
     import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WCompanyForm';
     import { BButton } from 'bootstrap-vue';
-    import router from '../../router';
 
     export default {
         name: 'WCompaniesUpdateForm',
+        store,
         components: {
             WNavigation,
             WForm,
@@ -34,20 +36,20 @@
         },
         data: function () {
             return {
-                companyName: '',
-                address: '',
-                description: ''
+                companyName: this.$store.state.updatedCompany.companyName,
+                address: this.$store.state.updatedCompany.address,
+                description: this.$store.state.updatedCompany.description,
             };
         },
         methods: {
             ...mapActions({
-                sendNewCompanyData: 'createCompany'
+                sendUpdateCompanyData: 'updateCompany'
             }),
             redirect() {
                 router.go(-1);
             },
-            sendData(newCompany) {
-                this.sendNewCompanyData(newCompany);
+            sendData(company) {
+                this.sendUpdateCompanyData(company);
                 this.redirect();
             }
         }

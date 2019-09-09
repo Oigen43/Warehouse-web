@@ -50,6 +50,7 @@
 
 <script>
     import { mapActions } from 'vuex';
+    import router from '../../../../router';
     import { BTable, BFormCheckbox, BButton } from 'bootstrap-vue';
 
     export default {
@@ -72,11 +73,14 @@
         },
         methods: {
             ...mapActions({
+                saveUpdatedCompanyData: 'saveUpdatedCompany',
                 sendDeletedCompanyData: 'deleteCompany'
             }),
             clickedWarehousesButton(item) {
             },
             clickedUpdateButton(item) {
+                this.saveUpdatedCompanyData(item);
+                router.push('/companies/update');
             },
             clickedDeleteButton(item) {
                 this.$emit('delete-button-clicked', item);

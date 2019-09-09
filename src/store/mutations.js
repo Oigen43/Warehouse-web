@@ -10,6 +10,9 @@ export default {
   [types.CREATE_COMPANY](state, company) {
     state.newCompany = company;
   },
+  [types.UPDATE_COMPANY](state, company) {
+    state.updatedCompany = company;
+  },
   [types.DELETE_COMPANY](state, company) {
     state.deletedCompany = company;
   }
