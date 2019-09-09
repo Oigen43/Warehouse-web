@@ -67,12 +67,7 @@
                     { key: 'warehouses', label: '' },
                     { key: 'update', label: '' },
                     { key: 'delete', label: '' }
-                ],
-                companyInfo: {
-                    companyName: '',
-                    address: '',
-                    description: ''
-                }
+                ]
             };
         },
         methods: {
@@ -80,13 +75,11 @@
                 sendDeletedCompanyData: 'deleteCompany'
             }),
             clickedWarehousesButton(item) {
-                this.companyInfo = item;
             },
             clickedUpdateButton(item) {
-                this.companyInfo = item;
             },
             clickedDeleteButton(item) {
-                this.sendNewCompanyData(item);
+                this.$emit('delete-button-clicked', item);
             }
         }
     };

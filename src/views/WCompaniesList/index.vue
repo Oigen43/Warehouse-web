@@ -14,13 +14,17 @@
       @page-changed="sendRequest"
     ></w-pagination>
     <div class="companies-list">
-      <w-list :companiesList="companies"></w-list>
+      <w-list
+        @delete-button-clicked="clickedDeleteButton"
+        :companiesList="companies"
+      ></w-list>
     </div>
   </div>
 </template>
 
 <script>
     import { mapActions, mapState } from 'vuex';
+    import router from '../../router';
     import WNavigation from '../../components/WNavigation';
     import WList from './components/WList';
     import { BButton } from 'bootstrap-vue';
@@ -47,12 +51,20 @@
         },
         methods: {
             ...mapActions({
-                fetchCompaniesList: 'fetchCompaniesList'
+                fetchCompaniesList: 'fetchCompaniesList',
+                sendDeletedCompanyData: 'deleteCompany'
             }),
             sendRequest(page) {
                 this.currentPage = page;
                 this.fetchCompaniesList(this.currentPage);
             },
+            rerender() {
+                router.go(0);
+            },
+            clickedDeleteButton(item) {
+                this.sendDeletedCompanyData(item);
+                this.rerender();
+            }
         },
         created: function () {
             this.fetchCompaniesList();
