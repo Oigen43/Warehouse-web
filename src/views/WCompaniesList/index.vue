@@ -8,12 +8,14 @@
       class="w-companies-add-button"
     >add company
     </b-button>
-    <w-pagination
-      v-if="companiesPageLimit > 1"
-      :current="currentPage"
-      :pageLimit="companiesPageLimit"
-      @page-changed="sendRequest"
-    ></w-pagination>
+    <div class="companies-list-pagination">
+      <w-pagination
+        v-if="companiesPageLimit > 1"
+        :current="currentPage"
+        :pageLimit="companiesPageLimit"
+        @page-changed="sendRequest"
+      ></w-pagination>
+    </div>
     <div class="companies-list">
       <w-list
         @delete-button-clicked="clickedDeleteButton"
