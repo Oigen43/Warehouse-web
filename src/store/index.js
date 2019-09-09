@@ -11,8 +11,11 @@ export default new Vuex.Store({
     companies: [],
     companiesPageLimit: 1,
     newCompany: {},
+    newCompanyResponse: null,
     updatedCompany: {},
-    deletedCompany: {}
+    updatedCompanyResponse: null,
+    deletedCompany: {},
+    deletedCompanyResponse: null
   },
   getters,
   mutations,

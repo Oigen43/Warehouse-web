@@ -43,13 +43,13 @@
         },
         methods: {
             ...mapActions({
-                sendUpdateCompanyData: 'updateCompany'
+                sendUpdatedCompanyData: 'sendUpdatedCompany'
             }),
             redirect() {
-                router.go(-1);
+                router.push('/companies');
             },
-            sendData(company) {
-                this.sendUpdateCompanyData(company);
+            async sendData(company) {
+                await this.sendUpdatedCompanyData(company);
                 this.redirect();
             }
         }

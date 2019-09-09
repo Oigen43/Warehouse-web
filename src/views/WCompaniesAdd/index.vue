@@ -44,7 +44,7 @@
                 sendNewCompanyData: 'createCompany'
             }),
             redirect() {
-                router.go(-1);
+                router.push('/companies');
             },
             sendData(newCompany) {
                 this.sendNewCompanyData(newCompany);

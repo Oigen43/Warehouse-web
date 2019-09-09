@@ -73,13 +73,13 @@
         },
         methods: {
             ...mapActions({
-                saveUpdatedCompanyData: 'saveUpdatedCompany',
-                sendDeletedCompanyData: 'deleteCompany'
+                getUpdatedCompanyData: 'getUpdatedCompany',
+                sendDeletedCompanyData: 'deleteCompany',
             }),
             clickedWarehousesButton(item) {
             },
             clickedUpdateButton(item) {
-                this.saveUpdatedCompanyData(item);
+                this.getUpdatedCompanyData(item);
                 router.push('/companies/update');
             },
             clickedDeleteButton(item) {

@@ -6,7 +6,8 @@
       variant="success"
       to="/companies/add"
       class="w-companies-add-button"
-    >add company</b-button>
+    >add company
+    </b-button>
     <w-pagination
       v-if="companiesPageLimit > 1"
       :current="currentPage"
@@ -58,9 +59,10 @@
                 this.currentPage = page;
                 this.fetchCompaniesList(this.currentPage);
             },
-            clickedDeleteButton(item) {
-                this.sendDeletedCompanyData(item);
+            async clickedDeleteButton(item) {
+                await this.sendDeletedCompanyData(item);
                 this.deletedCompanyData(item);
+                this.fetchCompaniesList(this.currentPage);
             }
         },
         created: function () {
