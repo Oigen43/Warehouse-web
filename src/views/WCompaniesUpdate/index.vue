@@ -19,8 +19,7 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
-    import store from '../../store';
+    import { mapState, mapActions } from 'vuex';
     import router from '../../router';
     import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WCompanyForm';
@@ -28,18 +27,24 @@
 
     export default {
         name: 'WCompaniesUpdateForm',
-        store,
         components: {
             WNavigation,
             WForm,
             BButton
         },
-        data: function () {
-            return {
-                companyName: this.$store.state.updatedCompany.companyName,
-                address: this.$store.state.updatedCompany.address,
-                description: this.$store.state.updatedCompany.description,
-            };
+        computed: {
+            ...mapState([
+                'updatedCompany'
+            ]),
+            companyName () {
+                return this.updatedCompany.companyName;
+            },
+            address () {
+                return this.updatedCompany.address;
+            },
+            description () {
+                return this.updatedCompany.description;
+            }
         },
         methods: {
             ...mapActions({
@@ -52,7 +57,7 @@
                 await this.sendUpdatedCompanyData(company);
                 this.redirect();
             }
-        }
+        },
     };
 </script>
 
