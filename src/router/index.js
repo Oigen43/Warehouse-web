@@ -3,6 +3,7 @@ import Router from 'vue-router';
 import WHome from '../views/WHome';
 import WCompaniesList from '../views/WCompaniesList';
 import WCompaniesAddForm from '../views/WCompaniesAdd';
+import WCompaniesUpdateForm from '../views/WCompaniesUpdate';
 
 Vue.use(Router);
 
@@ -23,6 +24,11 @@ export default new Router({
       path: '/companies/add',
       name: 'companiesAddForm',
       component: WCompaniesAddForm
+    },
+    {
+      path: '/companies/update',
+      name: 'companiesUpdateForm',
+      component: WCompaniesUpdateForm
     }
   ]
 });
