@@ -10,7 +10,7 @@ export default {
   [types.CREATE_COMPANY](state, company) {
     state.newCompany = company;
   },
-  [types.GET_UPDATED_COMPANY](state, company) {
+  [types.SET_UPDATED_COMPANY](state, company) {
     state.updatedCompany = company;
   },
   [types.UPDATE_COMPANY](state, company) {
@@ -20,6 +20,6 @@ export default {
   [types.DELETE_COMPANY](state, company) {
     state.deletedCompany = company;
     const index = state.companies.findIndex(item => item.companyName === company.companyName);
-    state.companies = [...state.companies.splice(index, 1)];
+    state.companies = [ ...state.companies.splice(index, 1) ];
   },
 };

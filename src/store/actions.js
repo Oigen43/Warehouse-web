@@ -15,7 +15,7 @@ export default {
     await api.sendNewCompanyData(req);
   },
   getUpdatedCompany: async ({ commit }, req) => {
-    commit(types.GET_UPDATED_COMPANY, req);
+    commit(types.SET_UPDATED_COMPANY, req);
   },
   sendUpdatedCompany: async ({ commit }, req) => {
     await api.sendUpdatedCompanyData(req);
