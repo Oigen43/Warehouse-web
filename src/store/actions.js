@@ -12,24 +12,18 @@ export default {
   },
   createCompany: async ({ commit }, req) => {
     commit(types.CREATE_COMPANY, req);
-    const res = await api.sendNewCompanyData(req);
-
-    commit(types.CREATE_COMPANY_RESPONSE, res.message);
+    await api.sendNewCompanyData(req);
   },
   getUpdatedCompany: async ({ commit }, req) => {
     commit(types.GET_UPDATED_COMPANY, req);
   },
   sendUpdatedCompany: async ({ commit }, req) => {
-    const res = await api.sendUpdatedCompanyData(req);
-
-    commit(types.UPDATE_COMPANY_RESPONSE, res.message);
+    await api.sendUpdatedCompanyData(req);
   },
   deleteCompany: async ({ commit }, req) => {
     commit(types.DELETE_COMPANY, req);
   },
   sendDeletedCompany: async ({ commit }, req) => {
-    const res = await api.sendDeletedCompanyData(req);
-
-    commit(types.DELETE_COMPANY_RESPONSE, res.message);
+   await api.sendDeletedCompanyData(req);
   }
 };
