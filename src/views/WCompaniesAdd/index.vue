@@ -46,8 +46,8 @@
             redirect() {
                 router.push('/companies');
             },
-            sendData(newCompany) {
-                this.sendNewCompanyData(newCompany);
+            async sendData(newCompany) {
+                await this.sendNewCompanyData(newCompany);
                 this.redirect();
             }
         }
