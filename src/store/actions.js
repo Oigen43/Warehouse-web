@@ -25,5 +25,33 @@ export default {
   },
   sendDeletedCompany: async ({ commit }, req) => {
    await api.sendDeletedCompanyData(req);
+  },
+
+  setCurrentCompany: async ({ commit }, req) => {
+    commit(types.CURRENT_COMPANY, req);
+  },
+
+  fetchWarehousesList: async ({ commit }, req) => {
+    const res = await api.fetchWarehousesData(req.page, req.perPage, req.companyName);
+    const pageLimit = helpers.calculatePageLimit(res.data.warehousesTotal, req.perPage);
+
+    commit(types.WAREHOUSES, res.data.warehouses);
+    commit(types.WAREHOUSES_PAGE_LIMIT, pageLimit);
+  },
+  createWarehouse: async ({ commit }, req) => {
+    commit(types.CREATE_WAREHOUSE, req);
+    await api.sendNewWarehouseData(req);
+  },
+  getUpdatedWarehouse: async ({ commit }, req) => {
+    commit(types.SET_UPDATED_WAREHOUSE, req);
+  },
+  sendUpdatedWarehouse: async ({ commit }, req) => {
+    await api.sendUpdatedWarehouseData(req);
+  },
+  deleteWarehouse: async ({ commit }, req) => {
+    commit(types.DELETE_WAREHOUSE, req);
+  },
+  sendDeletedWarehouse: async ({ commit }, req) => {
+   await api.sendDeletedWarehouseData(req);
   }
 };

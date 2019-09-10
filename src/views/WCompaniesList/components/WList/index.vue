@@ -76,8 +76,11 @@
             ...mapActions({
                 getUpdatedCompanyData: 'getUpdatedCompany',
                 sendDeletedCompanyData: 'deleteCompany',
+                setCurrentCompany: 'setCurrentCompany'
             }),
             clickedWarehousesButton(item) {
+              this.setCurrentCompany(item.companyName);
+              router.push('/warehouses');
             },
             clickedUpdateButton(item) {
                 this.getUpdatedCompanyData(item);
