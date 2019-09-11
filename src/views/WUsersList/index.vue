@@ -2,7 +2,12 @@
     <div class="w-users-list-page">
       <w-navigation></w-navigation>
       <h1>List of Users</h1>
-      <b-button to="/users/add" class="w-users-add-button">add user</b-button>
+      <b-button
+        to="/users/add"
+        class="w-users-add-button"
+        variant="success">
+        add user
+      </b-button>
       <div class="users-list-pagination">
         <w-pagination
           v-if="usersPageLimit > 1"
