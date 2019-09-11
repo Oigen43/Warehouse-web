@@ -1,32 +1,32 @@
 <template>
-  <div class="w-companies-add-form">
+  <div class="w-warehouses-add-form">
     <w-navigation></w-navigation>
-    <h1>Add a New Company</h1>
+    <h1>Add a New Warehouse</h1>
     <w-form
       @form-submitted="sendData"
-      submitButtonName="ADD COMPANY"
-      :companyName="companyName"
+      submitButtonName="ADD WAREHOUSE"
+      :warehouseName="warehouseName"
       :address="address"
-      :description="description"
+      :type="type"
     ></w-form>
     <b-button
       variant="link"
-      to="/companies"
-      class="w-companies-go-back-link"
+      to="/warehouses"
+      class="w-warehouses-go-back-link"
     >Go Back
     </b-button>
   </div>
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
+    import { mapActions, mapState } from 'vuex';
     import WNavigation from '../../components/WNavigation';
-    import WForm from '../../components/WCompanyForm';
+    import WForm from '../../components/WWarehouseForm';
     import { BButton } from 'bootstrap-vue';
     import router from '../../router';
 
     export default {
-        name: 'WCompaniesAddForm',
+        name: 'WWarehousesAddForm',
         components: {
             WNavigation,
             WForm,
@@ -34,20 +34,26 @@
         },
         data: function () {
             return {
-                companyName: '',
+                warehouseName: '',
                 address: '',
-                description: ''
+                type: ''
             };
+        },
+        computed: {
+          ...mapState([
+            'currentCompany'
+          ])
         },
         methods: {
             ...mapActions({
-                sendNewCompanyData: 'createCompany'
+                sendNewWarehouseData: 'createWarehouse'
             }),
             redirect() {
-                router.push('/companies');
+                router.push('/warehouses');
             },
-            async sendData(newCompany) {
-                await this.sendNewCompanyData(newCompany);
+            async sendData(newWarehouse) {
+                newWarehouse.companyName = this.currentCompany;
+                await this.sendNewWarehouseData(newWarehouse);
                 this.redirect();
             }
         }

@@ -1,10 +1,10 @@
 <template>
   <div class="w-companies-add-form">
     <w-navigation></w-navigation>
-    <h1>Add a New Company</h1>
+    <h1>Update Company</h1>
     <w-form
       @form-submitted="sendData"
-      submitButtonName="ADD COMPANY"
+      submitButtonName="UPDATE COMPANY"
       :companyName="companyName"
       :address="address"
       :description="description"
@@ -19,38 +19,45 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
+    import { mapState, mapActions } from 'vuex';
+    import router from '../../router';
     import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WCompanyForm';
     import { BButton } from 'bootstrap-vue';
-    import router from '../../router';
 
     export default {
-        name: 'WCompaniesAddForm',
+        name: 'WCompaniesUpdateForm',
         components: {
             WNavigation,
             WForm,
             BButton
         },
-        data: function () {
-            return {
-                companyName: '',
-                address: '',
-                description: ''
-            };
+        computed: {
+            ...mapState([
+                'updatedCompany'
+            ]),
+            companyName () {
+                return this.updatedCompany.companyName;
+            },
+            address () {
+                return this.updatedCompany.address;
+            },
+            description () {
+                return this.updatedCompany.description;
+            }
         },
         methods: {
             ...mapActions({
-                sendNewCompanyData: 'createCompany'
+                sendUpdatedCompanyData: 'sendUpdatedCompany'
             }),
             redirect() {
                 router.push('/companies');
             },
-            async sendData(newCompany) {
-                await this.sendNewCompanyData(newCompany);
+            async sendData(company) {
+                await this.sendUpdatedCompanyData(company);
                 this.redirect();
             }
-        }
+        },
     };
 </script>
 
