@@ -13,6 +13,13 @@ export default new Vuex.Store({
     newCompany: {},
     updatedCompany: {},
     deletedCompany: {},
+    currentCompany: null,
+
+    warehouses: [],
+    warehousesPageLimit: 1,
+    newWarehouse: {},
+    updatedWarehouse: {},
+    deletedWarehouse: {},
   },
   getters,
   mutations,
