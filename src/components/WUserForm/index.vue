@@ -1,6 +1,5 @@
 <template>
     <b-form @submit.prevent="onSubmit" class="w-users-form">
-
       <b-form-input
         id="user-first-name-input"
         size="lg"
