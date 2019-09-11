@@ -1,10 +1,11 @@
 <template>
     <b-form @submit.prevent="onSubmit" class="w-users-form">
+
       <b-form-input
         id="user-first-name-input"
         size="lg"
         v-model="form.firstName"
-        required
+        :disabled="submitButtonName === 'UPDATE USER'"
         placeholder="User first name"
         class="w-users-form-input"
       ></b-form-input>
@@ -32,6 +33,7 @@
         size="lg"
         v-model="form.email"
         required
+        type="email"
         placeholder="User email"
         class="w-users-form-input"
       ></b-form-input>
@@ -60,6 +62,7 @@
           size="lg"
           v-model="form.address.house"
           required
+          type="number"
           placeholder="User house"
           class="w-users-form-input"
         ></b-form-input>
@@ -69,6 +72,7 @@
           size="lg"
           v-model="form.address.flat"
           required
+          type="number"
           placeholder="User flat"
           class="w-users-form-input"
         ></b-form-input>
@@ -78,6 +82,7 @@
         id="user-birth-input"
         size="lg"
         v-model="form.birthDate"
+        type="date"
         required
         placeholder="User birth date"
         class="w-users-form-input"

@@ -49,12 +49,12 @@
                 address: {
                     city: '',
                     street: '',
-                    house: 0,
-                    flat: 0
+                    house: '',
+                    flat: ''
                 },
-                birthDate: '',
+                birthDate: new Date(),
                 login: '',
-                password: 0
+                password: ''
             };
         },
         methods: {
