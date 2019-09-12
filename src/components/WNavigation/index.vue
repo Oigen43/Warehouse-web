@@ -1,6 +1,6 @@
 <template>
   <div class='w-navigation'>
-    <b-navbar toggleable="lg" type="dark" variant="light">
+    <b-navbar toggleable="lg" type="light" variant="light">
       <b-navbar-brand>
         <router-link to='/'>
           <img class="logo" alt="logo" src="../../assets/logo.png">
