@@ -1,10 +1,16 @@
-import api from '../utils/api';
 import helpers from '../utils/helpers';
 import * as types from './mutation-types';
+import apiHelper from '../utils/apiHelper';
+import * as url from '../constants/url';
 
 export default {
   fetchCompaniesList: async ({ commit }, page = 1, perPage = 5) => {
-    const res = await api.fetchData(page, perPage);
+    const res = await apiHelper.get(url.COMPANIES_URL, {
+      params: {
+        page,
+        perPage
+      }
+    });
     const pageLimit = helpers.calculatePageLimit(res.data.companiesTotal, perPage);
 
     commit(types.COMPANIES, res.data.companies);
@@ -12,21 +18,26 @@ export default {
   },
   createCompany: async ({ commit }, req) => {
     commit(types.CREATE_COMPANY, req);
-    const res = await api.sendNewCompanyData(req);
+    const res = await apiHelper.post(url.COMPANIES_URL, req);
 
-    commit(types.SET_POPUP, res);
+    commit(types.SET_POPUP, helpers.createPopup(res));
   },
   getUpdatedCompany: async ({ commit }, req) => {
     commit(types.SET_UPDATED_COMPANY, req);
   },
   sendUpdatedCompany: async ({ commit }, req) => {
-    await api.sendUpdatedCompanyData(req);
+    const res = await apiHelper.put(url.COMPANIES_URL, req);
+
+    commit(types.SET_POPUP, helpers.createPopup(res));
+    return res.data;
   },
   deleteCompany: async ({ commit }, req) => {
     commit(types.DELETE_COMPANY, req);
   },
   sendDeletedCompany: async ({ commit }, req) => {
-   await api.sendDeletedCompanyData(req);
+    const res = await apiHelper.delete(url.COMPANIES_URL, req);
+    commit(types.SET_POPUP, helpers.createPopup(res));
+    return res.data;
   },
 
   setCurrentCompany: async ({ commit }, req) => {
@@ -34,7 +45,13 @@ export default {
   },
 
   fetchWarehousesList: async ({ commit }, req) => {
-    const res = await api.fetchWarehousesData(req.page, req.perPage, req.companyName);
+    const res = await apiHelper.get(url.WAREHOUSE_URL, {
+      params: {
+        page: req.page,
+        perPage: req.perPage,
+        companyName: req.companyName
+      }
+    });
     const pageLimit = helpers.calculatePageLimit(res.data.warehousesTotal, req.perPage);
 
     commit(types.WAREHOUSES, res.data.warehouses);
@@ -42,25 +59,34 @@ export default {
   },
   createWarehouse: async ({ commit }, req) => {
     commit(types.CREATE_WAREHOUSE, req);
-    const res = await api.sendNewWarehouseData(req);
+    const res = await apiHelper.post(url.WAREHOUSE_URL, req);
 
-    commit(types.SET_POPUP, res);
+    commit(types.SET_POPUP, helpers.createPopup(res));
   },
   getUpdatedWarehouse: async ({ commit }, req) => {
     commit(types.SET_UPDATED_WAREHOUSE, req);
   },
   sendUpdatedWarehouse: async ({ commit }, req) => {
-    await api.sendUpdatedWarehouseData(req);
+    const res = await apiHelper.put(url.WAREHOUSE_URL, req);
+    commit(types.SET_POPUP, helpers.createPopup(res));
+    return res.data;
   },
   deleteWarehouse: async ({ commit }, req) => {
     commit(types.DELETE_WAREHOUSE, req);
   },
   sendDeletedWarehouse: async ({ commit }, req) => {
-   await api.sendDeletedWarehouseData(req);
+    const res = await apiHelper.delete(url.WAREHOUSE_URL, req);
+    commit(types.SET_POPUP, helpers.createPopup(res));
+    return res.data;
   },
 
   fetchUsersList: async({ commit }, page = 1, perPage = 5) => {
-    const res = await api.fetchUsersData(page, perPage);
+    const res = await apiHelper.get(url.USERS_URL, {
+      params: {
+        page,
+        perPage
+      }
+    });
     const pageLimit = helpers.calculatePageLimit(res.data.usersTotal, perPage);
 
     commit(types.USERS, res.data.users);
@@ -68,20 +94,24 @@ export default {
   },
   createUser: async({ commit }, req) => {
     commit(types.CREATE_USER, req);
-    const res = await api.sendNewUserData(req);
+    const res = await apiHelper.post(url.USERS_URL, req);
 
-    commit(types.SET_POPUP, res);
+    commit(types.SET_POPUP, helpers.createPopup(res));
   },
   getUpdatedUser: async({ commit }, req) => {
     commit(types.SET_UPDATED_USER, req);
   },
   sendUpdatedUser: async ({ commit }, req) => {
-    await api.sendUpdatedUserData(req);
+    const res = await apiHelper.put(url.USERS_URL, req);
+
+    commit(types.SET_POPUP, helpers.createPopup(res));
   },
   deleteUser: async({ commit }, req) => {
     commit(types.DELETE_USER, req);
   },
   sendDeletedUser: async({ commit }, req) => {
-    await api.sendDeletedUserData(req);
+    const res = await apiHelper.delete(url.USERS_URL, req);
+    commit(types.SET_POPUP, helpers.createPopup(res));
+    return res.data;
   }
 };

@@ -55,20 +55,11 @@
             redirect() {
                 router.push('/companies');
             },
-            makeToast(variant = null) {
-                this.$bvToast.toast(this.popup.data.message, {
-                    title: `Variant ${variant || 'default'}`,
-                    variant: variant,
-                    solid: true
-                });
-            },
             async sendData(newCompany) {
                 await this.sendNewCompanyData(newCompany);
                 if (this.popup.done) {
-                    this.makeToast('success');
                     this.redirect();
                 } else {
-                    this.makeToast('danger');
                     this.popup.done = true;
                 }
             }
