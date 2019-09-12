@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import WHome from '../views/WHome';
+import WLogin from '../views/WLogin';
 import WCompaniesList from '../views/WCompaniesList';
 import WCompaniesAddForm from '../views/WCompaniesAdd';
 import WCompaniesUpdateForm from '../views/WCompaniesUpdate';
@@ -20,6 +21,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: WHome
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: WLogin
     },
     {
       path: '/companies',
