@@ -12,7 +12,9 @@ export default {
   },
   createCompany: async ({ commit }, req) => {
     commit(types.CREATE_COMPANY, req);
-    await api.sendNewCompanyData(req);
+    const res = await api.sendNewCompanyData(req);
+
+    commit(types.SET_POPUP, res);
   },
   getUpdatedCompany: async ({ commit }, req) => {
     commit(types.SET_UPDATED_COMPANY, req);
@@ -40,7 +42,9 @@ export default {
   },
   createWarehouse: async ({ commit }, req) => {
     commit(types.CREATE_WAREHOUSE, req);
-    await api.sendNewWarehouseData(req);
+    const res = await api.sendNewWarehouseData(req);
+
+    commit(types.SET_POPUP, res);
   },
   getUpdatedWarehouse: async ({ commit }, req) => {
     commit(types.SET_UPDATED_WAREHOUSE, req);
@@ -64,7 +68,9 @@ export default {
   },
   createUser: async({ commit }, req) => {
     commit(types.CREATE_USER, req);
-    await api.sendNewUserData(req);
+    const res = await api.sendNewUserData(req);
+
+    commit(types.SET_POPUP, res);
   },
   getUpdatedUser: async({ commit }, req) => {
     commit(types.SET_UPDATED_USER, req);
