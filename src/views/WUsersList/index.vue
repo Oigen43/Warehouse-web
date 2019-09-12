@@ -26,11 +26,13 @@
 </template>
 
 <script>
+    import { mapActions, mapState } from 'vuex';
+    import { BButton } from 'bootstrap-vue';
+
     import WNavigation from '../../components/WNavigation';
     import WPagination from '../../components/WPagination';
     import WList from './components/WList';
-    import { mapActions, mapState } from 'vuex';
-    import { BButton } from 'bootstrap-vue';
+
     export default {
         name: 'WUsersListPage',
         components: {

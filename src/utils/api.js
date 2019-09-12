@@ -6,8 +6,12 @@ export default {
     return res.data;
   },
   sendNewCompanyData: async (req) => {
-    const res = await axios.post('http://localhost:3030/companies', req);
-    return res.data;
+    try {
+      const res = await axios.post('http://localhost:3030/companies', req);
+      return res.data;
+    } catch (err) {
+      return err.response.data;
+    }
   },
   sendUpdatedCompanyData: async (req) => {
     const res = await axios.put('http://localhost:3030/companies', req);
@@ -22,8 +26,12 @@ export default {
     return res.data;
   },
   sendNewWarehouseData: async (req) => {
-    const res = await axios.post('http://localhost:3030/warehouses', req);
-    return res.data;
+    try {
+      const res = await axios.post('http://localhost:3030/warehouses', req);
+      return res.data;
+    } catch (err) {
+      return err.response.data;
+    }
   },
   sendUpdatedWarehouseData: async (req) => {
     const res = await axios.put('http://localhost:3030/warehouses', req);
@@ -39,8 +47,12 @@ export default {
     return res.data;
   },
   sendNewUserData: async (req) => {
-    const res = await axios.post('http://localhost:3030/users', req);
-    return res.data;
+    try {
+      const res = await axios.post('http://localhost:3030/users', req);
+      return res.data;
+    } catch (err) {
+    return err.response.data;
+  }
   },
   sendUpdatedUserData: async (req) => {
     const res = await axios.put('http://localhost:3030/users', req);

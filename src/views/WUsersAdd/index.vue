@@ -28,11 +28,16 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
+    import Vue from 'vue';
+    import { mapState, mapActions } from 'vuex';
+    import { ToastPlugin, BButton } from 'bootstrap-vue';
+
     import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WUserForm';
-    import { BButton } from 'bootstrap-vue';
     import router from '../../router';
+
+    Vue.use(ToastPlugin);
+
     export default {
         name: 'WUsersAddForm',
         components: {
@@ -57,6 +62,11 @@
                 password: ''
             };
         },
+        computed: {
+            ...mapState([
+                'popup'
+            ])
+        },
         methods: {
             ...mapActions({
                 sendNewUserData: 'createUser'
@@ -64,9 +74,22 @@
             redirect() {
                 router.push('/users');
             },
+            makeToast(variant = null) {
+                this.$bvToast.toast(this.popup.data.message, {
+                    title: `Variant ${variant || 'default'}`,
+                    variant: variant,
+                    solid: true
+                });
+            },
             async sendData(newUser) {
                 await this.sendNewUserData(newUser);
-                this.redirect();
+                if (this.popup.done) {
+                    this.makeToast('success');
+                    this.redirect();
+                } else {
+                    this.makeToast('danger');
+                    this.popup.done = true;
+                }
             }
         }
     };

@@ -20,10 +20,11 @@
 
 <script>
     import { mapState, mapActions } from 'vuex';
+    import { BButton } from 'bootstrap-vue';
+
     import router from '../../router';
     import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WCompanyForm';
-    import { BButton } from 'bootstrap-vue';
 
     export default {
         name: 'WCompaniesUpdateForm',

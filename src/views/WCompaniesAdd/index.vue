@@ -19,11 +19,15 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
+    import Vue from 'vue';
+    import { ToastPlugin, BButton } from 'bootstrap-vue';
+    import { mapState, mapActions } from 'vuex';
+
     import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WCompanyForm';
-    import { BButton } from 'bootstrap-vue';
     import router from '../../router';
+
+    Vue.use(ToastPlugin);
 
     export default {
         name: 'WCompaniesAddForm',
@@ -39,6 +43,11 @@
                 description: ''
             };
         },
+        computed: {
+            ...mapState([
+                'popup'
+            ])
+        },
         methods: {
             ...mapActions({
                 sendNewCompanyData: 'createCompany'
@@ -46,9 +55,22 @@
             redirect() {
                 router.push('/companies');
             },
+            makeToast(variant = null) {
+                this.$bvToast.toast(this.popup.data.message, {
+                    title: `Variant ${variant || 'default'}`,
+                    variant: variant,
+                    solid: true
+                });
+            },
             async sendData(newCompany) {
                 await this.sendNewCompanyData(newCompany);
-                this.redirect();
+                if (this.popup.done) {
+                    this.makeToast('success');
+                    this.redirect();
+                } else {
+                    this.makeToast('danger');
+                    this.popup.done = true;
+                }
             }
         }
     };

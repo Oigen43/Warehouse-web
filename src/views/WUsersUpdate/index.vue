@@ -29,10 +29,12 @@
 
 <script>
     import { mapState, mapActions } from 'vuex';
+    import { BButton } from 'bootstrap-vue';
+
     import WNavigation from '../../components/WNavigation/index';
     import WForm from '../../components/WUserForm';
     import router from '../../router';
-    import { BButton } from 'bootstrap-vue';
+
     export default {
         name: 'WUsersUpdateForm',
         components: {

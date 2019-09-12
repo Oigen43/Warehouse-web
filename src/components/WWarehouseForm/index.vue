@@ -4,6 +4,7 @@
         id="warehouse-name-input"
         size="lg"
         v-model="form.warehouseName"
+        :disabled="submitButtonName === 'UPDATE WAREHOUSE'"
         required
         placeholder="Warehouse name"
         class="w-warehouses-form-input"
