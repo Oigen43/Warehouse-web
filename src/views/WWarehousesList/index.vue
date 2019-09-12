@@ -27,9 +27,10 @@
 
 <script>
     import { mapActions, mapState } from 'vuex';
+    import { BButton } from 'bootstrap-vue';
+
     import WNavigation from '../../components/WNavigation';
     import WList from './components/WList';
-    import { BButton } from 'bootstrap-vue';
     import WPagination from '../../components/WPagination';
 
     export default {

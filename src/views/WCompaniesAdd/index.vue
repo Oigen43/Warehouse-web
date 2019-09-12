@@ -22,9 +22,11 @@
     import Vue from 'vue';
     import { ToastPlugin, BButton } from 'bootstrap-vue';
     import { mapState, mapActions } from 'vuex';
+
     import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WCompanyForm';
     import router from '../../router';
+
     Vue.use(ToastPlugin);
 
     export default {

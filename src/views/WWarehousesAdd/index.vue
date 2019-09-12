@@ -22,6 +22,7 @@
     import Vue from 'vue';
     import { ToastPlugin, BButton } from 'bootstrap-vue';
     import { mapActions, mapState } from 'vuex';
+
     import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WWarehouseForm';
     import router from '../../router';

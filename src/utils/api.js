@@ -2,23 +2,23 @@ import axios from 'axios';
 
 export default {
   fetchData: async (page, perPage) => {
-    const res = await axios.get(`http://192.168.14.28:3030/companies?page=${page}&perPage=${perPage}`);
+    const res = await axios.get(`http://localhost:3030/companies?page=${page}&perPage=${perPage}`);
     return res.data;
   },
   sendNewCompanyData: async (req) => {
     try {
-      const res = await axios.post('http://192.168.14.28:3030/companies', req);
+      const res = await axios.post('http://localhost:3030/companies', req);
       return res.data;
     } catch (err) {
       return err.response.data;
     }
   },
   sendUpdatedCompanyData: async (req) => {
-    const res = await axios.put('http://192.168.14.28:3030/companies', req);
+    const res = await axios.put('http://localhost:3030/companies', req);
     return res.data;
   },
   sendDeletedCompanyData: async (req) => {
-    const res = await axios.delete('http://192.168.14.28:3030/companies', { data: req });
+    const res = await axios.delete('http://localhost:3030/companies', { data: req });
     return res.data;
   },
   fetchWarehousesData: async (page, perPage, companyName) => {

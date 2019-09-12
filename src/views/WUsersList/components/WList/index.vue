@@ -32,8 +32,10 @@
 
 <script>
     import { mapActions } from 'vuex';
-    import router from '../../../../router';
     import { BTable, BButton } from 'bootstrap-vue';
+
+    import router from '../../../../router';
+
     export default {
         name: 'WList',
         components: {

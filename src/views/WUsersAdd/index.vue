@@ -30,10 +30,12 @@
 <script>
     import Vue from 'vue';
     import { mapState, mapActions } from 'vuex';
+    import { ToastPlugin, BButton } from 'bootstrap-vue';
+
     import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WUserForm';
-    import { ToastPlugin, BButton } from 'bootstrap-vue';
     import router from '../../router';
+
     Vue.use(ToastPlugin);
 
     export default {
