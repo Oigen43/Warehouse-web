@@ -20,6 +20,12 @@ export default new Vuex.Store({
     newWarehouse: {},
     updatedWarehouse: {},
     deletedWarehouse: {},
+
+    users: [],
+    usersPageLimit: 1,
+    newUser: {},
+    updatedUser: {},
+    deletedUser: {}
   },
   getters,
   mutations,

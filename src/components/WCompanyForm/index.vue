@@ -4,6 +4,7 @@
         id="company-name-input"
         size="lg"
         v-model="form.companyName"
+        :disabled="submitButtonName === 'UPDATE COMPANY'"
         required
         placeholder="Company name"
         class="w-companies-form-input"

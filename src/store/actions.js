@@ -12,7 +12,9 @@ export default {
   },
   createCompany: async ({ commit }, req) => {
     commit(types.CREATE_COMPANY, req);
-    await api.sendNewCompanyData(req);
+    const res = await api.sendNewCompanyData(req);
+
+    commit(types.SET_POPUP, res);
   },
   getUpdatedCompany: async ({ commit }, req) => {
     commit(types.SET_UPDATED_COMPANY, req);
@@ -40,7 +42,9 @@ export default {
   },
   createWarehouse: async ({ commit }, req) => {
     commit(types.CREATE_WAREHOUSE, req);
-    await api.sendNewWarehouseData(req);
+    const res = await api.sendNewWarehouseData(req);
+
+    commit(types.SET_POPUP, res);
   },
   getUpdatedWarehouse: async ({ commit }, req) => {
     commit(types.SET_UPDATED_WAREHOUSE, req);
@@ -53,5 +57,31 @@ export default {
   },
   sendDeletedWarehouse: async ({ commit }, req) => {
    await api.sendDeletedWarehouseData(req);
+  },
+
+  fetchUsersList: async({ commit }, page = 1, perPage = 5) => {
+    const res = await api.fetchUsersData(page, perPage);
+    const pageLimit = helpers.calculatePageLimit(res.data.usersTotal, perPage);
+
+    commit(types.USERS, res.data.users);
+    commit(types.USERS_PAGE_LIMIT, pageLimit);
+  },
+  createUser: async({ commit }, req) => {
+    commit(types.CREATE_USER, req);
+    const res = await api.sendNewUserData(req);
+
+    commit(types.SET_POPUP, res);
+  },
+  getUpdatedUser: async({ commit }, req) => {
+    commit(types.SET_UPDATED_USER, req);
+  },
+  sendUpdatedUser: async ({ commit }, req) => {
+    await api.sendUpdatedUserData(req);
+  },
+  deleteUser: async({ commit }, req) => {
+    commit(types.DELETE_USER, req);
+  },
+  sendDeletedUser: async({ commit }, req) => {
+    await api.sendDeletedUserData(req);
   }
 };

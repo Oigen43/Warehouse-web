@@ -1,46 +1,65 @@
 <template>
-  <div class="w-companies-add-form">
+  <div class="w-users-add-form">
     <w-navigation></w-navigation>
     <h1>Add a New Company</h1>
     <w-form
       @form-submitted="sendData"
-      submitButtonName="ADD COMPANY"
-      :companyName="companyName"
-      :address="address"
-      :description="description"
+      submitButtonName="ADD USER"
+      :firstName="firstName"
+      :surname="surname"
+      :patronymic="patronymic"
+      :email="email"
+      :city="address.city"
+      :street="address.street"
+      :house="address.house"
+      :flat="address.flat"
+      :birthDate="birthDate"
+      :login="login"
+      :password="password"
     ></w-form>
     <b-button
       variant="link"
-      to="/companies"
-      class="w-companies-go-back-link"
+      to="/users"
+      class="w-users-go-back-link"
     >Go Back
     </b-button>
   </div>
+
 </template>
 
 <script>
     import Vue from 'vue';
-    import { ToastPlugin, BButton } from 'bootstrap-vue';
     import { mapState, mapActions } from 'vuex';
+    import { ToastPlugin, BButton } from 'bootstrap-vue';
 
     import WNavigation from '../../components/WNavigation';
-    import WForm from '../../components/WCompanyForm';
+    import WForm from '../../components/WUserForm';
     import router from '../../router';
 
     Vue.use(ToastPlugin);
 
     export default {
-        name: 'WCompaniesAddForm',
+        name: 'WUsersAddForm',
         components: {
             WNavigation,
             WForm,
             BButton
         },
-        data: function () {
+        data() {
             return {
-                companyName: '',
-                address: '',
-                description: ''
+                firstName: '',
+                surname: '',
+                patronymic: '',
+                email: '',
+                address: {
+                    city: '',
+                    street: '',
+                    house: '',
+                    flat: ''
+                },
+                birthDate: new Date(),
+                login: '',
+                password: ''
             };
         },
         computed: {
@@ -50,10 +69,10 @@
         },
         methods: {
             ...mapActions({
-                sendNewCompanyData: 'createCompany'
+                sendNewUserData: 'createUser'
             }),
             redirect() {
-                router.push('/companies');
+                router.push('/users');
             },
             makeToast(variant = null) {
                 this.$bvToast.toast(this.popup.data.message, {
@@ -62,8 +81,8 @@
                     solid: true
                 });
             },
-            async sendData(newCompany) {
-                await this.sendNewCompanyData(newCompany);
+            async sendData(newUser) {
+                await this.sendNewUserData(newUser);
                 if (this.popup.done) {
                     this.makeToast('success');
                     this.redirect();

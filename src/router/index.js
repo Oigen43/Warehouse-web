@@ -7,6 +7,9 @@ import WCompaniesUpdateForm from '../views/WCompaniesUpdate';
 import WWarehousesList from '../views/WWarehousesList';
 import WWarehousesAddForm from '../views/WWarehousesAdd';
 import WWarehousesUpdateForm from '../views/WWarehousesUpdate';
+import WUsersList from '../views/WUsersList';
+import WUsersUpdateForm from '../views/WUsersUpdate';
+import WUsersAddForm from '../views/WUsersAdd';
 
 Vue.use(Router);
 
@@ -47,6 +50,21 @@ export default new Router({
       path: '/warehouses/update',
       name: 'warehousesUpdateForm',
       component: WWarehousesUpdateForm
+    },
+    {
+      path: '/users',
+      name: 'users',
+      component: WUsersList
+    },
+    {
+      path: '/users/add',
+      name: 'usersAddForm',
+      component: WUsersAddForm
+    },
+    {
+      path: '/users/update',
+      name: 'usersUpdateForm',
+      component: WUsersUpdateForm
     }
   ]
 });
