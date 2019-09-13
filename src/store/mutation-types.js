@@ -1,3 +1,8 @@
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'LOGIN_ERROR';
+export const LOGOUT = 'LOGOUT';
+
 export const COMPANIES = 'COMPANIES';
 export const COMPANIES_PAGE_LIMIT = 'COMPANIES_PAGE_LIMIT';
 export const CREATE_COMPANY = 'CREATE_COMPANY';

@@ -1,6 +1,10 @@
 import axios from 'axios';
 
 export default {
+  login: async (req) => {
+    const res = await axios.post(`http://localhost:3030/login`, req);
+    return res.data;
+  },
   fetchData: async (page, perPage) => {
     const res = await axios.get(`http://localhost:3030/companies?page=${page}&perPage=${perPage}`);
     return res.data;

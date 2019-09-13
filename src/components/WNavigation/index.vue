@@ -21,7 +21,8 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-            <b-button variant="primary" class="my-2 my-sm-0" to="/login">Login</b-button>
+          <b-button variant="primary" class="my-2 my-sm-0" to="/login" v-if="true">Login</b-button>
+          <b-button variant="primary" class="my-2 my-sm-0" v-if="false" @click="logout">Logout</b-button>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -29,7 +30,9 @@
 </template>
 
 <script>
+    import { mapActions, mapGetters } from 'vuex';
     import {BNav, BNavbar, BNavbarNav, BNavbarBrand, BNavbarToggle, BNavItem, BCollapse, BButton} from 'bootstrap-vue';
+    import router from '../../router';
 
     export default {
         name: 'WNavigation',
@@ -42,6 +45,27 @@
             BNavItem,
             BCollapse,
             BButton
+        },
+        computed: {
+            ...mapGetters([
+                'isLoggedIn'
+            ]),
+            isLoggedIn() {
+                return this.isLoggedIn
+            }
+        },
+        methods: {
+            ...mapActions([
+                'logout'
+            ]),
+            redirect() {
+                router.push('/login');
+            },
+            logout (){
+                this.logout().then(() => {
+                    this.redirect();
+                })
+            }
         }
     };
 </script>

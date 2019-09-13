@@ -1,6 +1,22 @@
 import * as types from './mutation-types';
 
 export default {
+  [types.LOGIN_REQUEST](state) {
+    state.status = 'loading';
+  },
+  [types.LOGIN_REQUEST](state, token, user) {
+    state.status = 'loading';
+    state.token = token;
+    state.user = user;
+  },
+  [types.LOGIN_ERROR](state) {
+    state.status = 'error';
+  },
+  [types.LOGOUT](state) {
+    state.status = '';
+    state.token = '';
+  },
+
   [types.COMPANIES](state, companies) {
     state.companies = companies;
   },
