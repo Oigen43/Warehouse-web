@@ -65,7 +65,7 @@
             async clickedDeleteButton(item) {
                 await this.sendDeletedCompanyData(item);
                 this.deletedCompanyData(item);
-                this.fetchCompaniesList({ page: this.currentPage });
+                this.fetchCompaniesList(this.currentPage);
             }
         },
         created: function () {
