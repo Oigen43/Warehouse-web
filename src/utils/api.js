@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export default {
   login: async (req) => {
-    const res = await axios.post(`http://localhost:3030/login`, req);
+    const res = await axios.post('http://localhost:3030/login', req);
     return res.data;
   },
   fetchData: async (page, perPage) => {

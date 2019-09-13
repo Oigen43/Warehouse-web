@@ -1,19 +1,24 @@
 <template>
-  <div>
+  <div class="w-home-page">
     <w-navigation></w-navigation>
-    <w-greeting-section msg='Welcome on Warehouse Online'/>
+    <w-content></w-content>
   </div>
 </template>
 
 <script>
-  import WGreetingSection from './components/WGreetingSection';
-  import WNavigation from '../../components/WNavigation';
 
-  export default {
-    name: 'WHomePage',
-    components: {
-      WGreetingSection,
-      WNavigation
-    }
-  };
+    import WNavigation from '../../components/WNavigation';
+    import WContent from './components/WContent';
+
+    export default {
+        name: 'WHomePage',
+        components: {
+            WNavigation,
+            WContent
+        }
+    };
 </script>
+
+<style lang="scss" scoped>
+  @import './styles.scss';
+</style>

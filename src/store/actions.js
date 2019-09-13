@@ -15,13 +15,13 @@ export default {
       commit(types.LOGIN_SUCCESS, token, user);
     } catch {
       commit(types.LOGIN_ERROR);
-      localStorage.removeItem('token')
+      localStorage.removeItem('token');
     }
   },
   logout: async ({ commit }) => {
     commit(types.LOGOUT);
     localStorage.removeItem('token');
-    delete axios.defaults.headers.common['Authorization']
+    delete axios.defaults.headers.common['Authorization'];
   },
   fetchCompaniesList: async ({ commit }, page = 1, perPage = 5) => {
     const res = await api.fetchData(page, perPage);

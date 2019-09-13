@@ -31,13 +31,12 @@
 
 <script>
     import { mapActions, mapGetters } from 'vuex';
-    import {BNav, BNavbar, BNavbarNav, BNavbarBrand, BNavbarToggle, BNavItem, BCollapse, BButton} from 'bootstrap-vue';
+    import { BNavbar, BNavbarNav, BNavbarBrand, BNavbarToggle, BNavItem, BCollapse, BButton } from 'bootstrap-vue';
     import router from '../../router';
 
     export default {
         name: 'WNavigation',
         components: {
-            BNav,
             BNavbar,
             BNavbarNav,
             BNavbarBrand,
@@ -51,7 +50,7 @@
                 'isLoggedIn'
             ]),
             isLoggedIn() {
-                return this.isLoggedIn
+                return this.isLoggedIn;
             }
         },
         methods: {
@@ -61,10 +60,10 @@
             redirect() {
                 router.push('/login');
             },
-            logout (){
+            logout () {
                 this.logout().then(() => {
                     this.redirect();
-                })
+                });
             }
         }
     };
