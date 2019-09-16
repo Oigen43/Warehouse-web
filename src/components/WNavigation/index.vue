@@ -21,8 +21,8 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-button variant="dark" class="w-navigation-button my-2 my-sm-0" to="/login" v-if="true">Login</b-button>
-          <b-button variant="dark" class="w-navigation-button my-2 my-sm-0" v-if="false" @click="logout">Logout
+          <b-button variant="dark" class="w-navigation-button my-2 my-sm-0" to="/login" v-if="!token">Login</b-button>
+          <b-button variant="dark" class="w-navigation-button my-2 my-sm-0" v-if="token" @click="logout">Logout
           </b-button>
         </b-navbar-nav>
       </b-collapse>
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-    import {mapActions, mapGetters} from 'vuex';
+    import { mapState, mapActions } from 'vuex';
     import {
         BNavbar,
         BNavbarNav,
@@ -57,24 +57,20 @@
             BButton
         },
         computed: {
-            ...mapGetters([
-                'isLoggedIn'
-            ]),
-            isLoggedIn() {
-                return this.isLoggedIn;
-            }
+            ...mapState([
+                'token'
+            ])
         },
         methods: {
-            ...mapActions([
-                'logout'
-            ]),
+            ...mapActions({
+                logoutUser: 'logout'
+            }),
             redirect() {
                 router.push('/login');
             },
-            logout() {
-                this.logout().then(() => {
-                    this.redirect();
-                });
+            async logout() {
+                await this.logoutUser();
+                this.redirect();
             }
         }
     };

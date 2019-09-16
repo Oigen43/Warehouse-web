@@ -8,9 +8,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    status: '',
-    token: localStorage.getItem('token') || '',
-    user: {},
+    token: '',
 
     companies: [],
     companiesPageLimit: 1,

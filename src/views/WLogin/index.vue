@@ -43,8 +43,8 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
-    import { BContainer, BRow, BCol, BForm, BFormInput, BButton } from 'bootstrap-vue';
+    import {mapState, mapActions} from 'vuex';
+    import {BContainer, BRow, BCol, BForm, BFormInput, BButton} from 'bootstrap-vue';
     import WNavigation from '../../components/WNavigation';
     import router from '../../router';
 
@@ -69,16 +69,14 @@
         },
         methods: {
             ...mapActions({
-                login: 'login'
+                loginUser: 'login'
             }),
             redirect() {
                 router.push('/');
             },
             login() {
-                const { email, password } = this;
-                this.login({ email, password }).then(() => {
-                    this.redirect();
-                });
+                this.loginUser(this.form);
+                this.redirect();
             }
         }
     };

@@ -1,27 +1,18 @@
-import axios from 'axios';
 import api from '../utils/api';
 import helpers from '../utils/helpers';
 import * as types from './mutation-types';
 
 export default {
   login: async ({ commit }, req) => {
-    try {
-      commit(types.LOGIN_REQUEST);
       const res = await api.login(req);
       const token = res.data.token;
-      const user = res.data.user;
 
-      axios.defaults.headers.common['Authorization'] = token;
-      commit(types.LOGIN_SUCCESS, token, user);
-    } catch {
-      commit(types.LOGIN_ERROR);
-      localStorage.removeItem('token');
-    }
+      localStorage.setItem('AUTH_TOKEN', token);
+      commit(types.LOGIN, token);
   },
   logout: async ({ commit }) => {
     commit(types.LOGOUT);
-    localStorage.removeItem('token');
-    delete axios.defaults.headers.common['Authorization'];
+    localStorage.removeItem('AUTH_TOKEN');
   },
   fetchCompaniesList: async ({ commit }, page = 1, perPage = 5) => {
     const res = await api.fetchData(page, perPage);
