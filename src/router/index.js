@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+
 import store from '../store';
 import WHome from '../views/WHome';
 import WLogin from '../views/WLogin';
