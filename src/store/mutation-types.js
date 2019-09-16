@@ -20,4 +20,4 @@ export const DELETE_USER = 'DELETE_USER';
 export const SET_UPDATED_USER = 'SET_UPDATED_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 
-export const SET_POPUP = 'SET_POPUP';
+export const SET_TOAST = 'SET_TOAST';

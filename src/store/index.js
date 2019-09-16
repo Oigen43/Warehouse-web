@@ -27,7 +27,7 @@ export default new Vuex.Store({
     updatedUser: {},
     deletedUser: {},
 
-    popup: {}
+    toast: {}
   },
   getters,
   mutations,

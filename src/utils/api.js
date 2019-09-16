@@ -4,7 +4,9 @@ import messageCode from '../constants/messages';
 
 export default {
   get: function(customURL, params) {
-    return this.requestHelper(axios.get(`${url.BASE_URL}${customURL}`, params));
+    return this.requestHelper(axios.get(`${url.BASE_URL}${customURL}`, {
+      params: params
+    }));
   },
   post: function(customURL, req) {
     return this.requestHelper(axios.post(`${url.BASE_URL}${customURL}`, req));
@@ -18,21 +20,24 @@ export default {
   requestHelper: async function(handler) {
     try {
       const res = await handler;
+      if (res.status < 300 && res.data.data.statusCode === undefined) {
+        return { data: res.data.data };
+      }
       return {
         data: res.data.data,
-        toast: this.createPopup(res)
+        toast: this.createToast(res)
       };
     } catch (err) {
       return {
         data: err.response,
-        toast: this.createPopup(err.response)
+        toast: this.createToast(err.response)
       };
     }
   },
-  createPopup: function(data) {
+  createToast: function(data) {
     return {
       variant: (data.status < 300) ? 'success' : 'danger',
-      message: data.data.data.statusCode ? messageCode[data.data.data.statusCode] : (data.status < 300) ? 'Get data' : 'Something goes wrong!',
+      message: data.data.data.statusCode ? messageCode[data.data.data.statusCode] : 'Something goes wrong!',
       done: data.data.done
     };
   }

@@ -1,7 +1,3 @@
-<template>
-  <div></div>
-</template>
-
 <script>
     import Vue from 'vue';
     import { ToastPlugin } from 'bootstrap-vue';
@@ -14,18 +10,19 @@
         name: 'WToastNotification',
         computed: {
             ...mapState([
-                'popup'
+                'toast'
             ])
         },
         watch: {
-            popup(newVal, oldVal) {
-                this.makeToast(this.popup.variant);
+            toast(newVal, oldVal) {
+                this.makeToast(this.toast.variant);
             }
         },
         methods: {
             makeToast(variant = null) {
-                this.$bvToast.toast(this.popup.message, {
-                    title: `Variant ${variant || 'default'}`,
+                this.$bvToast.toast(this.toast.message, {
+                    title: variant === 'success' ? 'Success!'
+                        : variant === 'danger' ? 'Error!' : 'default',
                     variant: variant,
                     solid: true
                 });
@@ -33,7 +30,3 @@
         }
     };
 </script>
-
-<style scoped>
-
-</style>

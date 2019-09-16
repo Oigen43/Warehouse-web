@@ -71,7 +71,7 @@ export default {
     state.users.splice(index, 1);
   },
 
-  [types.SET_POPUP](state, popup) {
-    state.popup = popup;
+  [types.SET_TOAST](state, toast) {
+    state.toast = toast;
   }
 };
