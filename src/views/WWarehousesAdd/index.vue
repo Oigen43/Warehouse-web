@@ -20,7 +20,7 @@
 
 <script>
     import { BButton } from 'bootstrap-vue';
-    import { mapActions } from 'vuex';
+    import { mapActions, mapState } from 'vuex';
 
     import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WWarehouseForm';
@@ -40,6 +40,11 @@
                 type: ''
             };
         },
+        computed: {
+            ...mapState([
+                'currentCompany',
+            ])
+        },
         methods: {
             ...mapActions({
                 sendNewWarehouseData: 'createWarehouse'
@@ -50,8 +55,7 @@
             async sendData(newWarehouse) {
                 newWarehouse.companyName = this.currentCompany;
                 await this.sendNewWarehouseData(newWarehouse);
-                    this.redirect();
-                }
+                this.redirect();
             }
     };
 </script>
