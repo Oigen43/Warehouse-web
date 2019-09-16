@@ -45,7 +45,7 @@
         },
         computed: {
             ...mapState([
-                'popup'
+                'toast'
             ])
         },
         methods: {
@@ -57,10 +57,10 @@
             },
             async sendData(newCompany) {
                 await this.sendNewCompanyData(newCompany);
-                if (this.popup.done) {
+                if (this.toast.done) {
                     this.redirect();
                 } else {
-                    this.popup.done = true;
+                    this.toast.done = true;
                 }
             }
         }

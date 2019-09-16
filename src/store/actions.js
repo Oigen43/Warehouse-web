@@ -22,9 +22,7 @@ export default {
   },
   sendUpdatedCompany: async ({ commit }, req) => {
     const res = await api.put(url.COMPANIES_URL, req);
-
     commit(types.SET_TOAST, res.toast);
-    return res.data;
   },
   deleteCompany: async ({ commit }, req) => {
     commit(types.DELETE_COMPANY, req);
@@ -32,7 +30,6 @@ export default {
   sendDeletedCompany: async ({ commit }, req) => {
     const res = await api.delete(url.COMPANIES_URL, req);
     commit(types.SET_TOAST, res.toast);
-    return res.data;
   },
 
   setCurrentCompany: async ({ commit }, req) => {
@@ -63,7 +60,6 @@ export default {
   sendUpdatedWarehouse: async ({ commit }, req) => {
     const res = await api.put(url.WAREHOUSES_URL, req);
     commit(types.SET_TOAST, res.toast);
-    return res.data;
   },
   deleteWarehouse: async ({ commit }, req) => {
     commit(types.DELETE_WAREHOUSE, req);
@@ -71,7 +67,6 @@ export default {
   sendDeletedWarehouse: async ({ commit }, req) => {
     const res = await api.delete(url.WAREHOUSES_URL, req);
     commit(types.SET_TOAST, res.toast);
-    return res.data;
   },
 
   fetchUsersList: async({ commit }, page = 1, perPage = 5) => {
@@ -85,7 +80,6 @@ export default {
   createUser: async({ commit }, req) => {
     commit(types.CREATE_USER, req);
     const res = await api.post(url.USERS_URL, req);
-
     commit(types.SET_TOAST, res.toast);
   },
   getUpdatedUser: async({ commit }, req) => {
@@ -93,7 +87,6 @@ export default {
   },
   sendUpdatedUser: async ({ commit }, req) => {
     const res = await api.put(url.USERS_URL, req);
-
     commit(types.SET_TOAST, res.toast);
   },
   deleteUser: async({ commit }, req) => {
@@ -102,6 +95,5 @@ export default {
   sendDeletedUser: async({ commit }, req) => {
     const res = await api.delete(url.USERS_URL, req);
     commit(types.SET_TOAST, res.toast);
-    return res.data;
   }
 };
