@@ -43,8 +43,8 @@
 </template>
 
 <script>
-    import {mapState, mapActions} from 'vuex';
-    import {BContainer, BRow, BCol, BForm, BFormInput, BButton} from 'bootstrap-vue';
+    import { mapActions } from 'vuex';
+    import { BContainer, BRow, BCol, BForm, BFormInput, BButton } from 'bootstrap-vue';
     import WNavigation from '../../components/WNavigation';
     import router from '../../router';
 

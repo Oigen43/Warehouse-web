@@ -39,7 +39,6 @@
         BNavbarToggle,
         BNavItem,
         BCollapse,
-        BButtonGroup,
         BButton
     } from 'bootstrap-vue';
     import router from '../../router';
@@ -53,7 +52,6 @@
             BNavbarToggle,
             BNavItem,
             BCollapse,
-            BButtonGroup,
             BButton
         },
         computed: {

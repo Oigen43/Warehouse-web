@@ -1,18 +1,19 @@
 import api from '../utils/api';
 import helpers from '../utils/helpers';
 import * as types from './mutation-types';
+import * as constant from '../constants';
 
 export default {
   login: async ({ commit }, req) => {
       const res = await api.login(req);
       const token = res.data.token;
 
-      localStorage.setItem('AUTH_TOKEN', token);
+      localStorage.setItem(constant.TOKEN_KEY, token);
       commit(types.LOGIN, token);
   },
   logout: async ({ commit }) => {
     commit(types.LOGOUT);
-    localStorage.removeItem('AUTH_TOKEN');
+    localStorage.removeItem(constant.TOKEN_KEY);
   },
   fetchCompaniesList: async ({ commit }, page = 1, perPage = 5) => {
     const res = await api.fetchData(page, perPage);
