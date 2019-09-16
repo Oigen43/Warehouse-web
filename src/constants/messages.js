@@ -1,10 +1,10 @@
 export default {
   '0001': 'This company already exists!',
-  '0002': 'This company does not exists!',
+  '0002': 'This company does not exist!',
   '0003': 'This user already exists!',
-  '0004': 'This user does not exists!',
+  '0004': 'This user does not exist!',
   '0005': 'This warehouse already exists!',
-  '0006': 'This warehouse does not exists!',
+  '0006': 'This warehouse does not exist!',
 
   '001': 'Company created!',
   '002': 'Company updated!',

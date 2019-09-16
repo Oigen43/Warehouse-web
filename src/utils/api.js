@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as url from '../constants/url';
+import * as url from '../constants/urls';
 
 export default {
   get: async (customURL, params) => {
