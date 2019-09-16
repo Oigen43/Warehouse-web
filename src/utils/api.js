@@ -1,55 +1,39 @@
 import axios from 'axios';
 import * as url from '../constants/urls';
+import messageCode from '../constants/messages';
 
 export default {
-  get: async (customURL, params) => {
-    try {
-      const res = await axios.get(`${url.BASE_URL}${customURL}`, params);
-      return res.data;
-    } catch (err) {
-      return err.response.data;
-    }
+  get: function(customURL, params) {
+    return this.requestHelper(axios.get(`${url.BASE_URL}${customURL}`, params));
   },
-  post: async (customURL, req) => {
-    try {
-      const res = await axios.post(`${url.BASE_URL}${customURL}`, req);
-      return {
-        data: res.data,
-        status: res.status
-      };
-    } catch (err) {
-      return {
-        data: err.response.data,
-        status: err.response.status
-      };
-    }
+  post: function(customURL, req) {
+    return this.requestHelper(axios.post(`${url.BASE_URL}${customURL}`, req));
   },
-  put: async (customURL, req) => {
+  put: function(customURL, req) {
+    return this.requestHelper(axios.put(`${url.BASE_URL}${customURL}`, req));
+  },
+  delete: function(customURL, req) {
+    return this.requestHelper(axios.delete(`${url.BASE_URL}${customURL}`, { data: req }));
+  },
+  requestHelper: async function(handler) {
     try {
-      const res = await axios.put(`${url.BASE_URL}${customURL}`, req);
+      const res = await handler;
       return {
-        data: res.data,
-        status: res.status
+        data: res.data.data,
+        toast: this.createPopup(res)
       };
     } catch (err) {
       return {
-        data: err.response.data,
-        status: err.response.status
+        data: err.response,
+        toast: this.createPopup(err.response)
       };
     }
   },
-  delete: async (customURL, req) => {
-    try {
-      const res = await axios.delete(`${url.BASE_URL}${customURL}`, { data: req });
-      return {
-        data: res.data,
-        status: res.status
-      };
-    } catch (err) {
-      return {
-        data: err.response.data,
-        status: err.response.status
-      };
-    }
+  createPopup: function(data) {
+    return {
+      variant: (data.status < 300) ? 'success' : 'danger',
+      message: data.data.data.statusCode ? messageCode[data.data.data.statusCode] : (data.status < 300) ? 'Get data' : 'Something goes wrong!',
+      done: data.data.done
+    };
   }
 };
