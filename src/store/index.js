@@ -29,7 +29,9 @@ export default new Vuex.Store({
     usersPageLimit: 1,
     newUser: {},
     updatedUser: {},
-    deletedUser: {}
+    deletedUser: {},
+
+    toast: {}
   },
   getters,
   mutations,

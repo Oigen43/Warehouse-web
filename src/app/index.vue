@@ -3,6 +3,7 @@
     <w-navigation></w-navigation>
     <b-container fluid class="main-container">
       <router-view/>
+      <w-toast-notification></w-toast-notification>
     </b-container>
   </div>
 </template>
@@ -11,14 +12,17 @@
     import { BContainer } from 'bootstrap-vue';
 
     import WNavigation from '../components/WNavigation';
+    import WToastNotification from '../components/WToastNotification';
 
     export default {
         name: 'app',
         components: {
             BContainer,
-            WNavigation
+            WNavigation,
+            WToastNotification
         },
     };
+
 </script>
 
 <style lang='scss' scoped>

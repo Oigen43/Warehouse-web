@@ -76,5 +76,9 @@ export default {
     state.deletedUser = user;
     const index = state.users.findIndex(item => item.firstName === user.firstName);
     state.users.splice(index, 1);
+  },
+
+  [types.SET_TOAST](state, toast) {
+    state.toast = toast;
   }
 };
