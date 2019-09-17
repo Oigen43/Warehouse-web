@@ -21,8 +21,8 @@
 
         <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
-          <b-button variant="dark" class="w-navigation-button my-2 my-sm-0" to="/login" v-if="!token">Login</b-button>
-          <b-button variant="dark" class="w-navigation-button my-2 my-sm-0" v-if="token" @click="logout">Logout
+          <b-button variant="dark" class="w-navigation-button my-2 my-sm-0" to="/login" v-if="!isAuthorized">Login</b-button>
+          <b-button variant="dark" class="w-navigation-button my-2 my-sm-0" v-if="isAuthorized" @click="logout">Logout
           </b-button>
         </b-navbar-nav>
       </b-collapse>
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-    import { mapState, mapActions } from 'vuex';
+    import { mapGetters, mapActions } from 'vuex';
     import {
         BNavbar,
         BNavbarNav,
@@ -56,8 +56,8 @@
             BButton
         },
         computed: {
-            ...mapState([
-                'token'
+            ...mapGetters([
+                'isAuthorized',
             ])
         },
         methods: {

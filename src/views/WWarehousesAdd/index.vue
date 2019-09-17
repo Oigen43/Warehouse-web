@@ -57,6 +57,7 @@
                 await this.sendNewWarehouseData(newWarehouse);
                 this.redirect();
             }
+        }
     };
 </script>
 
