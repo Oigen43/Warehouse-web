@@ -42,7 +42,7 @@
         },
         computed: {
             ...mapState([
-                'currentCompany',
+                'currentCompany'
             ])
         },
         methods: {
@@ -54,8 +54,8 @@
             },
             async sendData(newWarehouse) {
                 newWarehouse.companyName = this.currentCompany;
-                await this.sendNewWarehouseData(newWarehouse);
-                this.redirect();
+                const res = await this.sendNewWarehouseData(newWarehouse);
+                !res.error && this.redirect();
             }
         }
     };

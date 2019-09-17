@@ -48,8 +48,8 @@
                 router.push('/companies');
             },
             async sendData(newCompany) {
-                await this.sendNewCompanyData(newCompany);
-                this.redirect();
+                const res = await this.sendNewCompanyData(newCompany);
+                !res.error && this.redirect();
             }
         }
     };

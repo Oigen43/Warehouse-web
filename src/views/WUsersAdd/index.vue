@@ -67,8 +67,8 @@
                 router.push('/users');
             },
             async sendData(newUser) {
-                await this.sendNewUserData(newUser);
-                this.redirect();
+                const res = await this.sendNewUserData(newUser);
+                !res.error && this.redirect();
             }
         }
     };
