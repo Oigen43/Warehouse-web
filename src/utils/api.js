@@ -42,7 +42,8 @@ function createToast(data) {
     variant: (data.status && data.status < 300) ? 'success' : 'danger',
     message: ((data.response) && (data.response.data.data.statusCode)) ? messageCode[data.response.data.data.statusCode]
         : ((data.data) && (data.data.data.statusCode)) ? messageCode[data.data.data.statusCode]
-        : 'Server is not available!',
+        : ((data.request) && (!data.response)) ? 'Server is not available!'
+        : 'Something went wrong!',
     title: (data.status && data.status < 300) ? 'Success!' : 'Error!'
   };
 }
