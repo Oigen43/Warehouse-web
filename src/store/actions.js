@@ -14,22 +14,27 @@ export default {
   },
   createCompany: async ({ commit }, req) => {
     commit(types.CREATE_COMPANY, req);
+
     const res = await api.post(url.COMPANIES_URL, req);
-    commit(types.SET_TOAST, res.toast);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
   },
   getUpdatedCompany: async ({ commit }, req) => {
     commit(types.SET_UPDATED_COMPANY, req);
   },
   sendUpdatedCompany: async ({ commit }, req) => {
     const res = await api.put(url.COMPANIES_URL, req);
-    commit(types.SET_TOAST, res.toast);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
   },
   deleteCompany: async ({ commit }, req) => {
     commit(types.DELETE_COMPANY, req);
   },
   sendDeletedCompany: async ({ commit }, req) => {
     const res = await api.delete(url.COMPANIES_URL, req);
-    commit(types.SET_TOAST, res.toast);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
   },
 
   setCurrentCompany: async ({ commit }, req) => {
@@ -50,23 +55,27 @@ export default {
   },
   createWarehouse: async ({ commit }, req) => {
     commit(types.CREATE_WAREHOUSE, req);
+
     const res = await api.post(url.WAREHOUSES_URL, req);
 
-    commit(types.SET_TOAST, res.toast);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
   },
   getUpdatedWarehouse: async ({ commit }, req) => {
     commit(types.SET_UPDATED_WAREHOUSE, req);
   },
   sendUpdatedWarehouse: async ({ commit }, req) => {
     const res = await api.put(url.WAREHOUSES_URL, req);
-    commit(types.SET_TOAST, res.toast);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
   },
   deleteWarehouse: async ({ commit }, req) => {
     commit(types.DELETE_WAREHOUSE, req);
   },
   sendDeletedWarehouse: async ({ commit }, req) => {
     const res = await api.delete(url.WAREHOUSES_URL, req);
-    commit(types.SET_TOAST, res.toast);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
   },
 
   fetchUsersList: async({ commit }, page = 1, perPage = 5) => {
@@ -79,21 +88,25 @@ export default {
   },
   createUser: async({ commit }, req) => {
     commit(types.CREATE_USER, req);
+
     const res = await api.post(url.USERS_URL, req);
-    commit(types.SET_TOAST, res.toast);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
   },
   getUpdatedUser: async({ commit }, req) => {
     commit(types.SET_UPDATED_USER, req);
   },
   sendUpdatedUser: async ({ commit }, req) => {
     const res = await api.put(url.USERS_URL, req);
-    commit(types.SET_TOAST, res.toast);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
   },
   deleteUser: async({ commit }, req) => {
     commit(types.DELETE_USER, req);
   },
   sendDeletedUser: async({ commit }, req) => {
     const res = await api.delete(url.USERS_URL, req);
-    commit(types.SET_TOAST, res.toast);
+    res.toast && commit(types.SET_TOAST, res.toast);
   }
 };

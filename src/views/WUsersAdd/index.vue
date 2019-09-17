@@ -28,15 +28,12 @@
 </template>
 
 <script>
-    import Vue from 'vue';
-    import { mapState, mapActions } from 'vuex';
-    import { ToastPlugin, BButton } from 'bootstrap-vue';
+    import { mapActions } from 'vuex';
+    import { BButton } from 'bootstrap-vue';
 
     import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WUserForm';
     import router from '../../router';
-
-    Vue.use(ToastPlugin);
 
     export default {
         name: 'WUsersAddForm',
@@ -62,11 +59,6 @@
                 password: ''
             };
         },
-        computed: {
-            ...mapState([
-                'toast'
-            ])
-        },
         methods: {
             ...mapActions({
                 sendNewUserData: 'createUser'
@@ -75,12 +67,8 @@
                 router.push('/users');
             },
             async sendData(newUser) {
-                await this.sendNewUserData(newUser);
-                if (this.toast.done) {
-                    this.redirect();
-                } else {
-                    this.toast.done = true;
-                }
+                const res = await this.sendNewUserData(newUser);
+                !res.error && this.redirect();
             }
         }
     };

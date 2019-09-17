@@ -19,15 +19,12 @@
 </template>
 
 <script>
-    import Vue from 'vue';
-    import { ToastPlugin, BButton } from 'bootstrap-vue';
+    import { BButton } from 'bootstrap-vue';
     import { mapActions, mapState } from 'vuex';
 
     import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WWarehouseForm';
     import router from '../../router';
-
-    Vue.use(ToastPlugin);
 
     export default {
         name: 'WWarehousesAddForm',
@@ -45,8 +42,7 @@
         },
         computed: {
             ...mapState([
-                'currentCompany',
-                'toast'
+                'currentCompany'
             ])
         },
         methods: {
@@ -58,12 +54,8 @@
             },
             async sendData(newWarehouse) {
                 newWarehouse.companyName = this.currentCompany;
-                await this.sendNewWarehouseData(newWarehouse);
-                if (this.toast.done) {
-                    this.redirect();
-                } else {
-                    this.toast.done = true;
-                }
+                const res = await this.sendNewWarehouseData(newWarehouse);
+                !res.error && this.redirect();
             }
         }
     };

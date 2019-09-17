@@ -5,7 +5,6 @@
 <script>
     import Vue from 'vue';
     import { ToastPlugin } from 'bootstrap-vue';
-
     import { mapState } from 'vuex';
 
     Vue.use(ToastPlugin);
@@ -26,7 +25,7 @@
             makeToast(variant = null) {
                 this.$bvToast.toast(this.toast.message, {
                     title: variant === 'success' ? 'Success!'
-                        : variant === 'danger' ? 'Error!' : 'default',
+                        : variant === 'danger' ? 'Error!' : 'Info',
                     variant: variant,
                     solid: true
                 });
