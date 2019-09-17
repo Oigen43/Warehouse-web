@@ -18,15 +18,14 @@
         },
         watch: {
             toast(newVal, oldVal) {
-                this.makeToast(this.toast.variant);
+                this.makeToast(this.toast);
             }
         },
         methods: {
-            makeToast(variant = null) {
+            makeToast(toast) {
                 this.$bvToast.toast(this.toast.message, {
-                    title: variant === 'success' ? 'Success!'
-                        : variant === 'danger' ? 'Error!' : 'Info',
-                    variant: variant,
+                    title: toast.title,
+                    variant: toast.variant,
                     solid: true
                 });
             }

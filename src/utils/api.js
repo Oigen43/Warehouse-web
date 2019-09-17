@@ -39,11 +39,10 @@ async function requestHelper(handler) {
 
 function createToast(data) {
   return {
-    variant: ((data.response) && (data.response.status < 300)) ? 'success'
-        : ((data.request) && (data.request.status < 300)) ? 'success'
-        : (data.status && data.status < 300) ? 'success' : 'danger',
+    variant: (data.status && data.status < 300) ? 'success' : 'danger',
     message: ((data.response) && (data.response.data.data.statusCode)) ? messageCode[data.response.data.data.statusCode]
-        : (data.data.data.statusCode) ? messageCode[data.data.data.statusCode]
-        : 'Something goes wrong!'
+        : ((data.data) && (data.data.data.statusCode)) ? messageCode[data.data.data.statusCode]
+        : 'Server is not available!',
+    title: (data.status && data.status < 300) ? 'Success!' : 'Error!'
   };
 }
