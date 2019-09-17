@@ -1,6 +1,8 @@
 <template>
+  <b-row>
+    <b-col></b-col>
+    <b-col lg="12" sm="12">
     <div class="w-users-list-page">
-      <w-navigation></w-navigation>
       <h1>List of Users</h1>
       <b-button
         to="/users/add"
@@ -23,21 +25,24 @@
         ></w-list>
       </div>
     </div>
+    </b-col>
+    <b-col></b-col>
+  </b-row>
 </template>
 
 <script>
     import { mapActions, mapState } from 'vuex';
-    import { BButton } from 'bootstrap-vue';
+    import { BRow, BCol, BButton } from 'bootstrap-vue';
 
-    import WNavigation from '../../components/WNavigation';
     import WPagination from '../../components/WPagination';
     import WList from './components/WList';
 
     export default {
         name: 'WUsersListPage',
         components: {
+            BRow,
+            BCol,
             WPagination,
-            WNavigation,
             WList,
             BButton
         },

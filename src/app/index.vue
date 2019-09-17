@@ -1,13 +1,24 @@
 <template>
-  <div class='app'>
-    <router-view />
+  <div class="app">
+    <w-navigation></w-navigation>
+    <b-container fluid class="main-container">
+      <router-view/>
+    </b-container>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'app'
-  };
+    import { BContainer } from 'bootstrap-vue';
+
+    import WNavigation from '../components/WNavigation';
+
+    export default {
+        name: 'app',
+        components: {
+            BContainer,
+            WNavigation
+        },
+    };
 </script>
 
 <style lang='scss' scoped>

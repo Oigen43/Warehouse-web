@@ -1,42 +1,47 @@
 <template>
-  <div class='w-companies-list-page'>
-    <w-navigation></w-navigation>
-    <h1>List of Companies</h1>
-    <b-button
-      variant="success"
-      to="/companies/add"
-      class="w-companies-add-button"
-    >add company
-    </b-button>
-    <div class="companies-list-pagination">
-      <w-pagination
-        v-if="companiesPageLimit > 1"
-        :current="currentPage"
-        :pageLimit="companiesPageLimit"
-        @page-changed="sendRequest"
-      ></w-pagination>
-    </div>
-    <div class="companies-list">
-      <w-list
-        @delete-button-clicked="clickedDeleteButton"
-        :companiesList="companies"
-      ></w-list>
-    </div>
-  </div>
+  <b-row>
+    <b-col></b-col>
+    <b-col lg="12" sm="12">
+      <div class='w-companies-list-page'>
+        <h1>List of Companies</h1>
+        <b-button
+          variant="success"
+          to="/companies/add"
+          class="w-companies-add-button"
+        >add company
+        </b-button>
+        <div class="companies-list-pagination">
+          <w-pagination
+            v-if="companiesPageLimit > 1"
+            :current="currentPage"
+            :pageLimit="companiesPageLimit"
+            @page-changed="sendRequest"
+          ></w-pagination>
+        </div>
+        <div class="companies-list">
+          <w-list
+            @delete-button-clicked="clickedDeleteButton"
+            :companiesList="companies"
+          ></w-list>
+        </div>
+      </div>
+    </b-col>
+    <b-col></b-col>
+  </b-row>
 </template>
 
 <script>
     import { mapActions, mapState } from 'vuex';
-    import { BButton } from 'bootstrap-vue';
+    import { BRow, BCol, BButton } from 'bootstrap-vue';
 
-    import WNavigation from '../../components/WNavigation';
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
 
     export default {
         name: 'WCompaniesListPage',
         components: {
-            WNavigation,
+            BRow,
+            BCol,
             BButton,
             WList,
             WPagination

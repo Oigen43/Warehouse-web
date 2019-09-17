@@ -1,7 +1,4 @@
 <template>
-  <div>
-    <w-navigation></w-navigation>
-    <b-container>
       <b-row>
         <b-col lg="4" sm="2"></b-col>
         <b-col lg="4" sm="8">
@@ -38,24 +35,19 @@
         </b-col>
         <b-col lg="4" sm="2"></b-col>
       </b-row>
-    </b-container>
-  </div>
 </template>
 
 <script>
     import { mapActions } from 'vuex';
-    import { BContainer, BRow, BCol, BForm, BFormInput, BButton } from 'bootstrap-vue';
+    import { BRow, BCol, BForm, BFormInput, BButton } from 'bootstrap-vue';
 
-    import WNavigation from '../../components/WNavigation';
     import router from '../../router';
 
     export default {
         name: 'WLogin',
         components: {
-            BContainer,
             BRow,
             BCol,
-            WNavigation,
             BForm,
             BFormInput,
             BButton

@@ -1,7 +1,8 @@
 <template>
-  <div class="w-users-add-form">
-    <w-navigation></w-navigation>
-    <h1>Update User</h1>
+  <b-row>
+    <b-col lg="4"></b-col>
+    <b-col lg="4" sm="12">
+    <h1 class="w-user-update-form-h1">Update User</h1>
     <w-form
       @form-submitted="sendData"
       submitButtonName="UPDATE USER"
@@ -23,22 +24,23 @@
       class="w-users-go-back-link"
     >Go Back
     </b-button>
-
-  </div>
+    </b-col>
+    <b-col lg="4"></b-col>
+  </b-row>
 </template>
 
 <script>
     import { mapState, mapActions } from 'vuex';
-    import { BButton } from 'bootstrap-vue';
+    import { BRow, BCol, BButton } from 'bootstrap-vue';
 
-    import WNavigation from '../../components/WNavigation/index';
     import WForm from '../../components/WUserForm';
     import router from '../../router';
 
     export default {
         name: 'WUsersUpdateForm',
         components: {
-            WNavigation,
+            BRow,
+            BCol,
             WForm,
             BButton
         },

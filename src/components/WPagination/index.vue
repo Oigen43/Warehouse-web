@@ -40,7 +40,7 @@
       variant="outline-dark">
       ⭆
     </b-button>
-  </div>
+    </div>
 </template>
 
 <script>

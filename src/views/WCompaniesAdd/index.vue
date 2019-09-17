@@ -1,35 +1,38 @@
 <template>
-  <div class="w-companies-add-form">
-    <w-navigation></w-navigation>
-    <h1>Add a New Company</h1>
-    <w-form
-      @form-submitted="sendData"
-      submitButtonName="ADD COMPANY"
-      :companyName="companyName"
-      :address="address"
-      :description="description"
-    ></w-form>
-    <b-button
-      variant="link"
-      to="/companies"
-      class="w-companies-go-back-link"
-    >Go Back
-    </b-button>
-  </div>
+    <b-row>
+      <b-col lg="4"></b-col>
+      <b-col lg="4" sm="12">
+        <h1 class="w-company-add-form-h1">Add a New Company</h1>
+        <w-form
+          @form-submitted="sendData"
+          submitButtonName="ADD COMPANY"
+          :companyName="companyName"
+          :address="address"
+          :description="description"
+        ></w-form>
+        <b-button
+          variant="link"
+          to="/companies"
+          class="w-companies-go-back-link"
+        >Go Back
+        </b-button>
+      </b-col>
+      <b-col lg="4"></b-col>
+    </b-row>
 </template>
 
 <script>
-    import { BButton } from 'bootstrap-vue';
+    import { BRow, BCol, BButton } from 'bootstrap-vue';
     import { mapActions } from 'vuex';
 
-    import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WCompanyForm';
     import router from '../../router';
 
     export default {
         name: 'WCompaniesAddForm',
         components: {
-            WNavigation,
+            BRow,
+            BCol,
             WForm,
             BButton
         },

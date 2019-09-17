@@ -1,44 +1,46 @@
 <template>
-  <div class="w-users-add-form">
-    <w-navigation></w-navigation>
-    <h1>Add a New Company</h1>
-    <w-form
-      @form-submitted="sendData"
-      submitButtonName="ADD USER"
-      :firstName="firstName"
-      :surname="surname"
-      :patronymic="patronymic"
-      :email="email"
-      :city="address.city"
-      :street="address.street"
-      :house="address.house"
-      :flat="address.flat"
-      :birthDate="birthDate"
-      :login="login"
-      :password="password"
-    ></w-form>
-    <b-button
-      variant="link"
-      to="/users"
-      class="w-users-go-back-link"
-    >Go Back
-    </b-button>
-  </div>
-
+  <b-row>
+    <b-col lg="4"></b-col>
+    <b-col lg="4" sm="12">
+      <h1 class="w-user-add-form-h1">Add User</h1>
+      <w-form
+        @form-submitted="sendData"
+        submitButtonName="ADD USER"
+        :firstName="firstName"
+        :surname="surname"
+        :patronymic="patronymic"
+        :email="email"
+        :city="address.city"
+        :street="address.street"
+        :house="address.house"
+        :flat="address.flat"
+        :birthDate="birthDate"
+        :login="login"
+        :password="password"
+      ></w-form>
+      <b-button
+        variant="link"
+        to="/users"
+        class="w-users-go-back-link"
+      >Go Back
+      </b-button>
+    </b-col>
+    <b-col lg="4"></b-col>
+  </b-row>
 </template>
 
 <script>
     import { mapActions } from 'vuex';
-    import { BButton } from 'bootstrap-vue';
+    import { BRow, BCol, BButton } from 'bootstrap-vue';
 
-    import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WUserForm';
     import router from '../../router';
 
     export default {
         name: 'WUsersAddForm',
         components: {
-            WNavigation,
+            BRow,
+            BCol,
             WForm,
             BButton
         },

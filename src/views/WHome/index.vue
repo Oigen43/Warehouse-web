@@ -1,20 +1,27 @@
 <template>
-  <div class="w-home-page">
-    <w-navigation></w-navigation>
-    <w-content></w-content>
-  </div>
+  <b-row class="w-home-page">
+    <b-col lg="2"></b-col>
+    <b-col lg="8" sm="12">
+      <div class="w-content-container">
+        <h1 class="w-content-h1">Warehouse Online</h1>
+        <h3>Big or small… We can handle it all.</h3>
+        <hr>
+        <b-button size="lg" variant="outline-dark" class="w-content-button">Get Started!</b-button>
+      </div>
+    </b-col>
+    <b-col lg="2"></b-col>
+  </b-row>
 </template>
 
 <script>
-
-    import WNavigation from '../../components/WNavigation';
-    import WContent from './components/WContent';
+    import { BRow, BCol, BButton } from 'bootstrap-vue';
 
     export default {
         name: 'WHomePage',
         components: {
-            WNavigation,
-            WContent
+            BRow,
+            BCol,
+            BButton
         }
     };
 </script>
