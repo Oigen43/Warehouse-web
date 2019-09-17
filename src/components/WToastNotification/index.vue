@@ -1,3 +1,7 @@
+<template>
+  <div></div>
+</template>
+
 <script>
     import Vue from 'vue';
     import { ToastPlugin } from 'bootstrap-vue';
