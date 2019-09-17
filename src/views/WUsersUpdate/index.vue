@@ -1,7 +1,6 @@
 <template>
   <b-row>
-    <b-col lg="4"></b-col>
-    <b-col lg="4" sm="12">
+    <b-col lg="3" sm="12" offset-lg="4">
     <h1 class="w-user-update-form-h1">Update User</h1>
     <w-form
       @form-submitted="sendData"
@@ -25,7 +24,6 @@
     >Go Back
     </b-button>
     </b-col>
-    <b-col lg="4"></b-col>
   </b-row>
 </template>
 

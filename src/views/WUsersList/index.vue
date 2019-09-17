@@ -1,6 +1,5 @@
 <template>
   <b-row>
-    <b-col></b-col>
     <b-col lg="12" sm="12">
     <div class="w-users-list-page">
       <h1>List of Users</h1>
@@ -26,7 +25,6 @@
       </div>
     </div>
     </b-col>
-    <b-col></b-col>
   </b-row>
 </template>
 

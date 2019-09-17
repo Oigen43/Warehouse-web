@@ -1,7 +1,6 @@
 <template>
       <b-row>
-        <b-col lg="4" sm="2"></b-col>
-        <b-col lg="4" sm="8">
+        <b-col lg="3" sm="12" offset-lg="4">
           <h1 class="w-login-form-h1">Login</h1>
           <b-form class="w-login-form" @submit.prevent="login">
             <b-form-input
@@ -33,7 +32,6 @@
             </b-button>
           </b-form>
         </b-col>
-        <b-col lg="4" sm="2"></b-col>
       </b-row>
 </template>
 

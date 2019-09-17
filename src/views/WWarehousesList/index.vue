@@ -1,6 +1,5 @@
 <template>
   <b-row>
-    <b-col></b-col>
     <b-col lg="12" sm="12">
       <div class='w-warehouses-list-page'>
         <h1>List of Warehouses</h1>
@@ -26,7 +25,6 @@
         </div>
       </div>
     </b-col>
-    <b-col></b-col>
   </b-row>
 </template>
 
