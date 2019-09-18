@@ -1,6 +1,13 @@
 import * as types from './mutation-types';
 
 export default {
+  [types.LOGIN](state, token) {
+    state.token = token;
+  },
+  [types.LOGOUT](state) {
+    state.token = '';
+  },
+
   [types.COMPANIES](state, companies) {
     state.companies = companies;
   },
@@ -69,5 +76,9 @@ export default {
     state.deletedUser = user;
     const index = state.users.findIndex(item => item.firstName === user.firstName);
     state.users.splice(index, 1);
+  },
+
+  [types.SET_TOAST](state, toast) {
+    state.toast = toast;
   }
 };

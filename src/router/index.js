@@ -1,6 +1,9 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+
+import store from '../store';
 import WHome from '../views/WHome';
+import WLogin from '../views/WLogin';
 import WCompaniesList from '../views/WCompaniesList';
 import WCompaniesAddForm from '../views/WCompaniesAdd';
 import WCompaniesUpdateForm from '../views/WCompaniesUpdate';
@@ -13,6 +16,14 @@ import WUsersAddForm from '../views/WUsersAdd';
 
 Vue.use(Router);
 
+const ifAuthenticated = (to, from, next) => {
+  if (store.state.token) {
+    next();
+    return;
+  }
+  next('/login');
+};
+
 export default new Router({
   mode: 'history',
   routes: [
@@ -22,49 +33,63 @@ export default new Router({
       component: WHome
     },
     {
+      path: '/login',
+      name: 'login',
+      component: WLogin
+    },
+    {
       path: '/companies',
       name: 'companies',
-      component: WCompaniesList
+      component: WCompaniesList,
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/companies/add',
       name: 'companiesAddForm',
-      component: WCompaniesAddForm
+      component: WCompaniesAddForm,
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/companies/update',
       name: 'companiesUpdateForm',
-      component: WCompaniesUpdateForm
+      component: WCompaniesUpdateForm,
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/warehouses',
       name: 'warehouses',
-      component: WWarehousesList
+      component: WWarehousesList,
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/warehouses/add',
       name: 'warehousesAddForm',
-      component: WWarehousesAddForm
+      component: WWarehousesAddForm,
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/warehouses/update',
       name: 'warehousesUpdateForm',
-      component: WWarehousesUpdateForm
+      component: WWarehousesUpdateForm,
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/users',
       name: 'users',
-      component: WUsersList
+      component: WUsersList,
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/users/add',
       name: 'usersAddForm',
-      component: WUsersAddForm
+      component: WUsersAddForm,
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/users/update',
       name: 'usersUpdateForm',
-      component: WUsersUpdateForm
+      component: WUsersUpdateForm,
+      beforeEnter: ifAuthenticated,
     }
   ]
 });

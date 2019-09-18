@@ -1,65 +1,61 @@
 import axios from 'axios';
+import * as url from '../constants/urls';
+import messageCode from '../constants/messages';
+import store from '../store';
+
+axios.interceptors.request.use(function(config) {
+  const token = store.state.token;
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+}, function(err) {
+  return Promise.reject(err);
+});
 
 export default {
-  fetchData: async (page, perPage) => {
-    const res = await axios.get(`http://localhost:3030/companies?page=${page}&perPage=${perPage}`);
-    return res.data;
+  get: function (customURL, params) {
+    return requestHelper(axios.get(`${url.BASE_URL}${customURL}`, {
+      params: params
+    }));
   },
-  sendNewCompanyData: async (req) => {
-    try {
-      const res = await axios.post('http://localhost:3030/companies', req);
-      return res.data;
-    } catch (err) {
-      return err.response.data;
-    }
+  post: function (customURL, req) {
+    return requestHelper(axios.post(`${url.BASE_URL}${customURL}`, req));
   },
-  sendUpdatedCompanyData: async (req) => {
-    const res = await axios.put('http://localhost:3030/companies', req);
-    return res.data;
+  put: function (customURL, req) {
+    return requestHelper(axios.put(`${url.BASE_URL}${customURL}`, req));
   },
-  sendDeletedCompanyData: async (req) => {
-    const res = await axios.delete('http://localhost:3030/companies', { data: req });
-    return res.data;
-  },
-  fetchWarehousesData: async (page, perPage, companyName) => {
-    const res = await axios.get(`http://localhost:3030/warehouses?page=${page}&perPage=${perPage}&companyName=${companyName}`);
-    return res.data;
-  },
-  sendNewWarehouseData: async (req) => {
-    try {
-      const res = await axios.post('http://localhost:3030/warehouses', req);
-      return res.data;
-    } catch (err) {
-      return err.response.data;
-    }
-  },
-  sendUpdatedWarehouseData: async (req) => {
-    const res = await axios.put('http://localhost:3030/warehouses', req);
-    return res.data;
-  },
-  sendDeletedWarehouseData: async (req) => {
-    const res = await axios.delete('http://localhost:3030/warehouses', { data: req });
-    return res.data;
-  },
-
-  fetchUsersData: async (page, perPage) => {
-    const res = await axios.get(`http://localhost:3030/users?page=${page}&perPage=${perPage}`);
-    return res.data;
-  },
-  sendNewUserData: async (req) => {
-    try {
-      const res = await axios.post('http://localhost:3030/users', req);
-      return res.data;
-    } catch (err) {
-    return err.response.data;
-  }
-  },
-  sendUpdatedUserData: async (req) => {
-    const res = await axios.put('http://localhost:3030/users', req);
-    return res.data;
-  },
-  sendDeletedUserData: async (req) => {
-    const res = await axios.delete('http://localhost:3030/users', { data: req });
-    return res.data;
+  delete: function (customURL, req) {
+    return requestHelper(axios.delete(`${url.BASE_URL}${customURL}`, { data: req }));
   }
 };
+
+async function requestHelper(handler) {
+  try {
+    const res = await handler;
+    if (res.status < 300 && res.data.data.statusCode === undefined) {
+      return { data: res.data.data };
+    }
+    return {
+      data: res.data.data,
+      toast: createToast(res)
+    };
+  } catch (err) {
+    return {
+      error: err,
+      toast: createToast(err)
+    };
+  }
+}
+
+function createToast(data) {
+  return {
+    variant: (data.status && data.status < 300) ? 'success' : 'danger',
+    message: ((data.response) && (data.response.data.data.statusCode)) ? messageCode[data.response.data.data.statusCode]
+        : ((data.data) && (data.data.data.statusCode)) ? messageCode[data.data.data.statusCode]
+        : ((data.request) && (!data.response)) ? 'Server is not available!'
+        : 'Something went wrong!',
+    title: (data.status && data.status < 300) ? 'Success!' : 'Error!'
+  };
+}
