@@ -5,7 +5,6 @@
       <router-view/>
       <w-toast-notification></w-toast-notification>
     </b-container>
-    <w-footer></w-footer>
   </div>
 </template>
 
@@ -14,15 +13,13 @@
 
     import WNavigation from '../components/WNavigation';
     import WToastNotification from '../components/WToastNotification';
-    import WFooter from '../components/WFooter';
 
     export default {
         name: 'app',
         components: {
             BContainer,
             WNavigation,
-            WToastNotification,
-            WFooter
+            WToastNotification
         },
     };
 
