@@ -46,11 +46,7 @@
         data() {
             return {
                 fields: [
-                    'firstName', 'surname', 'patronymic', 'birthDate', 'email',
-                    { key: 'address.city', label: 'City' },
-                    { key: 'address.street', label: 'Street' },
-                    { key: 'address.house', label: 'House' },
-                    { key: 'address.flat', label: 'Flat' },
+                    'firstName', 'surname', 'patronymic', 'birthDate', 'email', 'address',
                     { key: 'update', label: '' },
                     { key: 'delete', label: '' }
                 ]

@@ -1,42 +1,45 @@
 <template>
-  <div class='w-warehouses-list-page'>
-    <w-navigation></w-navigation>
-    <h1>List of Warehouses</h1>
-    <b-button
-      variant="success"
-      to="/warehouses/add"
-      class="w-warehouses-add-button"
-    >add warehouse
-    </b-button>
-    <div class="warehouses-list-pagination">
-      <w-pagination
-        v-if="warehousesPageLimit > 1"
-        :current="currentPage"
-        :pageLimit="warehousesPageLimit"
-        @page-changed="sendRequest"
-      ></w-pagination>
-    </div>
-    <div class="warehouses-list">
-      <w-list
-        @delete-button-clicked="clickedDeleteButton"
-        :warehousesList="warehouses"
-      ></w-list>
-    </div>
-  </div>
+  <b-row>
+    <b-col lg="12" sm="12">
+      <div class='w-warehouses-list-page'>
+        <h1>List of Warehouses</h1>
+        <b-button
+          variant="success"
+          to="/warehouses/add"
+          class="w-warehouses-add-button"
+        >add warehouse
+        </b-button>
+        <div class="warehouses-list-pagination">
+          <w-pagination
+            v-if="warehousesPageLimit > 1"
+            :current="currentPage"
+            :pageLimit="warehousesPageLimit"
+            @page-changed="sendRequest"
+          ></w-pagination>
+        </div>
+        <div class="warehouses-list">
+          <w-list
+            @delete-button-clicked="clickedDeleteButton"
+            :warehousesList="warehouses"
+          ></w-list>
+        </div>
+      </div>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
     import { mapActions, mapState } from 'vuex';
-    import { BButton } from 'bootstrap-vue';
+    import { BRow, BCol, BButton } from 'bootstrap-vue';
 
-    import WNavigation from '../../components/WNavigation';
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
 
     export default {
         name: 'WWarehousesListPage',
         components: {
-            WNavigation,
+            BRow,
+            BCol,
             BButton,
             WList,
             WPagination
@@ -62,12 +65,20 @@
             }),
             sendRequest(page) {
                 this.currentPage = page;
-                this.fetchWarehousesList({ page: this.currentPage, perPage: this.perPage, companyName: this.currentCompany });
+                this.fetchWarehousesList({
+                    page: this.currentPage,
+                    perPage: this.perPage,
+                    companyName: this.currentCompany
+                });
             },
             async clickedDeleteButton(item) {
                 await this.sendDeletedWarehouseData(item);
                 this.deletedWarehouseData(item);
-                this.fetchWarehousesList({ page: this.currentPage, perPage: this.perPage, companyName: this.currentCompany });
+                this.fetchWarehousesList({
+                    page: this.currentPage,
+                    perPage: this.perPage,
+                    companyName: this.currentCompany
+                });
             }
         },
         created: function () {

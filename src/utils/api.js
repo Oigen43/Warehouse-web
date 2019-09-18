@@ -1,6 +1,19 @@
 import axios from 'axios';
 import * as url from '../constants/urls';
 import messageCode from '../constants/messages';
+import store from '../store';
+
+axios.interceptors.request.use(function(config) {
+  const token = store.state.token;
+console.log(`token: ${token}`);
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+
+  return config;
+}, function(err) {
+  return Promise.reject(err);
+});
 
 export default {
   get: function (customURL, params) {

@@ -1,13 +1,17 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+
 import getters from './getters';
 import mutations from './mutations';
 import actions from './actions';
+import * as constant from '../constants';
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
+    token: localStorage.getItem(constant.TOKEN_KEY) || null,
+
     companies: [],
     companiesPageLimit: 1,
     newCompany: {},
