@@ -7,7 +7,6 @@ import * as constant from '../constants';
 export default {
   login: async ({ commit }, req) => {
     const res = await api.post(url.LOGIN_URL, req);
-    console.log(res);
     if (res.data) {
       const token = res.data.token;
       localStorage.setItem(constant.TOKEN_KEY, token);
@@ -15,7 +14,6 @@ export default {
     }
 
     res.toast && commit(types.SET_TOAST, res.toast);
-    console.log(res.toast);
     return res;
   },
   logout: async ({ commit }) => {
