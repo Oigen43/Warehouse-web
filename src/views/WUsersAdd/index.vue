@@ -9,10 +9,7 @@
         :surname="surname"
         :patronymic="patronymic"
         :email="email"
-        :city="address.city"
-        :street="address.street"
-        :house="address.house"
-        :flat="address.flat"
+        :address="address"
         :birthDate="birthDate"
         :login="login"
         :password="password"
@@ -48,15 +45,10 @@
                 surname: '',
                 patronymic: '',
                 email: '',
-                address: {
-                    city: '',
-                    street: '',
-                    house: '',
-                    flat: ''
-                },
-                birthDate: new Date(),
+                address: '',
+                birthDate: '',
                 login: '',
-                password: ''
+                password: null
             };
         },
         methods: {

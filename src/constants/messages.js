@@ -9,9 +9,11 @@ export default {
   '02003': 'User created!',
   '02004': 'User updated!',
   '02005': 'User deleted!',
+  '02006': 'Incorrect username or password!',
+  '02007': 'You are logged in!',
   '03001': 'This warehouse already exists!',
   '03002': 'This warehouse does not exist!',
   '03003': 'Warehouse created!',
   '03004': 'Warehouse updated!',
-  '03005': 'Warehouse deleted!'
+  '03005': 'Warehouse deleted!',
 };

@@ -65,9 +65,9 @@
             redirect() {
                 router.push('/');
             },
-            login() {
-                this.loginUser(this.form);
-                this.redirect();
+            async login() {
+                const res = await this.loginUser(this.form);
+                !res.error && this.redirect();
             }
         }
     };

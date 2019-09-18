@@ -6,11 +6,17 @@ import * as constant from '../constants';
 
 export default {
   login: async ({ commit }, req) => {
-      const res = await api.login(req);
+    const res = await api.post(url.LOGIN_URL, req);
+    console.log(res)
+    if (res.data) {
       const token = res.data.token;
-
       localStorage.setItem(constant.TOKEN_KEY, token);
       commit(types.LOGIN, token);
+    }
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    console.log(res.toast)
+    return res;
   },
   logout: async ({ commit }) => {
     commit(types.LOGOUT);
@@ -55,9 +61,9 @@ export default {
 
   fetchWarehousesList: async ({ commit }, req) => {
     const res = await api.get(url.WAREHOUSES_URL, {
-        page: req.page,
-        perPage: req.perPage,
-        companyName: req.companyName
+      page: req.page,
+      perPage: req.perPage,
+      companyName: req.companyName
     });
     const pageLimit = helpers.calculatePageLimit(res.data.warehousesTotal, req.perPage);
 
@@ -90,7 +96,7 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
 
-  fetchUsersList: async({ commit }, page = 1, perPage = 5) => {
+  fetchUsersList: async ({ commit }, page = 1, perPage = 5) => {
     const res = await api.get(url.USERS_URL, { page, perPage });
     const pageLimit = helpers.calculatePageLimit(res.data.usersTotal, perPage);
 
@@ -98,7 +104,7 @@ export default {
     commit(types.USERS_PAGE_LIMIT, pageLimit);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
-  createUser: async({ commit }, req) => {
+  createUser: async ({ commit }, req) => {
     commit(types.CREATE_USER, req);
 
     const res = await api.post(url.USERS_URL, req);
@@ -106,7 +112,7 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
   },
-  getUpdatedUser: async({ commit }, req) => {
+  getUpdatedUser: async ({ commit }, req) => {
     commit(types.SET_UPDATED_USER, req);
   },
   sendUpdatedUser: async ({ commit }, req) => {
@@ -114,10 +120,10 @@ export default {
 
     res.toast && commit(types.SET_TOAST, res.toast);
   },
-  deleteUser: async({ commit }, req) => {
+  deleteUser: async ({ commit }, req) => {
     commit(types.DELETE_USER, req);
   },
-  sendDeletedUser: async({ commit }, req) => {
+  sendDeletedUser: async ({ commit }, req) => {
     const res = await api.delete(url.USERS_URL, req);
     res.toast && commit(types.SET_TOAST, res.toast);
   }

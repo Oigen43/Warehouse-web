@@ -10,7 +10,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    token: localStorage.getItem(constant.TOKEN_KEY),
+    token: localStorage.getItem(constant.TOKEN_KEY) || null,
 
     companies: [],
     companiesPageLimit: 1,
