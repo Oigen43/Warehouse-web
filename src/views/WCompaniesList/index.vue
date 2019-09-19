@@ -3,24 +3,28 @@
     <b-col lg="12" sm="12">
       <div class='w-companies-list-page'>
         <h1>List of Companies</h1>
-        <b-button
-          variant="success"
-          to="/companies/add"
-          class="w-companies-add-button"
-        >add company
-        </b-button>
-        <div class="companies-list-pagination">
-          <w-pagination
-            v-if="companiesPageLimit > 1"
-            :current="currentPage"
-            :pageLimit="companiesPageLimit"
-            @page-changed="sendRequest"
-          ></w-pagination>
-        </div>
+        <b-row>
+          <b-col lg="12" sm="12">
+            <b-button
+              variant="success"
+              to="/companies/add"
+              class="w-companies-add-button"
+            >add company
+            </b-button>
+            <div class="companies-list-pagination">
+              <w-pagination
+                v-if="companiesPageLimit > 1"
+                :current="currentPage"
+                :pageLimit="companiesPageLimit"
+                @page-changed="sendRequest"
+              ></w-pagination>
+            </div>
+          </b-col>
+        </b-row>
         <div class="companies-list">
           <w-list
             @delete-button-clicked="clickedDeleteButton"
-            :companiesList="companies"
+            :companies="companies"
           ></w-list>
         </div>
       </div>

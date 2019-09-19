@@ -1,36 +1,40 @@
 <template>
   <b-row>
     <b-col lg="12" sm="12">
-    <div class="w-users-list-page">
-      <h1>List of Users</h1>
-      <b-button
-        to="/users/add"
-        class="w-users-add-button"
-        variant="success">
-        add user
-      </b-button>
-      <div class="users-list-pagination">
-        <w-pagination
-          v-if="usersPageLimit > 1"
-          :current="currentPage"
-          :pageLimit="usersPageLimit"
-          @page-changed="sendRequest"
-        ></w-pagination>
+      <div class="w-users-list-page">
+        <h1>List of Users</h1>
+        <b-row>
+          <b-col lg="12" sm="12">
+            <b-button
+              to="/users/add"
+              class="w-users-add-button"
+              variant="success">
+              add user
+            </b-button>
+            <div class="users-list-pagination">
+              <w-pagination
+                v-if="usersPageLimit > 1"
+                :current="currentPage"
+                :pageLimit="usersPageLimit"
+                @page-changed="sendRequest"
+              ></w-pagination>
+            </div>
+          </b-col>
+        </b-row>
+        <div class="users-list">
+          <w-list
+            :usersList="users"
+            @delete-button-clicked="clickedDeleteButton"
+          ></w-list>
+        </div>
       </div>
-      <div class="users-list">
-        <w-list
-          :usersList="users"
-          @delete-button-clicked="clickedDeleteButton"
-        ></w-list>
-      </div>
-    </div>
     </b-col>
   </b-row>
 </template>
 
 <script>
-    import { mapActions, mapState } from 'vuex';
-    import { BRow, BCol, BButton } from 'bootstrap-vue';
+    import {mapActions, mapState} from 'vuex';
+    import {BRow, BCol, BButton} from 'bootstrap-vue';
 
     import WPagination from '../../components/WPagination';
     import WList from './components/WList';
@@ -46,7 +50,7 @@
         },
         data() {
             return {
-              currentPage: 1
+                currentPage: 1
             };
         },
         computed: {

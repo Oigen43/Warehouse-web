@@ -3,13 +3,13 @@
    head-variant="dark"
    borderless
    hover
+   stacked="sm"
    responsive
    :items="usersList"
    :fields="fields"
   >
     <template
-      slot="[update]"
-      slot-scope="data">
+      v-slot:cell(update)="data">
       <b-button
         variant="warning"
         size="sm"
@@ -100,7 +100,3 @@
         }
     };
 </script>
-
-<style lang="scss" scoped>
-  @import './styles.scss';
-</style>
