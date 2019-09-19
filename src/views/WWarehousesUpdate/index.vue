@@ -1,7 +1,7 @@
 <template>
-  <div class="w-warehouses-add-form">
-    <w-navigation></w-navigation>
-    <h1>Update Warehouse</h1>
+  <b-row>
+    <b-col lg="3" sm="12" offset-lg="4">
+    <h1 class="w-warehouses-update-form-h1">Update Warehouse</h1>
     <w-form
       @form-submitted="sendData"
       submitButtonName="UPDATE WAREHOUSE"
@@ -15,20 +15,22 @@
       class="w-warehouses-go-back-link"
     >Go Back
     </b-button>
-  </div>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
     import { mapState, mapActions } from 'vuex';
+    import { BRow, BCol, BButton } from 'bootstrap-vue';
+
     import router from '../../router';
-    import WNavigation from '../../components/WNavigation';
     import WForm from '../../components/WWarehouseForm';
-    import { BButton } from 'bootstrap-vue';
 
     export default {
         name: 'WWarehousesUpdateForm',
         components: {
-            WNavigation,
+            BRow,
+            BCol,
             WForm,
             BButton
         },

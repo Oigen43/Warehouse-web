@@ -37,45 +37,14 @@
         class="w-users-form-input"
       ></b-form-input>
 
-      <b-form>
         <b-form-input
           id="user-city-input"
           size="lg"
-          v-model="form.address.city"
+          v-model="form.address"
           required
-          placeholder="User city"
+          placeholder="User address (city, street, house, flat)"
           class="w-users-form-input"
         ></b-form-input>
-
-        <b-form-input
-          id="user-street-input"
-          size="lg"
-          v-model="form.address.street"
-          required
-          placeholder="User street"
-          class="w-users-form-input"
-        ></b-form-input>
-
-        <b-form-input
-          id="user-house-input"
-          size="lg"
-          v-model="form.address.house"
-          required
-          type="number"
-          placeholder="User house"
-          class="w-users-form-input"
-        ></b-form-input>
-
-        <b-form-input
-          id="user-flat-input"
-          size="lg"
-          v-model="form.address.flat"
-          required
-          type="number"
-          placeholder="User flat"
-          class="w-users-form-input"
-        ></b-form-input>
-      </b-form>
 
       <b-form-input
         id="user-birth-input"
@@ -143,17 +112,8 @@
             email: {
                 type: String
             },
-            city: {
+            address: {
                 type: String
-            },
-            street: {
-                type: String
-            },
-            house: {
-                type: Number
-            },
-            flat: {
-                type: Number
             },
             birthDate: {
                 type: String
@@ -172,12 +132,7 @@
                     surname: this.surname,
                     patronymic: this.patronymic,
                     email: this.email,
-                    address: {
-                        city: this.city,
-                        street: this.street,
-                        house: this.house,
-                        flat: this.flat
-                    },
+                    address: this.address,
                     birthDate: this.birthDate,
                     login: this.login,
                     password: this.password
