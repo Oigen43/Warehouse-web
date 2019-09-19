@@ -77,7 +77,7 @@
                 return this.updatedUser.login;
             },
             password() {
-                return this.updatedUser.password;
+                return '';
             }
         },
         methods: {

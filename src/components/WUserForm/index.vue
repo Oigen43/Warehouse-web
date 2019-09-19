@@ -122,7 +122,7 @@
                 type: String
             },
             password: {
-                type: Number
+                type: String
             }
         },
         data() {

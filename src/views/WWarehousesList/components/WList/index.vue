@@ -31,7 +31,7 @@
       <b-button
         variant="outline-dark"
         size="sm"
-        @click="clickedDeleteButton(data.item)">
+        @click="clickedDeleteModal(data.item)">
         ✕
       </b-button>
     </template>
@@ -40,7 +40,7 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
+    import { mapState, mapActions } from 'vuex';
     import { BTable, BFormCheckbox, BButton } from 'bootstrap-vue';
 
     import router from '../../../../router';
@@ -53,23 +53,56 @@
             BButton
         },
         props: ['warehousesList'],
+        computed: {
+            ...mapState([
+                'modalValue'
+            ])
+        },
+        watch: {
+            modalValue(newVal, oldVal) {
+                if (newVal) {
+                    this.clickedDeleteButton(this.clickedWarehouse);
+                    this.setModalValue(false);
+                }
+            }
+        },
         data: function () {
             return {
                 fields: [
                     'active', 'warehouseName', 'companyName', 'address', 'type',
                     { key: 'update', label: '' },
                     { key: 'delete', label: '' }
-                ]
+                ],
+                modal: {},
+                clickedWarehouse: {}
             };
         },
         methods: {
             ...mapActions({
                 getUpdatedWarehouseData: 'getUpdatedWarehouse',
                 sendDeletedWarehouseData: 'deleteWarehouse',
+                createModal: 'createModal',
+                setModalValue: 'setModalValue'
             }),
             clickedUpdateButton(item) {
                 this.getUpdatedWarehouseData(item);
                 router.push('/warehouses/update');
+            },
+            clickedDeleteModal(item) {
+                this.clickedWarehouse = item;
+                this.modal = {
+                    text: 'Please confirm that you want to delete the warehouse.',
+                    title: `Delete warehouse ${item.warehouseName}`,
+                    size: 'md',
+                    buttonSize: 'md',
+                    okVariant: 'secondary',
+                    cancelVariant: 'danger',
+                    okTitle: 'YES',
+                    cancelTitle: 'NO',
+                    hideHeaderClose: false,
+                    centered: true
+                };
+                this.createModal(this.modal);
             },
             clickedDeleteButton(item) {
                 this.$emit('delete-button-clicked', item);

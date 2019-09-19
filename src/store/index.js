@@ -31,7 +31,9 @@ export default new Vuex.Store({
     updatedUser: {},
     deletedUser: {},
 
-    toast: {}
+    toast: {},
+    modal: {},
+    modalValue: null
   },
   getters,
   mutations,

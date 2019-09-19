@@ -124,5 +124,11 @@ export default {
   sendDeletedUser: async ({ commit }, req) => {
     const res = await api.delete(url.USERS_URL, req);
     res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  createModal: async ({ commit }, req) => {
+    commit(types.CREATE_MODAL, req);
+  },
+  setModalValue: async ({ commit }, req) => {
+    commit(types.SET_MODAL_VALUE, req);
   }
 };

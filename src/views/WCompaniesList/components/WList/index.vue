@@ -41,7 +41,7 @@
       <b-button
         variant="outline-dark"
         size="sm"
-        @click="clickedDeleteButton(data.item)">
+        @click="clickedDeleteModal(data.item)">
         ✕
       </b-button>
     </template>
@@ -50,7 +50,7 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
+    import { mapState, mapActions } from 'vuex';
     import { BTable, BFormCheckbox, BButton } from 'bootstrap-vue';
 
     import router from '../../../../router';
@@ -63,6 +63,19 @@
             BButton
         },
         props: ['companiesList'],
+        computed: {
+            ...mapState([
+                'modalValue'
+            ])
+        },
+        watch: {
+            modalValue(newVal, oldVal) {
+                if (newVal) {
+                    this.clickedDeleteButton(this.clickedCompany);
+                    this.setModalValue(false);
+                }
+            }
+        },
         data: function () {
             return {
                 fields: [
@@ -70,22 +83,42 @@
                     { key: 'warehouses', label: '' },
                     { key: 'update', label: '' },
                     { key: 'delete', label: '' }
-                ]
+                ],
+                modal: {},
+                clickedCompany: {}
             };
         },
         methods: {
             ...mapActions({
                 getUpdatedCompanyData: 'getUpdatedCompany',
                 sendDeletedCompanyData: 'deleteCompany',
-                setCurrentCompany: 'setCurrentCompany'
+                setCurrentCompany: 'setCurrentCompany',
+                createModal: 'createModal',
+                setModalValue: 'setModalValue'
             }),
             clickedWarehousesButton(item) {
-              this.setCurrentCompany(item.companyName);
-              router.push('/warehouses');
+                this.setCurrentCompany(item.companyName);
+                router.push('/warehouses');
             },
             clickedUpdateButton(item) {
                 this.getUpdatedCompanyData(item);
                 router.push('/companies/update');
+            },
+            clickedDeleteModal(item) {
+                this.clickedCompany = item;
+                this.modal = {
+                    text: 'Please confirm that you want to delete the company.',
+                    title: `Delete company ${item.companyName}`,
+                    size: 'md',
+                    buttonSize: 'md',
+                    okVariant: 'secondary',
+                    cancelVariant: 'danger',
+                    okTitle: 'YES',
+                    cancelTitle: 'NO',
+                    hideHeaderClose: false,
+                    centered: true
+                };
+                this.createModal(this.modal);
             },
             clickedDeleteButton(item) {
                 this.$emit('delete-button-clicked', item);
