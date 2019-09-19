@@ -1,4 +1,6 @@
 .app {
+  display: flex;
+  flex-direction: column;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -8,4 +10,5 @@
 
 .main-container {
   height: 100%;
+  flex-grow: 1;
 }
