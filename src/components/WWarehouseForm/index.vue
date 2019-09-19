@@ -53,6 +53,9 @@
             submitButtonName: {
                 type: String,
             },
+            id: {
+                type: Number
+            },
             warehouseName: {
                 type: String,
                 default: '',
@@ -69,6 +72,7 @@
         data: function () {
             return {
                 form: {
+                    id: this.id,
                     warehouseName: this.warehouseName,
                     address: this.address,
                     type: this.type

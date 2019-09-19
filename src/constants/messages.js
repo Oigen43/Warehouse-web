@@ -5,12 +5,14 @@ export default {
   'company.update.success': 'Company updated!',
   'company.delete.success': 'Company deleted!',
 
+  'user.incorrect.login.data': 'Incorrect login or password! Try again!',
   'user.conflict': 'This user already exists!',
   'user.get.unknown': 'This user does not exist!',
   'user.create.success': 'User created!',
   'user.update.success': 'User updated!',
   'user.delete.success': 'User deleted!',
   'user.get.success': 'User found!',
+  'user.log.in': 'Login successful!',
 
   'warehouse.name.conflict': 'This warehouse already exists!',
   'warehouse.get.unknown': 'This warehouse does not exist!',
