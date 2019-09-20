@@ -4,7 +4,6 @@
         id="user-first-name-input"
         size="lg"
         v-model="form.firstName"
-        :disabled="submitButtonName === 'UPDATE USER'"
         placeholder="User first name"
         class="w-users-form-input"
       ></b-form-input>
@@ -100,6 +99,9 @@
             submitButtonName: {
                 type: String
             },
+            id: {
+                type: Number
+            },
             firstName: {
                 type: String
             },
@@ -122,12 +124,14 @@
                 type: String
             },
             password: {
-                type: Number
+                type: String,
+                default: ''
             }
         },
         data() {
             return {
                 form: {
+                    id: this.id,
                     firstName: this.firstName,
                     surname: this.surname,
                     patronymic: this.patronymic,

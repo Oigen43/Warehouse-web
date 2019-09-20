@@ -117,6 +117,7 @@ export default {
     const res = await api.put(url.USERS_URL, req);
 
     res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
   },
   deleteUser: async ({ commit }, req) => {
     commit(types.DELETE_USER, req);

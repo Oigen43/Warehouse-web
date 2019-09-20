@@ -5,6 +5,7 @@
     <w-form
       @form-submitted="sendData"
       submitButtonName="UPDATE WAREHOUSE"
+      :id="warehouseId"
       :warehouseName="warehouseName"
       :address="address"
       :type="type"
@@ -38,6 +39,9 @@
             ...mapState([
                 'updatedWarehouse'
             ]),
+            warehouseId() {
+                return this.updatedWarehouse.id;
+            },
             warehouseName () {
                 return this.updatedWarehouse.warehouseName;
             },
