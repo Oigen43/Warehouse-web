@@ -124,7 +124,8 @@
                 type: String
             },
             password: {
-                type: Number
+                type: String,
+                default: ''
             }
         },
         data() {

@@ -16,7 +16,6 @@
       :flat="flat"
       :birthDate="birthDate"
       :login="login"
-      :password="password"
     ></w-form>
     <b-button
       variant="link"
@@ -79,9 +78,6 @@
             },
             login() {
                 return this.updatedUser.login;
-            },
-            password() {
-                return '';
             }
         },
         methods: {
