@@ -60,8 +60,8 @@
                 router.push('/warehouses');
             },
             async sendData(warehouse) {
-                await this.sendUpdatedWarehouseData(warehouse);
-                this.redirect();
+                const res = await this.sendUpdatedWarehouseData(warehouse);
+                !res.error && this.redirect();
             }
         },
     };

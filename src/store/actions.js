@@ -43,6 +43,7 @@ export default {
     const res = await api.put(url.COMPANIES_URL, req);
 
     res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
   },
   deleteCompany: async ({ commit }, req) => {
     commit(types.DELETE_COMPANY, req);
@@ -84,6 +85,7 @@ export default {
     const res = await api.put(url.WAREHOUSES_URL, req);
 
     res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
   },
   deleteWarehouse: async ({ commit }, req) => {
     commit(types.DELETE_WAREHOUSE, req);
