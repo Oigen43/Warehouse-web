@@ -12,16 +12,15 @@ export default {
       const roles = res.data.roles;
       localStorage.setItem(constant.TOKEN_KEY, token);
       localStorage.setItem(constant.ROLES_LIST, roles);
-      commit(types.LOGIN, token);
+      commit(types.LOGIN, { token, roles });
     }
-
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
   },
   logout: async ({ commit }) => {
     localStorage.removeItem(constant.TOKEN_KEY);
     localStorage.removeItem(constant.ROLES_LIST);
-    commit(types.LOGOUT);
+    commit(types.LOGOUT, constant.initialState);
   },
   fetchCompaniesList: async ({ commit }, page = 1, perPage = 5) => {
     const res = await api.get(url.COMPANIES_URL, { page, perPage });
