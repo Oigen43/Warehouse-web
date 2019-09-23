@@ -62,7 +62,7 @@ export default {
     const res = await api.get(url.WAREHOUSES_URL, {
       page: req.page,
       perPage: req.perPage,
-      companyName: req.companyName
+      companyId: req.companyId
     });
     const pageLimit = helpers.calculatePageLimit(res.data.warehousesTotal, req.perPage);
 

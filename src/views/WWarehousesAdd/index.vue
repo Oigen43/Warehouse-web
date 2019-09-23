@@ -54,7 +54,7 @@
                 router.push('/warehouses');
             },
             async sendData(newWarehouse) {
-                newWarehouse.companyName = this.currentCompany;
+                newWarehouse.companyId = this.currentCompany;
                 const res = await this.sendNewWarehouseData(newWarehouse);
                 !res.error && this.redirect();
             }

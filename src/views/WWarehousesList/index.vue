@@ -68,7 +68,7 @@
                 this.fetchWarehousesList({
                     page: this.currentPage,
                     perPage: this.perPage,
-                    companyName: this.currentCompany
+                    companyId: this.currentCompany
                 });
             },
             async clickedDeleteButton(item) {
@@ -77,12 +77,12 @@
                 this.fetchWarehousesList({
                     page: this.currentPage,
                     perPage: this.perPage,
-                    companyName: this.currentCompany
+                    companyId: this.currentCompany
                 });
             }
         },
         created: function () {
-            this.fetchWarehousesList({ page: this.currentPage, perPage: this.perPage, companyName: this.currentCompany });
+            this.fetchWarehousesList({ page: this.currentPage, perPage: this.perPage, companyId: this.currentCompany });
         }
     };
 </script>
