@@ -68,6 +68,9 @@
             async clickedDeleteButton(item) {
                 await this.sendDeletedUserData(item);
                 this.deletedUserData(item);
+                if (this.users.length === 0) {
+                    this.currentPage -= 1;
+                }
                 this.fetchUsersList(this.currentPage);
             }
         },

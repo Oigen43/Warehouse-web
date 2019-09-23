@@ -17,7 +17,7 @@ export default new Vuex.Store({
     newCompany: {},
     updatedCompany: {},
     deletedCompany: {},
-    currentCompany: null,
+    currentCompany: {},
 
     warehouses: [],
     warehousesPageLimit: 1,

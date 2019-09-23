@@ -26,8 +26,7 @@ export default {
   },
   [types.DELETE_COMPANY](state, company) {
     state.deletedCompany = company;
-    const index = state.companies.findIndex(item => item.companyName === company.companyName);
-    state.companies = [ ...state.companies.splice(index, 1) ];
+    state.companies = state.companies.filter(item => item.companyName !== company.companyName);
   },
 
   [types.CURRENT_COMPANY](state, company) {
@@ -52,8 +51,7 @@ export default {
   },
   [types.DELETE_WAREHOUSE](state, warehouse) {
     state.deletedWarehouse = warehouse;
-    const index = state.warehouses.findIndex(item => item.warehouseName === warehouse.warehouseName);
-    state.warehouses = [ ...state.warehouses.splice(index, 1) ];
+    state.warehouses = state.warehouses.filter(item => item.warehouseName !== warehouse.warehouseName);
   },
 
   [types.USERS](state, users) {
@@ -74,8 +72,7 @@ export default {
   },
   [types.DELETE_USER](state, user) {
     state.deletedUser = user;
-    const index = state.users.findIndex(item => item.firstName === user.firstName);
-    state.users.splice(index, 1);
+    state.users = state.users.filter(item => item.firstName !== user.firstName);
   },
 
   [types.SET_TOAST](state, toast) {
