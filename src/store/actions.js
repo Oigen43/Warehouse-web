@@ -12,7 +12,7 @@ export default {
       const token = res.data.token;
       const roles = res.data.roles;
       localStorage.setItem(constant.TOKEN_KEY, token);
-      localStorage.setItem(constant.ROLES_LIST, roles);
+      localStorage.setItem(constant.ROLES_LIST, JSON.stringify(roles));
       commit(types.LOGIN, { token, roles });
     }
     res.toast && commit(types.SET_TOAST, res.toast);

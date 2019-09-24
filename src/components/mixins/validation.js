@@ -1,8 +1,7 @@
 export const validation = {
   methods: {
-    checkPermissions: function (rolesString, rolesPermissions) {
-      if (rolesString) {
-        const roles = rolesString.split(',');
+    checkPermissions: function (roles, rolesPermissions) {
+      if (roles) {
         return roles.some(item => rolesPermissions.includes(item));
         }
       return false;

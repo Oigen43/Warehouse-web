@@ -27,8 +27,7 @@ const ifAuthenticated = (to, from, next) => {
     return;
   }
 
-  let roles = store.state.roles.split(',');
-  if (roles.some(item => authorize.includes(item))) {
+  if (store.state.roles.some(item => authorize.includes(item))) {
     next();
   } else {
     next('/');
