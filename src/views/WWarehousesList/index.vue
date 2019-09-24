@@ -3,6 +3,8 @@
     <b-col lg="12" sm="12">
       <div class='w-warehouses-list-page'>
         <h1>List of Warehouses</h1>
+        <b-row>
+          <b-col lg="12" sm="12">
         <b-button
           variant="success"
           to="/warehouses/add"
@@ -17,6 +19,8 @@
             @page-changed="sendRequest"
           ></w-pagination>
         </div>
+          </b-col>
+        </b-row>
         <div class="warehouses-list">
           <w-list
             @delete-button-clicked="clickedDeleteButton"
