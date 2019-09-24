@@ -15,7 +15,7 @@
             <b-button variant="light" to='/companies' class="w-navigation-link" v-if="isAuthorized">Companies</b-button>
           </b-nav-item>
           <b-nav-item>
-            <b-button variant="light" to='/users' class="w-navigation-link"  v-if="isAuthorized">Users</b-button>
+            <b-button variant="light" to='/users' class="w-navigation-link"  v-if="isHasPermissions">Users</b-button>
           </b-nav-item>
         </b-navbar-nav>
 
@@ -65,7 +65,10 @@
             ]),
             ...mapState([
                 'roles',
-            ])
+            ]),
+            isHasPermissions: function () {
+                return this.checkPermissions(this.roles, routesPermissions.users);
+            }
         },
         methods: {
             ...mapActions({
@@ -78,10 +81,6 @@
                 await this.logoutUser();
                 this.redirect();
             }
-        },
-        created: function() {
-          // console.log(this.roles);
-          // console.log(this.checkPermissions(this.roles, routesPermissions));
         }
     };
 </script>
