@@ -1,11 +1,14 @@
 import * as types from './mutation-types';
 
 export default {
-  [types.LOGIN](state, token) {
-    state.token = token;
+  [types.LOGIN](state, data) {
+    state.token = data.token;
+    state.roles = data.roles;
   },
-  [types.LOGOUT](state) {
-    state.token = '';
+  [types.LOGOUT](state, initialState) {
+    Object.keys(initialState).forEach(key => {
+      state[key] = initialState[key];
+    });
   },
 
   [types.COMPANIES](state, companies) {
