@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 
 import store from '../store';
+import routesPermissions from '../constants/routesPermissions';
 import WHome from '../views/WHome';
 import WLogin from '../views/WLogin';
 import WCompaniesList from '../views/WCompaniesList';
@@ -17,11 +18,19 @@ import WUsersAddForm from '../views/WUsersAdd';
 Vue.use(Router);
 
 const ifAuthenticated = (to, from, next) => {
+  const { authorize } = to.meta;
   if (store.state.token) {
     next();
+  } else {
+    next('/login');
     return;
   }
-  next('/login');
+
+  if (store.state.roles.some(item => authorize.includes(item))) {
+    next();
+  } else {
+    next(from);
+  }
 };
 
 export default new Router({
@@ -30,7 +39,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: WHome
+      component: WHome,
     },
     {
       path: '/login',
@@ -41,53 +50,62 @@ export default new Router({
       path: '/companies',
       name: 'companies',
       component: WCompaniesList,
+      meta: { authorize: routesPermissions.companies },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/companies/add',
       name: 'companiesAddForm',
       component: WCompaniesAddForm,
+      meta: { authorize: routesPermissions.companies },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/companies/update',
       name: 'companiesUpdateForm',
       component: WCompaniesUpdateForm,
+      meta: { authorize: routesPermissions.companies },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/warehouses',
       name: 'warehouses',
       component: WWarehousesList,
+      meta: { authorize: routesPermissions.warehouses },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/warehouses/add',
       name: 'warehousesAddForm',
       component: WWarehousesAddForm,
+      meta: { authorize: routesPermissions.warehouses },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/warehouses/update',
       name: 'warehousesUpdateForm',
       component: WWarehousesUpdateForm,
+      meta: { authorize: routesPermissions.warehouses },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/users',
       name: 'users',
       component: WUsersList,
+      meta: { authorize: routesPermissions.users },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/users/add',
       name: 'usersAddForm',
       component: WUsersAddForm,
+      meta: { authorize: routesPermissions.users },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/users/update',
       name: 'usersUpdateForm',
+      meta: { authorize: routesPermissions.users },
       component: WUsersUpdateForm,
       beforeEnter: ifAuthenticated,
     }
