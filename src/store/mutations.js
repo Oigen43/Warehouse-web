@@ -3,7 +3,7 @@ import * as types from './mutation-types';
 export default {
   [types.LOGIN](state, data) {
     state.token = data.token;
-    state.roles = data.roles;
+    state.roles = data.roles.join();
   },
   [types.LOGOUT](state, initialState) {
     Object.keys(initialState).forEach(key => {

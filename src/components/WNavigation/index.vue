@@ -31,7 +31,10 @@
 </template>
 
 <script>
-    import { mapGetters, mapActions } from 'vuex';
+    import { validation } from '../../components/mixins/validation';
+    import routesPermissions from '../../constants/routesPermissions';
+
+    import { mapGetters, mapActions, mapState } from 'vuex';
     import {
         BNavbar,
         BNavbarNav,
@@ -46,6 +49,7 @@
 
     export default {
         name: 'WNavigation',
+        mixins: [validation],
         components: {
             BNavbar,
             BNavbarNav,
@@ -58,6 +62,9 @@
         computed: {
             ...mapGetters([
                 'isAuthorized',
+            ]),
+            ...mapState([
+                'roles',
             ])
         },
         methods: {
@@ -71,6 +78,10 @@
                 await this.logoutUser();
                 this.redirect();
             }
+        },
+        created: function() {
+          // console.log(this.roles);
+          // console.log(this.checkPermissions(this.roles, routesPermissions));
         }
     };
 </script>

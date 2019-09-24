@@ -19,7 +19,6 @@ Vue.use(Router);
 
 const ifAuthenticated = (to, from, next) => {
   const { authorize } = to.meta;
-  let roles = store.state.roles;
 
   if (store.state.token) {
     next();
@@ -28,7 +27,7 @@ const ifAuthenticated = (to, from, next) => {
     return;
   }
 
-  if (!Array.isArray(store.state.roles)) { roles = store.state.roles.split(','); }
+  let roles = store.state.roles.split(',');
   if (roles.some(item => authorize.includes(item))) {
     next();
   } else {
