@@ -13,6 +13,7 @@ export default {
   'user.delete.success': 'User deleted!',
   'user.get.success': 'User found!',
   'user.log.in': 'Login successful!',
+  'user.blocked': 'User deleted!',
 
   'warehouse.name.conflict': 'This warehouse already exists!',
   'warehouse.get.unknown': 'This warehouse does not exist!',
