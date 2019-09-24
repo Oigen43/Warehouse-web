@@ -1,5 +1,6 @@
 .w-list-button {
     margin: 0.5rem 1rem 0.5rem 0;
+    font-size: 1rem;
 }
 
 .w-users-card {
@@ -18,4 +19,12 @@
     text-shadow: 0 0 0.2rem #000;
     color: #f8f9fa;
     background: rgba(44, 62, 80, 0.6);
+}
+
+.w-users-card-text {
+    font-weight: bold;
+}
+
+.w-users-card-body {
+    margin-bottom: 1rem;
 }

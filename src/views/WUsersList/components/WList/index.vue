@@ -6,15 +6,15 @@
             <b-col lg="6" md="12">
               <div class="w-role-label">Admin</div>
               <b-card-img src="https://www.zayedhotel.com/addons/default/themes/yoona/img/user.jpg" class="rounded-0"
-                          fluid alt="User image"></b-card-img>
+                           alt="User image"></b-card-img>
             </b-col>
             <b-col lg="6" md="12">
-              <b-card-body>
-                <b-card-title class="mb-0">{{user.firstName}} {{user.surname}} ({{user.patronymic}})</b-card-title>
+              <b-card-body class="w-users-card-body">
+                <b-card-title class="mb-0">{{user.firstName}} {{user.patronymic}} {{user.surname}}</b-card-title>
                 <hr>
-                <p>{{user.birthDate}}</p>
-                <p>{{user.email}}</p>
-                <p>{{user.address}}</p>
+                <b-card-text><span class="w-users-card-text">Date of Birth:</span> {{user.birthDate}}</b-card-text>
+                <b-card-text><span class="w-users-card-text">Email:</span> {{user.email}}</b-card-text>
+                <b-card-text><span class="w-users-card-text">Address:</span> {{user.address}}</b-card-text>
               </b-card-body>
               <b-card-footer>
                 <b-button
@@ -41,7 +41,7 @@
 
 <script>
     import {mapState, mapActions} from 'vuex';
-    import {BRow, BCol, BCardGroup, BCard, BCardImg, BCardTitle, BCardBody, BCardFooter, BButton} from 'bootstrap-vue';
+    import {BRow, BCol, BCardGroup, BCard, BCardImg, BCardTitle, BCardBody,BCardText, BCardFooter, BButton} from 'bootstrap-vue';
 
     import router from '../../../../router';
 
@@ -54,6 +54,7 @@
             BCard,
             BCardImg,
             BCardTitle,
+            BCardText,
             BCardBody,
             BCardFooter,
             BButton
