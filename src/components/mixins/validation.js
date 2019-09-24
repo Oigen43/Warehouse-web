@@ -1,8 +1,15 @@
+import { mapState } from 'vuex';
+
 export const validation = {
+  computed: {
+    ...mapState([
+      'roles',
+    ])
+  },
   methods: {
-    checkPermissions: function (roles, rolesPermissions) {
-      if (roles) {
-        return roles.some(item => rolesPermissions.includes(item));
+    checkPermissions: function (rolesPermissions) {
+      if (this.roles) {
+        return this.roles.some(item => rolesPermissions.includes(item));
         }
       return false;
       }

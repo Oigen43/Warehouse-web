@@ -15,7 +15,7 @@
             <b-button variant="light" to='/companies' class="w-navigation-link" v-if="isAuthorized">Companies</b-button>
           </b-nav-item>
           <b-nav-item>
-            <b-button variant="light" to='/users' class="w-navigation-link"  v-if="isHasPermissions">Users</b-button>
+            <b-button variant="light" to='/users' class="w-navigation-link"  v-if="isHasPermissions('users')">Users</b-button>
           </b-nav-item>
         </b-navbar-nav>
 
@@ -34,7 +34,7 @@
     import { validation } from '../../components/mixins/validation';
     import routesPermissions from '../../constants/routesPermissions';
 
-    import { mapGetters, mapActions, mapState } from 'vuex';
+    import { mapGetters, mapActions } from 'vuex';
     import {
         BNavbar,
         BNavbarNav,
@@ -62,13 +62,7 @@
         computed: {
             ...mapGetters([
                 'isAuthorized',
-            ]),
-            ...mapState([
-                'roles',
-            ]),
-            isHasPermissions: function () {
-                return this.checkPermissions(this.roles, routesPermissions.users);
-            }
+            ])
         },
         methods: {
             ...mapActions({
@@ -76,6 +70,9 @@
             }),
             redirect() {
                 router.push('/login');
+            },
+            isHasPermissions (route) {
+                return this.checkPermissions(routesPermissions[route]);
             },
             async logout() {
                 await this.logoutUser();
