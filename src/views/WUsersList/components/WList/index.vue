@@ -1,48 +1,64 @@
 <template>
-  <b-table
-   head-variant="dark"
-   borderless
-   hover
-   stacked="sm"
-   responsive
-   :items="usersList"
-   :fields="fields"
-  >
-    <template
-      v-slot:cell(update)="data">
-      <b-button
-        variant="warning"
-        size="sm"
-        @click="clickedUpdateButton(data.item)">
-        Update
-      </b-button>
-    </template>
-    <template
-      slot="[delete]"
-      slot-scope="data">
-      <b-button
-        variant="outline-dark"
-        size="sm"
-        @click="clickedDeleteModal(data.item)">
-        ✕
-      </b-button>
-    </template>
-  </b-table>
+    <b-row>
+      <b-col lg="4" md="6" sm="12" v-for="user in users">
+        <b-card no-body class="overflow-hidden w-users-card">
+          <b-row no-gutters>
+            <b-col lg="6" md="12">
+              <div class="w-role-label">Admin</div>
+              <b-card-img src="https://www.zayedhotel.com/addons/default/themes/yoona/img/user.jpg" class="rounded-0"
+                          fluid alt="User image"></b-card-img>
+            </b-col>
+            <b-col lg="6" md="12">
+              <b-card-body>
+                <b-card-title class="mb-0">{{user.firstName}} {{user.surname}} ({{user.patronymic}})</b-card-title>
+                <hr>
+                <p>{{user.birthDate}}</p>
+                <p>{{user.email}}</p>
+                <p>{{user.address}}</p>
+              </b-card-body>
+              <b-card-footer>
+                <b-button
+                  class="w-list-button"
+                  variant="warning"
+                  size="sm"
+                  @click="clickedUpdateButton(user)">
+                  Update
+                </b-button>
+                <b-button
+                  class="w-list-button"
+                  variant="outline-dark"
+                  size="sm"
+                  @click="clickedDeleteModal(user)">
+                  ✕
+                </b-button>
+              </b-card-footer>
+            </b-col>
+          </b-row>
+        </b-card>
+      </b-col>
+    </b-row>
 </template>
 
 <script>
-    import { mapState, mapActions } from 'vuex';
-    import { BTable, BButton } from 'bootstrap-vue';
+    import {mapState, mapActions} from 'vuex';
+    import {BRow, BCol, BCardGroup, BCard, BCardImg, BCardTitle, BCardBody, BCardFooter, BButton} from 'bootstrap-vue';
 
     import router from '../../../../router';
 
     export default {
         name: 'WList',
         components: {
-            BTable,
+            BRow,
+            BCol,
+            BCardGroup,
+            BCard,
+            BCardImg,
+            BCardTitle,
+            BCardBody,
+            BCardFooter,
             BButton
         },
-        props: ['usersList'],
+        props: ['users'],
         computed: {
             ...mapState([
                 'modalValue'
@@ -60,8 +76,8 @@
             return {
                 fields: [
                     'firstName', 'surname', 'patronymic', 'birthDate', 'email', 'address',
-                    { key: 'update', label: '' },
-                    { key: 'delete', label: '' }
+                    {key: 'update', label: ''},
+                    {key: 'delete', label: ''}
                 ],
                 modal: {},
                 clickedUser: {}
@@ -95,8 +111,12 @@
                 this.createModal(this.modal);
             },
             clickedDeleteButton(item) {
-               this.$emit('delete-button-clicked', item);
+                this.$emit('delete-button-clicked', item);
             }
         }
     };
 </script>
+
+<style lang="scss" scoped>
+  @import './styles.scss';
+</style>

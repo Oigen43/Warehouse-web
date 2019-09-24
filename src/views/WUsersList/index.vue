@@ -23,7 +23,7 @@
         </b-row>
         <div class="users-list">
           <w-list
-            :usersList="users"
+            :users="users"
             @delete-button-clicked="clickedDeleteButton"
           ></w-list>
         </div>
