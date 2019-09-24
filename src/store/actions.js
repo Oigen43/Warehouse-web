@@ -51,8 +51,8 @@ export default {
   deleteCompany: async ({ commit }, req) => {
     commit(types.DELETE_COMPANY, req);
   },
-  sendDeletedCompany: async ({ commit }, req) => {
-    const res = await api.delete(url.COMPANIES_URL, req);
+  sendDeletedCompany: async ({ commit }, companyId) => {
+    const res = await api.delete(url.COMPANIES_URL, { companyId });
 
     res.toast && commit(types.SET_TOAST, res.toast);
   },
@@ -94,8 +94,8 @@ export default {
   deleteWarehouse: async ({ commit }, req) => {
     commit(types.DELETE_WAREHOUSE, req);
   },
-  sendDeletedWarehouse: async ({ commit }, req) => {
-    const res = await api.delete(url.WAREHOUSES_URL, req);
+  sendDeletedWarehouse: async ({ commit }, warehouseId) => {
+    const res = await api.delete(url.WAREHOUSES_URL, { warehouseId });
 
     res.toast && commit(types.SET_TOAST, res.toast);
   },
@@ -129,8 +129,9 @@ export default {
   deleteUser: async ({ commit }, req) => {
     commit(types.DELETE_USER, req);
   },
-  sendDeletedUser: async ({ commit }, req) => {
-    const res = await api.delete(url.USERS_URL, req);
+  sendDeletedUser: async ({ commit }, userId) => {
+    const res = await api.delete(url.USERS_URL, { userId });
+
     res.toast && commit(types.SET_TOAST, res.toast);
   }
 };
