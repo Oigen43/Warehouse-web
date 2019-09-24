@@ -32,11 +32,14 @@
     import { mapActions, mapState } from 'vuex';
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
+    import { validation } from '../../components/mixins/validation';
+    import routesPermissions from '../../constants/routesPermissions';
     import WPagination from '../../components/WPagination';
     import WList from './components/WList';
 
     export default {
         name: 'WUsersListPage',
+        mixins: [validation],
         components: {
             BRow,
             BCol,
@@ -52,7 +55,8 @@
         computed: {
             ...mapState([
                 'users',
-                'usersPageLimit'
+                'usersPageLimit',
+                'roles'
             ])
         },
         methods: {
@@ -76,6 +80,7 @@
         },
         created: function () {
             this.fetchUsersList();
+            // this.checkPermissions(this.roles, routesPermissions);
         }
     };
 </script>

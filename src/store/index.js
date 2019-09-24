@@ -11,7 +11,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     token: localStorage.getItem(constant.TOKEN_KEY) || null,
-    roles: localStorage.getItem(constant.ROLES_LIST) || null,
+    roles: localStorage.getItem(constant.ROLES_LIST).split(',') || null,
 
     companies: [],
     companiesPageLimit: 1,

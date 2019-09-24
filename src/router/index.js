@@ -19,6 +19,7 @@ Vue.use(Router);
 
 const ifAuthenticated = (to, from, next) => {
   const { authorize } = to.meta;
+  const roles = store.state.roles;
   if (store.state.token) {
     next();
   } else {
@@ -26,10 +27,10 @@ const ifAuthenticated = (to, from, next) => {
     return;
   }
 
-  if (store.state.roles.some(item => authorize.includes(item))) {
+  if (roles.some(item => authorize.includes(item))) {
     next();
   } else {
-    next(from);
+    next('/');
   }
 };
 

@@ -12,10 +12,10 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item>
-            <b-button variant="light" to='/companies' class="w-navigation-link">Companies</b-button>
+            <b-button variant="light" to='/companies' class="w-navigation-link" v-if="isAuthorized">Companies</b-button>
           </b-nav-item>
           <b-nav-item>
-            <b-button variant="light" to='/users' class="w-navigation-link">Users</b-button>
+            <b-button variant="light" to='/users' class="w-navigation-link"  v-if="isAuthorized">Users</b-button>
           </b-nav-item>
         </b-navbar-nav>
 
