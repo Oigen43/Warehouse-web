@@ -4,7 +4,6 @@
         id="warehouse-name-input"
         size="lg"
         v-model="form.warehouseName"
-        :disabled="submitButtonName === 'UPDATE WAREHOUSE'"
         required
         placeholder="Warehouse name"
         class="w-warehouses-form-input"
@@ -53,6 +52,9 @@
             submitButtonName: {
                 type: String,
             },
+            id: {
+                type: Number
+            },
             warehouseName: {
                 type: String,
                 default: '',
@@ -69,6 +71,7 @@
         data: function () {
             return {
                 form: {
+                    id: this.id,
                     warehouseName: this.warehouseName,
                     address: this.address,
                     type: this.type

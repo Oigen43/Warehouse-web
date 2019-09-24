@@ -72,21 +72,24 @@
                 this.fetchWarehousesList({
                     page: this.currentPage,
                     perPage: this.perPage,
-                    companyName: this.currentCompany
+                    companyId: this.currentCompany.id
                 });
             },
             async clickedDeleteButton(item) {
-                await this.sendDeletedWarehouseData(item);
+                await this.sendDeletedWarehouseData(item.id);
                 this.deletedWarehouseData(item);
+                if (this.warehouses.length === 0) {
+                    this.currentPage -= 1;
+                }
                 this.fetchWarehousesList({
                     page: this.currentPage,
                     perPage: this.perPage,
-                    companyName: this.currentCompany
+                    companyId: this.currentCompany.id
                 });
             }
         },
         created: function () {
-            this.fetchWarehousesList({ page: this.currentPage, perPage: this.perPage, companyName: this.currentCompany });
+            this.fetchWarehousesList({ page: this.currentPage, perPage: this.perPage, companyId: this.currentCompany.id });
         }
     };
 </script>

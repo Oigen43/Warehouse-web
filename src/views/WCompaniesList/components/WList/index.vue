@@ -93,8 +93,8 @@
                 setModalValue: 'setModalValue'
             }),
             clickedWarehousesButton(item) {
-                this.setCurrentCompany(item.companyName);
-                router.push('/warehouses');
+              this.setCurrentCompany({id: item.id, companyName: item.companyName});
+              router.push('/warehouses');
             },
             clickedUpdateButton(item) {
                 this.getUpdatedCompanyData(item);

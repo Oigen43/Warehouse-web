@@ -5,6 +5,7 @@
     <w-form
       @form-submitted="sendData"
       submitButtonName="UPDATE USER"
+      :id="userId"
       :firstName="firstName"
       :surname="surname"
       :patronymic="patronymic"
@@ -15,7 +16,6 @@
       :flat="flat"
       :birthDate="birthDate"
       :login="login"
-      :password="password"
     ></w-form>
     <b-button
       variant="link"
@@ -46,6 +46,9 @@
             ...mapState([
                 'updatedUser'
             ]),
+            userId() {
+                return this.updatedUser.id;
+            },
             firstName() {
                 return this.updatedUser.firstName;
             },
@@ -75,9 +78,6 @@
             },
             login() {
                 return this.updatedUser.login;
-            },
-            password() {
-                return '';
             }
         },
         methods: {
@@ -88,8 +88,8 @@
                 router.push('/users');
             },
             async sendData(user) {
-                await this.sendUpdatedUserData(user);
-                this.redirect();
+                const res = await this.sendUpdatedUserData(user);
+                !res.error && this.redirect();
             }
         }
     };

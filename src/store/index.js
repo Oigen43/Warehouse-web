@@ -11,13 +11,14 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     token: localStorage.getItem(constant.TOKEN_KEY) || null,
+    roles: localStorage.getItem(constant.ROLES_LIST) || null,
 
     companies: [],
     companiesPageLimit: 1,
     newCompany: {},
     updatedCompany: {},
     deletedCompany: {},
-    currentCompany: null,
+    currentCompany: {},
 
     warehouses: [],
     warehousesPageLimit: 1,

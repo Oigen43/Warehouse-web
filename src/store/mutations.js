@@ -1,11 +1,14 @@
 import * as types from './mutation-types';
 
 export default {
-  [types.LOGIN](state, token) {
-    state.token = token;
+  [types.LOGIN](state, data) {
+    state.token = data.token;
+    state.roles = data.roles;
   },
-  [types.LOGOUT](state) {
-    state.token = '';
+  [types.LOGOUT](state, initialState) {
+    Object.keys(initialState).forEach(key => {
+      state[key] = initialState[key];
+    });
   },
 
   [types.COMPANIES](state, companies) {
@@ -22,12 +25,11 @@ export default {
   },
   [types.UPDATE_COMPANY](state, company) {
     state.updatedCompany = company;
-    state.companies = [ ...state.companies.map(item => item.companyName === company.companyName ? company : item) ];
+    state.companies = [ ...state.companies.map(item => item.id === company.id ? company : item) ];
   },
   [types.DELETE_COMPANY](state, company) {
     state.deletedCompany = company;
-    const index = state.companies.findIndex(item => item.companyName === company.companyName);
-    state.companies = [ ...state.companies.splice(index, 1) ];
+    state.companies = state.companies.filter(item => item.id !== company.id);
   },
 
   [types.CURRENT_COMPANY](state, company) {
@@ -48,12 +50,11 @@ export default {
   },
   [types.UPDATE_WAREHOUSE](state, warehouse) {
     state.updatedWarehouse = warehouse;
-    state.warehouses = [ ...state.warehouses.map(item => item.warehouseName === warehouse.warehouseName ? warehouse : item) ];
+    state.warehouses = [ ...state.warehouses.map(item => item.id === warehouse.id ? warehouse : item) ];
   },
   [types.DELETE_WAREHOUSE](state, warehouse) {
     state.deletedWarehouse = warehouse;
-    const index = state.warehouses.findIndex(item => item.warehouseName === warehouse.warehouseName);
-    state.warehouses = [ ...state.warehouses.splice(index, 1) ];
+    state.warehouses = state.warehouses.filter(item => item.id !== warehouse.id);
   },
 
   [types.USERS](state, users) {
@@ -70,12 +71,11 @@ export default {
   },
   [types.UPDATE_USER](state, user) {
     state.updatedUser = user;
-    state.users = [...state.users.map(item => item.firstName === user.firstName ? user : item)];
+    state.users = [...state.users.map(item => item.id === user.id ? user : item)];
   },
   [types.DELETE_USER](state, user) {
     state.deletedUser = user;
-    const index = state.users.findIndex(item => item.firstName === user.firstName);
-    state.users.splice(index, 1);
+    state.users = state.users.filter(item => item.id !== user.id);
   },
 
   [types.SET_TOAST](state, toast) {

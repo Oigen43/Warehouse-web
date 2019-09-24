@@ -5,6 +5,7 @@
     <w-form
       @form-submitted="sendData"
       submitButtonName="UPDATE COMPANY"
+      :id="companyId"
       :companyName="companyName"
       :address="address"
       :description="description"
@@ -38,6 +39,9 @@
             ...mapState([
                 'updatedCompany'
             ]),
+            companyId() {
+                return this.updatedCompany.id;
+            },
             companyName () {
                 return this.updatedCompany.companyName;
             },
@@ -56,8 +60,8 @@
                 router.push('/companies');
             },
             async sendData(company) {
-                await this.sendUpdatedCompanyData(company);
-                this.redirect();
+                const res = await this.sendUpdatedCompanyData(company);
+                !res.error && this.redirect();
             }
         },
     };
