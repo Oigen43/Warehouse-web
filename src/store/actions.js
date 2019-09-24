@@ -64,7 +64,6 @@ export default {
       perPage: req.perPage,
       companyId: req.companyId
     });
-    console.log(res.data.warehousesTotal);
     const pageLimit = helpers.calculatePageLimit(res.data.warehousesTotal, req.perPage);
 
     commit(types.WAREHOUSES, res.data.warehouses);
