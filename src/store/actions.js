@@ -133,8 +133,5 @@ export default {
     const res = await api.delete(url.USERS_URL, { userId });
 
     res.toast && commit(types.SET_TOAST, res.toast);
-  },
-  setModalValue: async ({ commit }, req) => {
-    commit(types.SET_MODAL_VALUE, req);
   }
 };

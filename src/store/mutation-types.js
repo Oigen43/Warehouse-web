@@ -24,4 +24,3 @@ export const SET_UPDATED_USER = 'SET_UPDATED_USER';
 export const UPDATE_USER = 'UPDATE_USER';
 
 export const SET_TOAST = 'SET_TOAST';
-export const SET_MODAL_VALUE = 'SET_MODAL_VALUE';

@@ -40,7 +40,7 @@
 </template>
 
 <script>
-    import { mapState, mapActions } from 'vuex';
+    import { mapActions } from 'vuex';
     import {
         BRow,
         BCol,
@@ -70,41 +70,25 @@
             BButton
         },
         props: ['users'],
-        computed: {
-            ...mapState([
-                'modalValue'
-            ])
-        },
-        watch: {
-            modalValue(newVal, oldVal) {
-                if (newVal) {
-                    this.deleteUser(this.clickedUser);
-                    this.setModalValue(false);
-                }
-            }
-        },
         data() {
             return {
                 fields: [
                     'firstName', 'surname', 'patronymic', 'birthDate', 'email', 'address',
                     { key: 'update', label: '' },
                     { key: 'delete', label: '' }
-                ],
-                clickedUser: {}
+                ]
             };
         },
         methods: {
             ...mapActions({
                 getUpdatedUserData: 'getUpdatedUser',
                 sendDeletedUserData: 'deleteUser',
-                setModalValue: 'setModalValue'
             }),
             clickedUpdateButton(item) {
                 this.getUpdatedUserData(item);
                 router.push('/users/update');
             },
             clickedDeleteButton(item) {
-                this.clickedUser = item;
                 this.$bvModal.msgBoxConfirm(modal.USER_TEXT, {
                     title: `${modal.USER_TITLE} ${item.firstName} ${item.surname}`,
                     size: modal.SIZE,
@@ -117,7 +101,9 @@
                     centered: modal.CENTERED
                 })
                     .then(value => {
-                        this.setModalValue(value);
+                        if (value) {
+                            this.deleteUser(item);
+                        }
                     });
             },
             deleteUser(item) {

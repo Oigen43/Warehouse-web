@@ -37,7 +37,7 @@
 </template>
 
 <script>
-    import { mapState, mapActions } from 'vuex';
+    import { mapActions } from 'vuex';
     import { BTable, BFormCheckbox, BButton } from 'bootstrap-vue';
 
     import router from '../../../../router';
@@ -51,19 +51,6 @@
             BButton
         },
         props: ['warehousesList'],
-        computed: {
-            ...mapState([
-                'modalValue'
-            ])
-        },
-        watch: {
-            modalValue(newVal, oldVal) {
-                if (newVal) {
-                    this.deleteWarehouse(this.clickedWarehouse);
-                    this.setModalValue(false);
-                }
-            }
-        },
         data: function () {
             return {
                 fields: [
@@ -77,15 +64,13 @@
         methods: {
             ...mapActions({
                 getUpdatedWarehouseData: 'getUpdatedWarehouse',
-                sendDeletedWarehouseData: 'deleteWarehouse',
-                setModalValue: 'setModalValue'
+                sendDeletedWarehouseData: 'deleteWarehouse'
             }),
             clickedUpdateButton(item) {
                 this.getUpdatedWarehouseData(item);
                 router.push('/warehouses/update');
             },
             clickedDeleteButton(item) {
-                this.clickedWarehouse = item;
                 this.$bvModal.msgBoxConfirm(modal.WAREHOUSE_TEXT, {
                     title: `${modal.WAREHOUSE_TITLE} ${item.warehouseName}`,
                     size: modal.SIZE,
@@ -98,7 +83,9 @@
                     centered: modal.CENTERED
                 })
                     .then(value => {
-                        this.setModalValue(value);
+                        if (value) {
+                            this.deleteWarehouse(item);
+                        }
                     });
             },
             deleteWarehouse(item) {

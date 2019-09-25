@@ -46,7 +46,7 @@
 </template>
 
 <script>
-    import { mapState, mapActions } from 'vuex';
+    import { mapActions } from 'vuex';
     import { BTable, BFormCheckbox, BButton } from 'bootstrap-vue';
 
     import router from '../../../../router';
@@ -60,19 +60,6 @@
             BButton
         },
         props: ['companies'],
-        computed: {
-            ...mapState([
-                'modalValue'
-            ])
-        },
-        watch: {
-            modalValue(newVal, oldVal) {
-                if (newVal) {
-                    this.deleteCompany(this.clickedCompany);
-                    this.setModalValue(false);
-                }
-            }
-        },
         data: function () {
             return {
                 fields: [
@@ -80,8 +67,7 @@
                     { key: 'warehouses', label: '' },
                     { key: 'update', label: '' },
                     { key: 'delete', label: '' }
-                ],
-                clickedCompany: {}
+                ]
             };
         },
         methods: {
@@ -89,7 +75,6 @@
                 getUpdatedCompanyData: 'getUpdatedCompany',
                 sendDeletedCompanyData: 'deleteCompany',
                 setCurrentCompany: 'setCurrentCompany',
-                setModalValue: 'setModalValue'
             }),
             clickedWarehousesButton(item) {
               this.setCurrentCompany({ id: item.id, companyName: item.companyName });
@@ -100,7 +85,6 @@
                 router.push('/companies/update');
             },
             clickedDeleteButton(item) {
-                this.clickedCompany = item;
                 this.$bvModal.msgBoxConfirm(modal.COMPANY_TEXT, {
                     title: `${modal.COMPANY_TITLE} ${item.companyName}`,
                     size: modal.SIZE,
@@ -113,7 +97,9 @@
                     centered: modal.CENTERED
                 })
                     .then(value => {
-                        this.setModalValue(value);
+                        if (value) {
+                            this.deleteCompany(item);
+                        }
                     });
             },
             deleteCompany(item) {
