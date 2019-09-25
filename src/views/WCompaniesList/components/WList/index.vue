@@ -80,7 +80,7 @@
                 setCurrentCompany: 'setCurrentCompany'
             }),
             clickedWarehousesButton(item) {
-              this.setCurrentCompany({id: item.id, companyName: item.companyName});
+              this.setCurrentCompany({ id: item.id, companyName: item.companyName });
               router.push('/warehouses');
             },
             clickedUpdateButton(item) {

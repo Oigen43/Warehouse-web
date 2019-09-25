@@ -3,6 +3,7 @@ import * as types from './mutation-types';
 import api from '../utils/api';
 import * as url from '../constants/urls';
 import * as constant from '../constants';
+import initialState from '../constants/initialState';
 
 export default {
   login: async ({ commit }, req) => {
@@ -11,7 +12,7 @@ export default {
       const token = res.data.token;
       const roles = res.data.roles;
       localStorage.setItem(constant.TOKEN_KEY, token);
-      localStorage.setItem(constant.ROLES_LIST, roles);
+      localStorage.setItem(constant.ROLES_LIST, JSON.stringify(roles));
       commit(types.LOGIN, { token, roles });
     }
     res.toast && commit(types.SET_TOAST, res.toast);
@@ -20,7 +21,7 @@ export default {
   logout: async ({ commit }) => {
     localStorage.removeItem(constant.TOKEN_KEY);
     localStorage.removeItem(constant.ROLES_LIST);
-    commit(types.LOGOUT, constant.initialState);
+    commit(types.LOGOUT, initialState);
   },
   fetchCompaniesList: async ({ commit }, page = 1, perPage = 5) => {
     const res = await api.get(url.COMPANIES_URL, { page, perPage });
