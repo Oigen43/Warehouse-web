@@ -1,23 +1,21 @@
 <template>
   <b-table
     head-variant="dark"
-    borderless
-    hover
-    responsive
-    :items="companiesList"
+    class="w-companies-list-table"
+    bordered
+    stacked="md"
+    :items="companies"
     :fields="fields">
 
     <template
-      slot="[active]"
-      slot-scope="data">
+      v-slot:cell(active)="data">
       <b-form-checkbox
         v-model="data.value"
         disabled>
       </b-form-checkbox>
     </template>
     <template
-      slot="[warehouses]"
-      slot-scope="data">
+      v-slot:cell(warehouses)="data">
       <b-button
         variant="light"
         size="sm"
@@ -26,8 +24,7 @@
       </b-button>
     </template>
     <template
-      slot="[update]"
-      slot-scope="data">
+      v-slot:cell(update)="data">
       <b-button
         variant="warning"
         size="sm"
@@ -36,8 +33,7 @@
       </b-button>
     </template>
     <template
-      slot="[delete]"
-      slot-scope="data">
+      v-slot:cell(delete)="data">
       <b-button
         variant="outline-dark"
         size="sm"
@@ -54,6 +50,7 @@
     import { BTable, BFormCheckbox, BButton } from 'bootstrap-vue';
 
     import router from '../../../../router';
+    import * as modal from '../../../../constants/modal';
 
     export default {
         name: 'WList',
@@ -62,7 +59,7 @@
             BFormCheckbox,
             BButton
         },
-        props: ['companiesList'],
+        props: ['companies'],
         data: function () {
             return {
                 fields: [
@@ -77,7 +74,7 @@
             ...mapActions({
                 getUpdatedCompanyData: 'getUpdatedCompany',
                 sendDeletedCompanyData: 'deleteCompany',
-                setCurrentCompany: 'setCurrentCompany'
+                setCurrentCompany: 'setCurrentCompany',
             }),
             clickedWarehousesButton(item) {
               this.setCurrentCompany({ id: item.id, companyName: item.companyName });
@@ -88,8 +85,19 @@
                 router.push('/companies/update');
             },
             clickedDeleteButton(item) {
+                this.$bvModal.msgBoxConfirm(modal.COMPANY_TEXT, {
+                    title: `${modal.COMPANY_TITLE} ${item.companyName}`,
+                    ...modal.CONFIRM_MODAL_OPTIONS
+                })
+                    .then(value => value && this.deleteCompany(item));
+            },
+            deleteCompany(item) {
                 this.$emit('delete-button-clicked', item);
             }
         }
     };
 </script>
+
+<style lang="scss" scoped>
+  @import './styles.scss';
+</style>

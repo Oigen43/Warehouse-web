@@ -48,7 +48,7 @@
                 address: '',
                 birthDate: '',
                 login: '',
-                password: null
+                password: ''
             };
         },
         methods: {

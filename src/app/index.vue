@@ -5,21 +5,27 @@
       <router-view/>
       <w-toast-notification></w-toast-notification>
     </b-container>
+    <w-footer></w-footer>
   </div>
 </template>
 
 <script>
-    import { BContainer } from 'bootstrap-vue';
+    import Vue from 'vue';
+    import { BContainer, ModalPlugin } from 'bootstrap-vue';
 
     import WNavigation from '../components/WNavigation';
     import WToastNotification from '../components/WToastNotification';
+    import WFooter from '../components/WFooter';
+
+    Vue.use(ModalPlugin);
 
     export default {
         name: 'app',
         components: {
             BContainer,
             WNavigation,
-            WToastNotification
+            WToastNotification,
+            WFooter
         },
     };
 

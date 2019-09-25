@@ -1,0 +1,30 @@
+.w-list-button {
+    margin: 0.5rem 1rem 0.5rem 0;
+    font-size: 1rem;
+}
+
+.w-users-card {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    border: none;
+    box-shadow: 0 1.2rem 1.5rem 0.2rem rgba(0, 0, 0, 0.3);
+}
+
+.w-role-label {
+    position: absolute;
+    margin-top: 0.5rem;
+    padding: 0.3rem 0.7rem;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    text-shadow: 0 0 0.2rem #000;
+    color: #f8f9fa;
+    background: rgba(44, 62, 80, 0.6);
+}
+
+.w-users-card-text {
+    font-weight: bold;
+}
+
+.w-users-card-body {
+    margin-bottom: 1rem;
+}

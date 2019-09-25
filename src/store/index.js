@@ -33,7 +33,7 @@ export default new Vuex.Store({
     deletedUser: {},
 
     toast: {}
-  },
+    },
   getters,
   mutations,
   actions

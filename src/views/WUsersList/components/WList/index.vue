@@ -1,48 +1,75 @@
 <template>
-  <b-table
-   head-variant="dark"
-   borderless
-   hover
-   responsive
-   :items="usersList"
-   :fields="fields"
-  >
-    <template
-      slot="[delete]"
-      slot-scope="data">
-      <b-button
-        variant="outline-dark"
-        size="sm"
-        @click="clickedDeleteButton(data.item)">
-        ✕
-      </b-button>
-    </template>
-    <template
-      slot="[update]"
-      slot-scope="data">
-      <b-button
-        variant="warning"
-        size="sm"
-        @click="clickedUpdateButton(data.item)">
-        Update
-      </b-button>
-    </template>
-  </b-table>
+    <b-row>
+      <b-col lg="4" md="6" sm="12" v-for="user in users" v-bind:key="user.id">
+        <b-card no-body class="overflow-hidden w-users-card">
+          <b-row no-gutters>
+            <b-col lg="6" md="12">
+              <div class="w-role-label">Admin</div>
+              <b-card-img src="https://www.zayedhotel.com/addons/default/themes/yoona/img/user.jpg" class="rounded-0"
+                           alt="User image"></b-card-img>
+            </b-col>
+            <b-col lg="6" md="12">
+              <b-card-body class="w-users-card-body">
+                <b-card-title class="mb-0">{{user.firstName}} {{user.patronymic}} {{user.surname}}</b-card-title>
+                <hr>
+                <b-card-text><span class="w-users-card-text">Date of Birth:</span> {{user.birthDate}}</b-card-text>
+                <b-card-text><span class="w-users-card-text">Email:</span> {{user.email}}</b-card-text>
+                <b-card-text><span class="w-users-card-text">Address:</span> {{user.address}}</b-card-text>
+              </b-card-body>
+              <b-card-footer>
+                <b-button
+                  class="w-list-button"
+                  variant="warning"
+                  size="sm"
+                  @click="clickedUpdateButton(user)">
+                  Update
+                </b-button>
+                <b-button
+                  class="w-list-button"
+                  variant="outline-dark"
+                  size="sm"
+                  @click="clickedDeleteButton(user)">
+                  ✕
+                </b-button>
+              </b-card-footer>
+            </b-col>
+          </b-row>
+        </b-card>
+      </b-col>
+    </b-row>
 </template>
 
 <script>
     import { mapActions } from 'vuex';
-    import { BTable, BButton } from 'bootstrap-vue';
+    import {
+        BRow,
+        BCol,
+        BCard,
+        BCardImg,
+        BCardTitle,
+        BCardBody,
+        BCardText,
+        BCardFooter,
+        BButton
+    } from 'bootstrap-vue';
 
     import router from '../../../../router';
+    import * as modal from '../../../../constants/modal';
 
     export default {
         name: 'WList',
         components: {
-            BTable,
+            BRow,
+            BCol,
+            BCard,
+            BCardImg,
+            BCardTitle,
+            BCardText,
+            BCardBody,
+            BCardFooter,
             BButton
         },
-        props: ['usersList'],
+        props: ['users'],
         data() {
             return {
                 fields: [
@@ -55,14 +82,21 @@
         methods: {
             ...mapActions({
                 getUpdatedUserData: 'getUpdatedUser',
-                sendDeletedUserData: 'deleteUser'
+                sendDeletedUserData: 'deleteUser',
             }),
             clickedUpdateButton(item) {
                 this.getUpdatedUserData(item);
                 router.push('/users/update');
             },
             clickedDeleteButton(item) {
-               this.$emit('delete-button-clicked', item);
+                this.$bvModal.msgBoxConfirm(modal.USER_TEXT, {
+                    title: `${modal.USER_TITLE} ${item.firstName} ${item.surname}`,
+                    ...modal.CONFIRM_MODAL_OPTIONS
+                })
+                    .then(value => value && this.deleteUser(item));
+            },
+            deleteUser(item) {
+                this.$emit('delete-button-clicked', item);
             }
         }
     };
