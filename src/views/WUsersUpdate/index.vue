@@ -16,6 +16,7 @@
       :flat="flat"
       :birthDate="birthDate"
       :login="login"
+      :userRoles="roles"
     ></w-form>
     <b-button
       variant="link"
@@ -78,6 +79,9 @@
             },
             login() {
                 return this.updatedUser.login;
+            },
+            roles() {
+                return this.updatedUser.roles.map(role => role.title);
             }
         },
         methods: {

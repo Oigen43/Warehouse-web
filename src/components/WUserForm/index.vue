@@ -74,6 +74,13 @@
         class="w-users-form-input"
       ></b-form-input>
 
+      <b-form-group label="Roles">
+        <b-form-checkbox-group
+          v-model="selectedRoles"
+          :options="roles"
+        ></b-form-checkbox-group>
+      </b-form-group>
+
       <b-button
         type="submit"
         variant="outline-success"
@@ -86,13 +93,17 @@
 </template>
 
 <script>
-    import { BForm, BFormInput, BButton } from 'bootstrap-vue';
+    import { BForm, BFormInput, BFormGroup, BFormCheckboxGroup, BButton } from 'bootstrap-vue';
+
+    import * as userRoles from '../../constants/roles';
 
     export default {
         name: 'WUserForm',
         components: {
             BForm,
             BFormInput,
+            BFormGroup,
+            BFormCheckboxGroup,
             BButton
         },
         props: {
@@ -126,6 +137,12 @@
             password: {
                 type: String,
                 default: ''
+            },
+            userRoles: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
             }
         },
         data() {
@@ -140,12 +157,14 @@
                     birthDate: this.birthDate,
                     login: this.login,
                     password: this.password
-                }
+                },
+                roles: userRoles.ROLES,
+                selectedRoles: this.userRoles
             };
         },
         methods: {
             onSubmit() {
-                this.$emit('form-submitted', this.form);
+                this.$emit('form-submitted', { user: this.form, selectedRoles: this.selectedRoles });
             }
         }
     };
