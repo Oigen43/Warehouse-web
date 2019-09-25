@@ -33,7 +33,6 @@ export default new Vuex.Store({
     deletedUser: {},
 
     toast: {},
-    modal: {},
     modalValue: null
   },
   getters,

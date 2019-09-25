@@ -81,9 +81,6 @@ export default {
   [types.SET_TOAST](state, toast) {
     state.toast = toast;
   },
-  [types.CREATE_MODAL](state, modal) {
-    state.modal = modal;
-  },
   [types.SET_MODAL_VALUE](state, value) {
     state.modalValue = value;
   }

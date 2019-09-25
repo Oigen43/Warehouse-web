@@ -28,7 +28,7 @@
       <b-button
         variant="outline-dark"
         size="sm"
-        @click="clickedDeleteModal(data.item)">
+        @click="clickedDeleteButton(data.item)">
         ✕
       </b-button>
     </template>
@@ -41,6 +41,7 @@
     import { BTable, BFormCheckbox, BButton } from 'bootstrap-vue';
 
     import router from '../../../../router';
+    import * as modal from '../../../../constants/modal';
 
     export default {
         name: 'WList',
@@ -58,7 +59,7 @@
         watch: {
             modalValue(newVal, oldVal) {
                 if (newVal) {
-                    this.clickedDeleteButton(this.clickedWarehouse);
+                    this.deleteWarehouse(this.clickedWarehouse);
                     this.setModalValue(false);
                 }
             }
@@ -70,7 +71,6 @@
                     { key: 'update', label: '' },
                     { key: 'delete', label: '' }
                 ],
-                modal: {},
                 clickedWarehouse: {}
             };
         },
@@ -78,30 +78,30 @@
             ...mapActions({
                 getUpdatedWarehouseData: 'getUpdatedWarehouse',
                 sendDeletedWarehouseData: 'deleteWarehouse',
-                createModal: 'createModal',
                 setModalValue: 'setModalValue'
             }),
             clickedUpdateButton(item) {
                 this.getUpdatedWarehouseData(item);
                 router.push('/warehouses/update');
             },
-            clickedDeleteModal(item) {
-                this.clickedWarehouse = item;
-                this.modal = {
-                    text: 'Please confirm that you want to delete the warehouse.',
-                    title: `Delete warehouse ${item.warehouseName}`,
-                    size: 'md',
-                    buttonSize: 'md',
-                    okVariant: 'secondary',
-                    cancelVariant: 'danger',
-                    okTitle: 'YES',
-                    cancelTitle: 'NO',
-                    hideHeaderClose: false,
-                    centered: true
-                };
-                this.createModal(this.modal);
-            },
             clickedDeleteButton(item) {
+                this.clickedWarehouse = item;
+                this.$bvModal.msgBoxConfirm(modal.WAREHOUSE_TEXT, {
+                    title: `${modal.WAREHOUSE_TITLE} ${item.warehouseName}`,
+                    size: modal.SIZE,
+                    buttonSize: modal.BUTTON_SIZE,
+                    okVariant: modal.OK_VARIANT,
+                    cancelVariant: modal.CANCEL_VARIANT,
+                    okTitle: modal.OK_TITLE,
+                    cancelTitle: modal.CANCEL_TITLE,
+                    hideHeaderClose: modal.HIDE_HEADER_CLOSE,
+                    centered: modal.CENTERED
+                })
+                    .then(value => {
+                        this.setModalValue(value);
+                    });
+            },
+            deleteWarehouse(item) {
                 this.$emit('delete-button-clicked', item);
             }
         }

@@ -1,6 +1,6 @@
 <template>
     <b-row>
-      <b-col lg="4" md="6" sm="12" v-for="user in users">
+      <b-col lg="4" md="6" sm="12" v-for="user in users" v-bind:key="user.id">
         <b-card no-body class="overflow-hidden w-users-card">
           <b-row no-gutters>
             <b-col lg="6" md="12">
@@ -28,7 +28,7 @@
                   class="w-list-button"
                   variant="outline-dark"
                   size="sm"
-                  @click="clickedDeleteModal(user)">
+                  @click="clickedDeleteButton(user)">
                   ✕
                 </b-button>
               </b-card-footer>
@@ -40,17 +40,27 @@
 </template>
 
 <script>
-    import {mapState, mapActions} from 'vuex';
-    import {BRow, BCol, BCardGroup, BCard, BCardImg, BCardTitle, BCardBody,BCardText, BCardFooter, BButton} from 'bootstrap-vue';
+    import { mapState, mapActions } from 'vuex';
+    import {
+        BRow,
+        BCol,
+        BCard,
+        BCardImg,
+        BCardTitle,
+        BCardBody,
+        BCardText,
+        BCardFooter,
+        BButton
+    } from 'bootstrap-vue';
 
     import router from '../../../../router';
+    import * as modal from '../../../../constants/modal';
 
     export default {
         name: 'WList',
         components: {
             BRow,
             BCol,
-            BCardGroup,
             BCard,
             BCardImg,
             BCardTitle,
@@ -68,7 +78,7 @@
         watch: {
             modalValue(newVal, oldVal) {
                 if (newVal) {
-                    this.clickedDeleteButton(this.clickedUser);
+                    this.deleteUser(this.clickedUser);
                     this.setModalValue(false);
                 }
             }
@@ -77,10 +87,9 @@
             return {
                 fields: [
                     'firstName', 'surname', 'patronymic', 'birthDate', 'email', 'address',
-                    {key: 'update', label: ''},
-                    {key: 'delete', label: ''}
+                    { key: 'update', label: '' },
+                    { key: 'delete', label: '' }
                 ],
-                modal: {},
                 clickedUser: {}
             };
         },
@@ -88,30 +97,30 @@
             ...mapActions({
                 getUpdatedUserData: 'getUpdatedUser',
                 sendDeletedUserData: 'deleteUser',
-                createModal: 'createModal',
                 setModalValue: 'setModalValue'
             }),
             clickedUpdateButton(item) {
                 this.getUpdatedUserData(item);
                 router.push('/users/update');
             },
-            clickedDeleteModal(item) {
-                this.clickedUser = item;
-                this.modal = {
-                    text: 'Please confirm that you want to delete the user.',
-                    title: `Delete user ${item.firstName} ${item.surname}`,
-                    size: 'md',
-                    buttonSize: 'md',
-                    okVariant: 'secondary',
-                    cancelVariant: 'danger',
-                    okTitle: 'YES',
-                    cancelTitle: 'NO',
-                    hideHeaderClose: false,
-                    centered: true
-                };
-                this.createModal(this.modal);
-            },
             clickedDeleteButton(item) {
+                this.clickedUser = item;
+                this.$bvModal.msgBoxConfirm(modal.USER_TEXT, {
+                    title: `${modal.USER_TITLE} ${item.firstName} ${item.surname}`,
+                    size: modal.SIZE,
+                    buttonSize: modal.BUTTON_SIZE,
+                    okVariant: modal.OK_VARIANT,
+                    cancelVariant: modal.CANCEL_VARIANT,
+                    okTitle: modal.OK_TITLE,
+                    cancelTitle: modal.CANCEL_TITLE,
+                    hideHeaderClose: modal.HIDE_HEADER_CLOSE,
+                    centered: modal.CENTERED
+                })
+                    .then(value => {
+                        this.setModalValue(value);
+                    });
+            },
+            deleteUser(item) {
                 this.$emit('delete-button-clicked', item);
             }
         }

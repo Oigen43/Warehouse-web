@@ -37,7 +37,7 @@
       <b-button
         variant="outline-dark"
         size="sm"
-        @click="clickedDeleteModal(data.item)">
+        @click="clickedDeleteButton(data.item)">
         ✕
       </b-button>
     </template>
@@ -50,6 +50,7 @@
     import { BTable, BFormCheckbox, BButton } from 'bootstrap-vue';
 
     import router from '../../../../router';
+    import * as modal from '../../../../constants/modal';
 
     export default {
         name: 'WList',
@@ -67,7 +68,7 @@
         watch: {
             modalValue(newVal, oldVal) {
                 if (newVal) {
-                    this.clickedDeleteButton(this.clickedCompany);
+                    this.deleteCompany(this.clickedCompany);
                     this.setModalValue(false);
                 }
             }
@@ -80,7 +81,6 @@
                     { key: 'update', label: '' },
                     { key: 'delete', label: '' }
                 ],
-                modal: {},
                 clickedCompany: {}
             };
         },
@@ -89,34 +89,34 @@
                 getUpdatedCompanyData: 'getUpdatedCompany',
                 sendDeletedCompanyData: 'deleteCompany',
                 setCurrentCompany: 'setCurrentCompany',
-                createModal: 'createModal',
                 setModalValue: 'setModalValue'
             }),
             clickedWarehousesButton(item) {
-              this.setCurrentCompany({id: item.id, companyName: item.companyName});
+              this.setCurrentCompany({ id: item.id, companyName: item.companyName });
               router.push('/warehouses');
             },
             clickedUpdateButton(item) {
                 this.getUpdatedCompanyData(item);
                 router.push('/companies/update');
             },
-            clickedDeleteModal(item) {
-                this.clickedCompany = item;
-                this.modal = {
-                    text: 'Please confirm that you want to delete the company.',
-                    title: `Delete company ${item.companyName}`,
-                    size: 'md',
-                    buttonSize: 'md',
-                    okVariant: 'secondary',
-                    cancelVariant: 'danger',
-                    okTitle: 'YES',
-                    cancelTitle: 'NO',
-                    hideHeaderClose: false,
-                    centered: true
-                };
-                this.createModal(this.modal);
-            },
             clickedDeleteButton(item) {
+                this.clickedCompany = item;
+                this.$bvModal.msgBoxConfirm(modal.COMPANY_TEXT, {
+                    title: `${modal.COMPANY_TITLE} ${item.companyName}`,
+                    size: modal.SIZE,
+                    buttonSize: modal.BUTTON_SIZE,
+                    okVariant: modal.OK_VARIANT,
+                    cancelVariant: modal.CANCEL_VARIANT,
+                    okTitle: modal.OK_TITLE,
+                    cancelTitle: modal.CANCEL_TITLE,
+                    hideHeaderClose: modal.HIDE_HEADER_CLOSE,
+                    centered: modal.CENTERED
+                })
+                    .then(value => {
+                        this.setModalValue(value);
+                    });
+            },
+            deleteCompany(item) {
                 this.$emit('delete-button-clicked', item);
             }
         }

@@ -3,7 +3,6 @@
     <w-navigation></w-navigation>
     <b-container fluid class="main-container">
       <router-view/>
-      <w-modal></w-modal>
       <w-toast-notification></w-toast-notification>
     </b-container>
     <w-footer></w-footer>
@@ -11,19 +10,20 @@
 </template>
 
 <script>
-    import { BContainer } from 'bootstrap-vue';
+    import Vue from 'vue';
+    import { BContainer, ModalPlugin } from 'bootstrap-vue';
 
     import WNavigation from '../components/WNavigation';
-    import WModal from '../components/WModal';
     import WToastNotification from '../components/WToastNotification';
     import WFooter from '../components/WFooter';
+
+    Vue.use(ModalPlugin);
 
     export default {
         name: 'app',
         components: {
             BContainer,
             WNavigation,
-            WModal,
             WToastNotification,
             WFooter
         },

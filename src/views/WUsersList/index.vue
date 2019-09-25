@@ -33,8 +33,8 @@
 </template>
 
 <script>
-    import {mapActions, mapState} from 'vuex';
-    import {BRow, BCol, BButton} from 'bootstrap-vue';
+    import { mapActions, mapState } from 'vuex';
+    import { BRow, BCol, BButton } from 'bootstrap-vue';
 
     import WPagination from '../../components/WPagination';
     import WList from './components/WList';
