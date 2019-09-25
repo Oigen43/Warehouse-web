@@ -73,20 +73,9 @@
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.WAREHOUSE_TEXT, {
                     title: `${modal.WAREHOUSE_TITLE} ${item.warehouseName}`,
-                    size: modal.SIZE,
-                    buttonSize: modal.BUTTON_SIZE,
-                    okVariant: modal.OK_VARIANT,
-                    cancelVariant: modal.CANCEL_VARIANT,
-                    okTitle: modal.OK_TITLE,
-                    cancelTitle: modal.CANCEL_TITLE,
-                    hideHeaderClose: modal.HIDE_HEADER_CLOSE,
-                    centered: modal.CENTERED
+                    ...modal.CONFIRM_MODAL_OPTIONS
                 })
-                    .then(value => {
-                        if (value) {
-                            this.deleteWarehouse(item);
-                        }
-                    });
+                    .then(value => value && this.deleteWarehouse(item));
             },
             deleteWarehouse(item) {
                 this.$emit('delete-button-clicked', item);

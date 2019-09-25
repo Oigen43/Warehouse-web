@@ -87,20 +87,9 @@
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.COMPANY_TEXT, {
                     title: `${modal.COMPANY_TITLE} ${item.companyName}`,
-                    size: modal.SIZE,
-                    buttonSize: modal.BUTTON_SIZE,
-                    okVariant: modal.OK_VARIANT,
-                    cancelVariant: modal.CANCEL_VARIANT,
-                    okTitle: modal.OK_TITLE,
-                    cancelTitle: modal.CANCEL_TITLE,
-                    hideHeaderClose: modal.HIDE_HEADER_CLOSE,
-                    centered: modal.CENTERED
+                    ...modal.CONFIRM_MODAL_OPTIONS
                 })
-                    .then(value => {
-                        if (value) {
-                            this.deleteCompany(item);
-                        }
-                    });
+                    .then(value => value && this.deleteCompany(item));
             },
             deleteCompany(item) {
                 this.$emit('delete-button-clicked', item);
