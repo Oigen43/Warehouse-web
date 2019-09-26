@@ -66,7 +66,8 @@
                     'active', 'companyName', 'address', 'description', 'date',
                     { key: 'warehouses', label: '' },
                     { key: 'update', label: '' },
-                    { key: 'delete', label: '' }
+                    { key: 'delete', label: '' },
+                    { key: 'blank', label: '' }
                 ]
             };
         },
