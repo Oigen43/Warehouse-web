@@ -16,7 +16,7 @@
               variant="light"
               to='/companies'
               class="w-navigation-link"
-              v-if="hasPermissions('companies')"
+              v-if="hasPermissions(routesPermissions.companies)"
             >
               Companies
             </b-button>
@@ -26,7 +26,7 @@
               variant="light"
               to='/users'
               class="w-navigation-link"
-              v-if="hasPermissions('users')"
+              v-if="hasPermissions(routesPermissions.users)"
             >
               Users
             </b-button>
@@ -71,6 +71,7 @@
     } from 'bootstrap-vue';
 
     import router from '../../router';
+    import routesPermissions from '../../constants/routesPermissions';
 
     export default {
         name: 'WNavigation',
@@ -87,7 +88,10 @@
         computed: {
             ...mapGetters([
                 'isAuthorized',
-            ])
+            ]),
+            routesPermissions: function() {
+              return routesPermissions;
+            }
         },
         methods: {
             ...mapActions({

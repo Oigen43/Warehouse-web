@@ -74,17 +74,14 @@
         class="w-users-form-input"
       ></b-form-input>
 
-      <multiselect
-        class="multiselect"
-        v-model="selectedRoles"
-        :tag-placeholder="tagPlaceholder"
-        :placeholder="placeholder"
+      <w-multiselect
+        class="w-users-form-input"
+        @value-updated="updateValue"
+        :value="selectedRoles"
         :options="roles"
-        :multiple="true"
-        :taggable="true"
-        :searchable="false"
-        @tag="addTag"
-      ></multiselect>
+        :tagPlaceholder="tagPlaceholder"
+        :placeholder="placeholder"
+      ></w-multiselect>
 
       <b-button
         type="submit"
@@ -100,14 +97,14 @@
 <script>
     import { BForm, BFormInput, BButton } from 'bootstrap-vue';
     import * as userRoles from '../../constants/roles';
-    import Multiselect from 'vue-multiselect';
+    import WMultiselect from '../WMultiselect';
     export default {
         name: 'WUserForm',
         components: {
             BForm,
             BFormInput,
             BButton,
-            Multiselect
+            WMultiselect
         },
         props: {
             submitButtonName: {
@@ -161,31 +158,24 @@
                     login: this.login,
                     password: this.password
                 },
+
                 roles: userRoles.ROLES,
                 selectedRoles: this.userRoles,
-
                 tagPlaceholder: 'Add this as new role',
                 placeholder: 'Search or add a role'
 
             };
         },
         methods: {
+            updateValue(newRoles) {
+              this.selectedRoles = newRoles;
+            },
             onSubmit() {
                 this.$emit('form-submitted', { user: this.form, selectedRoles: this.selectedRoles });
-            },
-            addTag (newTag) {
-              const tag = {
-                name: newTag,
-                code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
-              };
-              this.options.push(tag);
-              this.value.push(tag);
             }
         },
     };
 </script>
-
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style lang="scss" scoped>
   @import 'styles';
