@@ -21,8 +21,8 @@
 </template>
 
 <script>
-    import {mapState, mapActions} from 'vuex';
-    import {BRow, BCol, BButton} from 'bootstrap-vue';
+    import { mapState, mapActions } from 'vuex';
+    import { BRow, BCol, BButton } from 'bootstrap-vue';
 
     import router from '../../router';
     import WForm from '../../components/WWarehouseForm';

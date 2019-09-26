@@ -35,11 +35,8 @@
 </template>
 
 <script>
-    import {mapActions} from 'vuex';
+    import { mapActions } from 'vuex';
     import {
-        BRow,
-        BCol,
-        BCardGroup,
         BCard,
         BCardImg,
         BCardTitle,
@@ -55,9 +52,6 @@
     export default {
         name: 'WList',
         components: {
-            BRow,
-            BCol,
-            BCardGroup,
             BCard,
             BCardImg,
             BCardTitle,
@@ -71,8 +65,8 @@
             return {
                 fields: [
                     'firstName', 'surname', 'patronymic', 'birthDate', 'email', 'address',
-                    {key: 'update', label: ''},
-                    {key: 'delete', label: ''}
+                    { key: 'update', label: '' },
+                    { key: 'delete', label: '' }
                 ]
             };
         },

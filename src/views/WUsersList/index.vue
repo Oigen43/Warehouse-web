@@ -11,6 +11,17 @@
               variant="success">
               add user
             </b-button>
+
+          </b-col>
+        </b-row>
+        <div class="users-list">
+          <w-list
+            :users="users"
+            @delete-button-clicked="clickedDeleteButton"
+          ></w-list>
+        </div>
+        <b-row>
+          <b-col lg="12" sm="12">
             <div class="users-list-pagination">
               <w-pagination
                 v-if="usersPageLimit > 1"
@@ -21,12 +32,6 @@
             </div>
           </b-col>
         </b-row>
-        <div class="users-list">
-          <w-list
-            :users="users"
-            @delete-button-clicked="clickedDeleteButton"
-          ></w-list>
-        </div>
       </div>
     </b-col>
   </b-row>

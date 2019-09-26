@@ -5,8 +5,14 @@
 
 .w-warehouses-add-button {
     float: left;
-    margin: 2.5rem 0 1rem 2rem;
+    margin: 2.5rem 0 1rem;
     text-transform: uppercase;
+}
+
+@media screen and (min-width: 53rem) {
+    .w-warehouses-add-button {
+        margin: 2.5rem 0 1rem 2rem;
+    }
 }
 
 .warehouses-list {
@@ -20,6 +26,6 @@
 }
 
 .warehouses-list-pagination {
-    margin-right: 12rem;
-    margin-top: 3rem;
+    margin: 2rem 0 1rem;
+
 }
