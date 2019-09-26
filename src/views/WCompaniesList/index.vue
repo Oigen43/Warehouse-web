@@ -11,6 +11,7 @@
               class="w-companies-add-button"
             >add company
             </b-button>
+            <b-col lg="12" sm="12">
             <div class="companies-list-pagination">
               <w-pagination
                 v-if="companiesPageLimit > 1"
@@ -19,6 +20,7 @@
                 @page-changed="sendRequest"
               ></w-pagination>
             </div>
+            </b-col>
           </b-col>
         </b-row>
         <div class="companies-list">

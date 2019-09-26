@@ -3,12 +3,24 @@
     <b-col lg="3" sm="12" offset-lg="4">
     <h1 class="w-warehouses-add-form-h1">Add a New Warehouse</h1>
     <w-form
-      @form-submitted="sendData"
+      @form-submitted="getNewWarehouse"
       submitButtonName="ADD WAREHOUSE"
       :warehouseName="warehouseName"
       :address="address"
       :type="type"
     ></w-form>
+
+    <w-admin-create
+      @submit-warehouse-admin="getWarehouseAdmin"
+      :name="adminName"
+      :email="adminEmail"
+    ></w-admin-create>
+
+    <b-button
+      @submit.prevent="sendNewWarehouse"
+      variant="success"
+    ></b-button>
+
     <b-button
       variant="link"
       to="/warehouses"
@@ -25,20 +37,24 @@
 
     import WForm from '../../components/WWarehouseForm';
     import router from '../../router';
+    import WAdminCreate from '../../components/WWarehouseAdminCreateForm';
 
     export default {
         name: 'WWarehousesAddForm',
         components: {
             BRow,
             BCol,
+            BButton,
             WForm,
-            BButton
+            WAdminCreate
         },
         data: function () {
             return {
                 warehouseName: '',
                 address: '',
-                type: ''
+                type: '',
+                adminName: '',
+                adminEmail: ''
             };
         },
         computed: {
@@ -53,10 +69,26 @@
             redirect() {
                 router.push('/warehouses');
             },
-            async sendData(newWarehouse) {
+            getNewWarehouse(newWarehouse) {
                 newWarehouse.companyInfo = this.currentCompany;
-                const res = await this.sendNewWarehouseData(newWarehouse);
-                !res.error && this.redirect();
+                return newWarehouse;
+            },
+            getWarehouseAdmin(warehouseAdmin) {
+                return warehouseAdmin;
+            },
+            // async sendData(newWarehouse) {
+            //     newWarehouse.companyInfo = this.currentCompany;
+            //     const res = await this.sendNewWarehouseData(newWarehouse);
+            //     !res.error && this.redirect();
+            // },
+            // async sendAdminData(warehouseAdmin) {
+            //
+            // },
+            async sendNewWarehouse() {
+                const warehouse = this.getNewWarehouse();
+                const admin = this.getWarehouseAdmin();
+                const res = await this.sendNewWarehouseData({ warehouse, admin });
+                //!res.error && this.redirect();
             }
         }
     };
