@@ -1,6 +1,5 @@
 <template>
     <multiselect
-        class="multiselect"
         v-model="mutableValue"
         :tag-placeholder="tagPlaceholder"
         :placeholder="placeholder"
