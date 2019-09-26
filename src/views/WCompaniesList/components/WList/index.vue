@@ -2,7 +2,7 @@
   <b-table
     head-variant="dark"
     class="w-companies-list-table"
-    bordered
+    outlined
     stacked="md"
     :items="companies"
     :fields="fields">

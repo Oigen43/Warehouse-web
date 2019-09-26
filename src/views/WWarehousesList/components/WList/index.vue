@@ -2,7 +2,7 @@
   <b-table
     head-variant="dark"
     class="w-warehouses-list-table"
-    bordered
+    outlined
     stacked="md"
     :items="warehousesList"
     :fields="fields">

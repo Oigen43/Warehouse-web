@@ -1,8 +1,8 @@
 <template>
       <b-row>
-        <b-col lg="3" sm="12" offset-lg="4">
+        <b-col class="w-login-form" lg="3" sm="12" offset-lg="4">
           <h1 class="w-login-form-h1">Login</h1>
-          <b-form class="w-login-form" @submit.prevent="login">
+          <b-form @submit.prevent="login">
             <b-form-input
               id="user-email-input"
               size="lg"
@@ -25,7 +25,7 @@
 
             <b-button
               type="submit"
-              variant="outline-primary"
+              variant="dark"
               size="lg"
               class="w-login-form-button"
             >LOGIN
