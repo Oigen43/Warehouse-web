@@ -16,7 +16,7 @@
               variant="light"
               to='/companies'
               class="w-navigation-link"
-              v-if="isAuthorized"
+              v-if="hasPermissions('companies')"
             >
               Companies
             </b-button>
@@ -33,7 +33,6 @@
           </b-nav-item>
         </b-navbar-nav>
 
-        <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
           <b-button
             variant="dark"
