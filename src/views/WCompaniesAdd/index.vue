@@ -10,6 +10,7 @@
           :description="description"
           :adminName="adminName"
           :adminEmail="adminEmail"
+          withAdminFields
         ></w-form>
         <b-button
           variant="link"

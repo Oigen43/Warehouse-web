@@ -27,7 +27,7 @@
         class="w-companies-form-input"
       ></b-form-input>
 
-      <div v-if="submitButtonName === 'ADD COMPANY'"
+      <div v-if="withAdminFields"
         class="w-companies-admin"
       >
         <h3>Add company admin</h3>
@@ -95,6 +95,10 @@
             adminEmail: {
                 type: String,
                 default: ''
+            },
+            withAdminFields: {
+                type: Boolean,
+                default: false
             }
         },
         data: function () {
