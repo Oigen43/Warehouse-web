@@ -1,48 +1,48 @@
 <template>
-  <b-table
-    head-variant="dark"
-    class="w-companies-list-table"
-    outlined
-    stacked="md"
-    :items="companies"
-    :fields="fields">
+  <div class="w-table">
+    <b-table
+      head-variant="dark"
+      class="w-companies-list-table"
+      borderless
+      stacked="md"
+      :items="companies"
+      :fields="fields">
 
-    <template
-      v-slot:cell(active)="data">
-      <b-form-checkbox
-        v-model="data.value"
-        disabled>
-      </b-form-checkbox>
-    </template>
-    <template
-      v-slot:cell(warehouses)="data">
-      <b-button
-        variant="light"
-        size="sm"
-        @click="clickedWarehousesButton(data.item)">
-        Warehouses
-      </b-button>
-    </template>
-    <template
-      v-slot:cell(update)="data">
-      <b-button
-        variant="warning"
-        size="sm"
-        @click="clickedUpdateButton(data.item)">
-        Update
-      </b-button>
-    </template>
-    <template
-      v-slot:cell(delete)="data">
-      <b-button
-        variant="outline-dark"
-        size="sm"
-        @click="clickedDeleteButton(data.item)">
-        ✕
-      </b-button>
-    </template>
-
-  </b-table>
+      <template
+        v-slot:cell(active)="data">
+        <b-form-checkbox
+          v-model="data.value"
+          disabled>
+        </b-form-checkbox>
+      </template>
+      <template
+        v-slot:cell(warehouses)="data">
+        <b-button
+          variant="light"
+          size="sm"
+          @click="clickedWarehousesButton(data.item)">
+          Warehouses
+        </b-button
+        >
+      </template>
+      <template
+        v-slot:cell(buttons)="data">
+        <b-button
+          class="w-companies-table-update-button"
+          variant="dark"
+          size="sm"
+          @click="clickedUpdateButton(data.item)">
+          Update
+        </b-button>
+        <b-button
+          variant="light"
+          size="sm"
+          @click="clickedDeleteButton(data.item)">
+          ✕
+        </b-button>
+      </template>
+    </b-table>
+  </div>
 </template>
 
 <script>
@@ -63,11 +63,11 @@
         data: function () {
             return {
                 fields: [
-                    'active', 'companyName', 'address', 'description', 'date',
+                    'active', 'companyName', 'address', 'description',
+                    { key: 'date', label: 'Date', formatter: 'date' },
                     { key: 'warehouses', label: '' },
-                    { key: 'update', label: '' },
-                    { key: 'delete', label: '' },
-                    { key: 'blank', label: '' }
+                    { key: 'buttons', label: '' },
+                    { key: 'blank', label: '', class: 'w-blank-column' }
                 ]
             };
         },
@@ -78,8 +78,8 @@
                 setCurrentCompany: 'setCurrentCompany',
             }),
             clickedWarehousesButton(item) {
-              this.setCurrentCompany({ id: item.id, companyName: item.companyName });
-              router.push('/warehouses');
+                this.setCurrentCompany({ id: item.id, companyName: item.companyName });
+                router.push('/warehouses');
             },
             clickedUpdateButton(item) {
                 this.getUpdatedCompanyData(item);
@@ -94,11 +94,14 @@
             },
             deleteCompany(item) {
                 this.$emit('delete-button-clicked', item);
+            },
+            date(value) {
+                return value.slice(0, 10);
             }
         }
     };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import './styles.scss';
 </style>

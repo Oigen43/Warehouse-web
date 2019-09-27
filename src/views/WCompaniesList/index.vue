@@ -6,7 +6,7 @@
         <b-row>
           <b-col lg="12" sm="12">
             <b-button
-              variant="success"
+              variant="dark"
               to="/companies/add"
               class="w-companies-add-button"
             >add company
@@ -19,7 +19,7 @@
             :companies="companies"
           ></w-list>
         </div>
-        <row>
+        <b-row>
         <b-col lg="12" sm="12">
           <div class="companies-list-pagination">
             <w-pagination
@@ -30,7 +30,7 @@
             ></w-pagination>
           </div>
         </b-col>
-        </row>
+        </b-row>
       </div>
     </b-col>
   </b-row>

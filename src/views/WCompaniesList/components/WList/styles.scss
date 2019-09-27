@@ -1,3 +1,37 @@
 .w-companies-list-table {
   background-color: #FFFFFF;
 }
+
+.w-table table td {
+  border-bottom: 1px solid #dee2e6;
+  border-right: 1px solid #dee2e6;
+  border-left: 1px solid #dee2e6;
+}
+
+.w-blank-column {
+  display: none;
+  height: 1rem;
+}
+
+.btn.w-companies-table-update-button {
+  margin-right: 1rem;
+  background-color: #2C3E50;
+}
+
+@media (max-width: 767.98px) {
+
+  .table.b-table.b-table-stacked-md > tbody > tr > td:first-child {
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #dee2e6;
+  }
+
+  .w-table td:last-child {
+    background-color: #f8f9fa;
+    border: none;
+  }
+
+  .w-companies-table-delete-button {
+    float: none;
+  }
+}
