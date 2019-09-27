@@ -1,14 +1,8 @@
 <template>
     <multiselect
-        v-model="mutableValue"
-        :tag-placeholder="tagPlaceholder"
-        :placeholder="placeholder"
-        :options="options"
-        :multiple="true"
-        :taggable="true"
-        :searchable="false"
+        v-bind="$attrs"
+        v-on="$listeners"
         @tag="addTag"
-        @input="updateValue"
     ></multiselect>
 </template>
 
@@ -19,25 +13,6 @@
         components: {
             Multiselect
         },
-        props: {
-            options: {
-                type: Array
-            },
-            value: {
-                type: Array
-            },
-            tagPlaceholder: {
-                type: String
-            },
-            placeholder: {
-                type: String
-            }
-        },
-        data: function() {
-            return {
-                mutableValue: this.value
-            };
-        },
         methods: {
             addTag (newTag) {
                 const tag = {
@@ -46,9 +21,6 @@
                 };
                 this.options.push(tag);
                 this.value.push(tag);
-            },
-            updateValue() {
-                this.$emit('value-updated', this.mutableValue);
             }
         }
     };

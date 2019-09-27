@@ -76,11 +76,13 @@
 
       <w-multiselect
         class="w-users-form-input"
-        @value-updated="updateValue"
         :value="selectedRoles"
         :options="roles"
-        :tagPlaceholder="tagPlaceholder"
         :placeholder="placeholder"
+        :multiple="true"
+        :taggable="true"
+        :searchable="false"
+        @input="updateValue"
       ></w-multiselect>
 
       <b-button
@@ -161,7 +163,6 @@
 
                 roles: userRoles.ROLES,
                 selectedRoles: this.userRoles,
-                tagPlaceholder: 'Add this as new role',
                 placeholder: 'Search or add a role'
 
             };
