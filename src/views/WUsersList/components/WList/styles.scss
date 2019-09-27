@@ -39,8 +39,11 @@
     object-fit: cover;
 }
 
-.w-users-card-role-label {
+.w-users-card-role-container {
     position: absolute;
+}
+
+.w-users-card-role-label {
     margin-top: 0.5rem;
     padding: 0.3rem 0.7rem;
     font-size: 0.8rem;
