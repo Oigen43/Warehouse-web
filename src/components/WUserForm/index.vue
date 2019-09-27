@@ -160,7 +160,7 @@
 
                 roles: userRoles.ROLES,
                 selectedRoles: this.userRoles,
-                placeholder: 'Search or add a role'
+                placeholder: 'Add a role'
 
             };
         },
