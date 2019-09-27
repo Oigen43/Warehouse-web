@@ -8,6 +8,9 @@
           :companyName="companyName"
           :address="address"
           :description="description"
+          :adminName="adminName"
+          :adminEmail="adminEmail"
+          with-admin-fields
         ></w-form>
         <b-button
           variant="link"
@@ -38,7 +41,9 @@
             return {
                 companyName: '',
                 address: '',
-                description: ''
+                description: '',
+                adminName: '',
+                adminEmail: ''
             };
         },
         methods: {
@@ -49,7 +54,7 @@
                 router.push('/companies');
             },
             async sendData(newCompany) {
-                const res = await this.sendNewCompanyData(newCompany);
+                const res = await this.sendNewCompanyData({ company: newCompany.company, admin: newCompany.admin });
                 !res.error && this.redirect();
             }
         }

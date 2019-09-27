@@ -11,14 +11,17 @@
               variant="success">
               add user
             </b-button>
-            <div class="users-list-pagination">
-              <w-pagination
-                v-if="usersPageLimit > 1"
-                :current="currentPage"
-                :pageLimit="usersPageLimit"
-                @page-changed="sendRequest"
-              ></w-pagination>
-            </div>
+
+            <b-col lg="12" sm="12">
+              <div class="users-list-pagination">
+                <w-pagination
+                  v-if="usersPageLimit > 1"
+                  :current="currentPage"
+                  :pageLimit="usersPageLimit"
+                  @page-changed="sendRequest"
+                ></w-pagination>
+              </div>
+            </b-col>
           </b-col>
         </b-row>
         <div class="users-list">
