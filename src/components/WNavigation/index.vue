@@ -16,7 +16,7 @@
               variant="light"
               to='/companies'
               class="w-navigation-link"
-              v-if="isAuthorized"
+              v-if="hasPermissions(routesPermissions.companies)"
             >
               Companies
             </b-button>
@@ -26,14 +26,13 @@
               variant="light"
               to='/users'
               class="w-navigation-link"
-              v-if="hasPermissions('users')"
+              v-if="hasPermissions(routesPermissions.users)"
             >
               Users
             </b-button>
           </b-nav-item>
         </b-navbar-nav>
 
-        <!-- Right aligned nav items -->
         <b-navbar-nav class="ml-auto">
           <b-button
             variant="dark"
@@ -72,6 +71,7 @@
     } from 'bootstrap-vue';
 
     import router from '../../router';
+    import routesPermissions from '../../constants/routesPermissions';
 
     export default {
         name: 'WNavigation',
@@ -88,7 +88,10 @@
         computed: {
             ...mapGetters([
                 'isAuthorized',
-            ])
+            ]),
+            routesPermissions: function() {
+              return routesPermissions;
+            }
         },
         methods: {
             ...mapActions({
