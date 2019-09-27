@@ -75,14 +75,11 @@
       ></b-form-input>
 
       <w-multiselect
-        class="w-users-form-input"
         :value="selectedRoles"
         :options="roles"
         :placeholder="placeholder"
-        :multiple="true"
-        :taggable="true"
-        :searchable="false"
         @input="updateValue"
+        class="w-users-form-input"
       ></w-multiselect>
 
       <b-button
