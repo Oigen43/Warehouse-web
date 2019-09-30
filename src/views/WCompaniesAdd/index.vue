@@ -54,7 +54,7 @@
                 router.push('/companies');
             },
             async sendData(newCompany) {
-                const res = await this.sendNewCompanyData({ company: newCompany.company, admin: newCompany.admin });
+                const res = await this.sendNewCompanyData({ company: newCompany.company, user: newCompany.user });
                 !res.error && this.redirect();
             }
         }

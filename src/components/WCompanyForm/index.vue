@@ -117,7 +117,10 @@
         },
         methods: {
             onSubmit() {
-                this.$emit('form-submitted', { company: this.companyForm, admin: this.adminForm });
+                this.$emit('form-submitted', { company: this.companyForm, user: {
+                    data: this.adminForm,
+                    roles: ['Company Admin']
+                }});
             }
         }
     };
