@@ -1,4 +1,4 @@
-.w-companies-list-table {
+.w-list-table {
   background-color: #FFFFFF;
 }
 
@@ -8,19 +8,28 @@
   border-left: 1px solid #dee2e6;
 }
 
+.w-table table td div {
+  float: left;
+}
+
+.w-table table td:nth-child(6) div,
+.w-table table td:nth-child(7) div{
+  float: none;
+}
+
 .w-blank-column {
   display: none;
   height: 1rem;
 }
 
-.btn.w-companies-table-update-button {
+.btn.w-table-update-button {
   margin-right: 1rem;
   background-color: #2C3E50;
 }
 
 @media (max-width: 767.98px) {
 
-  .table.b-table.b-table-stacked-md > tbody > tr > td:first-child {
+  .table.b-table.b-table-stacked-md tbody tr td:first-child {
     border-top-width: 1px;
     border-top-style: solid;
     border-top-color: #dee2e6;

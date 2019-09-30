@@ -1,10 +1,5 @@
 <template>
-  <div class="w-table">
-    <b-table
-      head-variant="dark"
-      class="w-warehouses-list-table"
-      borderless
-      stacked="md"
+    <w-table
       :items="warehousesList"
       :fields="fields">
       <template
@@ -17,7 +12,7 @@
       <template
         v-slot:cell(buttons)="data">
         <b-button
-          class="w-warehouses-table-update-button"
+          class="w-table-update-button"
           variant="dark"
           size="sm"
           @click="clickedUpdateButton(data.item)">
@@ -30,21 +25,21 @@
           ✕
         </b-button>
       </template>
-    </b-table>
-  </div>
+    </w-table>
 </template>
 
 <script>
     import { mapActions } from 'vuex';
-    import { BTable, BFormCheckbox, BButton } from 'bootstrap-vue';
+    import { BFormCheckbox, BButton } from 'bootstrap-vue';
 
+    import WTable from '../../../../components/WTable'
     import router from '../../../../router';
     import * as modal from '../../../../constants/modal';
 
     export default {
         name: 'WList',
         components: {
-            BTable,
+            WTable,
             BFormCheckbox,
             BButton
         },
