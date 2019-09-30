@@ -32,7 +32,7 @@
     import { mapActions } from 'vuex';
     import { BFormCheckbox, BButton } from 'bootstrap-vue';
 
-    import WTable from '../../../../components/WTable'
+    import WTable from '../../../../components/WTable';
     import router from '../../../../router';
     import * as modal from '../../../../constants/modal';
 

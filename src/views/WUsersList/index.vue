@@ -8,7 +8,7 @@
             <b-button
               to="/users/add"
               class="w-users-add-button"
-              variant="success">
+              variant="dark">
               add user
             </b-button>
 
