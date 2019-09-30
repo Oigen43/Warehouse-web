@@ -5,6 +5,7 @@ import store from '../store';
 import routesPermissions from '../constants/routesPermissions';
 import WHome from '../views/WHome';
 import WLogin from '../views/WLogin';
+import WConfirmation from '../views/WConfirmation';
 import WCompaniesList from '../views/WCompaniesList';
 import WCompaniesAddForm from '../views/WCompaniesAdd';
 import WCompaniesUpdateForm from '../views/WCompaniesUpdate';
@@ -34,6 +35,11 @@ const ifAuthenticated = (to, from, next) => {
   }
 };
 
+const ifConfirmed = (to, from, next) => {
+  console.log(to.query.token);
+  next();
+};
+
 export default new Router({
   mode: 'history',
   routes: [
@@ -46,6 +52,12 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: WLogin
+    },
+    {
+      path: '/confirmation',
+      name: 'confirmation',
+      component: WConfirmation,
+      beforeEnter: ifConfirmed
     },
     {
       path: '/companies',
