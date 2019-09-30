@@ -8,20 +8,10 @@
             <b-button
               to="/users/add"
               class="w-users-add-button"
-              variant="success">
+              variant="dark">
               add user
             </b-button>
 
-            <b-col lg="12" sm="12">
-              <div class="users-list-pagination">
-                <w-pagination
-                  v-if="usersPageLimit > 1"
-                  :current="currentPage"
-                  :pageLimit="usersPageLimit"
-                  @page-changed="sendRequest"
-                ></w-pagination>
-              </div>
-            </b-col>
           </b-col>
         </b-row>
         <div class="users-list">
@@ -30,6 +20,18 @@
             @delete-button-clicked="clickedDeleteButton"
           ></w-list>
         </div>
+        <b-row>
+          <b-col lg="12" sm="12">
+            <div class="users-list-pagination">
+              <w-pagination
+                v-if="usersPageLimit > 1"
+                :current="currentPage"
+                :pageLimit="usersPageLimit"
+                @page-changed="sendRequest"
+              ></w-pagination>
+            </div>
+          </b-col>
+        </b-row>
       </div>
     </b-col>
   </b-row>

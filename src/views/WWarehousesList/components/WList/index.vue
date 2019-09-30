@@ -1,52 +1,45 @@
 <template>
-  <b-table
-    head-variant="dark"
-    class="w-warehouses-list-table"
-    bordered
-    stacked="md"
-    :items="warehousesList"
-    :fields="fields">
-
-    <template
-      v-slot:cell(active)="data">
-      <b-form-checkbox
-        v-model="data.value"
-        disabled>
-      </b-form-checkbox>
-    </template>
-    <template
-      v-slot:cell(update)="data">
-      <b-button
-        variant="warning"
-        size="sm"
-        @click="clickedUpdateButton(data.item)">
-        Update
-      </b-button>
-    </template>
-    <template
-      v-slot:cell(delete)="data">
-      <b-button
-        variant="outline-dark"
-        size="sm"
-        @click="clickedDeleteButton(data.item)">
-        ✕
-      </b-button>
-    </template>
-
-  </b-table>
+    <w-table
+      :items="warehousesList"
+      :fields="fields">
+      <template
+        v-slot:cell(active)="data">
+        <b-form-checkbox
+          v-model="data.value"
+          disabled>
+        </b-form-checkbox>
+      </template>
+      <template
+        v-slot:cell(buttons)="data">
+        <b-button
+          class="w-table-update-button"
+          variant="dark"
+          size="sm"
+          @click="clickedUpdateButton(data.item)">
+          Update
+        </b-button>
+        <b-button
+          variant="light"
+          size="sm"
+          @click="clickedDeleteButton(data.item)">
+          ✕
+        </b-button>
+      </template>
+    </w-table>
 </template>
 
 <script>
     import { mapActions } from 'vuex';
-    import { BTable, BFormCheckbox, BButton } from 'bootstrap-vue';
+    import { BFormCheckbox, BButton } from 'bootstrap-vue';
 
+    import WTable from '../../../../components/WTable';
     import router from '../../../../router';
     import * as modal from '../../../../constants/modal';
 
     export default {
         name: 'WList',
         components: {
-            BTable,
+            WTable,
             BFormCheckbox,
             BButton
         },
@@ -55,8 +48,8 @@
             return {
                 fields: [
                     'active', 'warehouseName', 'companyName', 'address', 'type',
-                    { key: 'update', label: '' },
-                    { key: 'delete', label: '' }
+                    { key: 'buttons', label: '' },
+                    { key: 'blank', label: '', class: 'w-blank-column' }
                 ],
                 clickedWarehouse: {}
             };
@@ -84,6 +77,6 @@
     };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import './styles.scss';
 </style>

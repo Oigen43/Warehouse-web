@@ -172,7 +172,7 @@
                 this.$emit('form-submitted', { user: {
                     data: this.form,
                     roles: this.selectedRoles
-                }});
+                } });
             }
         },
     };

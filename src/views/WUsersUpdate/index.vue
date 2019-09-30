@@ -1,29 +1,29 @@
 <template>
   <b-row>
-    <b-col lg="3" sm="12" offset-lg="4">
-    <h1 class="w-user-update-form-h1">Update User</h1>
-    <w-form
-      @form-submitted="sendData"
-      submitButtonName="UPDATE USER"
-      :id="userId"
-      :firstName="firstName"
-      :surname="surname"
-      :patronymic="patronymic"
-      :email="email"
-      :city="city"
-      :street="street"
-      :house="house"
-      :flat="flat"
-      :birthDate="birthDate"
-      :login="login"
-      :userRoles="roles"
-    ></w-form>
-    <b-button
-      variant="link"
-      to="/users"
-      class="w-users-go-back-link"
-    >Go Back
-    </b-button>
+    <b-col class="w-users-update-form" lg="3" sm="12" offset-lg="4">
+      <h1 class="w-user-update-form-h1">Update User</h1>
+      <w-form
+        @form-submitted="sendData"
+        submitButtonName="UPDATE USER"
+        :id="userId"
+        :firstName="firstName"
+        :surname="surname"
+        :patronymic="patronymic"
+        :email="email"
+        :city="city"
+        :street="street"
+        :house="house"
+        :flat="flat"
+        :birthDate="birthDate"
+        :login="login"
+        :userRoles="roles"
+      ></w-form>
+      <b-button
+        variant="link"
+        to="/users"
+        class="w-users-go-back-link"
+      >Go Back
+      </b-button>
     </b-col>
   </b-row>
 </template>
@@ -86,7 +86,7 @@
         },
         methods: {
             ...mapActions({
-               sendUpdatedUserData: 'sendUpdatedUser'
+                sendUpdatedUserData: 'sendUpdatedUser'
             }),
             redirect() {
                 router.push('/users');
