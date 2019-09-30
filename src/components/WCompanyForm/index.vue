@@ -3,7 +3,7 @@
       <b-form-input
         id="company-name-input"
         size="lg"
-        v-model="form.companyName"
+        v-model="companyForm.companyName"
         required
         placeholder="Company name"
         class="w-companies-form-input"
@@ -12,7 +12,7 @@
       <b-form-input
         id="company-address-input"
         size="lg"
-        v-model="form.address"
+        v-model="companyForm.address"
         required
         placeholder="Company address"
         class="w-companies-form-input"
@@ -21,11 +21,32 @@
       <b-form-input
         id="company-description-input"
         size="lg"
-        v-model="form.description"
+        v-model="companyForm.description"
         required
         placeholder="Company description"
         class="w-companies-form-input"
       ></b-form-input>
+
+      <div v-if="withAdminFields"
+        class="w-companies-admin"
+      >
+        <h3>Add company admin</h3>
+        <b-form-input
+          v-model="adminForm.firstName"
+          size="lg"
+          required
+          placeholder="Admin name"
+          class="w-companies-admin-form-input"
+        ></b-form-input>
+
+        <b-form-input
+          v-model="adminForm.email"
+          size="lg"
+          required
+          placeholder="Admin email"
+          class="w-companies-admin-form-input"
+        ></b-form-input>
+      </div>
 
       <b-button
         type="submit"
@@ -40,6 +61,8 @@
 
 <script>
     import { BForm, BFormInput, BButton } from 'bootstrap-vue';
+
+    import * as userRoles from '../../constants/roles';
 
     export default {
         name: 'WCompanyForm',
@@ -66,21 +89,40 @@
             description: {
                 type: String,
                 default: '',
+            },
+            adminName: {
+                type: String,
+                default: ''
+            },
+            adminEmail: {
+                type: String,
+                default: ''
+            },
+            withAdminFields: {
+                type: Boolean,
+                default: false
             }
         },
         data: function () {
             return {
-                form: {
+                companyForm: {
                     id: this.id,
                     companyName: this.companyName,
                     address: this.address,
                     description: this.description
+                },
+                adminForm: {
+                    firstName: this.adminName,
+                    email: this.adminEmail
                 }
             };
         },
         methods: {
             onSubmit() {
-                this.$emit('form-submitted', this.form);
+                this.$emit('form-submitted', { company: this.companyForm, user: {
+                    data: this.adminForm,
+                    roles: [userRoles.COMPANY_ADMIN_ROLE]
+                }});
             }
         }
     };

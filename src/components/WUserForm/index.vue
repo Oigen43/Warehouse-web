@@ -74,12 +74,13 @@
         class="w-users-form-input"
       ></b-form-input>
 
-      <b-form-group label="Roles">
-        <b-form-checkbox-group
-          v-model="selectedRoles"
-          :options="roles"
-        ></b-form-checkbox-group>
-      </b-form-group>
+      <w-multiselect
+        :value="selectedRoles"
+        :options="roles"
+        :placeholder="placeholder"
+        @input="updateValue"
+        class="w-users-form-input"
+      ></w-multiselect>
 
       <b-button
         type="submit"
@@ -93,18 +94,16 @@
 </template>
 
 <script>
-    import { BForm, BFormInput, BFormGroup, BFormCheckboxGroup, BButton } from 'bootstrap-vue';
-
+    import { BForm, BFormInput, BButton } from 'bootstrap-vue';
     import * as userRoles from '../../constants/roles';
-
+    import WMultiselect from '../WMultiselect';
     export default {
         name: 'WUserForm',
         components: {
             BForm,
             BFormInput,
-            BFormGroup,
-            BFormCheckboxGroup,
-            BButton
+            BButton,
+            WMultiselect
         },
         props: {
             submitButtonName: {
@@ -158,15 +157,24 @@
                     login: this.login,
                     password: this.password
                 },
+
                 roles: userRoles.ROLES,
-                selectedRoles: this.userRoles
+                selectedRoles: this.userRoles,
+                placeholder: 'Add a role'
+
             };
         },
         methods: {
+            updateValue(newRoles) {
+              this.selectedRoles = newRoles;
+            },
             onSubmit() {
-                this.$emit('form-submitted', { user: this.form, selectedRoles: this.selectedRoles });
+                this.$emit('form-submitted', { user: {
+                    data: this.form,
+                    roles: this.selectedRoles
+                }});
             }
-        }
+        },
     };
 </script>
 

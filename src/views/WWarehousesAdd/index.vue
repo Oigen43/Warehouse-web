@@ -31,14 +31,16 @@
         components: {
             BRow,
             BCol,
+            BButton,
             WForm,
-            BButton
         },
         data: function () {
             return {
                 warehouseName: '',
                 address: '',
-                type: ''
+                type: '',
+                adminName: '',
+                adminEmail: ''
             };
         },
         computed: {

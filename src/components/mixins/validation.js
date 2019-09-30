@@ -1,5 +1,4 @@
 import { mapState } from 'vuex';
-import routesPermissions from '../../constants/routesPermissions';
 
 export const validation = {
   computed: {
@@ -8,9 +7,9 @@ export const validation = {
     ])
   },
   methods: {
-    hasPermissions: function (route) {
+    hasPermissions: function (permissions) {
       if (this.roles) {
-        return this.roles.some(item => routesPermissions[route].includes(item));
+        return this.roles.some(item => permissions.includes(item));
       }
       return false;
     }

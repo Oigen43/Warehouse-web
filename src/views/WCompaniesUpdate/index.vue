@@ -60,7 +60,7 @@
                 router.push('/companies');
             },
             async sendData(company) {
-                const res = await this.sendUpdatedCompanyData(company);
+                const res = await this.sendUpdatedCompanyData(company.company);
                 !res.error && this.redirect();
             }
         },
