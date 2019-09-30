@@ -7,7 +7,6 @@
       stacked="md"
       :items="companies"
       :fields="fields">
-
       <template
         v-slot:cell(active)="data">
         <b-form-checkbox

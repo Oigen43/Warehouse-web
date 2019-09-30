@@ -1,39 +1,37 @@
 <template>
-  <b-table
-    head-variant="dark"
-    class="w-warehouses-list-table"
-    outlined
-    stacked="md"
-    :items="warehousesList"
-    :fields="fields">
-
-    <template
-      v-slot:cell(active)="data">
-      <b-form-checkbox
-        v-model="data.value"
-        disabled>
-      </b-form-checkbox>
-    </template>
-    <template
-      v-slot:cell(update)="data">
-      <b-button
-        variant="warning"
-        size="sm"
-        @click="clickedUpdateButton(data.item)">
-        Update
-      </b-button>
-    </template>
-    <template
-      v-slot:cell(delete)="data">
-      <b-button
-        variant="outline-dark"
-        size="sm"
-        @click="clickedDeleteButton(data.item)">
-        ✕
-      </b-button>
-    </template>
-
-  </b-table>
+  <div class="w-table">
+    <b-table
+      head-variant="dark"
+      class="w-warehouses-list-table"
+      borderless
+      stacked="md"
+      :items="warehousesList"
+      :fields="fields">
+      <template
+        v-slot:cell(active)="data">
+        <b-form-checkbox
+          v-model="data.value"
+          disabled>
+        </b-form-checkbox>
+      </template>
+      <template
+        v-slot:cell(buttons)="data">
+        <b-button
+          class="w-warehouses-table-update-button"
+          variant="dark"
+          size="sm"
+          @click="clickedUpdateButton(data.item)">
+          Update
+        </b-button>
+        <b-button
+          variant="light"
+          size="sm"
+          @click="clickedDeleteButton(data.item)">
+          ✕
+        </b-button>
+      </template>
+    </b-table>
+  </div>
 </template>
 
 <script>
@@ -55,8 +53,8 @@
             return {
                 fields: [
                     'active', 'warehouseName', 'companyName', 'address', 'type',
-                    { key: 'update', label: '' },
-                    { key: 'delete', label: '' }
+                    { key: 'buttons', label: '' },
+                    { key: 'blank', label: '', class: 'w-blank-column' }
                 ],
                 clickedWarehouse: {}
             };
@@ -84,6 +82,6 @@
     };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
   @import './styles.scss';
 </style>

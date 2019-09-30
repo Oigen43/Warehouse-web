@@ -6,7 +6,7 @@
         <b-row>
           <b-col lg="12" sm="12">
             <b-button
-              variant="success"
+              variant="dark"
               to="/warehouses/add"
               class="w-warehouses-add-button"
             >add warehouse
