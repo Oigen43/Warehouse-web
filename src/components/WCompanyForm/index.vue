@@ -32,7 +32,7 @@
       >
         <h3>Add company admin</h3>
         <b-form-input
-          v-model="adminForm.name"
+          v-model="adminForm.firstName"
           size="lg"
           required
           placeholder="Admin name"
@@ -112,7 +112,7 @@
                     description: this.description
                 },
                 adminForm: {
-                    name: this.adminName,
+                    firstName: this.adminName,
                     email: this.adminEmail
                 }
             };
@@ -121,7 +121,7 @@
             onSubmit() {
                 this.$emit('form-submitted', { company: this.companyForm, user: {
                     data: this.adminForm,
-                    roles: userRoles.COMPANY_ADMIN
+                    roles: [userRoles.COMPANY_ADMIN_ROLE]
                 }});
             }
         }
