@@ -62,6 +62,8 @@
 <script>
     import { BForm, BFormInput, BButton } from 'bootstrap-vue';
 
+    import * as userRoles from '../../constants/roles';
+
     export default {
         name: 'WCompanyForm',
         components: {
@@ -117,7 +119,10 @@
         },
         methods: {
             onSubmit() {
-                this.$emit('form-submitted', { company: this.companyForm, admin: this.adminForm });
+                this.$emit('form-submitted', { company: this.companyForm, user: {
+                    data: this.adminForm,
+                    roles: userRoles.COMPANY_ADMIN
+                }});
             }
         }
     };
