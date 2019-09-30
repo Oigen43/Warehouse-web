@@ -3,9 +3,9 @@
 }
 
 .w-table table td {
-  border-bottom: 1px solid #dee2e6;
-  border-right: 1px solid #dee2e6;
-  border-left: 1px solid #dee2e6;
+  border-bottom: 1px solid #DEE2E6;
+  border-right: 1px solid #DEE2E6;
+  border-left: 1px solid #DEE2E6;
 }
 
 .w-table table td:nth-child(6) div,
@@ -24,11 +24,10 @@
 }
 
 @media (max-width: 63rem) {
-
   .table.b-table.b-table-stacked-md tbody tr td:first-child {
     border-top-width: 1px;
     border-top-style: solid;
-    border-top-color: #dee2e6;
+    border-top-color: #DEE2E6;
   }
 
   .w-table table td div {
@@ -36,7 +35,7 @@
   }
 
   .w-table td:last-child {
-    background-color: #f8f9fa;
+    background-color: #F8F9FA;
     border: none;
   }
 }

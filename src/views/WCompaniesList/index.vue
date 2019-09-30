@@ -20,16 +20,16 @@
           ></w-list>
         </div>
         <b-row>
-        <b-col lg="12" sm="12">
-          <div class="companies-list-pagination">
-            <w-pagination
-              v-if="companiesPageLimit > 1"
-              :current="currentPage"
-              :pageLimit="companiesPageLimit"
-              @page-changed="sendRequest"
-            ></w-pagination>
-          </div>
-        </b-col>
+          <b-col lg="12" sm="12">
+            <div class="companies-list-pagination">
+              <w-pagination
+                v-if="companiesPageLimit > 1"
+                :current="currentPage"
+                :pageLimit="companiesPageLimit"
+                @page-changed="sendRequest"
+              ></w-pagination>
+            </div>
+          </b-col>
         </b-row>
       </div>
     </b-col>

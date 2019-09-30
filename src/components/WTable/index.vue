@@ -6,7 +6,13 @@
     borderless
     stacked="lg"
     v-bind="$attrs">
-    <template v-for="slot in Object.keys($scopedSlots)" :slot="slot" slot-scope="scope"><slot :name="slot" v-bind="scope"/></template>
+    <template
+      v-for="slot in Object.keys($scopedSlots)"
+      :slot="slot"
+      slot-scope="scope"><slot
+      :name="slot"
+      v-bind="scope"/>
+    </template>
   </b-table>
   </div>
 </template>
