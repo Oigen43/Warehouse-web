@@ -3,3 +3,4 @@ export const COMPANIES_URL = '/companies';
 export const WAREHOUSES_URL = '/warehouses';
 export const USERS_URL = '/users';
 export const LOGIN_URL = '/login';
+export const REFRESH_TOKEN_URL = '/refresh';

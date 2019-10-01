@@ -6,14 +6,23 @@ import * as constant from '../constants';
 import initialState from '../constants/initialState';
 
 export default {
+  changeToken: async ({ commit }, req) => {
+    commit(types.REFRESH_TOKEN, req);
+  },
+  updateTokens: async ({ commit }, req) => {
+    commit(types.UPDATE_TOKENS, req);
+  },
   login: async ({ commit }, req) => {
     const res = await api.post(url.LOGIN_URL, req);
     if (res.data) {
       const token = res.data.token;
+      const refreshToken = res.data.refreshToken;
       const roles = res.data.roles;
+      const id = res.data.id;
       localStorage.setItem(constant.TOKEN_KEY, token);
+      localStorage.setItem(constant.REFRESH_TOKEN_KEY, refreshToken);
       localStorage.setItem(constant.ROLES_LIST, JSON.stringify(roles));
-      commit(types.LOGIN, { token, roles });
+      commit(types.LOGIN, { token, refreshToken, roles, id });
     }
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
