@@ -44,6 +44,7 @@ const ifConfirmed = async (to, from, next) => {
     store.state.registrationToken = to.query.token;
     const res = await api.get(url.CONFIRMATION_URL, store.state.registrationToken);
     if (res.error) {
+      store.state.registrationToken = null;
       next('/');
       return;
     }
