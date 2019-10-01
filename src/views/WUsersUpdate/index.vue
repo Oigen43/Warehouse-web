@@ -74,7 +74,7 @@
         },
         methods: {
             ...mapActions({
-               sendUpdatedUserData: 'sendUpdatedUser'
+                sendUpdatedUserData: 'sendUpdatedUser'
             }),
             redirect() {
                 router.push('/users');
