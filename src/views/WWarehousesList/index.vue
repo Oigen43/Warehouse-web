@@ -5,20 +5,12 @@
         <h1>List of Warehouses</h1>
         <b-row>
           <b-col lg="12" sm="12">
-        <b-button
-          variant="success"
-          to="/warehouses/add"
-          class="w-warehouses-add-button"
-        >add warehouse
-        </b-button>
-        <div class="warehouses-list-pagination">
-          <w-pagination
-            v-if="warehousesPageLimit > 1"
-            :current="currentPage"
-            :pageLimit="warehousesPageLimit"
-            @page-changed="sendRequest"
-          ></w-pagination>
-        </div>
+            <b-button
+              variant="dark"
+              to="/warehouses/add"
+              class="w-warehouses-add-button"
+            >add warehouse
+            </b-button>
           </b-col>
         </b-row>
         <div class="warehouses-list">
@@ -27,6 +19,18 @@
             :warehousesList="warehouses"
           ></w-list>
         </div>
+        <b-row>
+          <b-col lg="12" sm="12">
+            <div class="warehouses-list-pagination">
+              <w-pagination
+                v-if="warehousesPageLimit > 1"
+                :current="currentPage"
+                :pageLimit="warehousesPageLimit"
+                @page-changed="sendRequest"
+              ></w-pagination>
+            </div>
+          </b-col>
+        </b-row>
       </div>
     </b-col>
   </b-row>
@@ -89,7 +93,11 @@
             }
         },
         created: function () {
-            this.fetchWarehousesList({ page: this.currentPage, perPage: this.perPage, companyId: this.currentCompany.id });
+            this.fetchWarehousesList({
+                page: this.currentPage,
+                perPage: this.perPage,
+                companyId: this.currentCompany.id
+            });
         }
     };
 </script>

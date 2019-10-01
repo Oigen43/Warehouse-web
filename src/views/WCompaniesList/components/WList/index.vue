@@ -1,12 +1,7 @@
 <template>
-  <b-table
-    head-variant="dark"
-    class="w-companies-list-table"
-    bordered
-    stacked="md"
+  <w-table
     :items="companies"
     :fields="fields">
-
     <template
       v-slot:cell(active)="data">
       <b-form-checkbox
@@ -21,41 +16,40 @@
         size="sm"
         @click="clickedWarehousesButton(data.item)">
         Warehouses
-      </b-button>
+      </b-button
+      >
     </template>
     <template
-      v-slot:cell(update)="data">
+      v-slot:cell(buttons)="data">
       <b-button
-        variant="warning"
+        class="w-table-update-button"
+        variant="dark"
         size="sm"
         @click="clickedUpdateButton(data.item)">
         Update
       </b-button>
-    </template>
-    <template
-      v-slot:cell(delete)="data">
       <b-button
-        variant="outline-dark"
+        variant="light"
         size="sm"
         @click="clickedDeleteButton(data.item)">
         ✕
       </b-button>
     </template>
-
-  </b-table>
+  </w-table>
 </template>
 
 <script>
     import { mapActions } from 'vuex';
-    import { BTable, BFormCheckbox, BButton } from 'bootstrap-vue';
+    import { BFormCheckbox, BButton } from 'bootstrap-vue';
 
+    import WTable from '../../../../components/WTable';
     import router from '../../../../router';
     import * as modal from '../../../../constants/modal';
 
     export default {
         name: 'WList',
         components: {
-            BTable,
+            WTable,
             BFormCheckbox,
             BButton
         },
@@ -63,10 +57,11 @@
         data: function () {
             return {
                 fields: [
-                    'active', 'companyName', 'address', 'description', 'date',
+                    'active', 'companyName', 'address', 'description',
+                    { key: 'date', label: 'Date' },
                     { key: 'warehouses', label: '' },
-                    { key: 'update', label: '' },
-                    { key: 'delete', label: '' }
+                    { key: 'buttons', label: '' },
+                    { key: 'blank', label: '', class: 'w-blank-column' }
                 ]
             };
         },
@@ -77,8 +72,8 @@
                 setCurrentCompany: 'setCurrentCompany',
             }),
             clickedWarehousesButton(item) {
-              this.setCurrentCompany({ id: item.id, companyName: item.companyName });
-              router.push('/warehouses');
+                this.setCurrentCompany({ id: item.id, companyName: item.companyName });
+                router.push('/warehouses');
             },
             clickedUpdateButton(item) {
                 this.getUpdatedCompanyData(item);
@@ -97,7 +92,3 @@
         }
     };
 </script>
-
-<style lang="scss" scoped>
-  @import './styles.scss';
-</style>

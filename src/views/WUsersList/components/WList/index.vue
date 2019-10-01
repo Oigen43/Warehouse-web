@@ -1,42 +1,42 @@
 <template>
-    <b-row>
-      <b-col lg="4" md="6" sm="12" v-for="user in users" v-bind:key="user.id">
-        <b-card no-body class="overflow-hidden w-users-card">
-          <b-row no-gutters>
-            <b-col lg="6" md="12">
-              <div class="w-role-label">Admin</div>
-              <b-card-img src="https://www.zayedhotel.com/addons/default/themes/yoona/img/user.jpg" class="rounded-0"
-                           alt="User image"></b-card-img>
-            </b-col>
-            <b-col lg="6" md="12">
-              <b-card-body class="w-users-card-body">
-                <b-card-title class="mb-0">{{user.firstName}} {{user.patronymic}} {{user.surname}}</b-card-title>
-                <hr>
-                <b-card-text><span class="w-users-card-text">Date of Birth:</span> {{user.birthDate}}</b-card-text>
-                <b-card-text><span class="w-users-card-text">Email:</span> {{user.email}}</b-card-text>
-                <b-card-text><span class="w-users-card-text">Address:</span> {{user.address}}</b-card-text>
-              </b-card-body>
-              <b-card-footer>
-                <b-button
-                  class="w-list-button"
-                  variant="warning"
-                  size="sm"
-                  @click="clickedUpdateButton(user)">
-                  Update
-                </b-button>
-                <b-button
-                  class="w-list-button"
-                  variant="outline-dark"
-                  size="sm"
-                  @click="clickedDeleteButton(user)">
-                  ✕
-                </b-button>
-              </b-card-footer>
-            </b-col>
-          </b-row>
-        </b-card>
-      </b-col>
-    </b-row>
+  <b-row>
+    <b-col lg="3" sm="6" v-for="user in users" v-bind:key="user.id">
+      <b-card no-body class="overflow-hidden w-users-card">
+        <div class="w-users-card-role-container">
+          <div v-for="role in user.roles" class="w-users-card-role-label" v-bind:key="role.id">{{role.title}}</div>
+        </div>
+        <b-card-img src="https://www.zayedhotel.com/addons/default/themes/yoona/img/user.jpg"
+                    class="rounded-0 w-users-card-img"
+                    alt="User image"></b-card-img>
+        <b-card-body>
+          <b-card-title class="mb-0 w-users-card-text">{{user.firstName}} {{user.surname}}</b-card-title>
+          <hr>
+          <b-card-text class="w-users-card-text"><span class="w-users-card-text-bold">Date of Birth:</span>
+            {{user.birthDate}}
+          </b-card-text>
+          <b-card-text class="w-users-card-text"><span class="w-users-card-text-bold">Email:</span> {{user.email}}
+          </b-card-text>
+          <b-card-text class="w-users-card-text"><span class="w-users-card-text-bold">Address:</span> {{user.address}}
+          </b-card-text>
+        </b-card-body>
+        <b-card-footer class="w-users-card-footer">
+          <b-button
+            class="w-users-update-card-button"
+            variant="dark"
+            size="sm"
+            @click="clickedUpdateButton(user)">
+            Update
+          </b-button>
+          <b-button
+            variant="light"
+            size="sm"
+            @click="clickedDeleteButton(user)">
+            ✕
+          </b-button>
+        </b-card-footer>
+      </b-card>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
