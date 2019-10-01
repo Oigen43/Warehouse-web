@@ -2,7 +2,7 @@
   <b-row>
     <b-col lg="12" sm="12">
       <div class='w-storages-list-page'>
-        <h1>List of Warehouses</h1>
+        <h1>List of Storages</h1>
         <div class="w-storages-list">
           <w-list
             :storagesList="storages"
