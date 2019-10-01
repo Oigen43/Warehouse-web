@@ -5,6 +5,10 @@ export default {
   'company.update.success': 'Company updated!',
   'company.delete.success': 'Company deleted!',
 
+  'user.get.confirmation.form.success': 'Success, you have permissions',
+  'user.get.confirmation.form.failed': 'Fail, you have not permissions',
+  'user.registration.success': 'Registration completed',
+
   'user.incorrect.login.data': 'Incorrect login or password! Try again!',
   'user.conflict': 'This user already exists!',
   'user.get.unknown': 'This user does not exist!',

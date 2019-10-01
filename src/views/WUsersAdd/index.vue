@@ -61,7 +61,7 @@
                 const res = await this.sendNewUserData(newUser);
                 !res.error && this.redirect();
             }
-        }
+        },
     };
 </script>
 

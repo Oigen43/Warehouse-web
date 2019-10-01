@@ -2,7 +2,7 @@
     <b-row>
       <b-col lg="3" sm="12" offset-lg="4">
         <h1 class="w-user-registration-h1">Registration Completion</h1>
-        <b-form class="w-users-form">
+        <b-form @submit.prevent="onSubmit" class="w-users-form">
 
           <b-form-input
             size="lg"
@@ -64,6 +64,10 @@
 </template>
 
 <script>
+    import { mapActions } from 'vuex';
+    import api from '../../utils/api';
+    import * as url from '../../constants/urls';
+    import router from '../../router';
     import { BRow, BCol, BForm, BFormInput, BButton } from 'bootstrap-vue';
 
     export default {
@@ -78,14 +82,24 @@
         data() {
             return {
                 form: {
-                    surname: '',
-                    patronymic: '',
-                    address: '',
-                    birthDate: '',
-                    login: '',
-                    password: ''
+                    surname: null,
+                    patronymic: null,
+                    address: null,
+                    birthDate: null,
+                    login: null,
+                    password: null
                 },
             };
+        },
+        methods: {
+            ...mapActions({
+              sendData: 'sendRegistrationData'
+            }),
+            async onSubmit() {
+                await this.sendData(this.form);
+                router.push('/login');
+
+            }
         }
     };
 </script>

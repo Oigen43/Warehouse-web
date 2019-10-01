@@ -134,5 +134,9 @@ export default {
     const res = await api.delete(url.USERS_URL, { userId });
 
     res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  sendRegistrationData: async ({ commit }, form) => {
+    const res = await api.post(url.CONFIRMATION_URL, { user: form });
+    res.toast && commit(types.SET_TOAST, res.toast);
   }
 };

@@ -4,7 +4,8 @@ import messageCode from '../constants/messages';
 import store from '../store';
 
 axios.interceptors.request.use(function(config) {
-  const token = store.state.token;
+  const token = store.state.registrationToken ? store.state.registrationToken : store.state.token;
+
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }

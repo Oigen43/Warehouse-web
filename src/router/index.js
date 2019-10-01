@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+import api from '../utils/api';
+import * as url from '../constants/urls';
 import store from '../store';
 import routesPermissions from '../constants/routesPermissions';
 import WHome from '../views/WHome';
@@ -35,8 +37,22 @@ const ifAuthenticated = (to, from, next) => {
   }
 };
 
-const ifConfirmed = (to, from, next) => {
-  console.log(to.query.token);
+const ifConfirmed = async (to, from, next) => {
+  if (!to.query.token) {
+    next('/');
+  } else {
+    store.state.registrationToken = to.query.token;
+    const res = await api.get(url.CONFIRMATION_URL, store.state.registrationToken);
+    if (res.error) {
+      next('/');
+      return;
+    }
+    next();
+  }
+};
+
+const clearToken = (to, from, next) => {
+  store.state.registrationToken = null;
   next();
 };
 
@@ -57,7 +73,7 @@ export default new Router({
       path: '/confirmation',
       name: 'confirmation',
       component: WConfirmation,
-      beforeEnter: ifConfirmed
+      beforeEnter: ifConfirmed,
     },
     {
       path: '/companies',
