@@ -18,11 +18,10 @@ export default {
       const token = res.data.token;
       const refreshToken = res.data.refreshToken;
       const roles = res.data.roles;
-      const id = res.data.id;
       localStorage.setItem(constant.TOKEN_KEY, token);
       localStorage.setItem(constant.REFRESH_TOKEN_KEY, refreshToken);
       localStorage.setItem(constant.ROLES_LIST, JSON.stringify(roles));
-      commit(types.LOGIN, { token, refreshToken, roles, id });
+      commit(types.LOGIN, { token, refreshToken, roles });
     }
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -38,8 +37,8 @@ export default {
       const pageLimit = helpers.calculatePageLimit(res.data.companiesTotal, perPage);
       commit(types.COMPANIES, res.data.companies);
       commit(types.COMPANIES_PAGE_LIMIT, pageLimit);
-      res.toast && commit(types.SET_TOAST, res.toast);
     }
+    res.toast && commit(types.SET_TOAST, res.toast);
   },
   createCompany: async ({ commit }, req) => {
     commit(types.CREATE_COMPANY, req);
@@ -81,8 +80,8 @@ export default {
       const pageLimit = helpers.calculatePageLimit(res.data.warehousesTotal, req.perPage);
       commit(types.WAREHOUSES, res.data.warehouses);
       commit(types.WAREHOUSES_PAGE_LIMIT, pageLimit);
-      res.toast && commit(types.SET_TOAST, res.toast);
     }
+    res.toast && commit(types.SET_TOAST, res.toast);
   },
   createWarehouse: async ({ commit }, req) => {
     commit(types.CREATE_WAREHOUSE, req);
@@ -116,8 +115,8 @@ export default {
       const pageLimit = helpers.calculatePageLimit(res.data.usersTotal, perPage);
       commit(types.USERS, res.data.users);
       commit(types.USERS_PAGE_LIMIT, pageLimit);
-      res.toast && commit(types.SET_TOAST, res.toast);
     }
+    res.toast && commit(types.SET_TOAST, res.toast);
   },
   createUser: async ({ commit }, req) => {
     commit(types.CREATE_USER, req);

@@ -27,7 +27,6 @@ export default new Vuex.Store({
     updatedWarehouse: {},
     deletedWarehouse: {},
 
-    currentUserId: null,
     users: [],
     usersPageLimit: 1,
     newUser: {},

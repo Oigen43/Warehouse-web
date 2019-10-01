@@ -5,7 +5,6 @@ export default {
     state.token = data.token;
     state.refreshToken = data.refreshToken;
     state.roles = data.roles;
-    state.currentUserId = data.id;
   },
   [types.LOGOUT](state, initialState) {
     Object.keys(initialState).forEach(key => {

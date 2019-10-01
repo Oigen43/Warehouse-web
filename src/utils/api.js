@@ -2,6 +2,8 @@ import axios from 'axios';
 import * as url from '../constants/urls';
 import messageCode from '../constants/messages';
 import store from '../store';
+import router from '../router';
+import jwtDecode from 'jwt-decode';
 
 axios.interceptors.request.use(function(config) {
   const token = store.state.token;
@@ -18,29 +20,33 @@ axios.interceptors.request.use(function(config) {
   return Promise.reject(err);
 });
 
-axios.interceptors.response.use((response) => {
-  return response;
-}, (error) => {
-  const originalRequest = error.config;
-  if (error.response.status === 401) {
-    store.dispatch('changeToken', store.state.refreshToken).then(() => {
-      return axios.post(`${url.BASE_URL}${url.REFRESH_TOKEN_URL}`, { userId: store.state.currentUserId })
-        .then(res => {
-          console.log(11111111111111111111111, res);
-          store.dispatch('updateTokens', res.data.data)
-            .then(() => axios(originalRequest))
-            .catch(err => {
-              console.log(err);
-            })
-        })
-        .catch(err => {
-          store.dispatch('logout').then(() => {
-            console.log(err);
-          });
-        });
-    });
-  }
-});
+function createAxiosResponseInterceptor () {
+  const myInterceptor = axios.interceptors.response.use((response) => {
+    return response;
+  }, (error) => {
+    const originalRequest = error.config;
+    if (error.response.status === 401) {
+      store.dispatch('changeToken', store.state.refreshToken);
+      axios.interceptors.response.eject(myInterceptor);
+      const userData = jwtDecode(store.state.token);
+
+      return axios.post(`${url.BASE_URL}${url.REFRESH_TOKEN_URL}`, {
+        user: userData
+      }).then(response => {
+        store.dispatch('updateTokens', response.data.data);
+        error.response.config.headers['Authorization'] = `Bearer ${response.data.data.token}`;
+        return axios(originalRequest);
+      }).catch(error => {
+        store.dispatch('logout');
+        router.push('/login');
+        return Promise.reject(error);
+      }).finally(createAxiosResponseInterceptor);
+    } else {
+      return Promise.reject(error);
+    }
+  });
+}
+createAxiosResponseInterceptor();
 
 export default {
   get: function (customURL, params) {
@@ -72,23 +78,6 @@ async function requestHelper(handler) {
       toast: createToast(res)
     };
   } catch (err) {
-    if (err.request && err.request.status === 401) {
-      try {
-        console.log('HELLO');
-        const res = await handler;
-        console.log('WORLD!');
-        if (res.status < 300 && res.data.data.statusCode === undefined) {
-          return { data: res.data.data };
-        }
-        return {
-          data: res.data.data,
-          toast: createToast(res)
-        };
-      } catch (err) {
-        await store.dispatch('logout');
-      }
-    }
-
     return {
       error: err,
       toast: createToast(err)
@@ -99,7 +88,8 @@ async function requestHelper(handler) {
 function createToast(data) {
   return {
     variant: (data.status && data.status < 300) ? 'success' : 'danger',
-    message: ((data.response) && (data.response.data.data.statusCode)) ? messageCode[data.response.data.data.statusCode]
+    message: ((data.response) && (data.response.data.data) && (data.response.data.data.statusCode)) ? messageCode[data.response.data.data.statusCode]
+        : ((data.response) && (data.response.data)) ? messageCode[data.response.data]
         : ((data.data) && (data.data.data.statusCode)) ? messageCode[data.data.data.statusCode]
         : ((data.request) && (!data.response)) ? 'Server is not available!'
         : 'Something went wrong!',

@@ -164,10 +164,12 @@
         },
         methods: {
             onSubmit() {
-                this.$emit('form-submitted', { user: {
-                    data: this.form,
-                    roles: this.selectedRoles
-                }});
+                this.$emit('form-submitted', {
+                    user: {
+                      data: this.form,
+                      roles: this.selectedRoles
+                    }
+                });
             }
         }
     };

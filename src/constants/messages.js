@@ -5,6 +5,7 @@ export default {
   'company.update.success': 'Company updated!',
   'company.delete.success': 'Company deleted!',
 
+  'Unauthorized': 'Unauthorized',
   'user.incorrect.login.data': 'Incorrect login or password! Try again!',
   'user.conflict': 'This user already exists!',
   'user.get.unknown': 'This user does not exist!',
