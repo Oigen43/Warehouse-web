@@ -47,8 +47,8 @@
         data: function () {
             return {
                 fields: [
-                    {key: 'storageType', label: 'Type'},
-                    {key: 'storageCapacity', label: 'Size'}
+                    { key: 'storageType', label: 'Type' },
+                    { key: 'storageCapacity', label: 'Size' }
                 ]
             };
         }

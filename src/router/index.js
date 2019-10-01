@@ -15,6 +15,7 @@ import WUsersList from '../views/WUsersList';
 import WUsersUpdateForm from '../views/WUsersUpdate';
 import WUsersAddForm from '../views/WUsersAdd';
 import WStoragesList from '../views/WStoragesList';
+import WNotFound from '../views/WNotFound';
 
 Vue.use(Router);
 
@@ -117,6 +118,10 @@ export default new Router({
       component: WStoragesList,
       meta: { authorize: routesPermissions.storages },
       beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '*',
+      component: WNotFound,
     }
   ]
 });

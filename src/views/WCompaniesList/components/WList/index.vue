@@ -39,8 +39,8 @@
 </template>
 
 <script>
-    import {mapActions} from 'vuex';
-    import {BFormCheckbox, BButton} from 'bootstrap-vue';
+    import { mapActions } from 'vuex';
+    import { BFormCheckbox, BButton } from 'bootstrap-vue';
 
     import WTable from '../../../../components/WTable';
     import router from '../../../../router';
@@ -58,12 +58,14 @@
             return {
                 fields: [
                     'active', 'companyName', 'address', 'description',
-                    {key: 'date', label: 'Date', formatter: value => {
+                    { key: 'date',
+label: 'Date',
+formatter: value => {
                         return value.slice(0, 10);
-                        }},
-                    {key: 'warehouses', label: ''},
-                    {key: 'buttons', label: ''},
-                    {key: 'blank', label: '', class: 'w-blank-column'}
+                        } },
+                    { key: 'warehouses', label: '' },
+                    { key: 'buttons', label: '' },
+                    { key: 'blank', label: '', class: 'w-blank-column' }
                 ]
             };
         },
@@ -74,7 +76,7 @@
                 setCurrentCompany: 'setCurrentCompany',
             }),
             clickedWarehousesButton(item) {
-                this.setCurrentCompany({id: item.id, companyName: item.companyName});
+                this.setCurrentCompany({ id: item.id, companyName: item.companyName });
                 router.push('/warehouses');
             },
             clickedUpdateButton(item) {
