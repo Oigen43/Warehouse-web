@@ -64,9 +64,8 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
-    import api from '../../utils/api';
-    import * as url from '../../constants/urls';
+    import { mapActions, mapMutations } from 'vuex';
+    import * as types from '../../store/mutation-types';
     import router from '../../router';
     import { BRow, BCol, BForm, BFormInput, BButton } from 'bootstrap-vue';
 
@@ -95,12 +94,17 @@
             ...mapActions({
               sendData: 'sendRegistrationData'
             }),
+            ...mapMutations({
+              removeToken: types.REMOVE_REGISTRATION_TOKEN
+            }),
             async onSubmit() {
                 await this.sendData(this.form);
                 router.push('/login');
-
             }
-        }
+        },
+          beforeDestroy() {
+            this.removeToken();
+          }
     };
 </script>
 

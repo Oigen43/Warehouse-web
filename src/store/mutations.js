@@ -10,6 +10,9 @@ export default {
       state[key] = initialState[key];
     });
   },
+  [types.REMOVE_REGISTRATION_TOKEN](state) {
+    state.registrationToken = null;
+  },
 
   [types.COMPANIES](state, companies) {
     state.companies = companies;

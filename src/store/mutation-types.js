@@ -1,5 +1,6 @@
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
+export const REMOVE_REGISTRATION_TOKEN = 'REMOVE_REGISTRATION_TOKEN';
 
 export const COMPANIES = 'COMPANIES';
 export const COMPANIES_PAGE_LIMIT = 'COMPANIES_PAGE_LIMIT';

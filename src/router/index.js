@@ -51,11 +51,6 @@ const ifConfirmed = async (to, from, next) => {
   }
 };
 
-const clearToken = (to, from, next) => {
-  store.state.registrationToken = null;
-  next();
-};
-
 export default new Router({
   mode: 'history',
   routes: [
@@ -73,7 +68,7 @@ export default new Router({
       path: '/confirmation',
       name: 'confirmation',
       component: WConfirmation,
-      beforeEnter: ifConfirmed,
+      beforeEnter: ifConfirmed
     },
     {
       path: '/companies',

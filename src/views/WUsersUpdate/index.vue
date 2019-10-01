@@ -10,10 +10,7 @@
       :surname="surname"
       :patronymic="patronymic"
       :email="email"
-      :city="city"
-      :street="street"
-      :house="house"
-      :flat="flat"
+      :address="address"
       :birthDate="birthDate"
       :login="login"
       :userRoles="roles"
@@ -62,17 +59,8 @@
             email() {
                 return this.updatedUser.email;
             },
-            city() {
-                return this.updatedUser.address.city;
-            },
-            street() {
-                return this.updatedUser.address.street;
-            },
-            house() {
-                return this.updatedUser.address.house;
-            },
-            flat() {
-                return this.updatedUser.address.flat;
+            address() {
+                return this.updatedUser.address;
             },
             birthDate() {
                 return this.updatedUser.birthDate;

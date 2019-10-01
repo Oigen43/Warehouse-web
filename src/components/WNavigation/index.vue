@@ -33,7 +33,7 @@
           </b-nav-item>
         </b-navbar-nav>
 
-        <b-navbar-nav class="ml-auto">
+        <b-navbar-nav class="ml-auto" v-if="!registrationToken">
           <b-button
             variant="dark"
             class="w-navigation-button my-2 my-sm-0"
@@ -59,7 +59,7 @@
 <script>
     import { validation } from '../../components/mixins/validation';
 
-    import { mapGetters, mapActions } from 'vuex';
+    import { mapGetters, mapActions, mapState } from 'vuex';
     import {
         BNavbar,
         BNavbarNav,
@@ -86,6 +86,9 @@
             BButton
         },
         computed: {
+            ...mapState([
+              'registrationToken'
+            ]),
             ...mapGetters([
                 'isAuthorized',
             ]),
