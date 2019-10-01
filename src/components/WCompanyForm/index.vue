@@ -50,7 +50,7 @@
 
     <b-button
       type="submit"
-      variant="outline-success"
+      variant="outline-dark"
       size="lg"
       class="w-companies-form-button"
     >
