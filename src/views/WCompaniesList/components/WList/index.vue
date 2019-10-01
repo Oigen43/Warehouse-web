@@ -58,11 +58,13 @@
             return {
                 fields: [
                     'active', 'companyName', 'address', 'description',
-                    { key: 'date',
-label: 'Date',
-formatter: value => {
-                        return value.slice(0, 10);
-                        } },
+                    {
+                        key: 'date',
+                        label: 'Date',
+                        formatter: value => {
+                            return value.slice(0, 10);
+                        }
+                    },
                     { key: 'warehouses', label: '' },
                     { key: 'buttons', label: '' },
                     { key: 'blank', label: '', class: 'w-blank-column' }
