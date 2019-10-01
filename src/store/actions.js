@@ -101,6 +101,10 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
 
+  setCurrentWarehouse: async ({ commit }, req) => {
+    commit(types.CURRENT_WAREHOUSE, req);
+  },
+
   fetchUsersList: async ({ commit }, page = 1, perPage = 5) => {
     const res = await api.get(url.USERS_URL, { page, perPage });
     if (res.data) {
@@ -134,5 +138,20 @@ export default {
     const res = await api.delete(url.USERS_URL, { userId });
 
     res.toast && commit(types.SET_TOAST, res.toast);
-  }
+  },
+
+  fetchStoragesList: async ({ commit }, req) => {
+    const res = await api.get(url.STORAGES_URL, {
+      page: req.page,
+      perPage: req.perPage,
+      warehouseId: req.warehouseId
+    });
+    if (res.data) {
+      const pageLimit = helpers.calculatePageLimit(res.data.storagesTotal, req.perPage);
+      commit(types.STORAGES, res.data.storages);
+      commit(types.STORAGES_PAGE_LIMIT, pageLimit);
+      res.toast && commit(types.SET_TOAST, res.toast);
+    }
+  },
+
 };

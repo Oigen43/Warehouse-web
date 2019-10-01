@@ -25,12 +25,16 @@ export default new Vuex.Store({
     newWarehouse: {},
     updatedWarehouse: {},
     deletedWarehouse: {},
+    currentWarehouse: {},
 
     users: [],
     usersPageLimit: 1,
     newUser: {},
     updatedUser: {},
     deletedUser: {},
+
+    storages: [],
+    storagesPageLimit: 1,
 
     toast: {}
     },
