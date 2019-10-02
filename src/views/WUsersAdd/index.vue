@@ -30,7 +30,6 @@
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
     import WForm from '../../components/WUserForm';
-    
 
     export default {
         name: 'WUsersAddForm',
