@@ -14,6 +14,7 @@
       :birthDate="birthDate"
       :login="login"
       :userRoles="roles"
+      :passwordDisplay="false"
     ></w-form>
     <b-button
       variant="link"
