@@ -2,6 +2,7 @@ export default {
   token: '',
   refreshToken: '',
   roles: '',
+  registrationToken: null,
 
   companies: [],
   companiesPageLimit: 1,

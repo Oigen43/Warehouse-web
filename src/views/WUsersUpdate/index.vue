@@ -1,29 +1,26 @@
 <template>
   <b-row>
-    <b-col class="w-users-update-form" lg="3" sm="12" offset-lg="4">
-      <h1 class="w-user-update-form-h1">Update User</h1>
-      <w-form
-        @form-submitted="sendData"
-        submitButtonName="UPDATE USER"
-        :id="userId"
-        :firstName="firstName"
-        :surname="surname"
-        :patronymic="patronymic"
-        :email="email"
-        :city="city"
-        :street="street"
-        :house="house"
-        :flat="flat"
-        :birthDate="birthDate"
-        :login="login"
-        :userRoles="roles"
-      ></w-form>
-      <b-button
-        variant="link"
-        to="/users"
-        class="w-users-go-back-link"
-      >Go Back
-      </b-button>
+    <b-col lg="3" sm="12" offset-lg="4">
+    <h1 class="w-user-update-form-h1">Update User</h1>
+    <w-form
+      @form-submitted="sendData"
+      submitButtonName="UPDATE USER"
+      :id="userId"
+      :firstName="firstName"
+      :surname="surname"
+      :patronymic="patronymic"
+      :email="email"
+      :address="address"
+      :birthDate="birthDate"
+      :login="login"
+      :userRoles="roles"
+    ></w-form>
+    <b-button
+      variant="link"
+      to="/users"
+      class="w-users-go-back-link"
+    >Go Back
+    </b-button>
     </b-col>
   </b-row>
 </template>
@@ -62,17 +59,8 @@
             email() {
                 return this.updatedUser.email;
             },
-            city() {
-                return this.updatedUser.address.city;
-            },
-            street() {
-                return this.updatedUser.address.street;
-            },
-            house() {
-                return this.updatedUser.address.house;
-            },
-            flat() {
-                return this.updatedUser.address.flat;
+            address() {
+                return this.updatedUser.address;
             },
             birthDate() {
                 return this.updatedUser.birthDate;

@@ -97,6 +97,7 @@
     import { BForm, BFormInput, BButton } from 'bootstrap-vue';
     import * as userRoles from '../../constants/roles';
     import WMultiselect from '../WMultiselect';
+
     export default {
         name: 'WUserForm',
         components: {
