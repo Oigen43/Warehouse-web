@@ -3,12 +3,21 @@ import * as types from './mutation-types';
 export default {
   [types.LOGIN](state, data) {
     state.token = data.token;
+    state.refreshToken = data.refreshToken;
     state.roles = data.roles;
   },
   [types.LOGOUT](state, initialState) {
     Object.keys(initialState).forEach(key => {
       state[key] = initialState[key];
     });
+  },
+
+  [types.REFRESH_TOKEN](state, refreshToken) {
+    state.token = refreshToken;
+  },
+  [types.UPDATE_TOKENS](state, data) {
+    state.token = data.token;
+    state.refreshToken = data.refreshToken;
   },
 
   [types.COMPANIES](state, companies) {

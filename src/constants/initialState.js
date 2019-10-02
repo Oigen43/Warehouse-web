@@ -1,5 +1,6 @@
 export default {
   token: '',
+  refreshToken: '',
   roles: '',
 
   companies: [],
