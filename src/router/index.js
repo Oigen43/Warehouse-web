@@ -17,6 +17,8 @@ import WWarehousesUpdateForm from '../views/WWarehousesUpdate';
 import WUsersList from '../views/WUsersList';
 import WUsersUpdateForm from '../views/WUsersUpdate';
 import WUsersAddForm from '../views/WUsersAdd';
+import WStoragesList from '../views/WStoragesList';
+import WNotFound from '../views/WNotFound';
 
 Vue.use(Router);
 
@@ -64,6 +66,10 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: WLogin
+    },
+    {
+      path: '/refresh',
+      name: 'refresh'
     },
     {
       path: '/confirmation',
@@ -133,6 +139,17 @@ export default new Router({
       meta: { authorize: routesPermissions.users },
       component: WUsersUpdateForm,
       beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/storages',
+      name: 'storages',
+      component: WStoragesList,
+      meta: { authorize: routesPermissions.storages },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '*',
+      component: WNotFound,
     }
   ]
 });

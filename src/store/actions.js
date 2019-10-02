@@ -6,14 +6,22 @@ import * as constant from '../constants';
 import initialState from '../constants/initialState';
 
 export default {
+  changeToken: async ({ commit }, req) => {
+    commit(types.REFRESH_TOKEN, req);
+  },
+  updateTokens: async ({ commit }, req) => {
+    commit(types.UPDATE_TOKENS, req);
+  },
   login: async ({ commit }, req) => {
     const res = await api.post(url.LOGIN_URL, req);
     if (res.data) {
       const token = res.data.token;
+      const refreshToken = res.data.refreshToken;
       const roles = res.data.roles;
       localStorage.setItem(constant.TOKEN_KEY, token);
+      localStorage.setItem(constant.REFRESH_TOKEN_KEY, refreshToken);
       localStorage.setItem(constant.ROLES_LIST, JSON.stringify(roles));
-      commit(types.LOGIN, { token, roles });
+      commit(types.LOGIN, { token, refreshToken, roles });
     }
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -29,8 +37,8 @@ export default {
       const pageLimit = helpers.calculatePageLimit(res.data.companiesTotal, perPage);
       commit(types.COMPANIES, res.data.companies);
       commit(types.COMPANIES_PAGE_LIMIT, pageLimit);
-      res.toast && commit(types.SET_TOAST, res.toast);
     }
+    res.toast && commit(types.SET_TOAST, res.toast);
   },
   createCompany: async ({ commit }, req) => {
     commit(types.CREATE_COMPANY, req);
@@ -72,8 +80,8 @@ export default {
       const pageLimit = helpers.calculatePageLimit(res.data.warehousesTotal, req.perPage);
       commit(types.WAREHOUSES, res.data.warehouses);
       commit(types.WAREHOUSES_PAGE_LIMIT, pageLimit);
-      res.toast && commit(types.SET_TOAST, res.toast);
     }
+    res.toast && commit(types.SET_TOAST, res.toast);
   },
   createWarehouse: async ({ commit }, req) => {
     commit(types.CREATE_WAREHOUSE, req);
@@ -101,14 +109,18 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
 
+  setCurrentWarehouse: async ({ commit }, req) => {
+    commit(types.CURRENT_WAREHOUSE, req);
+  },
+
   fetchUsersList: async ({ commit }, page = 1, perPage = 5) => {
     const res = await api.get(url.USERS_URL, { page, perPage });
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.usersTotal, perPage);
       commit(types.USERS, res.data.users);
       commit(types.USERS_PAGE_LIMIT, pageLimit);
-      res.toast && commit(types.SET_TOAST, res.toast);
     }
+    res.toast && commit(types.SET_TOAST, res.toast);
   },
   createUser: async ({ commit }, req) => {
     commit(types.CREATE_USER, req);
@@ -138,5 +150,20 @@ export default {
   sendRegistrationData: async ({ commit }, form) => {
     const res = await api.post(url.CONFIRMATION_URL, { user: form });
     res.toast && commit(types.SET_TOAST, res.toast);
-  }
+  },
+
+  fetchStoragesList: async ({ commit }, req) => {
+    const res = await api.get(url.STORAGES_URL, {
+      page: req.page,
+      perPage: req.perPage,
+      warehouseId: req.warehouseId
+    });
+    if (res.data) {
+      const pageLimit = helpers.calculatePageLimit(res.data.storagesTotal, req.perPage);
+      commit(types.STORAGES, res.data.storages);
+      commit(types.STORAGES_PAGE_LIMIT, pageLimit);
+      res.toast && commit(types.SET_TOAST, res.toast);
+    }
+  },
+
 };

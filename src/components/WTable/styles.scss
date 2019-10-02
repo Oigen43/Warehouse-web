@@ -8,8 +8,7 @@
   border-left: 1px solid #DEE2E6;
 }
 
-.w-table table td:nth-child(6) div,
-.w-table table td:nth-child(7) div{
+.w-table table td:nth-last-child(-n+3) div{
   float: none;
 }
 

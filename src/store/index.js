@@ -11,6 +11,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     token: localStorage.getItem(constant.TOKEN_KEY) || null,
+    refreshToken: localStorage.getItem(constant.REFRESH_TOKEN_KEY) || null,
     registrationToken: null,
     roles: JSON.parse(localStorage.getItem(constant.ROLES_LIST)) || null,
 
@@ -26,12 +27,16 @@ export default new Vuex.Store({
     newWarehouse: {},
     updatedWarehouse: {},
     deletedWarehouse: {},
+    currentWarehouse: {},
 
     users: [],
     usersPageLimit: 1,
     newUser: {},
     updatedUser: {},
     deletedUser: {},
+
+    storages: [],
+    storagesPageLimit: 1,
 
     toast: {}
     },

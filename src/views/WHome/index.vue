@@ -5,7 +5,7 @@
         <h1 class="w-content-h1">Warehouse Online</h1>
         <h3>Big or small… We can handle it all.</h3>
         <hr>
-        <b-button size="lg" variant="outline-dark" class="w-content-button">Get Started!</b-button>
+        <b-button size="lg" variant="outline-dark" class="w-content-button" to="/companies">Get Started!</b-button>
       </div>
     </b-col>
   </b-row>

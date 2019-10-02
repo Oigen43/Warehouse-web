@@ -10,6 +10,15 @@
         </b-form-checkbox>
       </template>
       <template
+        v-slot:cell(storages)="data">
+        <b-button
+          variant="light"
+          size="sm"
+          @click="clickedStoragesButton(data.item)">
+          Storages
+        </b-button>
+      </template>
+      <template
         v-slot:cell(buttons)="data">
         <b-button
           class="w-table-update-button"
@@ -47,7 +56,8 @@
         data: function () {
             return {
                 fields: [
-                    'active', 'warehouseName', 'companyName', 'address', 'type',
+                    'active', 'warehouseName', 'companyName', 'address',
+                    { key: 'storages', label: '' },
                     { key: 'buttons', label: '' },
                     { key: 'blank', label: '', class: 'w-blank-column' }
                 ],
@@ -57,8 +67,13 @@
         methods: {
             ...mapActions({
                 getUpdatedWarehouseData: 'getUpdatedWarehouse',
-                sendDeletedWarehouseData: 'deleteWarehouse'
+                sendDeletedWarehouseData: 'deleteWarehouse',
+                setCurrentWarehouse: 'setCurrentWarehouse'
             }),
+            clickedStoragesButton(item) {
+                this.setCurrentWarehouse({ id: item.id, warehouseName: item.warehouseName });
+                router.push('/storages');
+            },
             clickedUpdateButton(item) {
                 this.getUpdatedWarehouseData(item);
                 router.push('/warehouses/update');
