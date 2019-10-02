@@ -174,7 +174,7 @@
                     roles: this.selectedRoles
                 } });
             }
-        },
+        }
     };
 </script>
 

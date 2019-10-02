@@ -1,6 +1,9 @@
 export const LOGIN = 'LOGIN';
 export const LOGOUT = 'LOGOUT';
 
+export const REFRESH_TOKEN = 'REFRESH_TOKEN';
+export const UPDATE_TOKENS = 'UPDATE_TOKENS';
+
 export const COMPANIES = 'COMPANIES';
 export const COMPANIES_PAGE_LIMIT = 'COMPANIES_PAGE_LIMIT';
 export const CREATE_COMPANY = 'CREATE_COMPANY';

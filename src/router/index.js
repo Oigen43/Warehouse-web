@@ -50,6 +50,10 @@ export default new Router({
       component: WLogin
     },
     {
+      path: '/refresh',
+      name: 'refresh'
+    },
+    {
       path: '/companies',
       name: 'companies',
       component: WCompaniesList,
