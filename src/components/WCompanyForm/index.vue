@@ -1,66 +1,68 @@
 <template>
-    <b-form @submit.prevent="onSubmit" class="w-companies-form">
+  <b-form @submit.prevent="onSubmit" class="w-companies-form">
+    <b-form-input
+      id="company-name-input"
+      size="lg"
+      v-model="companyForm.companyName"
+      required
+      placeholder="Company name"
+      class="w-companies-form-input"
+    ></b-form-input>
+
+    <b-form-input
+      id="company-address-input"
+      size="lg"
+      v-model="companyForm.address"
+      required
+      placeholder="Company address"
+      class="w-companies-form-input"
+    ></b-form-input>
+
+    <b-form-input
+      id="company-description-input"
+      size="lg"
+      v-model="companyForm.description"
+      required
+      placeholder="Company description"
+      class="w-companies-form-input"
+    ></b-form-input>
+
+    <div v-if="withAdminFields"
+         class="w-companies-admin"
+    >
+      <h3>Add company admin</h3>
       <b-form-input
-        id="company-name-input"
+        v-model="adminForm.firstName"
         size="lg"
-        v-model="companyForm.companyName"
         required
-        placeholder="Company name"
-        class="w-companies-form-input"
+        placeholder="Admin name"
+        class="w-companies-admin-form-input"
       ></b-form-input>
 
       <b-form-input
-        id="company-address-input"
+        v-model="adminForm.email"
         size="lg"
-        v-model="companyForm.address"
         required
-        placeholder="Company address"
-        class="w-companies-form-input"
+        placeholder="Admin email"
+        class="w-companies-admin-form-input"
       ></b-form-input>
+    </div>
 
-      <b-form-input
-        id="company-description-input"
-        size="lg"
-        v-model="companyForm.description"
-        required
-        placeholder="Company description"
-        class="w-companies-form-input"
-      ></b-form-input>
-
-      <div v-if="withAdminFields"
-        class="w-companies-admin"
-      >
-        <h3>Add company admin</h3>
-        <b-form-input
-          v-model="adminForm.name"
-          size="lg"
-          required
-          placeholder="Admin name"
-          class="w-companies-admin-form-input"
-        ></b-form-input>
-
-        <b-form-input
-          v-model="adminForm.email"
-          size="lg"
-          required
-          placeholder="Admin email"
-          class="w-companies-admin-form-input"
-        ></b-form-input>
-      </div>
-
-      <b-button
-        type="submit"
-        variant="outline-success"
-        size="lg"
-        class="w-companies-form-button"
-      >
-        {{ submitButtonName }}
-      </b-button>
-    </b-form>
+    <b-button
+      type="submit"
+      variant="outline-success"
+      size="lg"
+      class="w-companies-form-button"
+    >
+      {{ submitButtonName }}
+    </b-button>
+  </b-form>
 </template>
 
 <script>
     import { BForm, BFormInput, BButton } from 'bootstrap-vue';
+
+    import * as userRoles from '../../constants/roles';
 
     export default {
         name: 'WCompanyForm',
@@ -74,7 +76,7 @@
                 type: String,
             },
             id: {
-              type: Number
+                type: Number
             },
             companyName: {
                 type: String,
@@ -110,7 +112,7 @@
                     description: this.description
                 },
                 adminForm: {
-                    name: this.adminName,
+                    firstName: this.adminName,
                     email: this.adminEmail
                 }
             };
@@ -120,8 +122,8 @@
                 this.$emit('form-submitted', {
                     company: this.companyForm,
                     user: {
-                      data: this.adminForm,
-                      roles: ['Company Admin']
+                        data: this.adminForm,
+                        roles: [userRoles.COMPANY_ADMIN_ROLE]
                     }
                 });
             }
