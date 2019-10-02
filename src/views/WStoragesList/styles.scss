@@ -1,0 +1,22 @@
+.w-storages-list-page {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.w-storages-list {
+  margin-top: 1rem;
+}
+
+.w-storages-list-pagination {
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 53rem) {
+  .w-storages-list {
+    margin-top: 4rem;
+  }
+
+  .w-storages-list-pagination {
+    margin-top: 1rem;
+  }
+}

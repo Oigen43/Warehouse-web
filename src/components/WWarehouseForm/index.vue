@@ -29,7 +29,7 @@
 
       <b-button
         type="submit"
-        variant="outline-success"
+        variant="outline-dark"
         size="lg"
         class="w-warehouses-form-button"
       >

@@ -66,6 +66,10 @@ export default {
     state.warehouses = state.warehouses.filter(item => item.id !== warehouse.id);
   },
 
+  [types.CURRENT_WAREHOUSE](state, warehouse) {
+    state.currentWarehouse = warehouse;
+  },
+
   [types.USERS](state, users) {
     state.users = users;
   },
@@ -85,6 +89,13 @@ export default {
   [types.DELETE_USER](state, user) {
     state.deletedUser = user;
     state.users = state.users.filter(item => item.id !== user.id);
+  },
+
+  [types.STORAGES](state, storages) {
+    state.storages = storages;
+  },
+  [types.STORAGES_PAGE_LIMIT](state, storagesPageLimit) {
+    state.storagesPageLimit = storagesPageLimit;
   },
 
   [types.SET_TOAST](state, toast) {
