@@ -1,8 +1,10 @@
+import * as roles from './roles';
+
 const routesPermissions = {
-  companies: ['Admin', 'User'],
-  warehouses: ['Admin', 'User'],
-  users: ['Admin'],
-  storages: ['Admin', 'User']
+  companies: [roles.ADMIN_ROLE, roles.USER_ROLE],
+  warehouses: [roles.ADMIN_ROLE, roles.USER_ROLE],
+  users: [roles.ADMIN_ROLE],
+  storages: [roles.ADMIN_ROLE, roles.USER_ROLE]
 };
 
 module.exports = routesPermissions;
