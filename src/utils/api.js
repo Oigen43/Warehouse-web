@@ -25,6 +25,7 @@ function createAxiosResponseInterceptor () {
     return response;
   }, (error) => {
     const originalRequest = error.config;
+
     if (error.response.status === 401) {
       store.dispatch('changeToken', store.state.refreshToken);
       axios.interceptors.response.eject(myInterceptor);
@@ -89,7 +90,7 @@ function createToast(data) {
   return {
     variant: (data.status && data.status < 300) ? 'success' : 'danger',
     message: ((data.response) && (data.response.data.data) && (data.response.data.data.statusCode)) ? messageCode[data.response.data.data.statusCode]
-        : ((data.response) && (data.response.data)) ? messageCode[data.response.data]
+        : ((data.response) && (data.response.data)) ? data.response.data
         : ((data.data) && (data.data.data.statusCode)) ? messageCode[data.data.data.statusCode]
         : ((data.request) && (!data.response)) ? 'Server is not available!'
         : 'Something went wrong!',
