@@ -18,15 +18,6 @@
         class="w-warehouses-form-input"
       ></b-form-input>
 
-      <b-form-input
-        id="warehouse-type-input"
-        size="lg"
-        v-model="form.type"
-        required
-        placeholder="Warehouse type"
-        class="w-warehouses-form-input"
-      ></b-form-input>
-
       <b-button
         type="submit"
         variant="outline-dark"
@@ -62,10 +53,6 @@
             address: {
                 type: String,
                 default: '',
-            },
-            type: {
-                type: String,
-                default: '',
             }
         },
         data: function () {
@@ -73,8 +60,7 @@
                 form: {
                     id: this.id,
                     warehouseName: this.warehouseName,
-                    address: this.address,
-                    type: this.type
+                    address: this.address
                 }
             };
         },

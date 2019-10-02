@@ -4,6 +4,7 @@ import Router from 'vue-router';
 import api from '../utils/api';
 import * as url from '../constants/urls';
 import store from '../store';
+import * as types from '../store/mutation-types';
 import routesPermissions from '../constants/routesPermissions';
 import WHome from '../views/WHome';
 import WLogin from '../views/WLogin';
@@ -43,10 +44,10 @@ const ifConfirmed = async (to, from, next) => {
   if (!to.query.token) {
     next('/');
   } else {
-    store.state.registrationToken = to.query.token;
+    store.commit(types.SET_REGISTRATION_TOKEN, to.query.token);
     const res = await api.get(url.CONFIRMATION_URL, store.state.registrationToken);
     if (res.error) {
-      store.state.registrationToken = null;
+      store.commit(types.REMOVE_REGISTRATION_TOKEN);
       next('/');
       return;
     }

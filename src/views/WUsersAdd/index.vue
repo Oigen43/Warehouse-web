@@ -25,10 +25,12 @@
 </template>
 
 <script>
+    import router from '../../router';
     import { mapActions } from 'vuex';
     import { BRow, BCol, BButton } from 'bootstrap-vue';
+
     import WForm from '../../components/WUserForm';
-    import router from '../../router';
+    
 
     export default {
         name: 'WUsersAddForm',

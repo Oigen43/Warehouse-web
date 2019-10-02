@@ -11,6 +11,9 @@ export default {
       state[key] = initialState[key];
     });
   },
+  [types.SET_REGISTRATION_TOKEN](state, token) {
+    state.registrationToken = token;
+  },
   [types.REMOVE_REGISTRATION_TOKEN](state) {
     state.registrationToken = null;
   },

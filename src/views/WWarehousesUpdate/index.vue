@@ -8,7 +8,6 @@
         :id="warehouseId"
         :warehouseName="warehouseName"
         :address="address"
-        :type="type"
       ></w-form>
       <b-button
         variant="link"
@@ -47,9 +46,6 @@
             },
             address() {
                 return this.updatedWarehouse.address;
-            },
-            type() {
-                return this.updatedWarehouse.type;
             }
         },
         methods: {
