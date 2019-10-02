@@ -1,56 +1,89 @@
 <template>
   <b-row>
-    <b-col lg="4" offset-lg="4" md="6" offset-md="3" sm="12">
-      <b-list-group>
-        <b-list-group-item class="flex-column align-items-start w-storages-list-item">
-          <div class="d-flex w-100">
-            <div class="w-storages-list-item-capacity w-storages-list-item-title">
-              Size
-            </div>
-            <div class="w-storages-list-item-type w-storages-list-item-title">
-              Type
-            </div>
+    <b-col lg="3" sm="6" v-for="storage in storagesList" v-bind:key="storage.id">
+      <b-card no-body class="overflow-hidden w-storage-card">
+        <div class="rounded-0 w-storage-card-header">
+          <div class="w-storage-card-header-text">
+            {{storage.storageCapacity}}
           </div>
-        </b-list-group-item>
-        <b-list-group-item class="flex-column align-items-start w-storages-list-item" v-for="storage in storagesList" v-bind:key="storage.id">
-          <div class="d-flex w-100">
-            <div class="w-storages-list-item-capacity">
-              {{storage.storageCapacity}}
-            </div>
-            <div class="w-storages-list-item-type">
-              {{storage.storageType}}
-            </div>
-          </div>
-        </b-list-group-item>
-      </b-list-group>
+        </div>
+        <b-card-body>
+          <b-card-title class="mb-0 w-storage-card-text">{{storage.storageType}}</b-card-title>
+        </b-card-body>
+        <b-card-footer class="w-storage-card-footer">
+          <b-button
+            class="w-storage-update-card-button"
+            variant="dark"
+            size="sm"
+            @click="clickedUpdateButton(storage)">
+            Update
+          </b-button>
+          <b-button
+            variant="light"
+            size="sm"
+            @click="clickedDeleteButton(storage)">
+            ✕
+          </b-button>
+        </b-card-footer>
+      </b-card>
     </b-col>
   </b-row>
 </template>
 
 <script>
+    import { mapActions } from 'vuex';
     import {
         BRow,
         BCol,
+        BCard,
+        BCardImg,
+        BCardTitle,
+        BCardBody,
+        BCardText,
+        BCardFooter,
         BListGroup,
-        BListGroupItem
+        BListGroupItem,
+        BButton
     } from 'bootstrap-vue';
+
+    import router from '../../../../router';
+    import * as modal from '../../../../constants/modal';
 
     export default {
         name: 'WList',
         components: {
             BRow,
             BCol,
+            BCard,
+            BCardImg,
+            BCardTitle,
+            BCardBody,
+            BCardText,
+            BCardFooter,
             BListGroup,
-            BListGroupItem
+            BListGroupItem,
+            BButton
         },
         props: ['storagesList'],
-        data: function () {
-            return {
-                fields: [
-                    { key: 'storageType', label: 'Type' },
-                    { key: 'storageCapacity', label: 'Size' }
-                ]
-            };
+        methods: {
+            ...mapActions({
+                getUpdatedStorageData: 'getUpdatedStorage',
+                sendDeletedStorageData: 'deleteStorage',
+            }),
+            clickedUpdateButton(item) {
+                this.getUpdatedStorageData(item);
+                router.push('/storages/update');
+            },
+            clickedDeleteButton(item) {
+                this.$bvModal.msgBoxConfirm(modal.STORAGE_TEXT, {
+                    title: `${modal.STORAGE_TITLE}`,
+                    ...modal.CONFIRM_MODAL_OPTIONS
+                })
+                    .then(value => value && this.deleteStorage(item));
+            },
+            deleteStorage(item) {
+                this.$emit('delete-button-clicked', item);
+            }
         }
     };
 </script>

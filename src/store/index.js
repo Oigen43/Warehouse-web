@@ -37,6 +37,10 @@ export default new Vuex.Store({
 
     storages: [],
     storagesPageLimit: 1,
+    newStorage: {},
+    updatedStorage: {},
+    deletedStorage: {},
+    currentStorage: {},
 
     toast: {}
     },

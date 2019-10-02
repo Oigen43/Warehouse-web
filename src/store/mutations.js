@@ -103,6 +103,20 @@ export default {
   [types.STORAGES_PAGE_LIMIT](state, storagesPageLimit) {
     state.storagesPageLimit = storagesPageLimit;
   },
+  [types.CREATE_STORAGE](state, storage) {
+    state.newStorage = storage;
+  },
+  [types.SET_UPDATED_STORAGE](state, storage) {
+    state.updatedStorage = storage;
+  },
+  [types.UPDATE_STORAGE](state, storage) {
+    state.updatedStorage = storage;
+    state.storages = [ ...state.storages.map(item => item.id === storage.id ? storage : item) ];
+  },
+  [types.DELETE_STORAGE](state, storage) {
+    state.deletedStorage = storage;
+    state.storages = state.storages.filter(item => item.id !== storage.id);
+  },
 
   [types.SET_TOAST](state, toast) {
     state.toast = toast;

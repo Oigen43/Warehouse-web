@@ -3,8 +3,16 @@
   text-align: center;
 }
 
-.w-storages-list {
+.w-storages-add-button {
+  background-color: #2C3E50;
+  float: left;
   margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.w-storages-list {
+  margin: 0;
 }
 
 .w-storages-list-pagination {
@@ -13,7 +21,12 @@
 
 @media screen and (min-width: 53rem) {
   .w-storages-list {
-    margin-top: 4rem;
+    margin: 1rem 2rem;
+  }
+
+  .w-storages-add-button {
+      margin-bottom: 0.5rem;
+      margin-left: 2rem;
   }
 
   .w-storages-list-pagination {

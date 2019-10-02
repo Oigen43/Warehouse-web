@@ -2,7 +2,17 @@
   <b-row>
     <b-col lg="12" sm="12">
       <div class='w-storages-list-page'>
-        <h1>List of Storages</h1>
+        <h1>List of Storage Places</h1>
+        <b-row>
+          <b-col lg="12" sm="12">
+            <b-button
+              variant="dark"
+              to="/storages/add"
+              class="w-storages-add-button"
+            >add storage
+            </b-button>
+          </b-col>
+        </b-row>
         <div class="w-storages-list">
           <w-list
             :storagesList="storages"
@@ -27,7 +37,7 @@
 
 <script>
     import { mapActions, mapState } from 'vuex';
-    import { BRow, BCol } from 'bootstrap-vue';
+    import { BRow, BCol, BButton } from 'bootstrap-vue';
 
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
@@ -37,6 +47,7 @@
         components: {
             BRow,
             BCol,
+            BButton,
             WList,
             WPagination
         },

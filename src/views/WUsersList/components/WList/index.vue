@@ -70,15 +70,6 @@
             BButton
         },
         props: ['users'],
-        data() {
-            return {
-                fields: [
-                    'firstName', 'surname', 'patronymic', 'birthDate', 'email', 'address',
-                    { key: 'update', label: '' },
-                    { key: 'delete', label: '' }
-                ]
-            };
-        },
         methods: {
             ...mapActions({
                 getUpdatedUserData: 'getUpdatedUser',

@@ -166,5 +166,29 @@ export default {
       res.toast && commit(types.SET_TOAST, res.toast);
     }
   },
+  createStorage: async ({ commit }, req) => {
+    commit(types.CREATE_STORAGE, req);
 
+    const res = await api.post(url.STORAGES_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  getUpdatedStorage: async ({ commit }, req) => {
+    commit(types.SET_UPDATED_WAREHOUSE, req);
+  },
+  sendUpdatedStorage: async ({ commit }, req) => {
+    const res = await api.put(url.STORAGES_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  deleteStorage: async ({ commit }, req) => {
+    commit(types.DELETE_STORAGE, req);
+  },
+  sendDeletedStorage: async ({ commit }, storageId) => {
+    const res = await api.delete(url.STORAGES_URL, { storageId });
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
 };
