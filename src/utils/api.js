@@ -32,7 +32,7 @@ function createAxiosResponseInterceptor () {
       const userData = jwtDecode(store.state.token);
 
       return axios.post(`${url.BASE_URL}${url.REFRESH_TOKEN_URL}`, {
-        user: userData
+        userId: userData.id
       }).then(response => {
         store.dispatch('updateTokens', response.data.data);
         error.response.config.headers['Authorization'] = `Bearer ${response.data.data.token}`;
@@ -62,6 +62,7 @@ export default {
     return requestHelper(axios.put(`${url.BASE_URL}${customURL}`, req));
   },
   delete: function (customURL, params) {
+    console.log(params);
     return requestHelper(axios.delete(`${url.BASE_URL}${customURL}`, {
       params: params
     }));

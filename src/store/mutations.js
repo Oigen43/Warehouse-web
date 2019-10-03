@@ -97,6 +97,30 @@ export default {
     state.users = state.users.filter(item => item.id !== user.id);
   },
 
+  [types.CARRIERS](state, carriers) {
+    state.carriers = carriers;
+  },
+  [types.CARRIERS_PAGE_LIMIT](state, carriersPageLimit) {
+    state.carriersPageLimit = carriersPageLimit;
+  },
+  [types.CREATE_CARRIER](state, carrier) {
+    state.newCarrier = carrier;
+  },
+  [types.SET_UPDATED_CARRIER](state, carrier) {
+    state.updatedCarrier = carrier;
+  },
+  [types.UPDATE_CARRIER](state, carrier) {
+    state.updatedCarrier = carrier;
+    state.carriers = [ ...state.carriers.map(item => item.id === carrier.id ? carrier : item) ];
+  },
+  [types.DELETE_CARRIER](state, carrier) {
+    state.deletedCarrier = carrier;
+    state.carriers = state.carriers.filter(item => item.id !== carrier.id);
+  },
+  [types.CURRENT_CARRIER](state, carrier) {
+    state.currentCarrier = carrier;
+  },
+
   [types.STORAGES](state, storages) {
     state.storages = storages;
   },

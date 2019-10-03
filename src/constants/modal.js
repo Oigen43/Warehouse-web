@@ -4,6 +4,8 @@ export const WAREHOUSE_TEXT = 'Please confirm that you want to delete the wareho
 export const WAREHOUSE_TITLE = 'Delete warehouse';
 export const USER_TEXT = 'Please confirm that you want to delete the user';
 export const USER_TITLE = 'Delete user';
+export const CARRIER_TEXT = 'Please confirm that you want to delete the carrier.';
+export const CARRIER_TITLE = 'Delete carrier';
 
 export const CONFIRM_MODAL_OPTIONS = {
   size: 'md',

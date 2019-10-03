@@ -38,6 +38,13 @@ export default new Vuex.Store({
     storages: [],
     storagesPageLimit: 1,
 
+    carriers: [],
+    carriersPageLimit: 1,
+    newCarrier: {},
+    updatedCarrier: {},
+    deletedCarrier: {},
+    currentCarrier: {},
+
     toast: {}
     },
   getters,
