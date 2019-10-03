@@ -23,5 +23,7 @@ export default {
   'warehouse.get.unknown': 'This warehouse does not exist!',
   'warehouse.create.success': 'Warehouse created!',
   'warehouse.update.success': 'Warehouse updated!',
-  'warehouse.delete.success': 'Warehouse deleted!'
+  'warehouse.delete.success': 'Warehouse deleted!',
+
+  'email.send.failed': 'Email can not be sent'
 };
