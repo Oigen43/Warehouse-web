@@ -7,7 +7,6 @@
       submitButtonName="ADD WAREHOUSE"
       :warehouseName="warehouseName"
       :address="address"
-      :type="type"
     ></w-form>
     <b-button
       variant="link"
@@ -38,7 +37,6 @@
             return {
                 warehouseName: '',
                 address: '',
-                type: '',
                 adminName: '',
                 adminEmail: ''
             };

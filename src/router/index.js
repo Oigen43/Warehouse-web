@@ -1,10 +1,14 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 
+import api from '../utils/api';
+import * as url from '../constants/urls';
 import store from '../store';
+import * as types from '../store/mutation-types';
 import routesPermissions from '../constants/routesPermissions';
 import WHome from '../views/WHome';
 import WLogin from '../views/WLogin';
+import WConfirmation from '../views/WConfirmation';
 import WCompaniesList from '../views/WCompaniesList';
 import WCompaniesAddForm from '../views/WCompaniesAdd';
 import WCompaniesUpdateForm from '../views/WCompaniesUpdate';
@@ -36,6 +40,21 @@ const ifAuthenticated = (to, from, next) => {
   }
 };
 
+const ifConfirmed = async (to, from, next) => {
+  if (!to.query.token) {
+    next('/');
+  } else {
+    store.commit(types.SET_REGISTRATION_TOKEN, to.query.token);
+    const res = await api.get(url.CONFIRMATION_URL, store.state.registrationToken);
+    if (res.error) {
+      store.commit(types.REMOVE_REGISTRATION_TOKEN);
+      next('/');
+      return;
+    }
+    next();
+  }
+};
+
 export default new Router({
   mode: 'history',
   routes: [
@@ -52,6 +71,12 @@ export default new Router({
     {
       path: '/refresh',
       name: 'refresh'
+    },
+    {
+      path: '/confirmation',
+      name: 'confirmation',
+      component: WConfirmation,
+      beforeEnter: ifConfirmed
     },
     {
       path: '/companies',

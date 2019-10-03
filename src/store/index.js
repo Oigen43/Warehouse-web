@@ -12,6 +12,7 @@ export default new Vuex.Store({
   state: {
     token: localStorage.getItem(constant.TOKEN_KEY) || null,
     refreshToken: localStorage.getItem(constant.REFRESH_TOKEN_KEY) || null,
+    registrationToken: null,
     roles: JSON.parse(localStorage.getItem(constant.ROLES_LIST)) || null,
 
     companies: [],
