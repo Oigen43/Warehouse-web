@@ -175,7 +175,7 @@ export default {
     return res;
   },
   getUpdatedStorage: async ({ commit }, req) => {
-    commit(types.SET_UPDATED_WAREHOUSE, req);
+    commit(types.SET_UPDATED_STORAGE, req);
   },
   sendUpdatedStorage: async ({ commit }, req) => {
     const res = await api.put(url.STORAGES_URL, req);

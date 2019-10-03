@@ -36,13 +36,9 @@
         BRow,
         BCol,
         BCard,
-        BCardImg,
         BCardTitle,
         BCardBody,
-        BCardText,
         BCardFooter,
-        BListGroup,
-        BListGroupItem,
         BButton
     } from 'bootstrap-vue';
 
@@ -55,13 +51,9 @@
             BRow,
             BCol,
             BCard,
-            BCardImg,
             BCardTitle,
             BCardBody,
-            BCardText,
             BCardFooter,
-            BListGroup,
-            BListGroupItem,
             BButton
         },
         props: ['storagesList'],

@@ -66,10 +66,24 @@
         },
         methods: {
             ...mapActions({
-                fetchStoragesList: 'fetchStoragesList'
+                fetchStoragesList: 'fetchStoragesList',
+                sendDeletedStorageData: 'sendDeletedStorage',
+                deletedStorageData: 'deleteStorage'
             }),
             sendRequest(page) {
                 this.currentPage = page;
+                this.fetchStoragesList({
+                    page: this.currentPage,
+                    perPage: this.perPage,
+                    warehouseId: this.currentWarehouse.id
+                });
+            },
+            async clickedDeleteButton(item) {
+                await this.sendDeletedStorageData(item.id);
+                this.deletedStorageData(item);
+                if (this.storages.length === 0) {
+                    this.currentPage -= 1;
+                }
                 this.fetchStoragesList({
                     page: this.currentPage,
                     perPage: this.perPage,
