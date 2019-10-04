@@ -25,6 +25,7 @@
     ></b-form-input>
 
     <b-form-input
+      v-if="dateDisplay"
       size="lg"
       v-model="form.date"
       type="date"
@@ -73,8 +74,11 @@
                 default: '',
             },
             date: {
-                type: String,
-                default: '',
+                type: String
+            },
+            dateDisplay: {
+                type: Boolean,
+                default: true
             }
         },
         data: function () {
