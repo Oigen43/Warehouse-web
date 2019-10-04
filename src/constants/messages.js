@@ -23,5 +23,11 @@ export default {
   'warehouse.get.unknown': 'This warehouse does not exist!',
   'warehouse.create.success': 'Warehouse created!',
   'warehouse.update.success': 'Warehouse updated!',
-  'warehouse.delete.success': 'Warehouse deleted!'
+  'warehouse.delete.success': 'Warehouse deleted!',
+
+  'sender.name.conflict': 'This sender already exists!',
+  'sender.get.unknown': 'This sender does not exist!',
+  'sender.create.success': 'Sender created!',
+  'sender.update.success': 'Sender updated!',
+  'sender.delete.success': 'Sender deleted!'
 };

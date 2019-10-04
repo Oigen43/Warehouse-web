@@ -1,6 +1,6 @@
 <template>
   <w-table
-    :items="companies"
+    :items="senders"
     :fields="fields">
     <template
       v-slot:cell(active)="data">
@@ -8,16 +8,6 @@
         v-model="data.value"
         disabled>
       </b-form-checkbox>
-    </template>
-    <template
-      v-slot:cell(warehouses)="data">
-      <b-button
-        variant="light"
-        size="sm"
-        @click="clickedWarehousesButton(data.item)">
-        Warehouses
-      </b-button
-      >
     </template>
     <template
       v-slot:cell(buttons)="data">
@@ -53,11 +43,11 @@
             BFormCheckbox,
             BButton
         },
-        props: ['companies'],
+        props: ['senders'],
         data: function () {
             return {
                 fields: [
-                    'active', 'companyName', 'address', 'description',
+                    'senderName', 'upn', 'countryCode',
                     {
                         key: 'date',
                         label: 'Date',
@@ -65,7 +55,6 @@
                             return value.slice(0, 10);
                         }
                     },
-                    { key: 'warehouses', label: '', class: 'w-list-button' },
                     { key: 'buttons', label: '', class: 'w-list-button' },
                     { key: 'blank', label: '', class: 'w-blank-column' }
                 ]
@@ -73,26 +62,21 @@
         },
         methods: {
             ...mapActions({
-                getUpdatedCompanyData: 'getUpdatedCompany',
-                sendDeletedCompanyData: 'deleteCompany',
-                setCurrentCompany: 'setCurrentCompany',
+                getUpdatedSenderData: 'getUpdatedSender',
+                sendDeletedSenderData: 'deleteSender'
             }),
-            clickedWarehousesButton(item) {
-                this.setCurrentCompany({ id: item.id, companyName: item.companyName });
-                router.push('/warehouses');
-            },
             clickedUpdateButton(item) {
-                this.getUpdatedCompanyData(item);
-                router.push('/companies/update');
+                this.getUpdatedSenderData(item);
+                router.push('/senders/update');
             },
             clickedDeleteButton(item) {
-                this.$bvModal.msgBoxConfirm(modal.COMPANY_TEXT, {
-                    title: `${modal.COMPANY_TITLE} ${item.companyName}`,
+                this.$bvModal.msgBoxConfirm(modal.SENDER_TEXT, {
+                    title: `${modal.SENDER_TITLE} ${item.senderName}`,
                     ...modal.CONFIRM_MODAL_OPTIONS
                 })
-                    .then(value => value && this.deleteCompany(item));
+                    .then(value => value && this.deleteSender(item));
             },
-            deleteCompany(item) {
+            deleteSender(item) {
                 this.$emit('delete-button-clicked', item);
             }
         }
