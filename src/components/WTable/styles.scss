@@ -1,3 +1,5 @@
+$num: 3;
+
 .w-list-table {
   background-color: #FFFFFF;
 }
@@ -8,7 +10,7 @@
   border-left: 1px solid #DEE2E6;
 }
 
-.w-table table td:nth-last-child(-n+3) div{
+.w-table table td.w-list-button div {
   float: none;
 }
 

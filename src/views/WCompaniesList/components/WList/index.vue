@@ -65,8 +65,8 @@
                             return value.slice(0, 10);
                         }
                     },
-                    { key: 'warehouses', label: '' },
-                    { key: 'buttons', label: '' },
+                    { key: 'warehouses', label: '', class: 'w-list-button' },
+                    { key: 'buttons', label: '', class: 'w-list-button' },
                     { key: 'blank', label: '', class: 'w-blank-column' }
                 ]
             };

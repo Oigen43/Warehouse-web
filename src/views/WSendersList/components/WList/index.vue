@@ -55,7 +55,7 @@
                             return value.slice(0, 10);
                         }
                     },
-                    { key: 'buttons', label: '' },
+                    { key: 'buttons', label: '', class: 'w-list-button' },
                     { key: 'blank', label: '', class: 'w-blank-column' }
                 ]
             };
