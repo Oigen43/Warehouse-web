@@ -75,9 +75,9 @@
                             return value.slice(0, 10);
                         }
                     },
-                    { key: 'drivers', label: '' },
-                    { key: 'transport', label: '' },
-                    { key: 'buttons', label: '' },
+                    { key: 'drivers', label: '', class: 'w-list-button' },
+                    { key: 'transport', label: '', class: 'w-list-button' },
+                    { key: 'buttons', label: '', class: 'w-list-button' },
                     { key: 'blank', label: '', class: 'w-blank-column' }
                 ]
             };

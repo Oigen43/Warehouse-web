@@ -36,7 +36,7 @@
               variant="light"
               to='/carriers'
               class="w-navigation-link"
-              v-if="hasPermissions(routesPermissions.users)"
+              v-if="hasPermissions(routesPermissions.carriers)"
             >
               Carriers
             </b-button>
