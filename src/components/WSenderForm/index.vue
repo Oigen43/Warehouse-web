@@ -37,8 +37,7 @@
       type="submit"
       variant="outline-dark"
       size="lg"
-      class="w-senders-form-button"
-    >
+      class="w-senders-form-button">
       {{ submitButtonName }}
     </b-button>
   </b-form>
