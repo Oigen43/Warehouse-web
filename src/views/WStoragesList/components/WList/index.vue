@@ -4,7 +4,7 @@
       <b-card no-body class="overflow-hidden w-storage-card">
         <div class="rounded-0 w-storage-card-header">
           <div class="w-storage-card-header-text">
-            {{storage.storageCapacity}}
+            {{storage.storageCapacity}} m<sup><small>2</small></sup>
           </div>
         </div>
         <b-card-body>
