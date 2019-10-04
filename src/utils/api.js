@@ -62,7 +62,6 @@ export default {
     return requestHelper(axios.put(`${url.BASE_URL}${customURL}`, req));
   },
   delete: function (customURL, params) {
-    console.log(params);
     return requestHelper(axios.delete(`${url.BASE_URL}${customURL}`, {
       params: params
     }));

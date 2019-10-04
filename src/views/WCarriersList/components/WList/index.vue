@@ -84,7 +84,8 @@
         methods: {
             ...mapActions({
                 getUpdatedCarrierData: 'getUpdatedCarrier',
-                setCurrentCarrier: 'setCurrentCarrier'
+                setCurrentCarrier: 'setCurrentCarrier',
+                sendUpdatedCarrier: 'sendUpdatedCarrier'
             }),
             clickedDriversButton(item) {
                 this.setCurrentCarrier({ id: item.id });
@@ -94,8 +95,11 @@
                 this.setCurrentCarrier({ id: item.id });
                 router.push('/transport');
             },
+            clickedUpdateButton(item) {
+                this.getUpdatedCarrierData(item);
+                router.push('/carriers/update');
+            },
             clickedDeleteButton(item) {
-                console.log(item);
                 this.$bvModal.msgBoxConfirm(modal.CARRIER_TEXT, {
                     title: `${modal.CARRIER_TITLE} ${item.companyName}`,
                     ...modal.CONFIRM_MODAL_OPTIONS
@@ -108,3 +112,7 @@
         }
     };
 </script>
+
+<style lang="scss" scoped>
+  @import './styles.scss';
+</style>

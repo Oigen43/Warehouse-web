@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <b-col lg="12" sm="12">
-      <div class='w-companies-list-page'>
+      <div class='w-carriers-list-page'>
         <h1>List of Carriers</h1>
         <b-row>
           <b-col lg="12" sm="12">
@@ -9,7 +9,7 @@
               variant="dark"
               to="/carriers/add"
               class="w-carriers-add-button"
-            >add company
+            >add carrier
             </b-button>
           </b-col>
         </b-row>
@@ -73,7 +73,6 @@
                 this.fetchCarriersList(this.currentPage);
             },
             async clickedDeleteButton(item) {
-                console.log(item);
                 await this.sendDeletedCarrierData(item.id);
                 this.deletedCarrierData(item);
                 if (this.carriers.length === 0) {
@@ -85,7 +84,7 @@
         created: function () {
             this.fetchCarriersList();
         }
-    }
+    };
 </script>
 
 <style lang="scss" scoped>

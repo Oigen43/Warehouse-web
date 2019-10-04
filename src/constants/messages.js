@@ -23,5 +23,11 @@ export default {
   'warehouse.get.unknown': 'This warehouse does not exist!',
   'warehouse.create.success': 'Warehouse created!',
   'warehouse.update.success': 'Warehouse updated!',
-  'warehouse.delete.success': 'Warehouse deleted!'
+  'warehouse.delete.success': 'Warehouse deleted!',
+
+  'carrier.name.conflict': 'This carrier already exists!',
+  'carrier.get.unknown': 'This carrier does not exist!',
+  'carrier.create.success': 'Carrier created!',
+  'carrier.update.success': 'Carrier updated!',
+  'carrier.delete.success': 'Carrier deleted!'
 };

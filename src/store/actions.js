@@ -197,7 +197,6 @@ export default {
     commit(types.DELETE_CARRIER, req);
   },
   sendDeletedCarrier: async ({ commit }, carrierId) => {
-    console.log(carrierId);
     const res = await api.delete(url.CARRIERS_URL, { carrierId });
 
     res.toast && commit(types.SET_TOAST, res.toast);

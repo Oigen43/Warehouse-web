@@ -20,6 +20,8 @@ import WUsersUpdateForm from '../views/WUsersUpdate';
 import WUsersAddForm from '../views/WUsersAdd';
 import WStoragesList from '../views/WStoragesList';
 import WCarriersList from '../views/WCarriersList';
+import WCarriersAddForm from '../views/WCarriersAdd';
+import WCarriersUpdateForm from '../views/WCarriersUpdate';
 import WNotFound from '../views/WNotFound';
 
 Vue.use(Router);
@@ -148,6 +150,20 @@ export default new Router({
       component: WCarriersList,
       meta: { authorize: routesPermissions.carriers },
       beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/carriers/add',
+      name: 'carriersAddForm',
+      component: WCarriersAddForm,
+      meta: { authorize: routesPermissions.carriers },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/carriers/update',
+      name: 'carriersUpdateForm',
+      component: WCarriersUpdateForm,
+      meta: { authorize: routesPermissions.carriers },
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/storages',
