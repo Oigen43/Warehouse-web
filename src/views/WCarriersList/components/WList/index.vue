@@ -77,7 +77,8 @@
                     },
                     { key: 'drivers', label: '' },
                     { key: 'transport', label: '' },
-                    { key: 'buttons', label: '' }
+                    { key: 'buttons', label: '' },
+                    { key: 'blank', label: '', class: 'w-blank-column' }
                 ]
             };
         },

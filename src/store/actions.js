@@ -35,6 +35,7 @@ export default {
     const res = await api.get(url.COMPANIES_URL, { page, perPage });
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.companiesTotal, perPage);
+
       commit(types.COMPANIES, res.data.companies);
       commit(types.COMPANIES_PAGE_LIMIT, pageLimit);
     }
@@ -78,6 +79,7 @@ export default {
     });
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.warehousesTotal, req.perPage);
+
       commit(types.WAREHOUSES, res.data.warehouses);
       commit(types.WAREHOUSES_PAGE_LIMIT, pageLimit);
     }
@@ -117,6 +119,7 @@ export default {
     const res = await api.get(url.USERS_URL, { page, perPage });
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.usersTotal, perPage);
+
       commit(types.USERS, res.data.users);
       commit(types.USERS_PAGE_LIMIT, pageLimit);
     }
@@ -161,6 +164,7 @@ export default {
     });
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.storagesTotal, req.perPage);
+
       commit(types.STORAGES, res.data.storages);
       commit(types.STORAGES_PAGE_LIMIT, pageLimit);
       res.toast && commit(types.SET_TOAST, res.toast);
@@ -171,6 +175,7 @@ export default {
     const res = await api.get(url.CARRIERS_URL, { page, perPage });
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.carriersTotal, perPage);
+
       commit(types.CARRIERS, res.data.carriers);
       commit(types.CARRIERS_PAGE_LIMIT, pageLimit);
     }
