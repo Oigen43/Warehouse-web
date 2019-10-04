@@ -57,8 +57,8 @@
             return {
                 fields: [
                     'active', 'warehouseName', 'companyName', 'address',
-                    { key: 'storages', label: '' },
-                    { key: 'buttons', label: '' },
+                    { key: 'storages', label: '', class: 'w-list-button' },
+                    { key: 'buttons', label: '', class: 'w-list-button' },
                     { key: 'blank', label: '', class: 'w-blank-column' }
                 ],
                 clickedWarehouse: {}

@@ -32,4 +32,11 @@ export const UPDATE_USER = 'UPDATE_USER';
 export const STORAGES = 'STORAGES';
 export const STORAGES_PAGE_LIMIT = 'STORAGES_PAGE_LIMIT';
 
+export const SENDERS = 'SENDERS';
+export const SENDERS_PAGE_LIMIT = 'SENDERS_PAGE_LIMIT';
+export const CREATE_SENDER = 'CREATE_SENDER';
+export const SET_UPDATED_SENDER = 'SET_UPDATED_SENDER';
+export const UPDATE_SENDER = 'UPDATE_SENDER';
+export const DELETE_SENDER = 'DELETE_SENDER';
+
 export const SET_TOAST = 'SET_TOAST';
