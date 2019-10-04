@@ -104,6 +104,27 @@ export default {
     state.storagesPageLimit = storagesPageLimit;
   },
 
+  [types.SENDERS](state, senders) {
+    state.senders = senders;
+  },
+  [types.SENDERS_PAGE_LIMIT](state, sendersPageLimit) {
+    state.sendersPageLimit = sendersPageLimit;
+  },
+  [types.CREATE_SENDER](state, sender) {
+    state.newSender = sender;
+  },
+  [types.SET_UPDATED_SENDER](state, sender) {
+    state.updatedSender = sender;
+  },
+  [types.UPDATE_SENDER](state, sender) {
+    state.updatedSender = sender;
+    state.senders = [ ...state.senders.map(item => item.id === sender.id ? sender : item) ];
+  },
+  [types.DELETE_SENDER](state, sender) {
+    state.deletedSender = sender;
+    state.senders = state.senders.filter(item => item.id !== sender.id);
+  },
+
   [types.SET_TOAST](state, toast) {
     state.toast = toast;
   }

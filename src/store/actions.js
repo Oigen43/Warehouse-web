@@ -167,4 +167,39 @@ export default {
     }
   },
 
+  fetchSendersList: async ({ commit }, page = 1, perPage = 5) => {
+    const res = await api.get(url.SENDERS_URL, { page, perPage });
+    if (res.data) {
+      const pageLimit = helpers.calculatePageLimit(res.data.sendersTotal, perPage);
+      commit(types.SENDERS, res.data.senders);
+      commit(types.SENDERS_PAGE_LIMIT, pageLimit);
+    }
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  createSender: async ({ commit }, req) => {
+    commit(types.CREATE_SENDER, req);
+
+    const res = await api.post(url.SENDERS_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  getUpdatedSender: async ({ commit }, req) => {
+    commit(types.SET_UPDATED_SENDER, req);
+  },
+  sendUpdatedSender: async ({ commit }, req) => {
+    const res = await api.put(url.SENDERS_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  deleteSender: async ({ commit }, req) => {
+    commit(types.DELETE_SENDER, req);
+  },
+  sendDeletedSender: async ({ commit }, senderId) => {
+    const res = await api.delete(url.SENDERS_URL, { senderId });
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+
 };

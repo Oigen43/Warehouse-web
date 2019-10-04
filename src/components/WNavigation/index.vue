@@ -31,6 +31,16 @@
               Users
             </b-button>
           </b-nav-item>
+          <b-nav-item>
+            <b-button
+              variant="light"
+              to='/senders'
+              class="w-navigation-link"
+              v-if="hasPermissions(routesPermissions.senders)"
+            >
+              Senders
+            </b-button>
+          </b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto" v-if="!registrationToken">
