@@ -2,9 +2,13 @@ export default {
   'company.name.conflict': 'This company already exists!',
   'company.get.unknown': 'This company does not exist!',
   'company.create.success': 'Company created!',
+  'company.create.error': 'Can not create company',
   'company.update.success': 'Company updated!',
+  'company.update.error': 'Can not update company',
   'company.delete.success': 'Company deleted!',
+  'company.delete.error': 'Can not delete company',
 
+  'user.get.error': 'Can not get user',
   'users.list.get.error': 'Can not get users list',
   'user.name.conflict': 'This user already exists!',
   'user.get.unknown': 'This user does not exist!',
@@ -29,11 +33,15 @@ export default {
   'warehouse.delete.error': 'Can not delete warehouse',
 
   'user.get.confirmation.form.success': 'Success, you have permissions',
-  'user.get.confirmation.form.failed': 'Fail, you have not permissions',
+  'user.get.confirmation.form.error': 'Fail, you have not permissions',
+  'user.roles.get.error': 'Can nor get user roles',
   'user.registration.success': 'Registration completed',
   'user.log.in': 'Login successful!',
+  'user.find.error': 'Can not find user',
   'user.incorrect.login.data': 'Incorrect login or password! Try again!',
   'user.blocked': 'User deleted!',
+
+  'storages.list.get.error': 'Can not get storages list',
 
   'email.send.failed': 'Email can not be sent',
 };
