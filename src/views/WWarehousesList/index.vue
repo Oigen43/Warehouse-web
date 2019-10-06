@@ -82,7 +82,7 @@
             async clickedDeleteButton(item) {
                 await this.sendDeletedWarehouseData(item.id);
                 this.deletedWarehouseData(item);
-                if (this.warehouses.length === 0) {
+                if (this.warehouses.length === 0 && this.currentPage > 1) {
                     this.currentPage -= 1;
                 }
                 this.fetchWarehousesList({
