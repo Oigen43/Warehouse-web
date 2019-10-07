@@ -10,6 +10,8 @@ export const SENDER_TEXT = 'Please confirm that you want to delete the sender.';
 export const SENDER_TITLE = 'Delete sender';
 export const CARRIER_TEXT = 'Please confirm that you want to delete the carrier.';
 export const CARRIER_TITLE = 'Delete carrier';
+export const TRANSPORT_TEXT = 'Please confirm that you want to delete the transport.';
+export const TRANSPORT_TITLE = 'Delete transport';
 
 export const CONFIRM_MODAL_OPTIONS = {
   size: 'md',

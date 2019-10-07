@@ -6,5 +6,6 @@ export default {
   users: [roles.ADMIN_ROLE],
   storages: [roles.ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE],
   senders: [roles.ADMIN_ROLE],
-  carriers: [roles.ADMIN_ROLE]
+  carriers: [roles.ADMIN_ROLE],
+  transport: [roles.ADMIN_ROLE]
 };

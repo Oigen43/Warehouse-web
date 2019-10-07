@@ -27,6 +27,7 @@ import WSendersUpdateForm from '../views/WSendersUpdate';
 import WCarriersList from '../views/WCarriersList';
 import WCarriersAddForm from '../views/WCarriersAdd';
 import WCarriersUpdateForm from '../views/WCarriersUpdate';
+import WTransportList from '../views/WTransportList';
 import WNotFound from '../views/WNotFound';
 
 Vue.use(Router);
@@ -210,6 +211,13 @@ export default new Router({
       name: 'sendersUpdateForm',
       component: WSendersUpdateForm,
       meta: { authorize: routesPermissions.senders },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/transport',
+      name: 'transport',
+      component: WTransportList,
+      meta: { authorize: routesPermissions.transport },
       beforeEnter: ifAuthenticated,
     },
     {

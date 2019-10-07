@@ -56,6 +56,12 @@ export default new Vuex.Store({
     deletedCarrier: {},
     currentCarrier: {},
 
+    transport: [],
+    transportPageLimit: 1,
+    newTransport: {},
+    updatedTransport: {},
+    deletedTransport: {},
+
     toast: {}
     },
   getters,
