@@ -32,7 +32,7 @@ function createAxiosResponseInterceptor () {
       const userData = jwtDecode(store.state.token);
 
       return axios.post(`${url.BASE_URL}${url.REFRESH_TOKEN_URL}`, {
-        user: userData
+        userId: userData.id
       }).then(response => {
         store.dispatch('updateTokens', response.data.data);
         error.response.config.headers['Authorization'] = `Bearer ${response.data.data.token}`;

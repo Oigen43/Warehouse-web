@@ -37,6 +37,7 @@ export default {
 
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.companiesTotal, perPage);
+
       commit(types.COMPANIES, res.data.companies);
       commit(types.COMPANIES_PAGE_LIMIT, pageLimit);
     }
@@ -81,6 +82,7 @@ export default {
 
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.warehousesTotal, req.perPage);
+
       commit(types.WAREHOUSES, res.data.warehouses);
       commit(types.WAREHOUSES_PAGE_LIMIT, pageLimit);
     }
@@ -121,6 +123,7 @@ export default {
 
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.usersTotal, perPage);
+
       commit(types.USERS, res.data.users);
       commit(types.USERS_PAGE_LIMIT, pageLimit);
     }
@@ -167,6 +170,7 @@ export default {
 
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.storagesTotal, req.perPage);
+
       commit(types.STORAGES, res.data.storages);
       commit(types.STORAGES_PAGE_LIMIT, pageLimit);
       res.toast && commit(types.SET_TOAST, res.toast);
@@ -240,5 +244,44 @@ export default {
     const res = await api.delete(url.SENDERS_URL, { senderId });
 
     res.toast && commit(types.SET_TOAST, res.toast);
+  },
+
+  fetchCarriersList: async ({ commit }, page = 1, perPage = 5) => {
+    const res = await api.get(url.CARRIERS_URL, { page, perPage });
+    if (res.data) {
+      const pageLimit = helpers.calculatePageLimit(res.data.carriersTotal, perPage);
+
+      commit(types.CARRIERS, res.data.carriers);
+      commit(types.CARRIERS_PAGE_LIMIT, pageLimit);
+    }
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  createCarrier: async ({ commit }, req) => {
+    commit(types.CREATE_CARRIER, req);
+
+    const res = await api.post(url.CARRIERS_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  getUpdatedCarrier: async ({ commit }, req) => {
+    commit(types.SET_UPDATED_CARRIER, req);
+  },
+  sendUpdatedCarrier: async ({ commit }, req) => {
+    const res = await api.put(url.CARRIERS_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  deleteCarrier: async ({ commit }, req) => {
+    commit(types.DELETE_CARRIER, req);
+  },
+  sendDeletedCarrier: async ({ commit }, carrierId) => {
+    const res = await api.delete(url.CARRIERS_URL, { carrierId });
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  setCurrentCarrier: async ({ commit }, req) => {
+    commit(types.CURRENT_CARRIER, req);
   }
-};
+ };
