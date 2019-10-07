@@ -117,6 +117,9 @@ export default {
     state.deletedStorage = storage;
     state.storages = state.storages.filter(item => item.id !== storage.id);
   },
+  [types.STORAGE_TYPES](state, storageTypes) {
+    state.storageTypes = storageTypes;
+  },
 
   [types.SENDERS](state, senders) {
     state.senders = senders;

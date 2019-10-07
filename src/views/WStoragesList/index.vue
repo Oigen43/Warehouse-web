@@ -7,7 +7,7 @@
           <b-col lg="12" sm="12">
             <b-button
               variant="dark"
-              to="/storages/add"
+              @click="clickedAddButton"
               class="w-storages-add-button"
             >add storage
             </b-button>
@@ -41,6 +41,7 @@
 
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
+    import router from '../../router';
 
     export default {
         name: 'WStoragesListPage',
@@ -67,6 +68,7 @@
         methods: {
             ...mapActions({
                 fetchStoragesList: 'fetchStoragesList',
+                fetchStorageTypes: 'fetchStorageTypes',
                 sendDeletedStorageData: 'sendDeletedStorage',
                 deletedStorageData: 'deleteStorage'
             }),
@@ -77,6 +79,10 @@
                     perPage: this.perPage,
                     warehouseId: this.currentWarehouse.id
                 });
+            },
+            async clickedAddButton() {
+                await this.fetchStorageTypes();
+                router.push('/storages/add');
             },
             async clickedDeleteButton(item) {
                 await this.sendDeletedStorageData(item.id);

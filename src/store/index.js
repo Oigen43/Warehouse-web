@@ -41,6 +41,7 @@ export default new Vuex.Store({
     updatedStorage: {},
     deletedStorage: {},
     currentStorage: {},
+    storageTypes: [],
 
     senders: [],
     sendersPageLimit: 1,

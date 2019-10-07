@@ -172,6 +172,14 @@ export default {
       res.toast && commit(types.SET_TOAST, res.toast);
     }
   },
+  fetchStorageTypes: async ({ commit }) => {
+    const res = await api.get(url.STORAGE_TYPES_URL);
+
+    if (res.data) {
+      commit(types.STORAGE_TYPES, res.data.storageTypes);
+      res.toast && commit(types.SET_TOAST, res.toast);
+    }
+  },
   createStorage: async ({ commit }, req) => {
     commit(types.CREATE_STORAGE, req);
 

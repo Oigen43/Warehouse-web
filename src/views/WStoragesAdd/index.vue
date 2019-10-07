@@ -5,7 +5,8 @@
       <w-form
         @form-submitted="sendData"
         submitButtonName="ADD STORAGE"
-        :storageType="storageType"
+        :storageTypes="storageTypes"
+        :selectedStorageType="selectedStorageType"
         :storageCapacity="storageCapacity"
       ></w-form>
       <b-button
@@ -35,13 +36,14 @@
         },
         data: function () {
             return {
-                storageType: '',
-                storageCapacity: ''
+                storageCapacity: '',
+                selectedStorageType: null
             };
         },
         computed: {
             ...mapState([
-                'currentWarehouse'
+                'currentWarehouse',
+                'storageTypes'
             ])
         },
         methods: {

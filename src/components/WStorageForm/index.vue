@@ -8,13 +8,16 @@
       class="w-storages-form-input"
     ></b-form-input>
 
-    <b-form-input
+    <b-form-select
+      class="w-storages-form-input"
+      required
       size="lg"
       v-model="form.storageType"
-      required
-      placeholder="Storage Type"
-      class="w-storages-form-input"
-    ></b-form-input>
+      :options="options">
+      <template v-slot:first>
+        <option :value="null" disabled>Please select storage type</option>
+      </template>
+    </b-form-select>
 
     <b-button
       type="submit"
@@ -28,29 +31,38 @@
 </template>
 
 <script>
-    import { BForm, BFormInput, BButton } from 'bootstrap-vue';
+    import { BForm, BFormInput, BFormSelect, BButton } from 'bootstrap-vue';
 
     export default {
         name: 'WStorageForm',
         components: {
             BForm,
             BFormInput,
+            BFormSelect,
             BButton
         },
         props: {
             submitButtonName: {
-                type: String,
+                type: String
             },
             id: {
                 type: Number
             },
             storageCapacity: {
                 type: String,
-                default: '',
+                default: ''
             },
-            storageType: {
-                type: String,
-                default: '',
+            selectedStorageType: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
+            },
+            storageTypes: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
             }
         },
         data: function () {
@@ -58,9 +70,19 @@
                 form: {
                     id: this.id,
                     storageCapacity: this.storageCapacity,
-                    storageType: this.storageType
+                    storageType: this.selectedStorageType
                 }
             };
+        },
+        computed: {
+          options() {
+              return this.storageTypes.map(function(item) {
+                  return {
+                      value: item.id,
+                      text: item.type
+                  };
+              });
+          }
         },
         methods: {
             onSubmit() {
