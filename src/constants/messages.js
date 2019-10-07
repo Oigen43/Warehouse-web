@@ -42,7 +42,7 @@ export default {
   'user.blocked': 'User deleted!',
 
   'storages.list.get.error': 'Can not get storages list',
-
+  'user.authorization.error': 'You have not permissions',
   'email.send.failed': 'Email can not be sent',
 
   'sender.name.conflict': 'This sender already exists!',

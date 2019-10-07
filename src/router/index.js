@@ -51,6 +51,7 @@ const ifConfirmed = async (to, from, next) => {
     const res = await api.get(url.CONFIRMATION_URL, store.state.registrationToken);
     if (res.error) {
       store.commit(types.REMOVE_REGISTRATION_TOKEN);
+      res.toast && store.commit(types.SET_TOAST, res.toast);
       next('/');
       return;
     }
@@ -85,62 +86,62 @@ export default new Router({
       path: '/companies',
       name: 'companies',
       component: WCompaniesList,
-      meta: { authorize: routesPermissions.companies },
+      meta: { authorize: routesPermissions.companies.read },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/companies/add',
       name: 'companiesAddForm',
       component: WCompaniesAddForm,
-      meta: { authorize: routesPermissions.companies },
+      meta: { authorize: routesPermissions.companies.create },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/companies/update',
       name: 'companiesUpdateForm',
       component: WCompaniesUpdateForm,
-      meta: { authorize: routesPermissions.companies },
+      meta: { authorize: routesPermissions.companies.update },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/warehouses',
       name: 'warehouses',
       component: WWarehousesList,
-      meta: { authorize: routesPermissions.warehouses },
+      meta: { authorize: routesPermissions.warehouses.read },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/warehouses/add',
       name: 'warehousesAddForm',
       component: WWarehousesAddForm,
-      meta: { authorize: routesPermissions.warehouses },
+      meta: { authorize: routesPermissions.warehouses.create },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/warehouses/update',
       name: 'warehousesUpdateForm',
       component: WWarehousesUpdateForm,
-      meta: { authorize: routesPermissions.warehouses },
+      meta: { authorize: routesPermissions.warehouses.update },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/users',
       name: 'users',
       component: WUsersList,
-      meta: { authorize: routesPermissions.users },
+      meta: { authorize: routesPermissions.users.read },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/users/add',
       name: 'usersAddForm',
       component: WUsersAddForm,
-      meta: { authorize: routesPermissions.users },
+      meta: { authorize: routesPermissions.users.create },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/users/update',
       name: 'usersUpdateForm',
-      meta: { authorize: routesPermissions.users },
+      meta: { authorize: routesPermissions.users.update },
       component: WUsersUpdateForm,
       beforeEnter: ifAuthenticated,
     },
@@ -148,28 +149,28 @@ export default new Router({
       path: '/storages',
       name: 'storages',
       component: WStoragesList,
-      meta: { authorize: routesPermissions.storages },
+      meta: { authorize: routesPermissions.storages.read },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/senders',
       name: 'senders',
       component: WSendersList,
-      meta: { authorize: routesPermissions.senders },
+      meta: { authorize: routesPermissions.senders.read },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/senders/add',
       name: 'sendersAddForm',
       component: WSendersAddForm,
-      meta: { authorize: routesPermissions.senders },
+      meta: { authorize: routesPermissions.senders.create },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/senders/update',
       name: 'sendersUpdateForm',
       component: WSendersUpdateForm,
-      meta: { authorize: routesPermissions.senders },
+      meta: { authorize: routesPermissions.senders.update },
       beforeEnter: ifAuthenticated,
     },
     {
