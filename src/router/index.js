@@ -154,21 +154,21 @@ export default new Router({
       path: '/carriers',
       name: 'carriers',
       component: WCarriersList,
-      meta: { authorize: routesPermissions.carriers },
+      meta: { authorize: routesPermissions.carriers.read },
       beforeEnter: ifAuthenticated
     },
     {
       path: '/carriers/add',
       name: 'carriersAddForm',
       component: WCarriersAddForm,
-      meta: { authorize: routesPermissions.carriers },
+      meta: { authorize: routesPermissions.carriers.create },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/carriers/update',
       name: 'carriersUpdateForm',
       component: WCarriersUpdateForm,
-      meta: { authorize: routesPermissions.carriers },
+      meta: { authorize: routesPermissions.carriers.update },
       beforeEnter: ifAuthenticated,
     },
     {
@@ -182,14 +182,14 @@ export default new Router({
       path: '/storages/add',
       name: 'WStoragesAddForm',
       component: WStoragesAddForm,
-      meta: { authorize: routesPermissions.storages },
+      meta: { authorize: routesPermissions.storages.create },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/storages/update',
       name: 'WStoragesUpdateForm',
       component: WStoragesUpdateForm,
-      meta: { authorize: routesPermissions.storages },
+      meta: { authorize: routesPermissions.storages.update },
       beforeEnter: ifAuthenticated,
     },
     {

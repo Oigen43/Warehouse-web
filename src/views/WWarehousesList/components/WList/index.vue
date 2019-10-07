@@ -24,15 +24,13 @@
           class="w-table-update-button"
           variant="dark"
           size="sm"
-          @click="clickedUpdateButton(data.item)"
-          v-if="hasPermissions(routesPermissions.warehouses.update)">
+          @click="clickedUpdateButton(data.item)">
           Update
         </b-button>
         <b-button
           variant="light"
           size="sm"
-          @click="clickedDeleteButton(data.item)"
-          v-if="hasPermissions(routesPermissions.warehouses.delete)">
+          @click="clickedDeleteButton(data.item)">
           ✕
         </b-button>
       </template>
@@ -63,7 +61,6 @@
                 fields: [
                     'active', 'warehouseName', 'companyName', 'address',
                     { key: 'storages', label: '', class: 'w-list-button' },
-                    { key: 'buttons', label: '', class: 'w-list-button' },
                     { key: 'blank', label: '', class: 'w-blank-column' }
                 ],
                 clickedWarehouse: {}
@@ -71,6 +68,9 @@
         },
         computed: {
             routesPermissions: function() {
+              if (this.hasPermissions(routesPermissions.warehouses.update)) {
+                this.insert();
+              }
               return routesPermissions;
             }
         },
@@ -80,6 +80,9 @@
                 sendDeletedWarehouseData: 'deleteWarehouse',
                 setCurrentWarehouse: 'setCurrentWarehouse'
             }),
+            insert() {
+                this.fields.push({ key: 'buttons', label: '', class: 'w-list-button' });
+            },
             clickedStoragesButton(item) {
                 this.setCurrentWarehouse({ id: item.id, warehouseName: item.warehouseName });
                 router.push('/storages');
