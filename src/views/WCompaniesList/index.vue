@@ -76,7 +76,7 @@
             async clickedDeleteButton(item) {
                 await this.sendDeletedCompanyData(item.id);
                 this.deletedCompanyData(item);
-                if (this.companies.length === 0) {
+                if (this.companies.length === 0 && this.currentPage > 1) {
                     this.currentPage -= 1;
                 }
                 this.fetchCompaniesList(this.currentPage);
