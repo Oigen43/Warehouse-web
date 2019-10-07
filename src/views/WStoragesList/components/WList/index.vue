@@ -60,8 +60,7 @@
         methods: {
             ...mapActions({
                 fetchStorageTypes: 'fetchStorageTypes',
-                getUpdatedStorageData: 'getUpdatedStorage',
-                sendDeletedStorageData: 'deleteStorage',
+                getUpdatedStorageData: 'getUpdatedStorage'
             }),
             async clickedUpdateButton(item) {
                 await this.fetchStorageTypes();

@@ -15,6 +15,7 @@
         </b-row>
         <div class="w-storages-list">
           <w-list
+            @delete-button-clicked="clickedDeleteButton"
             :storagesList="storages"
           ></w-list>
         </div>
