@@ -6,7 +6,7 @@
         @form-submitted="sendData"
         submit-button-name="ADD CARRIER"
         :name="name"
-        :unp="unp"
+        :upn="upn"
         :country-code="countryCode"
       ></w-form>
       <b-button
@@ -37,7 +37,7 @@
         data() {
             return {
                 name: '',
-                unp: '',
+                upn: '',
                 countryCode: ''
             };
         },
