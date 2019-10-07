@@ -1,7 +1,7 @@
 <template>
   <b-row>
     <b-col class="w-transport-add-form" lg="3" sm="12" offset-lg="4">
-      <h1 class="w-transport-add-form-h1">Add a New Sender</h1>
+      <h1 class="w-transport-add-form-h1">Add a New Transport</h1>
       <w-form
         @form-submitted="sendData"
         submitButtonName="ADD TRANSPORT"
@@ -23,7 +23,7 @@
     import { BRow, BCol, BButton } from 'bootstrap-vue';
     import { mapActions } from 'vuex';
 
-    import WForm from '../../components/WSenderForm';
+    import WForm from '../../components/WTransportForm';
     import router from '../../router';
 
     export default {
