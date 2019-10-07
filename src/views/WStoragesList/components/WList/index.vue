@@ -8,7 +8,7 @@
           </div>
         </div>
         <b-card-body>
-          <b-card-title class="mb-0 w-storage-card-text">{{storage.storageType}}</b-card-title>
+          <b-card-title class="mb-0 w-storage-card-text">{{storage.StorageType.type}}</b-card-title>
         </b-card-body>
         <b-card-footer class="w-storage-card-footer">
           <b-button
