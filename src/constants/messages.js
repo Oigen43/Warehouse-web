@@ -25,6 +25,11 @@ export default {
   'warehouse.update.success': 'Warehouse updated!',
   'warehouse.delete.success': 'Warehouse deleted!',
 
+  'storage.get.unknown': 'This storage does not exist!',
+  'storage.create.success': 'Storage created!',
+  'storage.update.success': 'Storage updated!',
+  'storage.delete.success': 'Storage deleted!',
+
   'sender.name.conflict': 'This sender already exists!',
   'sender.get.unknown': 'This sender does not exist!',
   'sender.create.success': 'Sender created!',
