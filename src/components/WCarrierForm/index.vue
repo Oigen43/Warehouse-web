@@ -14,7 +14,7 @@
         size="lg"
         v-model="form.unp"
         required
-        placeholder="Carrier unp"
+        placeholder="Payer's account number"
         class="w-carrier-form-input"
       ></b-form-input>
 
