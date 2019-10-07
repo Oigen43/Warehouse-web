@@ -172,6 +172,39 @@ export default {
       res.toast && commit(types.SET_TOAST, res.toast);
     }
   },
+  fetchStorageTypes: async ({ commit }) => {
+    const res = await api.get(url.STORAGE_TYPES_URL);
+
+    if (res.data) {
+      commit(types.STORAGE_TYPES, res.data.storageTypes);
+      res.toast && commit(types.SET_TOAST, res.toast);
+    }
+  },
+  createStorage: async ({ commit }, req) => {
+    commit(types.CREATE_STORAGE, req);
+
+    const res = await api.post(url.STORAGES_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  getUpdatedStorage: async ({ commit }, req) => {
+    commit(types.SET_UPDATED_STORAGE, req);
+  },
+  sendUpdatedStorage: async ({ commit }, req) => {
+    const res = await api.put(url.STORAGES_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  deleteStorage: async ({ commit }, req) => {
+    commit(types.DELETE_STORAGE, req);
+  },
+  sendDeletedStorage: async ({ commit }, storageId) => {
+    const res = await api.delete(url.STORAGES_URL, { storageId });
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
 
   fetchSendersList: async ({ commit }, page = 1, perPage = 5) => {
     const res = await api.get(url.SENDERS_URL, { page, perPage });
