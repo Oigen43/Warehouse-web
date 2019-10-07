@@ -59,11 +59,13 @@
         props: ['storagesList'],
         methods: {
             ...mapActions({
+                fetchStorageTypes: 'fetchStorageTypes',
                 getUpdatedStorageData: 'getUpdatedStorage',
                 sendDeletedStorageData: 'deleteStorage',
             }),
-            clickedUpdateButton(item) {
-                this.getUpdatedStorageData(item);
+            async clickedUpdateButton(item) {
+                await this.fetchStorageTypes();
+                await this.getUpdatedStorageData(item);
                 router.push('/storages/update');
             },
             clickedDeleteButton(item) {

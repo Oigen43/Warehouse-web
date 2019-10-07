@@ -6,7 +6,8 @@
         @form-submitted="sendData"
         submitButtonName="UPDATE STORAGE"
         :id="storageId"
-        :storageType="storageType"
+        :storageTypes="storageTypes"
+        :selectedStorageType="storageType"
         :storageCapacity="storageCapacity"
       ></w-form>
       <b-button
@@ -36,13 +37,14 @@
         },
         computed: {
             ...mapState([
-                'updatedStorage'
+                'updatedStorage',
+                'storageTypes'
             ]),
             storageId() {
                 return this.updatedStorage.id;
             },
             storageType() {
-                return this.updatedStorage.storageType;
+                return this.updatedStorage.StorageType.id;
             },
             storageCapacity() {
                 return this.updatedStorage.storageCapacity;

@@ -53,10 +53,8 @@
                 default: ''
             },
             selectedStorageType: {
-                type: Array,
-                default: function () {
-                    return [];
-                }
+                type: Number,
+                default: null
             },
             storageTypes: {
                 type: Array,
