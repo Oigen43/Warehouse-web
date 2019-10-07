@@ -52,11 +52,15 @@ export default {
   'storage.delete.success': 'Storage deleted!',
   'storage.delete.error': 'Can not delete storage!',
 
+  'storage.types.list.get.error': 'Can not get storage types list!',
+
+  'sender.list.get.error': 'Can not get senders list!',
   'sender.name.conflict': 'This sender already exists!',
   'sender.get.unknown': 'This sender does not exist!',
   'sender.create.success': 'Sender created!',
+  'sender.create.error': 'Can not create sender!',
   'sender.update.success': 'Sender updated!',
+  'sender.update.error': 'Can not update sender!',
   'sender.delete.success': 'Sender deleted!',
-
-  'storage.types.list.get.error': 'Can not get storage types list!'
+  'sender.delete.error': 'Can not delete sender!'
 };
