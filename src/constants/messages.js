@@ -63,5 +63,15 @@ export default {
   'sender.update.success': 'Sender updated!',
   'sender.update.error': 'Can not update sender!',
   'sender.delete.success': 'Sender deleted!',
-  'sender.delete.error': 'Can not delete sender!'
+  'sender.delete.error': 'Can not delete sender!',
+
+  'carriers.list.get.error': 'Can not get carriers list',
+  'carrier.get.unknown': 'This carrier does not exist',
+  'carrier.name.conflict': 'This carrier already exists!',
+  'carrier.create.success': 'Carrier created!',
+  'carrier.create.error': 'Can not create carrier',
+  'carrier.update.success': 'Carrier updated!',
+  'carrier.update.error': 'Can not update carrier',
+  'carrier.delete.success': 'Carrier deleted!',
+  'carrier.delete.error': 'Can not delete carrier'
 };

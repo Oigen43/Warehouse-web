@@ -8,6 +8,8 @@ export const STORAGE_TEXT = 'Please confirm that you want to delete the storage.
 export const STORAGE_TITLE = 'Delete storage';
 export const SENDER_TEXT = 'Please confirm that you want to delete the sender.';
 export const SENDER_TITLE = 'Delete sender';
+export const CARRIER_TEXT = 'Please confirm that you want to delete the carrier.';
+export const CARRIER_TITLE = 'Delete carrier';
 
 export const CONFIRM_MODAL_OPTIONS = {
   size: 'md',
