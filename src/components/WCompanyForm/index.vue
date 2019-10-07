@@ -28,16 +28,15 @@
     ></b-form-input>
 
     <div v-if="withAdminFields"
-         class="w-companies-admin"
-    >
+         class="w-companies-admin">
       <h3>Add company admin</h3>
       <b-form-input
         v-model="adminForm.firstName"
         size="lg"
         required
         placeholder="Admin name"
-        class="w-companies-admin-form-input"
-      ></b-form-input>
+        class="w-companies-admin-form-input">
+      </b-form-input>
 
       <b-form-input
         v-model="adminForm.email"
@@ -52,8 +51,7 @@
       type="submit"
       variant="outline-dark"
       size="lg"
-      class="w-companies-form-button"
-    >
+      class="w-companies-form-button">
       {{ submitButtonName }}
     </b-button>
   </b-form>

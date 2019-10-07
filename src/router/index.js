@@ -19,10 +19,12 @@ import WUsersList from '../views/WUsersList';
 import WUsersUpdateForm from '../views/WUsersUpdate';
 import WUsersAddForm from '../views/WUsersAdd';
 import WStoragesList from '../views/WStoragesList';
-import WNotFound from '../views/WNotFound';
+import WStoragesAddForm from '../views/WStoragesAdd';
+import WStoragesUpdateForm from '../views/WStoragesUpdate';
 import WSendersList from '../views/WSendersList';
 import WSendersAddForm from '../views/WSendersAdd';
 import WSendersUpdateForm from '../views/WSendersUpdate';
+import WNotFound from '../views/WNotFound';
 
 Vue.use(Router);
 
@@ -148,6 +150,20 @@ export default new Router({
       path: '/storages',
       name: 'storages',
       component: WStoragesList,
+      meta: { authorize: routesPermissions.storages },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/storages/add',
+      name: 'WStoragesAddForm',
+      component: WStoragesAddForm,
+      meta: { authorize: routesPermissions.storages },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/storages/update',
+      name: 'WStoragesUpdateForm',
+      component: WStoragesUpdateForm,
       meta: { authorize: routesPermissions.storages },
       beforeEnter: ifAuthenticated,
     },

@@ -41,13 +41,26 @@ export default {
   'user.incorrect.login.data': 'Incorrect login or password! Try again!',
   'user.blocked': 'User deleted!',
 
-  'storages.list.get.error': 'Can not get storages list',
-
   'email.send.failed': 'Email can not be sent',
 
+  'storages.list.get.error': 'Can not get storages list!',
+  'storage.get.unknown': 'This storage does not exist!',
+  'storage.create.success': 'Storage created!',
+  'storage.create.error': 'Can not create storage!',
+  'storage.update.success': 'Storage updated!',
+  'storage.update.error': 'Can not update storage!',
+  'storage.delete.success': 'Storage deleted!',
+  'storage.delete.error': 'Can not delete storage!',
+
+  'storage.types.list.get.error': 'Can not get storage types list!',
+
+  'sender.list.get.error': 'Can not get senders list!',
   'sender.name.conflict': 'This sender already exists!',
   'sender.get.unknown': 'This sender does not exist!',
   'sender.create.success': 'Sender created!',
+  'sender.create.error': 'Can not create sender!',
   'sender.update.success': 'Sender updated!',
-  'sender.delete.success': 'Sender deleted!'
+  'sender.update.error': 'Can not update sender!',
+  'sender.delete.success': 'Sender deleted!',
+  'sender.delete.error': 'Can not delete sender!'
 };
