@@ -28,6 +28,7 @@ import WCarriersList from '../views/WCarriersList';
 import WCarriersAddForm from '../views/WCarriersAdd';
 import WCarriersUpdateForm from '../views/WCarriersUpdate';
 import WTransportList from '../views/WTransportList';
+import WTransportAddForm from '../views/WTransportAdd';
 import WNotFound from '../views/WNotFound';
 
 Vue.use(Router);
@@ -217,6 +218,13 @@ export default new Router({
       path: '/transport',
       name: 'transport',
       component: WTransportList,
+      meta: { authorize: routesPermissions.transport },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/transport/add',
+      name: 'transportAddForm',
+      component: WTransportAddForm,
       meta: { authorize: routesPermissions.transport },
       beforeEnter: ifAuthenticated,
     },
