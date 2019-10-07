@@ -38,6 +38,16 @@
               Senders
             </b-button>
           </b-nav-item>
+          <b-nav-item>
+            <b-button
+              variant="light"
+              to='/carriers'
+              class="w-navigation-link"
+              v-if="hasPermissions(routesPermissions.carriers)"
+            >
+              Carriers
+            </b-button>
+          </b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto" v-if="!registrationToken">
