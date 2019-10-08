@@ -224,19 +224,6 @@ export default {
     }
     res.toast && commit(types.SET_TOAST, res.toast);
   },
-  // fetchDriversList: async ({ commit }, page = 1, perPage = 5) => {
-  //   const res = await api.get(url.DRIVERS_URL, {
-  //     page: req.page,
-  //     perPage: req.perPage
-  //   });
-  //   if (res.data) {
-  //     const pageLimit = helpers.calculatePageLimit(res.data.driversTotal, perPage);
-  //
-  //     commit(types.DRIVERS, res.data.drivers);
-  //     commit(types.DRIVERS_PAGE_LIMIT, pageLimit);
-  //   }
-  //   res.toast && commit(types.SET_TOAST, res.toast);
-  // },
   sendDeletedDriver: async ({ commit }, driverId) => {
     const res = await api.delete(url.DRIVERS_URL, { driverId });
 
