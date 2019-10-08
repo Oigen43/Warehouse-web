@@ -64,20 +64,20 @@
         },
         computed: {
             fields: function() {
-            const fieldList = [
-                'active', 'warehouseName', 'companyName', 'address',
-                { key: 'storages', label: '', class: 'w-list-button' },
-                { key: 'blank', label: '', class: 'w-blank-column' }
-            ];
+                const fieldList = [
+                    'active', 'warehouseName', 'companyName', 'address',
+                    { key: 'storages', label: '', class: 'w-list-button' },
+                    { key: 'blank', label: '', class: 'w-blank-column' }
+                ];
 
-            if (this.hasPermissions(routesPermissions.warehouses.update)) {
-              fieldList.push({ key: 'buttons', label: '', class: 'w-list-button' });
-            }
+                if (this.hasPermissions(routesPermissions.warehouses.update)) {
+                    fieldList.push({ key: 'buttons', label: '', class: 'w-list-button' });
+                }
 
-            return fieldList;
+                return fieldList;
             },
             routesPermissions: function() {
-              return routesPermissions;
+                return routesPermissions;
             }
         },
         methods: {
