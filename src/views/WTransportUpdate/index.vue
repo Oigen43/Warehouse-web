@@ -8,7 +8,6 @@
         :id="transportId"
         :transportType="transportType"
         :transportNumber="transportNumber"
-        :date="date"
       ></w-form>
       <b-button
         variant="link"
@@ -47,9 +46,6 @@
             },
             transportNumber() {
                 return this.updatedTransport.transportNumber;
-            },
-            date() {
-                return this.updatedTransport.date;
             }
         },
         methods: {

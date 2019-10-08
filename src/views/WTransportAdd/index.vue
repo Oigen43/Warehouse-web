@@ -7,7 +7,6 @@
         submitButtonName="ADD TRANSPORT"
         :transportType="transportType"
         :transportNumber="transportNumber"
-        :date="date"
       ></w-form>
       <b-button
         variant="link"
@@ -37,8 +36,7 @@
         data: function () {
             return {
                 transportType: '',
-                transportNumber: '',
-                date: ''
+                transportNumber: ''
             };
         },
         computed: {

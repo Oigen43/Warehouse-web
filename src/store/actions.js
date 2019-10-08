@@ -185,7 +185,6 @@ export default {
     }
   },
   createStorage: async ({ commit }, req) => {
-    console.log(req)
     commit(types.CREATE_STORAGE, req);
 
     const res = await api.post(url.STORAGES_URL, req);
@@ -211,7 +210,7 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
 
-  fetchSendersList: async ({ commit }, page, perPage) => {
+  fetchSendersList: async ({ commit }, page = 1, perPage = 5) => {
     const res = await api.get(url.SENDERS_URL, { page, perPage });
 
     if (res.data) {

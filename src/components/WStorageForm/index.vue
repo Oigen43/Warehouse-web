@@ -9,7 +9,6 @@
     ></b-form-input>
 
     <w-multiselect
-      :value="form.storageType"
       :options="storageTypes"
       :multiple="false"
       label="type"
@@ -59,7 +58,9 @@
             },
             selectedStorageType: {
                 type: Object,
-                default: {}
+                default: function () {
+                    return {};
+                }
             },
             storageTypes: {
                 type: Array,
@@ -78,16 +79,6 @@
                 placeholder: 'Please select storage type'
             };
         },
-        // computed: {
-        //   options() {
-        //       return this.storageTypes.map(function(item) {
-        //           return {
-        //               value: item.id,
-        //               text: item.type
-        //           };
-        //       });
-        //   }
-        // },
         methods: {
             onSubmit() {
                 this.$emit('form-submitted', this.form);
