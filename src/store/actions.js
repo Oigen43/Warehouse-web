@@ -283,5 +283,45 @@ export default {
   },
   setCurrentCarrier: async ({ commit }, req) => {
     commit(types.CURRENT_CARRIER, req);
-  }
+  },
+
+  fetchDriversList: async ({ commit }, req) => {
+    const res = await api.get(url.DRIVERS_URL, {
+      page: req.page,
+      perPage: req.perPage,
+      carrierId: req.carrierId
+    });
+    if (res.data) {
+      const pageLimit = helpers.calculatePageLimit(res.data.driversTotal, req.perPage);
+
+      commit(types.DRIVERS, res.data.drivers);
+      commit(types.DRIVERS_PAGE_LIMIT, pageLimit);
+    }
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  sendDeletedDriver: async ({ commit }, driverId) => {
+    const res = await api.delete(url.DRIVERS_URL, { driverId });
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  deleteDriver: async ({ commit }, req) => {
+    commit(types.DELETE_DRIVER, req);
+  },
+  getUpdatedDriver: async ({ commit }, req) => {
+    commit(types.SET_UPDATED_DRIVER, req);
+  },
+  createDriver: async ({ commit }, req) => {
+    commit(types.CREATE_DRIVER, req);
+
+    const res = await api.post(url.DRIVERS_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  sendUpdatedDriver: async ({ commit }, req) => {
+    const res = await api.put(url.DRIVERS_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
  };
