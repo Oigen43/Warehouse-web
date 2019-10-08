@@ -60,7 +60,8 @@
         computed: {
             ...mapState([
                 'transport',
-                'transportPageLimit'
+                'transportPageLimit',
+                'currentCarrier'
             ])
         },
         methods: {
@@ -71,7 +72,11 @@
             }),
             sendRequest(page) {
                 this.currentPage = page;
-                this.fetchTransportList(this.currentPage);
+                this.fetchTransportList({
+                    page: this.currentPage,
+                    perPage: this.perPage,
+                    carrierId: this.currentCarrier.id
+                });
             },
             async clickedDeleteButton(item) {
                 await this.sendDeletedTransportData(item.id);
@@ -79,11 +84,19 @@
                 if (this.transport.length === 0 && this.currentPage > 1) {
                     this.currentPage -= 1;
                 }
-                this.fetchTransportList(this.currentPage);
+                this.fetchTransportList({
+                    page: this.currentPage,
+                    perPage: this.perPage,
+                    carrierId: this.currentCarrier.id
+                });
             }
         },
         created: function () {
-            this.fetchTransportList();
+            this.fetchTransportList({
+                page: this.currentPage,
+                perPage: this.perPage,
+                carrierId: this.currentCarrier.id
+            });
         }
     };
 </script>

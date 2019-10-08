@@ -21,7 +21,7 @@
 
 <script>
     import { BRow, BCol, BButton } from 'bootstrap-vue';
-    import { mapActions } from 'vuex';
+    import { mapState, mapActions } from 'vuex';
 
     import WForm from '../../components/WTransportForm';
     import router from '../../router';
@@ -41,6 +41,11 @@
                 date: ''
             };
         },
+        computed: {
+            ...mapState([
+                'currentCarrier'
+            ])
+        },
         methods: {
             ...mapActions({
                 sendNewTransportData: 'createTransport'
@@ -49,6 +54,7 @@
                 router.push('/transport');
             },
             async sendData(newTransport) {
+                newTransport.carrierInfo = this.currentCarrier;
                 const res = await this.sendNewTransportData(newTransport);
                 !res.error && this.redirect();
             }

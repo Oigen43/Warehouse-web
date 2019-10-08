@@ -39,7 +39,7 @@
         data: function () {
             return {
                 fields: [
-                    'transportType', 'transportNumber',
+                    'carrierName', 'transportType', 'transportNumber',
                     {
                         key: 'date',
                         label: 'Date',

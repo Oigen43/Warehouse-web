@@ -210,7 +210,7 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
 
-  fetchSendersList: async ({ commit }, page = 1, perPage = 5) => {
+  fetchSendersList: async ({ commit }, page, perPage) => {
     const res = await api.get(url.SENDERS_URL, { page, perPage });
 
     if (res.data) {
@@ -286,10 +286,15 @@ export default {
     commit(types.CURRENT_CARRIER, req);
   },
 
-  fetchTransportList: async ({ commit }, page = 1, perPage = 5) => {
-    const res = await api.get(url.TRANSPORT_URL, { page, perPage });
+  fetchTransportList: async ({ commit }, req) => {
+    const res = await api.get(url.TRANSPORT_URL, {
+      page: req.page,
+      perPage: req.perPage,
+      carrierId: req.carrierId
+    });
+
     if (res.data) {
-      const pageLimit = helpers.calculatePageLimit(res.data.transportTotal, perPage);
+      const pageLimit = helpers.calculatePageLimit(res.data.transportTotal, req.perPage);
 
       commit(types.TRANSPORT, res.data.transport);
       commit(types.TRANSPORT_PAGE_LIMIT, pageLimit);

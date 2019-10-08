@@ -16,14 +16,6 @@
       class="w-transport-form-input"
     ></b-form-input>
 
-    <b-form-input
-      size="lg"
-      v-model="form.date"
-      type="date"
-      placeholder="Transport active date"
-      class="w-transport-form-input"
-    ></b-form-input>
-
     <b-button
       type="submit"
       variant="outline-dark"
@@ -58,9 +50,6 @@
             transportNumber: {
                 type: String,
                 default: '',
-            },
-            date: {
-                type: String
             }
         },
         data: function () {
@@ -68,8 +57,7 @@
                 form: {
                     id: this.id,
                     transportType: this.transportType,
-                    transportNumber: this.transportNumber,
-                    date: this.date
+                    transportNumber: this.transportNumber
                 }
             };
         },
