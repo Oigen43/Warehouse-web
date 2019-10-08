@@ -1,6 +1,6 @@
 <template>
   <w-table
-    :items="companies"
+    :items="companiesList"
     :fields="fields">
     <template
       v-slot:cell(active)="data">
@@ -59,7 +59,7 @@
             BButton
         },
         props: ['companies'],
-        data: function () {
+        data: function() {
             return {
                 fields: [
                     'active', 'companyName', 'address', 'description',
@@ -78,7 +78,13 @@
         },
         computed: {
             routesPermissions: function() {
-              return routesPermissions;
+                return routesPermissions;
+            },
+            companiesList: function() {
+                if (!(Array.isArray(this.companies))) {
+                    return new Array(this.companies);
+                }
+                return this.companies;
             }
         },
         methods: {
