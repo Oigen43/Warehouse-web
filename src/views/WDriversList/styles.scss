@@ -1,0 +1,35 @@
+.w-drivers-list-page {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.w-drivers-add-button {
+  background-color: #2C3E50;
+  float: left;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.drivers-list {
+  margin: 0;
+}
+
+.drivers-list-pagination {
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 53rem) {
+  .w-drivers-add-button {
+    margin-bottom: 0.5rem;
+    margin-left: 2rem;
+  }
+
+  .drivers-list {
+    margin: 1rem 2rem;
+  }
+
+  .drivers-list-pagination {
+    margin-top: 1rem;
+  }
+}

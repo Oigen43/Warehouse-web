@@ -6,7 +6,7 @@
         v-model="form.name"
         required
         placeholder="Carrier name"
-        class="w-carrier-form-input"
+        class="w-carriers-form-input"
       ></b-form-input>
 
       <b-form-input
@@ -15,7 +15,7 @@
         v-model="form.unp"
         required
         placeholder="Payer's account number"
-        class="w-carrier-form-input"
+        class="w-carriers-form-input"
       ></b-form-input>
 
       <b-form-input
@@ -24,7 +24,7 @@
         v-model="form.countryCode"
         required
         placeholder="Carrier country code"
-        class="w-carrier-form-input"
+        class="w-carriers-form-input"
       ></b-form-input>
 
       <b-button

@@ -22,6 +22,9 @@ import WStoragesList from '../views/WStoragesList';
 import WCarriersList from '../views/WCarriersList';
 import WCarriersAddForm from '../views/WCarriersAdd';
 import WCarriersUpdateForm from '../views/WCarriersUpdate';
+import WDriversList from '../views/WDriversList';
+import WDriversAddForm from '../views/WDriversAdd';
+import WDriversUpdateForm from '../views/WDriversUpdate';
 import WNotFound from '../views/WNotFound';
 
 Vue.use(Router);
@@ -163,6 +166,27 @@ export default new Router({
       name: 'carriersUpdateForm',
       component: WCarriersUpdateForm,
       meta: { authorize: routesPermissions.carriers },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/drivers',
+      name: 'drivers',
+      component: WDriversList,
+      meta: { authorize: routesPermissions.drivers },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/drivers/add',
+      name: 'driversAddForm',
+      component: WDriversAddForm,
+      meta: { authorize: routesPermissions.drivers },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/drivers/update',
+      name: 'driversUpdateForm',
+      component: WDriversUpdateForm,
+      meta: { authorize: routesPermissions.drivers },
       beforeEnter: ifAuthenticated,
     },
     {

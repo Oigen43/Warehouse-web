@@ -121,6 +121,27 @@ export default {
     state.currentCarrier = carrier;
   },
 
+  [types.DRIVERS](state, drivers) {
+    state.drivers = drivers;
+  },
+  [types.DRIVERS_PAGE_LIMIT](state, driversPageLimit) {
+    state.driversPageLimit = driversPageLimit;
+  },
+  [types.CREATE_DRIVER](state, driver) {
+    state.newDriver = driver;
+  },
+  [types.SET_UPDATED_DRIVER](state, driver) {
+    state.updatedDriver = driver;
+  },
+  [types.UPDATE_DRIVER](state, driver) {
+    state.updatedDriver = driver;
+    state.drivers = [ ...state.drivers.map(item => item.id === driver.id ? driver : item) ];
+  },
+  [types.DELETE_DRIVER](state, driver) {
+    state.deletedDriver = driver;
+    state.drivers = state.drivers.filter(item => item.id !== driver.id);
+  },
+
   [types.STORAGES](state, storages) {
     state.storages = storages;
   },

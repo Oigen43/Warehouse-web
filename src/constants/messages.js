@@ -33,5 +33,15 @@ export default {
   'carrier.update.success': 'Carrier updated!',
   'carrier.update.error': 'Can not update carrier',
   'carrier.delete.success': 'Carrier deleted!',
-  'carrier.delete.error': 'Can not delete carrier'
+  'carrier.delete.error': 'Can not delete carrier',
+
+  'drivers.list.get.error': 'Can not get drivers list',
+  'driver.get.unknown': 'This driver does not exist',
+  'driver.name.conflict': 'This driver already exists!',
+  'driver.create.success': 'Driver created!',
+  'driver.create.error': 'Can not create driver',
+  'driver.update.success': 'Driver updated!',
+  'driver.update.error': 'Can not update driver',
+  'driver.delete.success': 'Driver deleted!',
+  'driver.delete.error': 'Can not delete driver'
 };
