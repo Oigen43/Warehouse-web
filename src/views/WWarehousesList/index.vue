@@ -9,6 +9,7 @@
               variant="dark"
               to="/warehouses/add"
               class="w-warehouses-add-button"
+              v-if="hasPermissions(routesPermissions.warehouses.create)"
             >add warehouse
             </b-button>
           </b-col>
@@ -40,11 +41,14 @@
     import { mapActions, mapState } from 'vuex';
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
+    import { validation } from '../../components/mixins/validation';
+    import routesPermissions from '../../constants/routesPermissions';
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
 
     export default {
         name: 'WWarehousesListPage',
+        mixins: [validation],
         components: {
             BRow,
             BCol,
@@ -63,7 +67,10 @@
                 'warehouses',
                 'warehousesPageLimit',
                 'currentCompany'
-            ])
+            ]),
+            routesPermissions: function() {
+              return routesPermissions;
+            }
         },
         methods: {
             ...mapActions({
@@ -82,7 +89,7 @@
             async clickedDeleteButton(item) {
                 await this.sendDeletedWarehouseData(item.id);
                 this.deletedWarehouseData(item);
-                if (this.warehouses.length === 0) {
+                if (this.warehouses.length === 0 && this.currentPage > 1) {
                     this.currentPage -= 1;
                 }
                 this.fetchWarehousesList({

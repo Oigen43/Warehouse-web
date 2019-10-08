@@ -83,7 +83,7 @@
             async clickedDeleteButton(item) {
                 await this.sendDeletedDriverData(item.id);
                 this.deletedDriverData(item);
-                if (this.drivers.length === 0) {
+                if (this.drivers.length === 0 && this.currentPage > 1) {
                     this.currentPage -= 1;
                 }
                 this.fetchDriversList({

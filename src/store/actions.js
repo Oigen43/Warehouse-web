@@ -14,6 +14,7 @@ export default {
   },
   login: async ({ commit }, req) => {
     const res = await api.post(url.LOGIN_URL, req);
+
     if (res.data) {
       const token = res.data.token;
       const refreshToken = res.data.refreshToken;
@@ -33,6 +34,7 @@ export default {
   },
   fetchCompaniesList: async ({ commit }, page = 1, perPage = 5) => {
     const res = await api.get(url.COMPANIES_URL, { page, perPage });
+
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.companiesTotal, perPage);
 
@@ -77,6 +79,7 @@ export default {
       perPage: req.perPage,
       companyId: req.companyId
     });
+
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.warehousesTotal, req.perPage);
 
@@ -117,6 +120,7 @@ export default {
 
   fetchUsersList: async ({ commit }, page = 1, perPage = 5) => {
     const res = await api.get(url.USERS_URL, { page, perPage });
+
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.usersTotal, perPage);
 
@@ -150,6 +154,7 @@ export default {
 
     res.toast && commit(types.SET_TOAST, res.toast);
   },
+
   sendRegistrationData: async ({ commit }, form) => {
     const res = await api.post(url.CONFIRMATION_URL, { user: form });
 
@@ -162,6 +167,7 @@ export default {
       perPage: req.perPage,
       warehouseId: req.warehouseId
     });
+
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.storagesTotal, req.perPage);
 
@@ -169,6 +175,75 @@ export default {
       commit(types.STORAGES_PAGE_LIMIT, pageLimit);
       res.toast && commit(types.SET_TOAST, res.toast);
     }
+  },
+  fetchStorageTypes: async ({ commit }) => {
+    const res = await api.get(url.STORAGE_TYPES_URL);
+
+    if (res.data) {
+      commit(types.STORAGE_TYPES, res.data.storageTypes);
+      res.toast && commit(types.SET_TOAST, res.toast);
+    }
+  },
+  createStorage: async ({ commit }, req) => {
+    commit(types.CREATE_STORAGE, req);
+
+    const res = await api.post(url.STORAGES_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  getUpdatedStorage: async ({ commit }, req) => {
+    commit(types.SET_UPDATED_STORAGE, req);
+  },
+  sendUpdatedStorage: async ({ commit }, req) => {
+    const res = await api.put(url.STORAGES_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  deleteStorage: async ({ commit }, req) => {
+    commit(types.DELETE_STORAGE, req);
+  },
+  sendDeletedStorage: async ({ commit }, storageId) => {
+    const res = await api.delete(url.STORAGES_URL, { storageId });
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+
+  fetchSendersList: async ({ commit }, page = 1, perPage = 5) => {
+    const res = await api.get(url.SENDERS_URL, { page, perPage });
+
+    if (res.data) {
+      const pageLimit = helpers.calculatePageLimit(res.data.sendersTotal, perPage);
+      commit(types.SENDERS, res.data.senders);
+      commit(types.SENDERS_PAGE_LIMIT, pageLimit);
+    }
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  createSender: async ({ commit }, req) => {
+    commit(types.CREATE_SENDER, req);
+
+    const res = await api.post(url.SENDERS_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  getUpdatedSender: async ({ commit }, req) => {
+    commit(types.SET_UPDATED_SENDER, req);
+  },
+  sendUpdatedSender: async ({ commit }, req) => {
+    const res = await api.put(url.SENDERS_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  deleteSender: async ({ commit }, req) => {
+    commit(types.DELETE_SENDER, req);
+  },
+  sendDeletedSender: async ({ commit }, senderId) => {
+    const res = await api.delete(url.SENDERS_URL, { senderId });
+
+    res.toast && commit(types.SET_TOAST, res.toast);
   },
 
   fetchCarriersList: async ({ commit }, page = 1, perPage = 5) => {

@@ -1,6 +1,6 @@
 <template>
   <w-table
-    :items="carriers"
+    :items="senders"
     :fields="fields">
     <template
       v-slot:cell(active)="data">
@@ -8,26 +8,6 @@
         v-model="data.value"
         disabled>
       </b-form-checkbox>
-    </template>
-    <template
-      v-slot:cell(drivers)="data">
-      <b-button
-        variant="light"
-        size="sm"
-        @click="clickedDriversButton(data.item)">
-        Drivers
-      </b-button
-      >
-    </template>
-    <template
-      v-slot:cell(transport)="data">
-      <b-button
-        variant="light"
-        size="sm"
-        @click="clickedTransportButton(data.item)">
-        Transport
-      </b-button
-      >
     </template>
     <template
       v-slot:cell(buttons)="data">
@@ -63,11 +43,11 @@
             BFormCheckbox,
             BButton
         },
-        props: ['carriers'],
+        props: ['senders'],
         data: function () {
             return {
                 fields: [
-                    'name', 'upn', 'countryCode',
+                    'senderName', 'upn', 'countryCode',
                     {
                         key: 'date',
                         label: 'Date',
@@ -75,8 +55,6 @@
                             return value.slice(0, 10);
                         }
                     },
-                    { key: 'drivers', label: '', class: 'w-list-button' },
-                    { key: 'transport', label: '', class: 'w-list-button' },
                     { key: 'buttons', label: '', class: 'w-list-button' },
                     { key: 'blank', label: '', class: 'w-blank-column' }
                 ]
@@ -84,36 +62,23 @@
         },
         methods: {
             ...mapActions({
-                getUpdatedCarrierData: 'getUpdatedCarrier',
-                setCurrentCarrier: 'setCurrentCarrier',
-                sendUpdatedCarrier: 'sendUpdatedCarrier'
+                getUpdatedSenderData: 'getUpdatedSender',
+                sendDeletedSenderData: 'deleteSender'
             }),
-            clickedDriversButton(item) {
-                this.setCurrentCarrier({ id: item.id, carrierName: item.name });
-                router.push('/drivers');
-            },
-            clickedTransportButton(item) {
-                this.setCurrentCarrier({ id: item.id });
-                router.push('/transport');
-            },
             clickedUpdateButton(item) {
-                this.getUpdatedCarrierData(item);
-                router.push('/carriers/update');
+                this.getUpdatedSenderData(item);
+                router.push('/senders/update');
             },
             clickedDeleteButton(item) {
-                this.$bvModal.msgBoxConfirm(modal.CARRIER_TEXT, {
-                    title: `${modal.CARRIER_TITLE} ${item.name}`,
+                this.$bvModal.msgBoxConfirm(modal.SENDER_TEXT, {
+                    title: `${modal.SENDER_TITLE} ${item.senderName}`,
                     ...modal.CONFIRM_MODAL_OPTIONS
                 })
-                    .then(value => value && this.deleteCarrier(item));
+                    .then(value => value && this.deleteSender(item));
             },
-            deleteCarrier(item) {
+            deleteSender(item) {
                 this.$emit('delete-button-clicked', item);
             }
         }
     };
 </script>
-
-<style lang="scss" scoped>
-  @import './styles.scss';
-</style>

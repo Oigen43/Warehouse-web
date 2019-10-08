@@ -2,9 +2,21 @@
   <b-row>
     <b-col lg="12" sm="12">
       <div class='w-storages-list-page'>
-        <h1>List of Storages</h1>
+        <h1>List of Storage Places</h1>
+        <b-row>
+          <b-col lg="12" sm="12">
+            <b-button
+              variant="dark"
+              @click="clickedAddButton"
+              class="w-storages-add-button"
+              v-if="hasPermissions(routesPermissions.storages.create)"
+            >add storage
+            </b-button>
+          </b-col>
+        </b-row>
         <div class="w-storages-list">
           <w-list
+            @delete-button-clicked="clickedDeleteButton"
             :storagesList="storages"
           ></w-list>
         </div>
@@ -27,16 +39,21 @@
 
 <script>
     import { mapActions, mapState } from 'vuex';
-    import { BRow, BCol } from 'bootstrap-vue';
+    import { BRow, BCol, BButton } from 'bootstrap-vue';
 
+    import { validation } from '../../components/mixins/validation';
+    import routesPermissions from '../../constants/routesPermissions';
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
+    import router from '../../router';
 
     export default {
         name: 'WStoragesListPage',
+        mixins: [validation],
         components: {
             BRow,
             BCol,
+            BButton,
             WList,
             WPagination
         },
@@ -51,14 +68,36 @@
                 'storages',
                 'storagesPageLimit',
                 'currentWarehouse'
-            ])
+            ]),
+            routesPermissions: function() {
+              return routesPermissions;
+            }
         },
         methods: {
             ...mapActions({
-                fetchStoragesList: 'fetchStoragesList'
+                fetchStoragesList: 'fetchStoragesList',
+                fetchStorageTypes: 'fetchStorageTypes',
+                sendDeletedStorageData: 'sendDeletedStorage',
+                deletedStorageData: 'deleteStorage'
             }),
             sendRequest(page) {
                 this.currentPage = page;
+                this.fetchStoragesList({
+                    page: this.currentPage,
+                    perPage: this.perPage,
+                    warehouseId: this.currentWarehouse.id
+                });
+            },
+            async clickedAddButton() {
+                await this.fetchStorageTypes();
+                router.push('/storages/add');
+            },
+            async clickedDeleteButton(item) {
+                await this.sendDeletedStorageData(item.id);
+                this.deletedStorageData(item);
+                if (this.storages.length === 0) {
+                    this.currentPage -= 1;
+                }
                 this.fetchStoragesList({
                     page: this.currentPage,
                     perPage: this.perPage,

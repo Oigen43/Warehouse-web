@@ -16,8 +16,7 @@
               variant="light"
               to='/companies'
               class="w-navigation-link"
-              v-if="hasPermissions(routesPermissions.companies)"
-            >
+              v-if="hasPermissions(routesPermissions.companies.read)">
               Companies
             </b-button>
           </b-nav-item>
@@ -26,9 +25,17 @@
               variant="light"
               to='/users'
               class="w-navigation-link"
-              v-if="hasPermissions(routesPermissions.users)"
-            >
+              v-if="hasPermissions(routesPermissions.users.read)">
               Users
+            </b-button>
+          </b-nav-item>
+          <b-nav-item>
+            <b-button
+              variant="light"
+              to='/senders'
+              class="w-navigation-link"
+              v-if="hasPermissions(routesPermissions.senders.read)">
+              Senders
             </b-button>
           </b-nav-item>
           <b-nav-item>
@@ -36,7 +43,7 @@
               variant="light"
               to='/carriers'
               class="w-navigation-link"
-              v-if="hasPermissions(routesPermissions.carriers)"
+              v-if="hasPermissions(routesPermissions.carriers.read)"
             >
               Carriers
             </b-button>
@@ -48,16 +55,14 @@
             variant="dark"
             class="w-navigation-button my-2 my-sm-0"
             to="/login"
-            v-if="!isAuthorized"
-          >
+            v-if="!isAuthorized">
             Login
           </b-button>
           <b-button
             variant="dark"
             class="w-navigation-button my-2 my-sm-0"
             v-if="isAuthorized"
-            @click="logout"
-          >
+            @click="logout">
             Logout
           </b-button>
         </b-navbar-nav>

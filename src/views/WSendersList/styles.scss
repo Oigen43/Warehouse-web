@@ -1,9 +1,9 @@
-.w-storages-list-page {
+.w-senders-list-page {
   margin-top: 2rem;
   text-align: center;
 }
 
-.w-storages-add-button {
+.w-senders-add-button {
   background-color: #2C3E50;
   float: left;
   margin-top: 1rem;
@@ -11,25 +11,23 @@
   text-transform: uppercase;
 }
 
-.w-storages-list {
+.w-senders-list {
   margin: 0;
 }
 
-.w-storages-list-pagination {
+.w-senders-list-pagination {
   margin-bottom: 1rem;
 }
 
 @media screen and (min-width: 53rem) {
-  .w-storages-list {
+  .w-senders-add-button {
+    margin-bottom: 0.5rem;
+    margin-left: 2rem;
+  }
+  .w-senders-list {
     margin: 1rem 2rem;
   }
-
-  .w-storages-add-button {
-      margin-bottom: 0.5rem;
-      margin-left: 2rem;
-  }
-
-  .w-storages-list-pagination {
+  .w-senders-list-pagination {
     margin-top: 1rem;
   }
 }

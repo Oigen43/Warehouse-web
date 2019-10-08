@@ -19,7 +19,8 @@
         </b-button>
       </template>
       <template
-        v-slot:cell(buttons)="data">
+        v-slot:cell(buttons)="data"
+        v-if="hasPermissions(routesPermissions.warehouses.update)">
         <b-button
           class="w-table-update-button"
           variant="dark"
@@ -41,12 +42,15 @@
     import { mapActions } from 'vuex';
     import { BFormCheckbox, BButton } from 'bootstrap-vue';
 
+    import { validation } from '../../../../components/mixins/validation';
+    import routesPermissions from '../../../../constants/routesPermissions';
     import WTable from '../../../../components/WTable';
     import router from '../../../../router';
     import * as modal from '../../../../constants/modal';
 
     export default {
         name: 'WList',
+        mixins: [validation],
         components: {
             WTable,
             BFormCheckbox,
@@ -55,14 +59,26 @@
         props: ['warehousesList'],
         data: function () {
             return {
-                fields: [
-                    'active', 'warehouseName', 'companyName', 'address',
-                    { key: 'storages', label: '' },
-                    { key: 'buttons', label: '' },
-                    { key: 'blank', label: '', class: 'w-blank-column' }
-                ],
                 clickedWarehouse: {}
             };
+        },
+        computed: {
+            fields: function() {
+                const fieldList = [
+                    'active', 'warehouseName', 'companyName', 'address',
+                    { key: 'storages', label: '', class: 'w-list-button' },
+                    { key: 'blank', label: '', class: 'w-blank-column' }
+                ];
+
+                if (this.hasPermissions(routesPermissions.warehouses.update)) {
+                    fieldList.push({ key: 'buttons', label: '', class: 'w-list-button' });
+                }
+
+                return fieldList;
+            },
+            routesPermissions: function() {
+                return routesPermissions;
+            }
         },
         methods: {
             ...mapActions({

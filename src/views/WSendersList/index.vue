@@ -1,32 +1,31 @@
 <template>
   <b-row>
     <b-col lg="12" sm="12">
-      <div class='w-companies-list-page'>
-        <h1>List of Companies</h1>
+      <div class='w-senders-list-page'>
+        <h1>List of Senders</h1>
         <b-row>
           <b-col lg="12" sm="12">
             <b-button
               variant="dark"
-              to="/companies/add"
-              class="w-companies-add-button"
-              v-if="hasPermissions(routesPermissions.companies.create)"
-            >add company
+              to="/senders/add"
+              class="w-senders-add-button"
+            >add sender
             </b-button>
           </b-col>
         </b-row>
-        <div class="companies-list">
+        <div class="w-senders-list">
           <w-list
             @delete-button-clicked="clickedDeleteButton"
-            :companies="companies"
+            :senders="senders"
           ></w-list>
         </div>
         <b-row>
           <b-col lg="12" sm="12">
-            <div class="companies-list-pagination">
+            <div class="w-senders-list-pagination">
               <w-pagination
-                v-if="companiesPageLimit > 1"
+                v-if="sendersPageLimit > 1"
                 :current="currentPage"
-                :pageLimit="companiesPageLimit"
+                :pageLimit="sendersPageLimit"
                 @page-changed="sendRequest"
               ></w-pagination>
             </div>
@@ -41,14 +40,11 @@
     import { mapActions, mapState } from 'vuex';
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
-    import { validation } from '../../components/mixins/validation';
-    import routesPermissions from '../../constants/routesPermissions';
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
 
     export default {
-        name: 'WCompaniesListPage',
-        mixins: [validation],
+        name: 'WSenderListPage',
         components: {
             BRow,
             BCol,
@@ -63,34 +59,31 @@
         },
         computed: {
             ...mapState([
-                'companies',
-                'companiesPageLimit'
-            ]),
-            routesPermissions: function() {
-              return routesPermissions;
-            }
+                'senders',
+                'sendersPageLimit'
+            ])
         },
         methods: {
             ...mapActions({
-                fetchCompaniesList: 'fetchCompaniesList',
-                sendDeletedCompanyData: 'sendDeletedCompany',
-                deletedCompanyData: 'deleteCompany'
+                fetchSendersList: 'fetchSendersList',
+                sendDeletedSenderData: 'sendDeletedSender',
+                deletedSenderData: 'deleteSender'
             }),
             sendRequest(page) {
                 this.currentPage = page;
-                this.fetchCompaniesList(this.currentPage);
+                this.fetchSendersList(this.currentPage);
             },
             async clickedDeleteButton(item) {
-                await this.sendDeletedCompanyData(item.id);
-                this.deletedCompanyData(item);
-                if (this.companies.length === 0 && this.currentPage > 1) {
+                await this.sendDeletedSenderData(item.id);
+                this.deletedSenderData(item);
+                if (this.senders.length === 0) {
                     this.currentPage -= 1;
                 }
-                this.fetchCompaniesList(this.currentPage);
+                this.fetchSendersList(this.currentPage);
             }
         },
         created: function () {
-            this.fetchCompaniesList();
+            this.fetchSendersList();
         }
     };
 </script>
