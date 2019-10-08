@@ -72,5 +72,15 @@ export default {
   'carrier.update.success': 'Carrier updated!',
   'carrier.update.error': 'Can not update carrier',
   'carrier.delete.success': 'Carrier deleted!',
-  'carrier.delete.error': 'Can not delete carrier'
+  'carrier.delete.error': 'Can not delete carrier',
+
+  'transport.list.get.error': 'Can not get transport list',
+  'transport.get.unknown': 'This transport does not exist',
+  'transport.name.conflict': 'This transport already exists!',
+  'transport.create.success': 'Transport created!',
+  'transport.create.error': 'Can not create transport',
+  'transport.update.success': 'Transport updated!',
+  'transport.update.error': 'Can not update transport',
+  'transport.delete.success': 'Transport deleted!',
+  'transport.delete.error': 'Can not delete transport'
 };
