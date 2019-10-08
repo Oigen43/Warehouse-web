@@ -2,10 +2,8 @@
     <multiselect
         v-bind="$attrs"
         v-on="$listeners"
-        :multiple="true"
         :taggable="true"
         :searchable="false"
-        :close-on-select="false"
         @tag="addTag"
     ></multiselect>
 </template>
@@ -24,7 +22,7 @@
                     code: newTag.substring(0, 2) + Math.floor((Math.random() * 10000000))
                 };
                 this.options.push(tag);
-                this.value.push(tag);
+                // this.value.push(tag);
             }
         }
     };

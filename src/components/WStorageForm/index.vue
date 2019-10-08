@@ -8,16 +8,19 @@
       class="w-storages-form-input"
     ></b-form-input>
 
-    <b-form-select
-      class="w-storages-form-input"
-      required
+    <w-multiselect
+      :value="form.storageType"
+      :options="storageTypes"
+      :multiple="false"
+      label="type"
       size="lg"
+      :allow-empty="false"
+      :preselectFirst="true"
+      :close-on-select="true"
+      :placeholder="placeholder"
       v-model="form.storageType"
-      :options="options">
-      <template v-slot:first>
-        <option :value="null" disabled>Please select storage type</option>
-      </template>
-    </b-form-select>
+      class="w-storages-form-input"
+    ></w-multiselect>
 
     <b-button
       type="submit"
@@ -31,14 +34,16 @@
 </template>
 
 <script>
-    import { BForm, BFormInput, BFormSelect, BButton } from 'bootstrap-vue';
+    import { BForm, BFormInput, BButton } from 'bootstrap-vue';
+
+    import WMultiselect from '../WMultiselect';
 
     export default {
         name: 'WStorageForm',
         components: {
             BForm,
             BFormInput,
-            BFormSelect,
+            WMultiselect,
             BButton
         },
         props: {
@@ -53,8 +58,8 @@
                 default: ''
             },
             selectedStorageType: {
-                type: Number,
-                default: null
+                type: Object,
+                default: {}
             },
             storageTypes: {
                 type: Array,
@@ -69,19 +74,20 @@
                     id: this.id,
                     storageCapacity: this.storageCapacity,
                     storageType: this.selectedStorageType
-                }
+                },
+                placeholder: 'Please select storage type'
             };
         },
-        computed: {
-          options() {
-              return this.storageTypes.map(function(item) {
-                  return {
-                      value: item.id,
-                      text: item.type
-                  };
-              });
-          }
-        },
+        // computed: {
+        //   options() {
+        //       return this.storageTypes.map(function(item) {
+        //           return {
+        //               value: item.id,
+        //               text: item.type
+        //           };
+        //       });
+        //   }
+        // },
         methods: {
             onSubmit() {
                 this.$emit('form-submitted', this.form);

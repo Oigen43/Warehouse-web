@@ -185,6 +185,7 @@ export default {
     }
   },
   createStorage: async ({ commit }, req) => {
+    console.log(req)
     commit(types.CREATE_STORAGE, req);
 
     const res = await api.post(url.STORAGES_URL, req);

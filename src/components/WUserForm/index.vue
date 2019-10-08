@@ -73,6 +73,8 @@
       <w-multiselect
         :value="selectedRoles"
         :options="roles"
+        :multiple="true"
+        :close-on-select="false"
         :placeholder="placeholder"
         @input="updateValue"
         class="w-users-form-input"
