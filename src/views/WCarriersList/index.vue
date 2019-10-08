@@ -75,7 +75,7 @@
             async clickedDeleteButton(item) {
                 await this.sendDeletedCarrierData(item.id);
                 this.deletedCarrierData(item);
-                if (this.carriers.length === 0) {
+                if (this.carriers.length === 0 && this.currentPage > 1) {
                     this.currentPage -= 1;
                 }
                 this.fetchCarriersList(this.currentPage);

@@ -41,6 +41,7 @@ export default {
   'user.incorrect.login.data': 'Incorrect login or password! Try again!',
   'user.blocked': 'User deleted!',
 
+  'user.authorization.error': 'You have not permissions',
   'email.send.failed': 'Email can not be sent',
 
   'storages.list.get.error': 'Can not get storages list!',
@@ -73,6 +74,16 @@ export default {
   'carrier.update.error': 'Can not update carrier',
   'carrier.delete.success': 'Carrier deleted!',
   'carrier.delete.error': 'Can not delete carrier',
+
+  'drivers.list.get.error': 'Can not get drivers list',
+  'driver.get.unknown': 'This driver does not exist',
+  'driver.name.conflict': 'This driver already exists!',
+  'driver.create.success': 'Driver created!',
+  'driver.create.error': 'Can not create driver',
+  'driver.update.success': 'Driver updated!',
+  'driver.update.error': 'Can not update driver',
+  'driver.delete.success': 'Driver deleted!',
+  'driver.delete.error': 'Can not delete driver',
 
   'transport.list.get.error': 'Can not get transport list',
   'transport.get.unknown': 'This transport does not exist',

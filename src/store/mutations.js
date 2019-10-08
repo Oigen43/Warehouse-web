@@ -40,7 +40,7 @@ export default {
   },
   [types.UPDATE_COMPANY](state, company) {
     state.updatedCompany = company;
-    state.companies = [ ...state.companies.map(item => item.id === company.id ? company : item) ];
+    state.companies = state.companies.map(item => item.id === company.id ? company : item);
   },
   [types.DELETE_COMPANY](state, company) {
     state.deletedCompany = company;
@@ -65,7 +65,7 @@ export default {
   },
   [types.UPDATE_WAREHOUSE](state, warehouse) {
     state.updatedWarehouse = warehouse;
-    state.warehouses = [ ...state.warehouses.map(item => item.id === warehouse.id ? warehouse : item) ];
+    state.warehouses = state.warehouses.map(item => item.id === warehouse.id ? warehouse : item);
   },
   [types.DELETE_WAREHOUSE](state, warehouse) {
     state.deletedWarehouse = warehouse;
@@ -90,7 +90,7 @@ export default {
   },
   [types.UPDATE_USER](state, user) {
     state.updatedUser = user;
-    state.users = [...state.users.map(item => item.id === user.id ? user : item)];
+    state.users = state.users.map(item => item.id === user.id ? user : item);
   },
   [types.DELETE_USER](state, user) {
     state.deletedUser = user;
@@ -111,7 +111,7 @@ export default {
   },
   [types.UPDATE_CARRIER](state, carrier) {
     state.updatedCarrier = carrier;
-    state.carriers = [ ...state.carriers.map(item => item.id === carrier.id ? carrier : item) ];
+    state.carriers = state.carriers.map(item => item.id === carrier.id ? carrier : item);
   },
   [types.DELETE_CARRIER](state, carrier) {
     state.deletedCarrier = carrier;
@@ -119,6 +119,27 @@ export default {
   },
   [types.CURRENT_CARRIER](state, carrier) {
     state.currentCarrier = carrier;
+  },
+
+  [types.DRIVERS](state, drivers) {
+    state.drivers = drivers;
+  },
+  [types.DRIVERS_PAGE_LIMIT](state, driversPageLimit) {
+    state.driversPageLimit = driversPageLimit;
+  },
+  [types.CREATE_DRIVER](state, driver) {
+    state.newDriver = driver;
+  },
+  [types.SET_UPDATED_DRIVER](state, driver) {
+    state.updatedDriver = driver;
+  },
+  [types.UPDATE_DRIVER](state, driver) {
+    state.updatedDriver = driver;
+    state.drivers = state.drivers.map(item => item.id === driver.id ? driver : item);
+  },
+  [types.DELETE_DRIVER](state, driver) {
+    state.deletedDriver = driver;
+    state.drivers = state.drivers.filter(item => item.id !== driver.id);
   },
 
   [types.STORAGES](state, storages) {

@@ -16,7 +16,7 @@
               variant="light"
               to='/companies'
               class="w-navigation-link"
-              v-if="hasPermissions(routesPermissions.companies)">
+              v-if="hasPermissions(routesPermissions.companies.read)">
               Companies
             </b-button>
           </b-nav-item>
@@ -25,7 +25,7 @@
               variant="light"
               to='/users'
               class="w-navigation-link"
-              v-if="hasPermissions(routesPermissions.users)">
+              v-if="hasPermissions(routesPermissions.users.read)">
               Users
             </b-button>
           </b-nav-item>
@@ -34,7 +34,7 @@
               variant="light"
               to='/senders'
               class="w-navigation-link"
-              v-if="hasPermissions(routesPermissions.senders)">
+              v-if="hasPermissions(routesPermissions.senders.read)">
               Senders
             </b-button>
           </b-nav-item>
@@ -43,7 +43,7 @@
               variant="light"
               to='/carriers'
               class="w-navigation-link"
-              v-if="hasPermissions(routesPermissions.carriers)">
+              v-if="hasPermissions(routesPermissions.carriers.read)">
               Carriers
             </b-button>
           </b-nav-item>

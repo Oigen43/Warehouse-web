@@ -1,6 +1,6 @@
 <template>
   <w-table
-    :items="companies"
+    :items="companiesList"
     :fields="fields">
     <template
       v-slot:cell(active)="data">
@@ -25,13 +25,15 @@
         class="w-table-update-button"
         variant="dark"
         size="sm"
-        @click="clickedUpdateButton(data.item)">
+        @click="clickedUpdateButton(data.item)"
+        v-if="hasPermissions(routesPermissions.companies.update)">
         Update
       </b-button>
       <b-button
         variant="light"
         size="sm"
-        @click="clickedDeleteButton(data.item)">
+        @click="clickedDeleteButton(data.item)"
+        v-if="hasPermissions(routesPermissions.companies.delete)">
         ✕
       </b-button>
     </template>
@@ -42,19 +44,22 @@
     import { mapActions } from 'vuex';
     import { BFormCheckbox, BButton } from 'bootstrap-vue';
 
+    import { validation } from '../../../../components/mixins/validation';
+    import routesPermissions from '../../../../constants/routesPermissions';
     import WTable from '../../../../components/WTable';
     import router from '../../../../router';
     import * as modal from '../../../../constants/modal';
 
     export default {
         name: 'WList',
+        mixins: [validation],
         components: {
             WTable,
             BFormCheckbox,
             BButton
         },
         props: ['companies'],
-        data: function () {
+        data: function() {
             return {
                 fields: [
                     'active', 'companyName', 'address', 'description',
@@ -70,6 +75,17 @@
                     { key: 'blank', label: '', class: 'w-blank-column' }
                 ]
             };
+        },
+        computed: {
+            routesPermissions: function() {
+                return routesPermissions;
+            },
+            companiesList: function() {
+                if (!(Array.isArray(this.companies))) {
+                    return new Array(this.companies);
+                }
+                return this.companies;
+            }
         },
         methods: {
             ...mapActions({

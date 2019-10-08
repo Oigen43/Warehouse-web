@@ -27,6 +27,9 @@ import WSendersUpdateForm from '../views/WSendersUpdate';
 import WCarriersList from '../views/WCarriersList';
 import WCarriersAddForm from '../views/WCarriersAdd';
 import WCarriersUpdateForm from '../views/WCarriersUpdate';
+import WDriversList from '../views/WDriversList';
+import WDriversAddForm from '../views/WDriversAdd';
+import WDriversUpdateForm from '../views/WDriversUpdate';
 import WTransportList from '../views/WTransportList';
 import WTransportAddForm from '../views/WTransportAdd';
 import WTransportUpdateForm from '../views/WTransportUpdate';
@@ -59,6 +62,7 @@ const ifConfirmed = async (to, from, next) => {
     const res = await api.get(url.CONFIRMATION_URL, store.state.registrationToken);
     if (res.error) {
       store.commit(types.REMOVE_REGISTRATION_TOKEN);
+      res.toast && store.commit(types.SET_TOAST, res.toast);
       next('/');
       return;
     }
@@ -93,62 +97,62 @@ export default new Router({
       path: '/companies',
       name: 'companies',
       component: WCompaniesList,
-      meta: { authorize: routesPermissions.companies },
+      meta: { authorize: routesPermissions.companies.read },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/companies/add',
       name: 'companiesAddForm',
       component: WCompaniesAddForm,
-      meta: { authorize: routesPermissions.companies },
+      meta: { authorize: routesPermissions.companies.create },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/companies/update',
       name: 'companiesUpdateForm',
       component: WCompaniesUpdateForm,
-      meta: { authorize: routesPermissions.companies },
+      meta: { authorize: routesPermissions.companies.update },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/warehouses',
       name: 'warehouses',
       component: WWarehousesList,
-      meta: { authorize: routesPermissions.warehouses },
+      meta: { authorize: routesPermissions.warehouses.read },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/warehouses/add',
       name: 'warehousesAddForm',
       component: WWarehousesAddForm,
-      meta: { authorize: routesPermissions.warehouses },
+      meta: { authorize: routesPermissions.warehouses.create },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/warehouses/update',
       name: 'warehousesUpdateForm',
       component: WWarehousesUpdateForm,
-      meta: { authorize: routesPermissions.warehouses },
+      meta: { authorize: routesPermissions.warehouses.update },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/users',
       name: 'users',
       component: WUsersList,
-      meta: { authorize: routesPermissions.users },
+      meta: { authorize: routesPermissions.users.read },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/users/add',
       name: 'usersAddForm',
       component: WUsersAddForm,
-      meta: { authorize: routesPermissions.users },
+      meta: { authorize: routesPermissions.users.create },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/users/update',
       name: 'usersUpdateForm',
-      meta: { authorize: routesPermissions.users },
+      meta: { authorize: routesPermissions.users.update },
       component: WUsersUpdateForm,
       beforeEnter: ifAuthenticated,
     },
@@ -156,84 +160,105 @@ export default new Router({
       path: '/carriers',
       name: 'carriers',
       component: WCarriersList,
-      meta: { authorize: routesPermissions.carriers },
+      meta: { authorize: routesPermissions.carriers.read },
       beforeEnter: ifAuthenticated
     },
     {
       path: '/carriers/add',
       name: 'carriersAddForm',
       component: WCarriersAddForm,
-      meta: { authorize: routesPermissions.carriers },
+      meta: { authorize: routesPermissions.carriers.create },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/carriers/update',
       name: 'carriersUpdateForm',
       component: WCarriersUpdateForm,
-      meta: { authorize: routesPermissions.carriers },
+      meta: { authorize: routesPermissions.carriers.update },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/drivers',
+      name: 'drivers',
+      component: WDriversList,
+      meta: { authorize: routesPermissions.drivers.read },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/drivers/add',
+      name: 'driversAddForm',
+      component: WDriversAddForm,
+      meta: { authorize: routesPermissions.drivers.create },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/drivers/update',
+      name: 'driversUpdateForm',
+      component: WDriversUpdateForm,
+      meta: { authorize: routesPermissions.drivers.update },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/storages',
       name: 'storages',
       component: WStoragesList,
-      meta: { authorize: routesPermissions.storages },
+      meta: { authorize: routesPermissions.storages.read },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/storages/add',
       name: 'WStoragesAddForm',
       component: WStoragesAddForm,
-      meta: { authorize: routesPermissions.storages },
+      meta: { authorize: routesPermissions.storages.create },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/storages/update',
       name: 'WStoragesUpdateForm',
       component: WStoragesUpdateForm,
-      meta: { authorize: routesPermissions.storages },
+      meta: { authorize: routesPermissions.storages.update },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/senders',
       name: 'senders',
       component: WSendersList,
-      meta: { authorize: routesPermissions.senders },
+      meta: { authorize: routesPermissions.senders.read },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/senders/add',
       name: 'sendersAddForm',
       component: WSendersAddForm,
-      meta: { authorize: routesPermissions.senders },
+      meta: { authorize: routesPermissions.senders.create },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/senders/update',
       name: 'sendersUpdateForm',
       component: WSendersUpdateForm,
-      meta: { authorize: routesPermissions.senders },
+      meta: { authorize: routesPermissions.senders.update },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/transport',
       name: 'transport',
       component: WTransportList,
-      meta: { authorize: routesPermissions.transport },
+      meta: { authorize: routesPermissions.transport.read },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/transport/add',
       name: 'transportAddForm',
       component: WTransportAddForm,
-      meta: { authorize: routesPermissions.transport },
+      meta: { authorize: routesPermissions.transport.create },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/transport/update',
       name: 'transportUpdateForm',
       component: WTransportUpdateForm,
-      meta: { authorize: routesPermissions.transport },
+      meta: { authorize: routesPermissions.transport.update },
       beforeEnter: ifAuthenticated,
     },
     {

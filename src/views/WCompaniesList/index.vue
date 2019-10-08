@@ -9,6 +9,7 @@
               variant="dark"
               to="/companies/add"
               class="w-companies-add-button"
+              v-if="hasPermissions(routesPermissions.companies.create)"
             >add company
             </b-button>
           </b-col>
@@ -40,11 +41,14 @@
     import { mapActions, mapState } from 'vuex';
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
+    import { validation } from '../../components/mixins/validation';
+    import routesPermissions from '../../constants/routesPermissions';
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
 
     export default {
         name: 'WCompaniesListPage',
+        mixins: [validation],
         components: {
             BRow,
             BCol,
@@ -61,7 +65,10 @@
             ...mapState([
                 'companies',
                 'companiesPageLimit'
-            ])
+            ]),
+            routesPermissions: function() {
+              return routesPermissions;
+            }
         },
         methods: {
             ...mapActions({

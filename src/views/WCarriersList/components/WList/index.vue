@@ -67,7 +67,7 @@
         data: function () {
             return {
                 fields: [
-                    'name', 'unp', 'countryCode',
+                    'name', 'upn', 'countryCode',
                     {
                         key: 'date',
                         label: 'Date',
@@ -89,7 +89,7 @@
                 sendUpdatedCarrier: 'sendUpdatedCarrier'
             }),
             clickedDriversButton(item) {
-                this.setCurrentCarrier({ id: item.id, name: item.name });
+                this.setCurrentCarrier({ id: item.id, carrierName: item.name });
                 router.push('/drivers');
             },
             clickedTransportButton(item) {
@@ -102,7 +102,7 @@
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.CARRIER_TEXT, {
-                    title: `${modal.CARRIER_TITLE} ${item.companyName}`,
+                    title: `${modal.CARRIER_TITLE} ${item.name}`,
                     ...modal.CONFIRM_MODAL_OPTIONS
                 })
                     .then(value => value && this.deleteCarrier(item));

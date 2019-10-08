@@ -6,16 +6,16 @@
         v-model="form.name"
         required
         placeholder="Carrier name"
-        class="w-carrier-form-input"
+        class="w-carriers-form-input"
       ></b-form-input>
 
       <b-form-input
-        id="carrier-unp-input"
+        id="carrier-upn-input"
         size="lg"
-        v-model="form.unp"
+        v-model="form.upn"
         required
         placeholder="Payer's account number"
-        class="w-carrier-form-input"
+        class="w-carriers-form-input"
       ></b-form-input>
 
       <b-form-input
@@ -24,7 +24,7 @@
         v-model="form.countryCode"
         required
         placeholder="Carrier country code"
-        class="w-carrier-form-input"
+        class="w-carriers-form-input"
       ></b-form-input>
 
       <b-button
@@ -59,7 +59,7 @@
                 type: String,
                 default: ''
             },
-            unp: {
+            upn: {
                 type: String,
                 default: ''
             },
@@ -73,7 +73,7 @@
                 form: {
                     id: this.id,
                     name: this.name,
-                    unp: this.unp,
+                    upn: this.upn,
                     countryCode: this.countryCode
                 }
             };
