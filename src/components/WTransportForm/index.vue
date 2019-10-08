@@ -70,5 +70,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import 'styles';
+  @import './styles.scss';
 </style>
