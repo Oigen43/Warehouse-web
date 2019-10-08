@@ -1,5 +1,6 @@
 <template>
   <w-table
+    v-if="sendersListLength"
     :items="senders"
     :fields="fields">
     <template
@@ -59,6 +60,11 @@
                     { key: 'blank', label: '', class: 'w-blank-column' }
                 ]
             };
+        },
+        computed: {
+            sendersListLength: function () {
+                return this.senders.length;
+            }
         },
         methods: {
             ...mapActions({

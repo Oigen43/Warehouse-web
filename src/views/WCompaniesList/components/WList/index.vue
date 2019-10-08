@@ -1,5 +1,6 @@
 <template>
   <w-table
+    v-if="companiesListLength"
     :items="companiesList"
     :fields="fields">
     <template
@@ -85,6 +86,9 @@
                     return new Array(this.companies);
                 }
                 return this.companies;
+            },
+            companiesListLength: function () {
+                return this.companiesList.length;
             }
         },
         methods: {
