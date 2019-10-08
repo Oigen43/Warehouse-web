@@ -1,6 +1,5 @@
 <template>
   <w-table
-    v-if="carriersListLength"
     :items="carriers"
     :fields="fields">
     <template
@@ -82,11 +81,6 @@
                     { key: 'blank', label: '', class: 'w-blank-column' }
                 ]
             };
-        },
-        computed: {
-            carriersListLength: function () {
-                return this.carriers.length;
-            }
         },
         methods: {
             ...mapActions({

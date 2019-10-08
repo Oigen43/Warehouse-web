@@ -1,6 +1,5 @@
 <template>
     <w-table
-      v-if="warehouseListLength"
       :items="warehousesList"
       :fields="fields">
       <template
@@ -79,9 +78,6 @@
             },
             routesPermissions: function() {
                 return routesPermissions;
-            },
-            warehouseListLength: function () {
-                return this.warehousesList.length;
             }
         },
         methods: {
