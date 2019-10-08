@@ -159,7 +159,7 @@
                     password: this.password
                 },
 
-                roles: userRoles.ROLES,
+                roles: userRoles.ROLES_FOR_CREATING,
                 selectedRoles: this.userRoles,
                 placeholder: 'Add a role'
 

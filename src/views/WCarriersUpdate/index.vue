@@ -7,7 +7,7 @@
         submitButtonName="UPDATE CARRIER"
         :id="carrierId"
         :name="name"
-        :unp="unp"
+        :upn="upn"
         :country-code="countryCode"
       ></w-form>
       <b-button
@@ -45,8 +45,8 @@
             name() {
                 return this.updatedCarrier.name;
             },
-            unp() {
-                return this.updatedCarrier.unp;
+            upn() {
+                return this.updatedCarrier.upn;
             },
             countryCode() {
                 return this.updatedCarrier.countryCode;

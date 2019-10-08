@@ -41,9 +41,10 @@ export default {
   'user.incorrect.login.data': 'Incorrect login or password! Try again!',
   'user.blocked': 'User deleted!',
 
+  'storages.list.get.error': 'Can not get storages list',
+  'user.authorization.error': 'You have not permissions',
   'email.send.failed': 'Email can not be sent',
 
-  'storages.list.get.error': 'Can not get storages list!',
   'storage.get.unknown': 'This storage does not exist!',
   'storage.create.success': 'Storage created!',
   'storage.create.error': 'Can not create storage!',

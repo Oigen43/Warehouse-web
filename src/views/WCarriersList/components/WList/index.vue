@@ -67,7 +67,7 @@
         data: function () {
             return {
                 fields: [
-                    'name', 'unp', 'countryCode',
+                    'name', 'upn', 'countryCode',
                     {
                         key: 'date',
                         label: 'Date',

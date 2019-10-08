@@ -9,6 +9,7 @@
               variant="dark"
               @click="clickedAddButton"
               class="w-storages-add-button"
+              v-if="hasPermissions(routesPermissions.storages.create)"
             >add storage
             </b-button>
           </b-col>
@@ -40,12 +41,15 @@
     import { mapActions, mapState } from 'vuex';
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
+    import { validation } from '../../components/mixins/validation';
+    import routesPermissions from '../../constants/routesPermissions';
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
     import router from '../../router';
 
     export default {
         name: 'WStoragesListPage',
+        mixins: [validation],
         components: {
             BRow,
             BCol,
@@ -64,7 +68,10 @@
                 'storages',
                 'storagesPageLimit',
                 'currentWarehouse'
-            ])
+            ]),
+            routesPermissions: function() {
+              return routesPermissions;
+            }
         },
         methods: {
             ...mapActions({

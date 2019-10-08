@@ -10,7 +10,8 @@
         <b-card-body>
           <b-card-title class="mb-0 w-storage-card-text">{{storage.StorageType.type}}</b-card-title>
         </b-card-body>
-        <b-card-footer class="w-storage-card-footer">
+        <b-card-footer class="w-storage-card-footer"
+          v-if="hasPermissions(routesPermissions.storages.update)">
           <b-button
             class="w-storage-update-card-button"
             variant="dark"
@@ -42,11 +43,14 @@
         BButton
     } from 'bootstrap-vue';
 
+    import { validation } from '../../../../components/mixins/validation';
+    import routesPermissions from '../../../../constants/routesPermissions';
     import router from '../../../../router';
     import * as modal from '../../../../constants/modal';
 
     export default {
         name: 'WList',
+        mixins: [validation],
         components: {
             BRow,
             BCol,
@@ -57,6 +61,11 @@
             BButton
         },
         props: ['storagesList'],
+        computed: {
+            routesPermissions: function() {
+              return routesPermissions;
+            }
+        },
         methods: {
             ...mapActions({
                 fetchStorageTypes: 'fetchStorageTypes',
