@@ -76,7 +76,7 @@
             async clickedDeleteButton(item) {
                 await this.sendDeletedSenderData(item.id);
                 this.deletedSenderData(item);
-                if (this.senders.length === 0) {
+                if (this.senders.length === 0 && this.currentPage > 1) {
                     this.currentPage -= 1;
                 }
                 this.fetchSendersList(this.currentPage);
