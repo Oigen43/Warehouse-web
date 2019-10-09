@@ -1,5 +1,5 @@
 <template>
-  <b-row>
+  <b-row v-if="isItemsExists">
     <b-col lg="3" sm="6" v-for="driver in drivers" v-bind:key="driver.id">
       <b-card no-body class="overflow-hidden w-drivers-card">
         <b-card-img src="https://image.shutterstock.com/image-vector/drivers-license-identification-card-line-600w-381946675.jpg"
@@ -36,6 +36,7 @@
       </b-card>
     </b-col>
   </b-row>
+  <w-empty-table v-else></w-empty-table>
 </template>
 
 <script>
@@ -54,6 +55,8 @@
 
     import router from '../../../../router';
     import * as modal from '../../../../constants/modal';
+    import WEmptyTable from '../../../../components/WEmptyTable';
+    import helpers from '../../../../utils/helpers';
 
     export default {
         name: 'WList',
@@ -66,7 +69,8 @@
             BCardText,
             BCardBody,
             BCardFooter,
-            BButton
+            BButton,
+            WEmptyTable
         },
         props: ['drivers'],
         data() {
@@ -77,6 +81,11 @@
                     { key: 'delete', label: '' }
                 ]
             };
+        },
+        computed: {
+            isItemsExists() {
+                return helpers.isItemsExists(this.drivers);
+            }
         },
         methods: {
             ...mapActions({
