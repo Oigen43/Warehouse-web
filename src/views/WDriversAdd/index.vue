@@ -12,7 +12,7 @@
       ></w-form>
       <b-button
         variant="link"
-        to="/users"
+        to="/drivers"
         class="w-drivers-go-back-link"
       >Go Back
       </b-button>

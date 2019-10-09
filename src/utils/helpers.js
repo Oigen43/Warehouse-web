@@ -4,6 +4,6 @@ export default {
   },
 
   isItemsExists: (items) => {
-    return items.length;
+    return items.length > 0;
   }
 };
