@@ -1,5 +1,5 @@
 <template>
-  <b-row>
+  <b-row v-if="isItemsExists">
     <b-col lg="3" sm="6" v-for="user in users" v-bind:key="user.id">
       <b-card no-body class="overflow-hidden w-users-card">
         <div class="w-users-card-role-container">
@@ -37,6 +37,7 @@
       </b-card>
     </b-col>
   </b-row>
+  <w-empty-table v-else></w-empty-table>
 </template>
 
 <script>
@@ -55,6 +56,8 @@
 
     import router from '../../../../router';
     import * as modal from '../../../../constants/modal';
+    import WEmptyTable from '../../../../components/WEmptyTable';
+    import helpers from '../../../../utils/helpers';
 
     export default {
         name: 'WList',
@@ -67,9 +70,15 @@
             BCardText,
             BCardBody,
             BCardFooter,
-            BButton
+            BButton,
+            WEmptyTable
         },
         props: ['users'],
+        computed: {
+            isItemsExists() {
+                return helpers.isItemsExists(this.users);
+            }
+        },
         methods: {
             ...mapActions({
                 getUpdatedUserData: 'getUpdatedUser',

@@ -1,5 +1,5 @@
 <template>
-  <b-row>
+  <b-row v-if="isItemsExists">
     <b-col lg="3" sm="6" v-for="storage in storagesList" v-bind:key="storage.id">
       <b-card no-body class="overflow-hidden w-storage-card">
         <div class="rounded-0 w-storage-card-header">
@@ -29,6 +29,7 @@
       </b-card>
     </b-col>
   </b-row>
+  <w-empty-table v-else></w-empty-table>
 </template>
 
 <script>
@@ -47,6 +48,8 @@
     import routesPermissions from '../../../../constants/routesPermissions';
     import router from '../../../../router';
     import * as modal from '../../../../constants/modal';
+    import WEmptyTable from '../../../../components/WEmptyTable';
+    import helpers from '../../../../utils/helpers';
 
     export default {
         name: 'WList',
@@ -58,12 +61,16 @@
             BCardTitle,
             BCardBody,
             BCardFooter,
-            BButton
+            BButton,
+            WEmptyTable
         },
         props: ['storagesList'],
         computed: {
             routesPermissions: function() {
               return routesPermissions;
+            },
+            isItemsExists() {
+                return helpers.isItemsExists(this.storagesList);
             }
         },
         methods: {

@@ -16,23 +16,24 @@
       </template>
     </b-table>
   </div>
-  <div v-else>
-    <h1>There is no elements yet!</h1>
-    <h3>Insert elements here!</h3>
-  </div>
+  <w-empty-table v-else></w-empty-table>
 </template>
 
 <script>
     import { BTable } from 'bootstrap-vue';
 
+    import WEmptyTable from '../../components/WEmptyTable';
+    import helpers from '../../utils/helpers';
+
     export default {
         name: 'WTable',
         components: {
-            BTable
+            BTable,
+            WEmptyTable
         },
         computed: {
             isItemsExists() {
-                return this.$attrs.items.length;
+                return helpers.isItemsExists(this.$attrs.items);
             }
         },
     };
