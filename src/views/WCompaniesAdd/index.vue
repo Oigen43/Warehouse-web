@@ -10,6 +10,7 @@
           :description="description"
           :adminName="adminName"
           :adminEmail="adminEmail"
+          :disableState="disableState"
           with-admin-fields
         ></w-form>
         <b-button
@@ -43,7 +44,8 @@
                 address: '',
                 description: '',
                 adminName: '',
-                adminEmail: ''
+                adminEmail: '',
+                disableState: false
             };
         },
         methods: {
@@ -53,8 +55,13 @@
             redirect() {
                 router.push('/companies');
             },
+            changeDisableState() {
+              this.disableState = !this.disableState;
+            },
             async sendData(newCompany) {
+                this.changeDisableState();
                 const res = await this.sendNewCompanyData({ company: newCompany.company, user: newCompany.user });
+                res.error && this.changeDisableState();
                 !res.error && this.redirect();
             }
         }
