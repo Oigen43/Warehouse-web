@@ -54,7 +54,8 @@
         },
         data: function () {
             return {
-                currentPage: 1
+                currentPage: 1,
+                perPage: 8
             };
         },
         computed: {

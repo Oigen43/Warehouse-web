@@ -60,7 +60,7 @@
         data: function () {
             return {
                 currentPage: 1,
-                perPage: 5
+                perPage: 8
             };
         },
         computed: {
