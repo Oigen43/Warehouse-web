@@ -32,7 +32,7 @@ export default {
     localStorage.removeItem(constant.ROLES_LIST);
     commit(types.LOGOUT, initialState);
   },
-  fetchCompaniesList: async ({ commit }, page = 1, perPage = 6) => {
+  fetchCompaniesList: async ({ commit }, page = 1, perPage = 8) => {
     const res = await api.get(url.COMPANIES_URL, { page, perPage });
 
     if (res.data) {
@@ -281,6 +281,7 @@ export default {
 
     res.toast && commit(types.SET_TOAST, res.toast);
   },
+
   setCurrentCarrier: async ({ commit }, req) => {
     commit(types.CURRENT_CARRIER, req);
   },
@@ -324,4 +325,45 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
   },
+
+  fetchTransportList: async ({ commit }, req) => {
+    const res = await api.get(url.TRANSPORT_URL, {
+      page: req.page,
+      perPage: req.perPage,
+      carrierId: req.carrierId
+    });
+
+    if (res.data) {
+      const pageLimit = helpers.calculatePageLimit(res.data.transportTotal, req.perPage);
+
+      commit(types.TRANSPORT, res.data.transport);
+      commit(types.TRANSPORT_PAGE_LIMIT, pageLimit);
+    }
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  createTransport: async ({ commit }, req) => {
+    commit(types.CREATE_TRANSPORT, req);
+
+    const res = await api.post(url.TRANSPORT_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  getUpdatedTransport: async ({ commit }, req) => {
+    commit(types.SET_UPDATED_TRANSPORT, req);
+  },
+  sendUpdatedTransport: async ({ commit }, req) => {
+    const res = await api.put(url.TRANSPORT_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  deleteTransport: async ({ commit }, req) => {
+    commit(types.DELETE_TRANSPORT, req);
+  },
+  sendDeletedTransport: async ({ commit }, transportId) => {
+    const res = await api.delete(url.TRANSPORT_URL, { transportId });
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+  }
  };

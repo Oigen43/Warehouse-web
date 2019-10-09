@@ -8,7 +8,6 @@
         :senderName="senderName"
         :upn="upn"
         :countryCode="countryCode"
-        :date="date"
       ></w-form>
       <b-button
         variant="link"
@@ -39,8 +38,7 @@
             return {
                 senderName: '',
                 upn: '',
-                countryCode: '',
-                date: ''
+                countryCode: ''
             };
         },
         methods: {
