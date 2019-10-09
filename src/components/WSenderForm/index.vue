@@ -24,15 +24,6 @@
       class="w-senders-form-input"
     ></b-form-input>
 
-    <b-form-input
-      v-if="dateDisplay"
-      size="lg"
-      v-model="form.date"
-      type="date"
-      placeholder="Sender active date"
-      class="w-senders-form-input"
-    ></b-form-input>
-
     <b-button
       type="submit"
       variant="outline-dark"
@@ -71,13 +62,6 @@
             countryCode: {
                 type: String,
                 default: '',
-            },
-            date: {
-                type: String
-            },
-            dateDisplay: {
-                type: Boolean,
-                default: true
             }
         },
         data: function () {
@@ -86,8 +70,7 @@
                     id: this.id,
                     senderName: this.senderName,
                     upn: this.upn,
-                    countryCode: this.countryCode,
-                    date: this.date
+                    countryCode: this.countryCode
                 }
             };
         },

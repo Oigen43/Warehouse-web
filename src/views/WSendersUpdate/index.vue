@@ -9,7 +9,6 @@
         :senderName="senderName"
         :upn="upn"
         :countryCode="countryCode"
-        :dateDisplay="false"
       ></w-form>
       <b-button
         variant="link"
