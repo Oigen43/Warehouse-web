@@ -43,8 +43,7 @@
               variant="light"
               to='/carriers'
               class="w-navigation-link"
-              v-if="hasPermissions(routesPermissions.carriers.read)"
-            >
+              v-if="hasPermissions(routesPermissions.carriers.read)">
               Carriers
             </b-button>
           </b-nav-item>

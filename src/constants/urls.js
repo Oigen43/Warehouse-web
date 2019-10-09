@@ -8,5 +8,6 @@ export const STORAGE_TYPES_URL = '/storage_types';
 export const SENDERS_URL = '/senders';
 export const CARRIERS_URL = '/carriers';
 export const DRIVERS_URL = '/drivers';
+export const TRANSPORT_URL = '/transport';
 export const REFRESH_TOKEN_URL = '/refresh';
 export const CONFIRMATION_URL = '/confirmation';

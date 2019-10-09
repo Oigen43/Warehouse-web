@@ -93,7 +93,7 @@
                 router.push('/drivers');
             },
             clickedTransportButton(item) {
-                this.setCurrentCarrier({ id: item.id });
+                this.setCurrentCarrier({ id: item.id, name: item.name });
                 router.push('/transport');
             },
             clickedUpdateButton(item) {
