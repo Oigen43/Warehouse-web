@@ -187,6 +187,27 @@ export default {
     state.senders = state.senders.filter(item => item.id !== sender.id);
   },
 
+  [types.TRANSPORT](state, transport) {
+    state.transport = transport;
+  },
+  [types.TRANSPORT_PAGE_LIMIT](state, transportPageLimit) {
+    state.transportPageLimit = transportPageLimit;
+  },
+  [types.CREATE_TRANSPORT](state, transport) {
+    state.newTransport = transport;
+  },
+  [types.SET_UPDATED_TRANSPORT](state, transport) {
+    state.updatedTransport = transport;
+  },
+  [types.UPDATE_TRANSPORT](state, transport) {
+    state.updatedTransport = transport;
+    state.transport = [ ...state.transport.map(item => item.id === transport.id ? transport : item) ];
+  },
+  [types.DELETE_TRANSPORT](state, transport) {
+    state.deletedTransport = transport;
+    state.transport = state.transport.filter(item => item.id !== transport.id);
+  },
+
   [types.SET_TOAST](state, toast) {
     state.toast = toast;
   }

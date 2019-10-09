@@ -44,7 +44,7 @@
                 return this.updatedStorage.id;
             },
             storageType() {
-                return this.updatedStorage.StorageType.id;
+                return this.updatedStorage.StorageType;
             },
             storageCapacity() {
                 return this.updatedStorage.storageCapacity;

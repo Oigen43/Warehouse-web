@@ -30,6 +30,9 @@ import WCarriersUpdateForm from '../views/WCarriersUpdate';
 import WDriversList from '../views/WDriversList';
 import WDriversAddForm from '../views/WDriversAdd';
 import WDriversUpdateForm from '../views/WDriversUpdate';
+import WTransportList from '../views/WTransportList';
+import WTransportAddForm from '../views/WTransportAdd';
+import WTransportUpdateForm from '../views/WTransportUpdate';
 import WNotFound from '../views/WNotFound';
 
 Vue.use(Router);
@@ -235,6 +238,27 @@ export default new Router({
       name: 'sendersUpdateForm',
       component: WSendersUpdateForm,
       meta: { authorize: routesPermissions.senders.update },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/transport',
+      name: 'transport',
+      component: WTransportList,
+      meta: { authorize: routesPermissions.transport.read },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/transport/add',
+      name: 'transportAddForm',
+      component: WTransportAddForm,
+      meta: { authorize: routesPermissions.transport.create },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/transport/update',
+      name: 'transportUpdateForm',
+      component: WTransportUpdateForm,
+      meta: { authorize: routesPermissions.transport.update },
       beforeEnter: ifAuthenticated,
     },
     {

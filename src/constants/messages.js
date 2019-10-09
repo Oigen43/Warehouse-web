@@ -41,10 +41,10 @@ export default {
   'user.incorrect.login.data': 'Incorrect login or password! Try again!',
   'user.blocked': 'User deleted!',
 
-  'storages.list.get.error': 'Can not get storages list',
   'user.authorization.error': 'You have not permissions',
   'email.send.failed': 'Email can not be sent',
 
+  'storages.list.get.error': 'Can not get storages list!',
   'storage.get.unknown': 'This storage does not exist!',
   'storage.create.success': 'Storage created!',
   'storage.create.error': 'Can not create storage!',
@@ -83,5 +83,15 @@ export default {
   'driver.update.success': 'Driver updated!',
   'driver.update.error': 'Can not update driver',
   'driver.delete.success': 'Driver deleted!',
-  'driver.delete.error': 'Can not delete driver'
+  'driver.delete.error': 'Can not delete driver',
+
+  'transport.list.get.error': 'Can not get transport list',
+  'transport.get.unknown': 'This transport does not exist',
+  'transport.name.conflict': 'This transport already exists!',
+  'transport.create.success': 'Transport created!',
+  'transport.create.error': 'Can not create transport',
+  'transport.update.success': 'Transport updated!',
+  'transport.update.error': 'Can not update transport',
+  'transport.delete.success': 'Transport deleted!',
+  'transport.delete.error': 'Can not delete transport'
 };

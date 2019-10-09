@@ -12,6 +12,8 @@ export const CARRIER_TEXT = 'Please confirm that you want to delete the carrier.
 export const CARRIER_TITLE = 'Delete carrier';
 export const DRIVER_TEXT = 'Please confirm that you want to delete the driver.';
 export const DRIVER_TITLE = 'Delete driver';
+export const TRANSPORT_TEXT = 'Please confirm that you want to delete the transport.';
+export const TRANSPORT_TITLE = 'Delete transport';
 
 export const CONFIRM_MODAL_OPTIONS = {
   size: 'md',

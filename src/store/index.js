@@ -63,6 +63,12 @@ export default new Vuex.Store({
     deletedDriver: {},
     currentDriver: {},
 
+    transport: [],
+    transportPageLimit: 1,
+    newTransport: {},
+    updatedTransport: {},
+    deletedTransport: {},
+
     toast: {}
     },
   getters,
