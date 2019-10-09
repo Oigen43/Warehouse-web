@@ -157,7 +157,6 @@ export default {
 
   sendRegistrationData: async ({ commit }, form) => {
     const res = await api.post(url.CONFIRMATION_URL, { user: form });
-    console.log(res);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
 
