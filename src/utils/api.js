@@ -38,8 +38,10 @@ function createAxiosResponseInterceptor () {
         error.response.config.headers['Authorization'] = `Bearer ${response.data.data.token}`;
         return axios(originalRequest);
       }).catch(error => {
-        store.dispatch('logout');
-        router.push('/login');
+        if (error.response.status === 401) {
+          store.dispatch('logout');
+          router.push('/login');
+        }
         return Promise.reject(error);
       }).finally(createAxiosResponseInterceptor);
     } else {
