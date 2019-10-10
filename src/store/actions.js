@@ -364,5 +364,17 @@ export default {
     const res = await api.delete(url.TRANSPORT_URL, { transportId });
 
     res.toast && commit(types.SET_TOAST, res.toast);
+  },
+
+  fetchTTNList: async ({ commit }, page = 1, perPage = 8) => {
+    const res = await api.get(url.TTN_URL, { page, perPage });
+
+    if (res.data) {
+      const pageLimit = helpers.calculatePageLimit(res.data.TTNTotal, perPage);
+
+      commit(types.TTN, res.data.TTN);
+      commit(types.TTN_PAGE_LIMIT, pageLimit);
+    }
+    res.toast && commit(types.SET_TOAST, res.toast);
   }
  };

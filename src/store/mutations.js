@@ -208,6 +208,13 @@ export default {
     state.transport = state.transport.filter(item => item.id !== transport.id);
   },
 
+  [types.TTN](state, TTN) {
+    state.TTN = TTN;
+  },
+  [types.TTN_PAGE_LIMIT](state, TTNPageLimit) {
+    state.TTNPageLimit = TTNPageLimit;
+  },
+
   [types.SET_TOAST](state, toast) {
     state.toast = toast;
   }

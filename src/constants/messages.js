@@ -93,5 +93,7 @@ export default {
   'transport.update.success': 'Transport updated!',
   'transport.update.error': 'Can not update transport',
   'transport.delete.success': 'Transport deleted!',
-  'transport.delete.error': 'Can not delete transport'
+  'transport.delete.error': 'Can not delete transport',
+
+  'ttn.list.get.error': 'Can not get TTN list'
 };
