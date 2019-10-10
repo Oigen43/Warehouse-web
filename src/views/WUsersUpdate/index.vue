@@ -1,7 +1,7 @@
 <template>
   <b-row>
-    <b-col lg="4" sm="12" offset-lg="4">
-    <h1 class="w-user-update-form-h1">Update User</h1>
+    <b-col class="w-users-update-form" lg="4" sm="12" offset-lg="4">
+    <h1 class="w-users-update-form-h1">Update User</h1>
     <w-form
       v-if="!loading"
       @form-submitted="sendData"
