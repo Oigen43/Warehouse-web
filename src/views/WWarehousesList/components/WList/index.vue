@@ -71,7 +71,7 @@
                 ];
 
                 if (this.hasPermissions(routesPermissions.warehouses.update)) {
-                    fieldList.push({ key: 'buttons', label: '', class: 'w-list-button' });
+                    fieldList.splice(fieldList.length - 1, 0, { key: 'buttons', label: '', class: 'w-list-button' });
                 }
 
                 return fieldList;

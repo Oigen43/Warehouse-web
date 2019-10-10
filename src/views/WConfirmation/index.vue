@@ -1,6 +1,6 @@
 <template>
     <b-row>
-      <b-col lg="3" sm="12" offset-lg="4">
+      <b-col lg="4" sm="12" offset-lg="4">
         <h1 class="w-user-registration-h1">Registration Completion</h1>
         <b-form @submit.prevent="onSubmit" class="w-users-form">
           <b-form-input

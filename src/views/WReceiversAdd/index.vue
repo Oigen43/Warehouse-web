@@ -1,6 +1,6 @@
 <template>
   <b-row>
-    <b-col class="w-receivers-add-form" lg="3" sm="12" offset-lg="4">
+    <b-col class="w-receivers-add-form" lg="4" sm="12" offset-lg="4">
       <h1 class="w-receivers-add-form-h1">Add a New Receiver</h1>
       <w-form
         @form-submitted="sendData"
