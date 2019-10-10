@@ -7,7 +7,7 @@
           <b-col lg="12" sm="12">
             <b-button
               variant="dark"
-              to="/warehouses/add"
+              to="warehouses/add"
               class="w-warehouses-add-button"
               v-if="hasPermissions(routesPermissions.warehouses.create)"
             >add warehouse
@@ -45,6 +45,7 @@
     import routesPermissions from '../../constants/routesPermissions';
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
+    import router from '../../router';
 
     export default {
         name: 'WWarehousesListPage',
@@ -65,11 +66,13 @@
         computed: {
             ...mapState([
                 'warehouses',
-                'warehousesPageLimit',
-                'currentCompany'
+                'warehousesPageLimit'
             ]),
             routesPermissions: function() {
               return routesPermissions;
+            },
+            companyId: function() {
+                return this.$route.params.companyId;
             }
         },
         methods: {
@@ -83,7 +86,7 @@
                 this.fetchWarehousesList({
                     page: this.currentPage,
                     perPage: this.perPage,
-                    companyId: this.currentCompany.id
+                    companyId: this.companyId
                 });
             },
             async clickedDeleteButton(item) {
@@ -95,7 +98,7 @@
                 this.fetchWarehousesList({
                     page: this.currentPage,
                     perPage: this.perPage,
-                    companyId: this.currentCompany.id
+                    companyId: this.companyId
                 });
             }
         },
@@ -103,7 +106,7 @@
             this.fetchWarehousesList({
                 page: this.currentPage,
                 perPage: this.perPage,
-                companyId: this.currentCompany.id
+                companyId: this.companyId
             });
         }
     };

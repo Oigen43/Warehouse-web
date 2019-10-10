@@ -47,10 +47,6 @@ export default {
     state.companies = state.companies.filter(item => item.id !== company.id);
   },
 
-  [types.CURRENT_COMPANY](state, company) {
-    state.currentCompany = company;
-  },
-
   [types.WAREHOUSES](state, warehouses) {
     state.warehouses = warehouses;
   },
@@ -70,10 +66,6 @@ export default {
   [types.DELETE_WAREHOUSE](state, warehouse) {
     state.deletedWarehouse = warehouse;
     state.warehouses = state.warehouses.filter(item => item.id !== warehouse.id);
-  },
-
-  [types.CURRENT_WAREHOUSE](state, warehouse) {
-    state.currentWarehouse = warehouse;
   },
 
   [types.USERS](state, users) {
@@ -210,5 +202,12 @@ export default {
 
   [types.SET_TOAST](state, toast) {
     state.toast = toast;
+  },
+
+  [types.REQUEST](state) {
+    state.loading = true;
+  },
+  [types.SUCCESS](state) {
+    state.loading = false;
   }
 };

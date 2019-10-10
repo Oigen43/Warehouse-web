@@ -20,14 +20,12 @@ export default new Vuex.Store({
     newCompany: {},
     updatedCompany: {},
     deletedCompany: {},
-    currentCompany: {},
 
     warehouses: [],
     warehousesPageLimit: 1,
     newWarehouse: {},
     updatedWarehouse: {},
     deletedWarehouse: {},
-    currentWarehouse: {},
 
     users: [],
     usersPageLimit: 1,
@@ -61,7 +59,6 @@ export default new Vuex.Store({
     newDriver: {},
     updatedDriver: {},
     deletedDriver: {},
-    currentDriver: {},
 
     transport: [],
     transportPageLimit: 1,
@@ -69,7 +66,8 @@ export default new Vuex.Store({
     updatedTransport: {},
     deletedTransport: {},
 
-    toast: {}
+    toast: {},
+    loading: false
     },
   getters,
   mutations,

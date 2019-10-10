@@ -39,7 +39,8 @@
         data: function () {
             return {
                 fields: [
-                    'carrierName', 'transportType', 'transportNumber',
+                    { key: 'Carrier.name', label: 'Carrier Name' },
+                    'transportType', 'transportNumber',
                     {
                         key: 'date',
                         label: 'Date',
@@ -54,12 +55,10 @@
         },
         methods: {
             ...mapActions({
-                getUpdatedTransportData: 'getUpdatedTransport',
                 sendDeletedTransportData: 'deleteTransport'
             }),
             clickedUpdateButton(item) {
-                this.getUpdatedTransportData(item);
-                router.push('/transport/update');
+                router.push(`transport/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.TRANSPORT_TEXT, {

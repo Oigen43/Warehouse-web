@@ -12,7 +12,7 @@
       ></w-form>
       <b-button
         variant="link"
-        to="/drivers"
+        @click="redirect"
         class="w-drivers-go-back-link"
       >Go Back
       </b-button>
@@ -46,17 +46,23 @@
         computed: {
           ...mapState([
               'currentCarrier'
-          ])
+          ]),
+            carrierId() {
+                return +this.$route.params.carrierId;
+            },
+            driverId() {
+                return +this.$route.params.driverId;
+            }
         },
         methods: {
             ...mapActions({
                 sendNewDriverData: 'createDriver'
             }),
             redirect() {
-                router.push('/drivers');
+                router.push(`/carriers/${this.carrierId}/drivers`);
             },
             async sendData(newDriver) {
-                newDriver.carrierInfo = this.currentCarrier;
+                newDriver.carrierId = this.carrierId;
                 const res = await this.sendNewDriverData(newDriver);
                 !res.error && this.redirect();
             }

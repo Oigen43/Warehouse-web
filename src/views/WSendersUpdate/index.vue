@@ -3,6 +3,7 @@
     <b-col class="w-senders-update-form" lg="3" sm="12" offset-lg="4">
       <h1 class="w-senders-update-form-h1">Update Sender</h1>
       <w-form
+        v-if="!loading"
         @form-submitted="sendData"
         submitButtonName="UPDATE SENDER"
         :id="senderId"
@@ -37,10 +38,11 @@
         },
         computed: {
             ...mapState([
+                'loading',
                 'updatedSender'
             ]),
             senderId() {
-                return this.updatedSender.id;
+                return +this.$route.params.senderId;
             },
             senderName() {
                 return this.updatedSender.senderName;
@@ -54,6 +56,7 @@
         },
         methods: {
             ...mapActions({
+                getUpdatedSenderData: 'getUpdatedSender',
                 sendUpdatedSenderData: 'sendUpdatedSender'
             }),
             redirect() {
@@ -64,6 +67,9 @@
                 !res.error && this.redirect();
             }
         },
+        created: function() {
+            this.getUpdatedSenderData(this.senderId);
+        }
     };
 </script>
 

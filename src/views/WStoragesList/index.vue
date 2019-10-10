@@ -66,17 +66,18 @@
         computed: {
             ...mapState([
                 'storages',
-                'storagesPageLimit',
-                'currentWarehouse'
+                'storagesPageLimit'
             ]),
             routesPermissions: function() {
               return routesPermissions;
+            },
+            warehouseId: function() {
+                return this.$route.params.warehouseId;
             }
         },
         methods: {
             ...mapActions({
                 fetchStoragesList: 'fetchStoragesList',
-                fetchStorageTypes: 'fetchStorageTypes',
                 sendDeletedStorageData: 'sendDeletedStorage',
                 deletedStorageData: 'deleteStorage'
             }),
@@ -85,12 +86,11 @@
                 this.fetchStoragesList({
                     page: this.currentPage,
                     perPage: this.perPage,
-                    warehouseId: this.currentWarehouse.id
+                    warehouseId: this.warehouseId
                 });
             },
-            async clickedAddButton() {
-                await this.fetchStorageTypes();
-                router.push('/storages/add');
+            clickedAddButton() {
+                router.push('storages/add');
             },
             async clickedDeleteButton(item) {
                 await this.sendDeletedStorageData(item.id);
@@ -101,7 +101,7 @@
                 this.fetchStoragesList({
                     page: this.currentPage,
                     perPage: this.perPage,
-                    warehouseId: this.currentWarehouse.id
+                    warehouseId: this.warehouseId
                 });
             }
         },
@@ -109,7 +109,7 @@
             this.fetchStoragesList({
                 page: this.currentPage,
                 perPage: this.perPage,
-                warehouseId: this.currentWarehouse.id
+                warehouseId: this.warehouseId
             });
         }
     };

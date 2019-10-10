@@ -3,6 +3,7 @@
     <b-col class="w-carriers-update-form" lg="3" sm="12" offset-lg="4">
       <h1 class="w-carriers-update-form-h1">Update Carrier</h1>
       <w-form
+        v-if="!loading"
         @form-submitted="sendData"
         submitButtonName="UPDATE CARRIER"
         :id="carrierId"
@@ -37,10 +38,11 @@
         },
         computed: {
             ...mapState([
+                'loading',
                 'updatedCarrier'
             ]),
             carrierId() {
-                return this.updatedCarrier.id;
+                return +this.$route.params.carrierId;
             },
             name() {
                 return this.updatedCarrier.name;
@@ -54,6 +56,7 @@
         },
         methods: {
             ...mapActions({
+                getUpdatedCarrierData: 'getUpdatedCarrier',
                 sendUpdatedCarrierData: 'sendUpdatedCarrier'
             }),
             redirect() {
@@ -63,6 +66,9 @@
                 const res = await this.sendUpdatedCarrierData(carrier);
                 !res.error && this.redirect();
             }
+        },
+        created: function() {
+            this.getUpdatedCarrierData(this.carrierId);
         }
     };
 </script>

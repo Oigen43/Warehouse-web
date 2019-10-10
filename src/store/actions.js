@@ -51,8 +51,14 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
   },
-  getUpdatedCompany: async ({ commit }, req) => {
-    commit(types.SET_UPDATED_COMPANY, req);
+  getUpdatedCompany: async ({ commit }, id) => {
+    commit(types.REQUEST);
+    const res = await api.getById(url.COMPANIES_URL, id);
+
+    commit(types.SET_UPDATED_COMPANY, res.data.companies);
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
   },
   sendUpdatedCompany: async ({ commit }, req) => {
     const res = await api.put(url.COMPANIES_URL, req);
@@ -67,10 +73,6 @@ export default {
     const res = await api.delete(url.COMPANIES_URL, { companyId });
 
     res.toast && commit(types.SET_TOAST, res.toast);
-  },
-
-  setCurrentCompany: async ({ commit }, req) => {
-    commit(types.CURRENT_COMPANY, req);
   },
 
   fetchWarehousesList: async ({ commit }, req) => {
@@ -96,8 +98,14 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
   },
-  getUpdatedWarehouse: async ({ commit }, req) => {
-    commit(types.SET_UPDATED_WAREHOUSE, req);
+  getUpdatedWarehouse: async ({ commit }, id) => {
+    commit(types.REQUEST);
+    const res = await api.getById(url.WAREHOUSES_URL, id);
+
+    commit(types.SET_UPDATED_WAREHOUSE, res.data.warehouse);
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
   },
   sendUpdatedWarehouse: async ({ commit }, req) => {
     const res = await api.put(url.WAREHOUSES_URL, req);
@@ -112,10 +120,6 @@ export default {
     const res = await api.delete(url.WAREHOUSES_URL, { warehouseId });
 
     res.toast && commit(types.SET_TOAST, res.toast);
-  },
-
-  setCurrentWarehouse: async ({ commit }, req) => {
-    commit(types.CURRENT_WAREHOUSE, req);
   },
 
   fetchUsersList: async ({ commit }, page = 1, perPage = 8) => {
@@ -137,8 +141,14 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
   },
-  getUpdatedUser: async ({ commit }, req) => {
-    commit(types.SET_UPDATED_USER, req);
+  getUpdatedUser: async ({ commit }, id) => {
+    commit(types.REQUEST);
+    const res = await api.getById(url.USERS_URL, id);
+
+    commit(types.SET_UPDATED_USER, res.data.user);
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
   },
   sendUpdatedUser: async ({ commit }, req) => {
     const res = await api.put(url.USERS_URL, req);
@@ -177,10 +187,12 @@ export default {
     }
   },
   fetchStorageTypes: async ({ commit }) => {
+    commit(types.REQUEST);
     const res = await api.get(url.STORAGE_TYPES_URL);
 
     if (res.data) {
       commit(types.STORAGE_TYPES, res.data.storageTypes);
+      commit(types.SUCCESS);
       res.toast && commit(types.SET_TOAST, res.toast);
     }
   },
@@ -192,8 +204,14 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
   },
-  getUpdatedStorage: async ({ commit }, req) => {
-    commit(types.SET_UPDATED_STORAGE, req);
+  getUpdatedStorage: async ({ commit }, id) => {
+    commit(types.REQUEST);
+    const res = await api.getById(url.STORAGES_URL, id);
+
+    commit(types.SET_UPDATED_STORAGE, res.data.storage);
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
   },
   sendUpdatedStorage: async ({ commit }, req) => {
     const res = await api.put(url.STORAGES_URL, req);
@@ -228,9 +246,15 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
   },
-  getUpdatedSender: async ({ commit }, req) => {
-    commit(types.SET_UPDATED_SENDER, req);
-  },
+  getUpdatedSender: async ({ commit }, id) => {
+    commit(types.REQUEST);
+    const res = await api.getById(url.SENDERS_URL, id);
+
+    commit(types.SET_UPDATED_SENDER, res.data.sender);
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+    },
   sendUpdatedSender: async ({ commit }, req) => {
     const res = await api.put(url.SENDERS_URL, req);
 
@@ -264,8 +288,14 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
   },
-  getUpdatedCarrier: async ({ commit }, req) => {
-    commit(types.SET_UPDATED_CARRIER, req);
+  getUpdatedCarrier: async ({ commit }, id) => {
+    commit(types.REQUEST);
+    const res = await api.getById(url.CARRIERS_URL, id);
+
+    commit(types.SET_UPDATED_CARRIER, res.data.carrier);
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
   },
   sendUpdatedCarrier: async ({ commit }, req) => {
     const res = await api.put(url.CARRIERS_URL, req);
@@ -280,10 +310,6 @@ export default {
     const res = await api.delete(url.CARRIERS_URL, { carrierId });
 
     res.toast && commit(types.SET_TOAST, res.toast);
-  },
-
-  setCurrentCarrier: async ({ commit }, req) => {
-    commit(types.CURRENT_CARRIER, req);
   },
 
   fetchDriversList: async ({ commit }, req) => {
@@ -308,9 +334,15 @@ export default {
   deleteDriver: async ({ commit }, req) => {
     commit(types.DELETE_DRIVER, req);
   },
-  getUpdatedDriver: async ({ commit }, req) => {
-    commit(types.SET_UPDATED_DRIVER, req);
-  },
+  getUpdatedDriver: async ({ commit }, id) => {
+    commit(types.REQUEST);
+    const res = await api.getById(url.DRIVERS_URL, id);
+
+    commit(types.SET_UPDATED_DRIVER, res.data.driver);
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+    },
   createDriver: async ({ commit }, req) => {
     commit(types.CREATE_DRIVER, req);
 
@@ -349,8 +381,14 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
   },
-  getUpdatedTransport: async ({ commit }, req) => {
-    commit(types.SET_UPDATED_TRANSPORT, req);
+  getUpdatedTransport: async ({ commit }, id) => {
+    commit(types.REQUEST);
+    const res = await api.getById(url.TRANSPORT_URL, id);
+
+    commit(types.SET_UPDATED_TRANSPORT, res.data.transport);
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
   },
   sendUpdatedTransport: async ({ commit }, req) => {
     const res = await api.put(url.TRANSPORT_URL, req);

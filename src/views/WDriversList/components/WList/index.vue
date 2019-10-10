@@ -40,7 +40,6 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
     import {
         BRow,
         BCol,
@@ -88,12 +87,8 @@
             }
         },
         methods: {
-            ...mapActions({
-                getUpdatedDriverData: 'getUpdatedDriver'
-            }),
             clickedUpdateButton(item) {
-                this.getUpdatedDriverData(item);
-                router.push('/drivers/update');
+                router.push(`drivers/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.DRIVER_TEXT, {

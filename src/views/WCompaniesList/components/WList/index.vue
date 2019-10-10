@@ -16,8 +16,7 @@
         size="sm"
         @click="clickedWarehousesButton(data.item)">
         Warehouses
-      </b-button
-      >
+      </b-button>
     </template>
     <template
       v-slot:cell(buttons)="data">
@@ -90,16 +89,13 @@
         methods: {
             ...mapActions({
                 getUpdatedCompanyData: 'getUpdatedCompany',
-                sendDeletedCompanyData: 'deleteCompany',
-                setCurrentCompany: 'setCurrentCompany',
+                sendDeletedCompanyData: 'deleteCompany'
             }),
             clickedWarehousesButton(item) {
-                this.setCurrentCompany({ id: item.id, companyName: item.companyName });
-                router.push('/warehouses');
+                router.push(`companies/${item.id}/warehouses`);
             },
             clickedUpdateButton(item) {
-                this.getUpdatedCompanyData(item);
-                router.push('/companies/update');
+                router.push(`/companies/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.COMPANY_TEXT, {

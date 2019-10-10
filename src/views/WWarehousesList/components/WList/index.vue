@@ -65,7 +65,9 @@
         computed: {
             fields: function() {
                 const fieldList = [
-                    'active', 'warehouseName', 'companyName', 'address',
+                    'active', 'warehouseName',
+                    { key: 'Company.companyName', label: 'Company Name' },
+                    'address',
                     { key: 'storages', label: '', class: 'w-list-button' },
                     { key: 'blank', label: '', class: 'w-blank-column' }
                 ];
@@ -78,21 +80,20 @@
             },
             routesPermissions: function() {
                 return routesPermissions;
+            },
+            companyId: function() {
+                return this.$route.params.companyId;
             }
         },
         methods: {
             ...mapActions({
-                getUpdatedWarehouseData: 'getUpdatedWarehouse',
-                sendDeletedWarehouseData: 'deleteWarehouse',
-                setCurrentWarehouse: 'setCurrentWarehouse'
+                sendDeletedWarehouseData: 'deleteWarehouse'
             }),
             clickedStoragesButton(item) {
-                this.setCurrentWarehouse({ id: item.id, warehouseName: item.warehouseName });
-                router.push('/storages');
+                router.push(`warehouses/${item.id}/storages`);
             },
             clickedUpdateButton(item) {
-                this.getUpdatedWarehouseData(item);
-                router.push('/warehouses/update');
+                router.push(`warehouses/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.WAREHOUSE_TEXT, {

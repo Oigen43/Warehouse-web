@@ -81,12 +81,10 @@
         },
         methods: {
             ...mapActions({
-                getUpdatedUserData: 'getUpdatedUser',
                 sendDeletedUserData: 'deleteUser',
             }),
             clickedUpdateButton(item) {
-                this.getUpdatedUserData(item);
-                router.push('/users/update');
+                router.push(`/users/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.USER_TEXT, {

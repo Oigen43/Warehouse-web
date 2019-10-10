@@ -3,6 +3,7 @@
     <b-col lg="3" sm="12" offset-lg="4">
     <h1 class="w-user-update-form-h1">Update User</h1>
     <w-form
+      v-if="!loading"
       @form-submitted="sendData"
       submitButtonName="UPDATE USER"
       :id="userId"
@@ -43,10 +44,11 @@
         },
         computed: {
             ...mapState([
+                'loading',
                 'updatedUser'
             ]),
             userId() {
-                return this.updatedUser.id;
+                return +this.$route.params.userId;
             },
             firstName() {
                 return this.updatedUser.firstName;
@@ -75,6 +77,7 @@
         },
         methods: {
             ...mapActions({
+                getUpdatedUserData: 'getUpdatedUser',
                 sendUpdatedUserData: 'sendUpdatedUser'
             }),
             redirect() {
@@ -84,6 +87,9 @@
                 const res = await this.sendUpdatedUserData(user);
                 !res.error && this.redirect();
             }
+        },
+        created: function() {
+            this.getUpdatedUserData(this.userId);
         }
     };
 </script>

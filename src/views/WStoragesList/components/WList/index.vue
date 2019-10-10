@@ -33,7 +33,6 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
     import {
         BRow,
         BCol,
@@ -74,14 +73,8 @@
             }
         },
         methods: {
-            ...mapActions({
-                fetchStorageTypes: 'fetchStorageTypes',
-                getUpdatedStorageData: 'getUpdatedStorage'
-            }),
-            async clickedUpdateButton(item) {
-                await this.fetchStorageTypes();
-                await this.getUpdatedStorageData(item);
-                router.push('/storages/update');
+            clickedUpdateButton(item) {
+                router.push(`storages/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.STORAGE_TEXT, {
