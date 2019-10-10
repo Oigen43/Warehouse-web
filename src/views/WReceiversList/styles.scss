@@ -1,0 +1,33 @@
+.w-receivers-list-page {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.w-receivers-add-button {
+  background-color: #2C3E50;
+  float: left;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.w-receivers-list {
+  margin: 0;
+}
+
+.w-receivers-list-pagination {
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 53rem) {
+  .w-receivers-add-button {
+    margin-bottom: 0.5rem;
+    margin-left: 2rem;
+  }
+  .w-receivers-list {
+    margin: 1rem 2rem;
+  }
+  .w-receivers-list-pagination {
+    margin-top: 1rem;
+  }
+}

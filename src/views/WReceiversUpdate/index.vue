@@ -1,19 +1,19 @@
 <template>
   <b-row>
-    <b-col class="w-senders-update-form" lg="4" sm="12" offset-lg="4">
-      <h1 class="w-senders-update-form-h1">Update Sender</h1>
+    <b-col class="w-receivers-update-form" lg="4" sm="12" offset-lg="4">
+      <h1 class="w-receivers-update-form-h1">Update Receiver</h1>
       <w-form
         @form-submitted="sendData"
-        submitButtonName="UPDATE SENDER"
-        :id="senderId"
-        :senderName="senderName"
+        submitButtonName="UPDATE RECEIVER"
+        :id="receiverId"
+        :receiverName="receiverName"
         :upn="upn"
         :countryCode="countryCode"
       ></w-form>
       <b-button
         variant="link"
-        to="/senders"
-        class="w-senders-go-back-link"
+        to="/receivers"
+        class="w-receivers-go-back-link"
       >Go Back
       </b-button>
     </b-col>
@@ -25,10 +25,10 @@
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
     import router from '../../router';
-    import WForm from '../../components/WSenderForm';
+    import WForm from '../../components/WReceiverForm';
 
     export default {
-        name: 'WSendersUpdateForm',
+        name: 'WReceiversUpdateForm',
         components: {
             BRow,
             BCol,
@@ -37,30 +37,30 @@
         },
         computed: {
             ...mapState([
-                'updatedSender'
+                'updatedReceiver'
             ]),
-            senderId() {
-                return this.updatedSender.id;
+            receiverId() {
+                return this.updatedReceiver.id;
             },
-            senderName() {
-                return this.updatedSender.senderName;
+           receiverName() {
+                return this.updatedReceiver.receiverName;
             },
             upn() {
-                return this.updatedSender.upn;
+                return this.updatedReceiver.upn;
             },
             countryCode() {
-                return this.updatedSender.countryCode;
+                return this.updatedReceiver.countryCode;
             }
         },
         methods: {
             ...mapActions({
-                sendUpdatedSenderData: 'sendUpdatedSender'
+                sendUpdatedReceiverData: 'sendUpdatedReceiver'
             }),
             redirect() {
-                router.push('/senders');
+                router.push('/receivers');
             },
-            async sendData(sender) {
-                const res = await this.sendUpdatedSenderData(sender);
+            async sendData(receiver) {
+                const res = await this.sendUpdatedReceiverData(receiver);
                 !res.error && this.redirect();
             }
         },

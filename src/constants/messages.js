@@ -55,7 +55,7 @@ export default {
 
   'storage.types.list.get.error': 'Can not get storage types list!',
 
-  'sender.list.get.error': 'Can not get senders list!',
+  'senders.list.get.error': 'Can not get senders list!',
   'sender.name.conflict': 'This sender already exists!',
   'sender.get.unknown': 'This sender does not exist!',
   'sender.create.success': 'Sender created!',
@@ -64,6 +64,16 @@ export default {
   'sender.update.error': 'Can not update sender!',
   'sender.delete.success': 'Sender deleted!',
   'sender.delete.error': 'Can not delete sender!',
+
+  'receivers.list.get.error': 'Can not get receivers list!',
+  'receiver.name.conflict': 'This receiver already exists!',
+  'receiver.get.unknown': 'This receiver does not exist!',
+  'receiver.create.success': 'Receiver created!',
+  'receiver.create.error': 'Can not create receiver!',
+  'receiver.update.success': 'Receiver updated!',
+  'receiver.update.error': 'Can not update receiver!',
+  'receiver.delete.success': 'Receiver deleted!',
+  'receiver.delete.error': 'Can not delete receiver!',
 
   'carriers.list.get.error': 'Can not get carriers list',
   'carrier.get.unknown': 'This carrier does not exist',
