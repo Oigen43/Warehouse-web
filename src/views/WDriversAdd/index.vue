@@ -1,6 +1,6 @@
 <template>
   <b-row>
-    <b-col class="w-drivers-add-form" lg="3" sm="12" offset-lg="4">
+    <b-col class="w-drivers-add-form" lg="4" sm="12" offset-lg="4">
       <h1 class="w-drivers-add-form-h1">Add a New Driver</h1>
       <w-form
         @form-submitted="sendData"

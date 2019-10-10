@@ -51,7 +51,8 @@
       type="submit"
       variant="outline-dark"
       size="lg"
-      class="w-companies-form-button">
+      class="w-companies-form-button"
+      :disabled="disableState">
       {{ submitButtonName }}
     </b-button>
   </b-form>
@@ -95,6 +96,10 @@
             adminEmail: {
                 type: String,
                 default: ''
+            },
+            disableState: {
+                type: Boolean,
+                default: false
             },
             withAdminFields: {
                 type: Boolean,

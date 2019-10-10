@@ -24,6 +24,9 @@ import WStoragesUpdateForm from '../views/WStoragesUpdate';
 import WSendersList from '../views/WSendersList';
 import WSendersAddForm from '../views/WSendersAdd';
 import WSendersUpdateForm from '../views/WSendersUpdate';
+import WReceiversList from '../views/WReceiversList';
+import WReceiversAddForm from '../views/WReceiversAdd';
+import WReceiversUpdateForm from '../views/WReceiversUpdate';
 import WCarriersList from '../views/WCarriersList';
 import WCarriersAddForm from '../views/WCarriersAdd';
 import WCarriersUpdateForm from '../views/WCarriersUpdate';
@@ -238,6 +241,27 @@ export default new Router({
       name: 'sendersUpdateForm',
       component: WSendersUpdateForm,
       meta: { authorize: routesPermissions.senders.update },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/receivers',
+      name: 'receivers',
+      component: WReceiversList,
+      meta: { authorize: routesPermissions.receivers.read },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/receivers/add',
+      name: 'receiversAddForm',
+      component: WReceiversAddForm,
+      meta: { authorize: routesPermissions.receivers.create },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/receivers/update',
+      name: 'receiversUpdateForm',
+      component: WReceiversUpdateForm,
+      meta: { authorize: routesPermissions.receivers.update },
       beforeEnter: ifAuthenticated,
     },
     {

@@ -47,6 +47,12 @@ export default new Vuex.Store({
     updatedSender: {},
     deletedSender: {},
 
+    receivers: [],
+    receiversPageLimit: 1,
+    newReceiver: {},
+    updatedReceiver: {},
+    deletedReceiver: {},
+
     carriers: [],
     carriersPageLimit: 1,
     newCarrier: {},

@@ -1,18 +1,18 @@
 <template>
   <b-row>
-    <b-col class="w-carriers-add-form" lg="4" sm="12" offset-lg="4">
-      <h1 class="w-carriers-add-form-h1">Add a New Carrier</h1>
+    <b-col class="w-receivers-add-form" lg="4" sm="12" offset-lg="4">
+      <h1 class="w-receivers-add-form-h1">Add a New Receiver</h1>
       <w-form
         @form-submitted="sendData"
-        submit-button-name="ADD CARRIER"
-        :name="name"
+        submitButtonName="ADD RECEIVER"
+        :receiverName="receiverName"
         :upn="upn"
-        :country-code="countryCode"
+        :countryCode="countryCode"
       ></w-form>
       <b-button
         variant="link"
-        to="/carriers"
-        class="w-carriers-go-back-link"
+        to="/receivers"
+        class="w-receivers-go-back-link"
       >Go Back
       </b-button>
     </b-col>
@@ -23,33 +23,33 @@
     import { BRow, BCol, BButton } from 'bootstrap-vue';
     import { mapActions } from 'vuex';
 
-    import WForm from '../../components/WCarrierForm';
+    import WForm from '../../components/WReceiverForm';
     import router from '../../router';
 
     export default {
-        name: 'WCarriersAddForm',
+        name: 'WReceiverAddForm',
         components: {
             BRow,
             BCol,
-            BButton,
-            WForm
+            WForm,
+            BButton
         },
-        data() {
+        data: function () {
             return {
-                name: '',
+                receiverName: '',
                 upn: '',
                 countryCode: ''
             };
         },
         methods: {
             ...mapActions({
-                sendNewCarrierData: 'createCarrier'
+                sendNewReceiverData: 'createReceiver'
             }),
             redirect() {
-                router.push('/carriers');
+                router.push('/receivers');
             },
-            async sendData(newCarrier) {
-                const res = await this.sendNewCarrierData(newCarrier);
+            async sendData(newReceiver) {
+                const res = await this.sendNewReceiverData(newReceiver);
                 !res.error && this.redirect();
             }
         }

@@ -167,7 +167,6 @@ export default {
 
   sendRegistrationData: async ({ commit }, form) => {
     const res = await api.post(url.CONFIRMATION_URL, { user: form });
-
     res.toast && commit(types.SET_TOAST, res.toast);
   },
 
@@ -266,6 +265,42 @@ export default {
   },
   sendDeletedSender: async ({ commit }, senderId) => {
     const res = await api.delete(url.SENDERS_URL, { senderId });
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+
+  fetchReceiversList: async ({ commit }, page = 1, perPage = 8) => {
+    const res = await api.get(url.RECEIVERS_URL, { page, perPage });
+
+    if (res.data) {
+      const pageLimit = helpers.calculatePageLimit(res.data.receiversTotal, perPage);
+      commit(types.RECEIVERS, res.data.receivers);
+      commit(types.RECEIVERS_PAGE_LIMIT, pageLimit);
+    }
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  createReceiver: async ({ commit }, req) => {
+    commit(types.CREATE_RECEIVER, req);
+
+    const res = await api.post(url.RECEIVERS_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  getUpdatedReceiver: async ({ commit }, req) => {
+    commit(types.SET_UPDATED_RECEIVER, req);
+  },
+  sendUpdatedReceiver: async ({ commit }, req) => {
+    const res = await api.put(url.RECEIVERS_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  deleteReceiver: async ({ commit }, req) => {
+    commit(types.DELETE_RECEIVER, req);
+  },
+  sendDeletedReceiver: async ({ commit }, receiverId) => {
+    const res = await api.delete(url.RECEIVERS_URL, { receiverId });
 
     res.toast && commit(types.SET_TOAST, res.toast);
   },
