@@ -41,6 +41,15 @@
           <b-nav-item>
             <b-button
               variant="light"
+              to='/receivers'
+              class="w-navigation-link"
+              v-if="hasPermissions(routesPermissions.receivers.read)">
+              Receivers
+            </b-button>
+          </b-nav-item>
+          <b-nav-item>
+            <b-button
+              variant="light"
               to='/carriers'
               class="w-navigation-link"
               v-if="hasPermissions(routesPermissions.carriers.read)">
