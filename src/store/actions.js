@@ -287,9 +287,15 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
   },
-  getUpdatedReceiver: async ({ commit }, req) => {
-    commit(types.SET_UPDATED_RECEIVER, req);
-  },
+  getUpdatedReceiver: async ({ commit }, id) => {
+    commit(types.REQUEST);
+    const res = await api.getById(url.RECEIVERS_URL, id);
+
+    commit(types.SET_UPDATED_RECEIVER, res.data.receiver);
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+    },
   sendUpdatedReceiver: async ({ commit }, req) => {
     const res = await api.put(url.RECEIVERS_URL, req);
 

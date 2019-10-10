@@ -45,7 +45,6 @@
     import routesPermissions from '../../constants/routesPermissions';
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
-    import router from '../../router';
 
     export default {
         name: 'WWarehousesListPage',

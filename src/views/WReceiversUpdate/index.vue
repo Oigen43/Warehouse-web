@@ -3,6 +3,7 @@
     <b-col class="w-receivers-update-form" lg="4" sm="12" offset-lg="4">
       <h1 class="w-receivers-update-form-h1">Update Receiver</h1>
       <w-form
+        v-if="!loading"
         @form-submitted="sendData"
         submitButtonName="UPDATE RECEIVER"
         :id="receiverId"
@@ -37,12 +38,13 @@
         },
         computed: {
             ...mapState([
+                'loading',
                 'updatedReceiver'
             ]),
             receiverId() {
-                return this.updatedReceiver.id;
+                return +this.$route.params.receiverId;
             },
-           receiverName() {
+            receiverName() {
                 return this.updatedReceiver.receiverName;
             },
             upn() {
@@ -54,6 +56,7 @@
         },
         methods: {
             ...mapActions({
+                getUpdatedReceiverData: 'getUpdatedReceiver',
                 sendUpdatedReceiverData: 'sendUpdatedReceiver'
             }),
             redirect() {
@@ -64,6 +67,9 @@
                 !res.error && this.redirect();
             }
         },
+        created: function() {
+            this.getUpdatedReceiverData(this.receiverId);
+        }
     };
 </script>
 

@@ -258,7 +258,7 @@ export default new Router({
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/receivers/update',
+      path: '/receivers/:receiverId/update',
       name: 'receiversUpdateForm',
       component: WReceiversUpdateForm,
       meta: { authorize: routesPermissions.receivers.update },
