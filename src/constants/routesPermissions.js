@@ -49,4 +49,10 @@ export default {
     update: [roles.SYSTEM_ADMIN_ROLE],
     delete: [roles.SYSTEM_ADMIN_ROLE]
   },
+  ttn: {
+    update: [roles.WAREHOUSE_DISPATCHER_ROLE, roles.SYSTEM_ADMIN_ROLE],
+    delete: [roles.WAREHOUSE_DISPATCHER_ROLE, roles.SYSTEM_ADMIN_ROLE],
+    check: [roles.CONTROLLER_ROLE, roles.SYSTEM_ADMIN_ROLE],
+    takeOut: [roles.MANAGER_ROLE, roles.SYSTEM_ADMIN_ROLE]
+  }
 };

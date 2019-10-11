@@ -15,16 +15,18 @@
         </b-row>
         <div class="w-ttn-list">
           <w-list
-            :TTN="TTN"
+            :ttn="ttn"
+            @delete-button-clicked="clickedDeleteButton"
+            @take-out-button-clicked="clickedTakeOutButton"
           ></w-list>
         </div>
         <b-row>
           <b-col lg="12" sm="12">
             <div class="w-ttn-list-pagination">
               <w-pagination
-                v-if="TTNPageLimit > 1"
+                v-if="ttnPageLimit > 1"
                 :current="currentPage"
-                :pageLimit="TTNPageLimit"
+                :pageLimit="ttnPageLimit"
                 @page-changed="sendRequest"
               ></w-pagination>
             </div>
@@ -59,21 +61,36 @@
         },
         computed: {
             ...mapState([
-                'TTN',
-                'TTNPageLimit'
+                'ttn',
+                'ttnPageLimit'
             ])
         },
         methods: {
             ...mapActions({
-                fetchTTNList: 'fetchTTNList'
+                fetchTtnList: 'fetchTtnList',
+                sendDeletedTtnData: 'sendDeletedTtn',
+                deletedTtnData: 'deleteTtn',
+                sendTakeOutTtnData: 'takeOutTtn'
             }),
             sendRequest(page) {
                 this.currentPage = page;
-                this.fetchTTNList(this.currentPage);
+                this.fetchTtnList(this.currentPage);
+            },
+            async clickedDeleteButton(item) {
+                await this.sendDeletedTtnData(item.id);
+                this.deletedTtnData(item);
+                if (this.ttn.length === 0 && this.currentPage > 1) {
+                    this.currentPage -= 1;
+                }
+                this.fetchTtnList(this.currentPage);
+            },
+            async clickedTakeOutButton(item) {
+                await this.sendTakeOutTtnData(item);
+                this.fetchTtnList();
             }
         },
         created: function () {
-            this.fetchTTNList();
+            this.fetchTtnList();
         }
     };
 </script>
