@@ -74,7 +74,7 @@ export default new Vuex.Store({
 
     toast: {},
     loading: false
-    },
+  },
   getters,
   mutations,
   actions

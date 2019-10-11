@@ -32,14 +32,12 @@
         variant="outline-dark"
         size="lg"
         class="w-carriers-form-button">
-        <b-spinner v-if="loading" class="w-carriers-form-button-spinner"></b-spinner>
         {{submitButtonName}}
       </b-button>
     </b-form>
 </template>
 
 <script>
-    import { mapState } from 'vuex';
     import { BForm, BFormInput, BSpinner, BButton } from 'bootstrap-vue';
 
     export default {
@@ -47,7 +45,6 @@
         components: {
             BForm,
             BFormInput,
-            BSpinner,
             BButton
         },
         props: {
@@ -79,11 +76,6 @@
                     countryCode: this.countryCode
                 }
             };
-        },
-        computed: {
-            ...mapState([
-                'loading'
-            ])
         },
         methods: {
             onSubmit() {

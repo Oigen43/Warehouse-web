@@ -1,10 +1,4 @@
 <template>
-  <b-spinner
-    v-if="loading"
-    style="width: 4rem; height: 4rem;"
-    label="Large Spinner"
-  ></b-spinner>
-  <div v-else>
     <b-row v-if="isItemsExists">
       <b-col lg="3" sm="6" v-for="storage in storagesList" v-bind:key="storage.id">
         <b-card no-body class="overflow-hidden w-storage-card">
@@ -36,13 +30,10 @@
       </b-col>
     </b-row>
     <w-empty-table v-else></w-empty-table>
-  </div>
 </template>
 
 <script>
-    import { mapState } from 'vuex';
     import {
-        BSpinner,
         BRow,
         BCol,
         BCard,
@@ -63,7 +54,6 @@
         name: 'WList',
         mixins: [validation],
         components: {
-            BSpinner,
             BRow,
             BCol,
             BCard,
@@ -75,9 +65,6 @@
         },
         props: ['storagesList'],
         computed: {
-            ...mapState([
-                'loading'
-            ]),
             routesPermissions: function() {
               return routesPermissions;
             },

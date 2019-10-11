@@ -26,15 +26,13 @@
       variant="outline-dark"
       size="lg"
       class="w-storages-form-button">
-      <b-spinner v-if="loading" class="w-storages-form-button-spinner"></b-spinner>
       {{ submitButtonName }}
     </b-button>
   </b-form>
 </template>
 
 <script>
-    import { mapState } from 'vuex';
-    import { BForm, BFormInput, BSpinner, BButton } from 'bootstrap-vue';
+    import { BForm, BFormInput, BButton } from 'bootstrap-vue';
 
     import WMultiselect from '../WMultiselect';
 
@@ -44,7 +42,6 @@
             BForm,
             BFormInput,
             WMultiselect,
-            BSpinner,
             BButton
         },
         props: {
@@ -80,11 +77,6 @@
                 },
                 placeholder: 'Please select storage type'
             };
-        },
-        computed: {
-            ...mapState([
-                'loading'
-            ])
         },
         methods: {
             onSubmit() {

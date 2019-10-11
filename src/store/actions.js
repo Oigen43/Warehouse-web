@@ -36,7 +36,7 @@ export default {
     commit(types.LOGOUT, initialState);
   },
   fetchCompaniesList: async ({ commit }, page = 1, perPage = 8) => {
-    commit(types.REQUEST);
+    commit(types.REQUEST)
 
     const res = await api.get(url.COMPANIES_URL, { page, perPage });
 

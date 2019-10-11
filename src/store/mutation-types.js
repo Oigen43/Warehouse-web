@@ -75,3 +75,4 @@ export const SET_TOAST = 'SET_TOAST';
 
 export const REQUEST = 'REQUEST';
 export const SUCCESS = 'SUCCESS';
+export const SHOW_SPINNER = 'SHOW_SPINNER';
