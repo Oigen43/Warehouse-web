@@ -68,10 +68,10 @@
                 'storages',
                 'storagesPageLimit'
             ]),
-            routesPermissions: function() {
-              return routesPermissions;
+            routesPermissions: function () {
+                return routesPermissions;
             },
-            warehouseId: function() {
+            warehouseId: function () {
                 return this.$route.params.warehouseId;
             }
         },
