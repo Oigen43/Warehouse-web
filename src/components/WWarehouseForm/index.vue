@@ -22,21 +22,23 @@
         type="submit"
         variant="outline-dark"
         size="lg"
-        class="w-warehouses-form-button"
-      >
+        class="w-warehouses-form-button">
+        <b-spinner v-if="loading" class="w-warehouses-form-button-spinner"></b-spinner>
         {{ submitButtonName }}
       </b-button>
     </b-form>
 </template>
 
 <script>
-    import { BForm, BFormInput, BButton } from 'bootstrap-vue';
+    import { mapState } from 'vuex';
+    import { BForm, BFormInput, BSpinner, BButton } from 'bootstrap-vue';
 
     export default {
         name: 'WWarehouseForm',
         components: {
             BForm,
             BFormInput,
+            BSpinner,
             BButton
         },
         props: {
@@ -63,6 +65,11 @@
                     address: this.address
                 }
             };
+        },
+        computed: {
+            ...mapState([
+                'loading'
+            ])
         },
         methods: {
             onSubmit() {

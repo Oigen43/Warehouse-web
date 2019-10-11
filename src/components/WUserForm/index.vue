@@ -84,15 +84,17 @@
         type="submit"
         variant="outline-dark"
         size="lg"
-        class="w-users-form-button"
-      >
+        class="w-users-form-button">
+        <b-spinner v-if="loading" class="w-users-form-button-spinner"></b-spinner>
         {{ submitButtonName }}
       </b-button>
     </b-form>
 </template>
 
 <script>
-    import { BForm, BFormInput, BButton } from 'bootstrap-vue';
+    import { mapState } from 'vuex';
+    import { BForm, BFormInput, BSpinner, BButton } from 'bootstrap-vue';
+
     import * as userRoles from '../../constants/roles';
     import WMultiselect from '../WMultiselect';
 
@@ -102,6 +104,7 @@
             BForm,
             BFormInput,
             BButton,
+            BSpinner,
             WMultiselect
         },
         props: {
@@ -166,6 +169,11 @@
                 placeholder: 'Add a role'
 
             };
+        },
+        computed: {
+            ...mapState([
+                'loading'
+            ])
         },
         methods: {
             updateValue(newRoles) {

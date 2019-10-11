@@ -53,13 +53,15 @@
       size="lg"
       class="w-companies-form-button"
       :disabled="disableState">
+      <b-spinner v-if="loading" class="w-companies-form-button-spinner"></b-spinner>
       {{ submitButtonName }}
     </b-button>
   </b-form>
 </template>
 
 <script>
-    import { BForm, BFormInput, BButton } from 'bootstrap-vue';
+    import { mapState } from 'vuex';
+    import { BForm, BFormInput, BSpinner, BButton } from 'bootstrap-vue';
 
     import * as userRoles from '../../constants/roles';
 
@@ -68,6 +70,7 @@
         components: {
             BForm,
             BFormInput,
+            BSpinner,
             BButton
         },
         props: {
@@ -119,6 +122,11 @@
                     email: this.adminEmail
                 }
             };
+        },
+        computed: {
+            ...mapState([
+                'loading'
+            ])
         },
         methods: {
             onSubmit() {

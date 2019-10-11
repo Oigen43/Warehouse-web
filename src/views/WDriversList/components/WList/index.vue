@@ -1,4 +1,10 @@
 <template>
+  <b-spinner
+    v-if="loading"
+    style="width: 4rem; height: 4rem;"
+    label="Large Spinner"
+  ></b-spinner>
+  <div v-else>
   <b-row v-if="isItemsExists">
     <b-col lg="3" sm="6" v-for="driver in drivers" v-bind:key="driver.id">
       <b-card no-body class="overflow-hidden w-drivers-card">
@@ -37,10 +43,13 @@
     </b-col>
   </b-row>
   <w-empty-table v-else></w-empty-table>
+  </div>
 </template>
 
 <script>
+    import { mapState } from 'vuex';
     import {
+        BSpinner,
         BRow,
         BCol,
         BCard,
@@ -60,6 +69,7 @@
     export default {
         name: 'WList',
         components: {
+            BSpinner,
             BRow,
             BCol,
             BCard,
@@ -82,6 +92,9 @@
             };
         },
         computed: {
+            ...mapState([
+                'loading'
+            ]),
             isItemsExists() {
                 return helpers.isItemsExists(this.drivers);
             }

@@ -1,7 +1,7 @@
 <template>
   <b-spinner
     v-if="loading"
-    style="width: 3rem; height: 3rem;"
+    style="width: 4rem; height: 4rem;"
     label="Large Spinner"
   ></b-spinner>
   <div v-else>

@@ -29,19 +29,22 @@
       variant="outline-dark"
       size="lg"
       class="w-receivers-form-button">
+      <b-spinner v-if="loading" class="w-receivers-form-button-spinner"></b-spinner>
       {{ submitButtonName }}
     </b-button>
   </b-form>
 </template>
 
 <script>
-    import { BForm, BFormInput, BButton } from 'bootstrap-vue';
+    import { mapState } from 'vuex';
+    import { BForm, BFormInput, BSpinner, BButton } from 'bootstrap-vue';
 
     export default {
         name: 'WReceiverForm',
         components: {
             BForm,
             BFormInput,
+            BSpinner,
             BButton
         },
         props: {
@@ -73,6 +76,11 @@
                     countryCode: this.countryCode
                 }
             };
+        },
+        computed: {
+            ...mapState([
+                'loading'
+            ])
         },
         methods: {
             onSubmit() {
