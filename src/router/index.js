@@ -37,6 +37,7 @@ import WTransportList from '../views/WTransportList';
 import WTransportAddForm from '../views/WTransportAdd';
 import WTransportUpdateForm from '../views/WTransportUpdate';
 import WNotFound from '../views/WNotFound';
+import WTtnForm from '../views/WTtnAdd';
 
 Vue.use(Router);
 
@@ -288,6 +289,11 @@ export default new Router({
     {
       path: '*',
       component: WNotFound,
-    }
+    },
+    {
+      path: '/ttn',
+      name: 'ttn',
+      component: WTtnForm,
+    },
   ]
 });
