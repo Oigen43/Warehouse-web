@@ -5,8 +5,7 @@
     <template
       v-slot:cell(buttons)="data">
       <b-button
-        v-if="data.item.status === 'registered' &&
-              hasPermissions(routesPermissions.ttn.update)"
+        v-if="hasUpdateAction(data.item)"
         class="w-table-update-button"
         variant="dark"
         size="sm"
@@ -14,8 +13,7 @@
         Update
       </b-button>
       <b-button
-        v-if="data.item.status === 'registered' &&
-              hasPermissions(routesPermissions.ttn.delete)"
+        v-if="hasDeleteAction(data.item)"
         variant="light"
         size="sm"
         @click="clickedDeleteButton(data.item)">
@@ -25,9 +23,7 @@
     <template
       v-slot:cell(options)="data">
       <b-button
-        v-if="(data.item.status === 'registered' ||
-              data.item.status === 'release allowed') &&
-              hasPermissions(routesPermissions.ttn.check)"
+        v-if="hasCheckAction(data.item)"
         class="w-table-check-button"
         variant="dark"
         size="sm"
@@ -35,8 +31,7 @@
         Check
       </b-button>
       <b-button
-        v-if="data.item.status === 'confirmed' &&
-              hasPermissions(routesPermissions.ttn.takeOut)"
+        v-if="hasTakeOutAction(data.item)"
         class="w-table-take-out-button"
         variant="dark"
         size="sm"
@@ -56,6 +51,7 @@
     import WTable from '../../../../components/WTable';
     import router from '../../../../router';
     import * as modal from '../../../../constants/modal';
+    import * as statuses from '../../../../constants/statuses';
 
     export default {
         name: 'WList',
@@ -68,21 +64,28 @@
         computed: {
             fields: function () {
                 const fieldsList = [
-                    'number', 'registrationDate', 'type', 'status', 'carrier', 'sender_receiver'
+                    'number', 'registrationDate', 'type', 'status', 'carrier', 'sender_receiver',
+                  { key: 'blank', label: '', class: 'w-blank-column' }
                 ];
 
-                this.ttn.some(item => {
-                    return item.status === 'confirmed' ||
-                        item.status === 'release allowed';
-                }) && fieldsList.push({ key: 'options', label: '', class: 'w-options-button' });
+                this.hasOptionsColumn && fieldsList.splice(fieldsList.length - 1, 0, { key: 'options', label: '', class: 'w-list-button' });
 
-                this.ttn.some(item => {
-                    return (item.status === 'registered') &&
-                        this.hasPermissions(this.routesPermissions.ttn.update) &&
-                        this.hasPermissions(this.routesPermissions.ttn.delete);
-                }) && fieldsList.push({ key: 'buttons', label: '', class: 'w-list-button' });
+                this.hasButtonsColumn && fieldsList.splice(fieldsList.length - 1, 0, { key: 'buttons', label: '', class: 'w-list-button' });
 
                 return fieldsList;
+            },
+            hasButtonsColumn() {
+                return this.ttn.some(item => {
+                    return item.status === statuses.REGISTERED_STATUS &&
+                        this.hasPermissions(this.routesPermissions.ttn.update) &&
+                        this.hasPermissions(this.routesPermissions.ttn.delete);
+                });
+            },
+            hasOptionsColumn() {
+                return this.ttn.some(item => {
+                    return item.status === statuses.CONFIRMED_STATUS ||
+                        item.status === statuses.RELEASE_ALLOWED_STATUS;
+                });
             },
 
             items: function() {
@@ -94,13 +97,30 @@
             },
 
             routesPermissions: function () {
-                return routesPermissions;
-            }
+              return routesPermissions;
+            },
         },
         methods: {
             ...mapActions({
                 getUpdatedTtnData: 'getUpdatedTtn'
             }),
+            hasUpdateAction(item) {
+              return item.status === statuses.REGISTERED_STATUS &&
+                this.hasPermissions(this.routesPermissions.ttn.update);
+            },
+            hasDeleteAction(item) {
+              return item.status === statuses.REGISTERED_STATUS &&
+                this.hasPermissions(this.routesPermissions.ttn.delete);
+            },
+            hasCheckAction(item) {
+              return (item.status === statuses.REGISTERED_STATUS ||
+                item.status === statuses.RELEASE_ALLOWED_STATUS) &&
+                this.hasPermissions(this.routesPermissions.ttn.check);
+            },
+            hasTakeOutAction(item) {
+              return item.status === statuses.CONFIRMED_STATUS &&
+                this.hasPermissions(this.routesPermissions.ttn.takeOut);
+            },
             clickedUpdateButton(item) {
                 this.getUpdatedTtnData(item);
                 router.push('/ttn/update');
