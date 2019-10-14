@@ -72,7 +72,7 @@
                 return this.updatedUser.login;
             },
             roles() {
-                return this.updatedUser.roles.map(role => role.title);
+                return this.updatedUser.roles ? this.updatedUser.roles.map(role => role.title) : [];
             }
         },
         methods: {
