@@ -1,10 +1,10 @@
 <template>
   <b-row>
-    <b-col lg="12" sm="12">
+    <b-col>
       <div class="w-users-list-page">
         <h1>List of Users</h1>
         <b-row>
-          <b-col lg="12" sm="12">
+          <b-col>
             <b-button
               to="/users/add"
               class="w-users-add-button"
@@ -21,7 +21,7 @@
           ></w-list>
         </div>
         <b-row>
-          <b-col lg="12" sm="12">
+          <b-col>
             <div class="users-list-pagination">
               <w-pagination
                 v-if="usersPageLimit > 1"

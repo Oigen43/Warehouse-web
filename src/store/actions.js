@@ -318,7 +318,7 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
-    },
+  },
   sendUpdatedSender: async ({ commit }, req) => {
     commit(types.REQUEST);
 
@@ -374,7 +374,7 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
-    },
+  },
   sendUpdatedReceiver: async ({ commit }, req) => {
     commit(types.REQUEST);
 
@@ -491,7 +491,7 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
-    },
+  },
   createDriver: async ({ commit }, req) => {
     commit(types.REQUEST);
     commit(types.CREATE_DRIVER, req);
@@ -570,5 +570,50 @@ export default {
 
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
+  },
+
+  fetchTTNList: async ({ commit }, page = 1, perPage = 8) => {
+    commit(types.REQUEST);
+
+    const res = await api.get(url.TTN_URL, { page, perPage });
+
+    if (res.data) {
+      const pageLimit = helpers.calculatePageLimit(res.data.TTNTotal, perPage);
+
+      commit(types.TTN, res.data.TTN);
+      commit(types.TTN_PAGE_LIMIT, pageLimit);
+    }
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  getUpdatedTTN: async ({ commit }, id) => {
+    commit(types.CLEAN_UPDATED_TTN);
+    commit(types.REQUEST);
+
+    const res = await api.getById(url.TTN_URL, id);
+
+    commit(types.SET_UPDATED_TTN, res.data.TTN);
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  deleteTTN: async ({ commit }, req) => {
+    commit(types.DELETE_TTN, req);
+  },
+  sendDeletedTTN: async ({ commit }, TTNId) => {
+    commit(types.REQUEST);
+
+    const res = await api.delete(url.TTN_URL, { TTNId });
+
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  takeOutTTN: async ({ commit }, req) => {
+    commit(types.REQUEST);
+
+    const res = await api.put(url.TTN_URL, req);
+
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
   }
- };
+};

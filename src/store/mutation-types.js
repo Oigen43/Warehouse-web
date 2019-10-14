@@ -79,6 +79,12 @@ export const UPDATE_TRANSPORT = 'UPDATE_TRANSPORT';
 export const DELETE_TRANSPORT = 'DELETE_TRANSPORT';
 export const CLEAN_UPDATED_TRANSPORT = 'CLEAN_UPDATED_TRANSPORT';
 
+export const TTN = 'TTN';
+export const TTN_PAGE_LIMIT = 'TTN_PAGE_LIMIT';
+export const SET_UPDATED_TTN = 'SET_UPDATED_TTN';
+export const DELETE_TTN = 'DELETE_TTN';
+export const CLEAN_UPDATED_TTN = 'CLEAN_UPDATED_TTN';
+
 export const SET_TOAST = 'SET_TOAST';
 
 export const REQUEST = 'REQUEST';

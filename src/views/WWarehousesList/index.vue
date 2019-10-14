@@ -1,10 +1,10 @@
 <template>
   <b-row>
-    <b-col lg="12" sm="12">
+    <b-col>
       <div class='w-warehouses-list-page'>
         <h1>List of Warehouses</h1>
         <b-row>
-          <b-col lg="12" sm="12">
+          <b-col>
             <b-button
               variant="dark"
               to="warehouses/add"
@@ -21,7 +21,7 @@
           ></w-list>
         </div>
         <b-row>
-          <b-col lg="12" sm="12">
+          <b-col>
             <div class="warehouses-list-pagination">
               <w-pagination
                 v-if="warehousesPageLimit > 1"

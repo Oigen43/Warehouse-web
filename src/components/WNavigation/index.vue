@@ -56,6 +56,14 @@
               Carriers
             </b-button>
           </b-nav-item>
+          <b-nav-item>
+            <b-button
+              variant="light"
+              to='/ttn'
+              class="w-navigation-link">
+              TTN
+            </b-button>
+          </b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto" v-if="!registrationToken">

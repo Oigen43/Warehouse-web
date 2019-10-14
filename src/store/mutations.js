@@ -245,6 +245,23 @@ export default {
     state.updatedTransport = {};
   },
 
+  [types.TTN](state, TTN) {
+    state.TTN = TTN;
+  },
+  [types.TTN_PAGE_LIMIT](state, TTNPageLimit) {
+    state.TTNPageLimit = TTNPageLimit;
+  },
+  [types.SET_UPDATED_TTN](state, TTN) {
+    state.updatedTTN = TTN;
+  },
+  [types.DELETE_TTN](state, TTN) {
+    state.deletedTTN = TTN;
+    state.TTN = state.TTN.filter(item => item.id !== TTN.id);
+  },
+  [types.CLEAN_UPDATED_TTN](state) {
+    state.updatedTTN = {};
+  },
+
   [types.SET_TOAST](state, toast) {
     state.toast = toast;
   },

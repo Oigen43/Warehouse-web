@@ -36,6 +36,7 @@ import WDriversUpdateForm from '../views/WDriversUpdate';
 import WTransportList from '../views/WTransportList';
 import WTransportAddForm from '../views/WTransportAdd';
 import WTransportUpdateForm from '../views/WTransportUpdate';
+import WTTNList from '../views/WTTNList';
 import WNotFound from '../views/WNotFound';
 
 Vue.use(Router);
@@ -284,6 +285,11 @@ export default new Router({
       component: WTransportUpdateForm,
       meta: { authorize: routesPermissions.transport.update },
       beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/ttn',
+      name: 'ttn',
+      component: WTTNList
     },
     {
       path: '*',

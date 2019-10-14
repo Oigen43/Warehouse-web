@@ -103,5 +103,15 @@ export default {
   'transport.update.success': 'Transport updated!',
   'transport.update.error': 'Can not update transport',
   'transport.delete.success': 'Transport deleted!',
-  'transport.delete.error': 'Can not delete transport'
+  'transport.delete.error': 'Can not delete transport',
+
+  'ttn.list.get.error': 'Can not get TTN list',
+  'ttn.get.unknown': 'This TTN does not exist',
+  'ttn.name.conflict': 'This TTN already exists!',
+  'ttn.create.success': 'TTN created!',
+  'ttn.create.error': 'Can not create TTN',
+  'ttn.update.success': 'TTN updated!',
+  'ttn.update.error': 'Can not update TTN',
+  'ttn.delete.success': 'TTN deleted!',
+  'ttn.delete.error': 'Can not delete TTN',
 };

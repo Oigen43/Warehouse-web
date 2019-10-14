@@ -1,10 +1,10 @@
 <template>
   <b-row>
-    <b-col lg="12" sm="12">
+    <b-col>
       <div class='w-transport-list-page'>
         <h1>List of Transport</h1>
         <b-row>
-          <b-col lg="12" sm="12">
+          <b-col>
             <b-button
               variant="dark"
               to="transport/add"
@@ -20,7 +20,7 @@
           ></w-list>
         </div>
         <b-row>
-          <b-col lg="12" sm="12">
+          <b-col>
             <div class="w-transport-list-pagination">
               <w-pagination
                 v-if="transportPageLimit > 1"
