@@ -1,6 +1,6 @@
 <template>
       <b-row>
-        <b-col class="w-login-form" lg="4" sm="12" offset-lg="4">
+        <b-col class="w-login-form" lg="4" offset-lg="4">
           <h1 class="w-login-form-h1">Login</h1>
           <b-form @submit.prevent="login">
             <b-form-input

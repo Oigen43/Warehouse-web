@@ -25,8 +25,7 @@
       type="submit"
       variant="outline-dark"
       size="lg"
-      class="w-storages-form-button"
-    >
+      class="w-storages-form-button">
       {{ submitButtonName }}
     </b-button>
   </b-form>

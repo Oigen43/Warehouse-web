@@ -46,9 +46,8 @@ export default {
     state.deletedCompany = company;
     state.companies = state.companies.filter(item => item.id !== company.id);
   },
-
-  [types.CURRENT_COMPANY](state, company) {
-    state.currentCompany = company;
+  [types.CLEAN_UPDATED_COMPANY](state) {
+    state.updatedCompany = {};
   },
 
   [types.WAREHOUSES](state, warehouses) {
@@ -71,9 +70,8 @@ export default {
     state.deletedWarehouse = warehouse;
     state.warehouses = state.warehouses.filter(item => item.id !== warehouse.id);
   },
-
-  [types.CURRENT_WAREHOUSE](state, warehouse) {
-    state.currentWarehouse = warehouse;
+  [types.CLEAN_UPDATED_WAREHOUSE](state) {
+    state.updatedWarehouse = {};
   },
 
   [types.USERS](state, users) {
@@ -91,6 +89,9 @@ export default {
   [types.UPDATE_USER](state, user) {
     state.updatedUser = user;
     state.users = state.users.map(item => item.id === user.id ? user : item);
+  },
+  [types.CLEAN_UPDATED_USER](state) {
+    state.updatedUser = {};
   },
   [types.DELETE_USER](state, user) {
     state.deletedUser = user;
@@ -117,8 +118,8 @@ export default {
     state.deletedCarrier = carrier;
     state.carriers = state.carriers.filter(item => item.id !== carrier.id);
   },
-  [types.CURRENT_CARRIER](state, carrier) {
-    state.currentCarrier = carrier;
+  [types.CLEAN_UPDATED_CARRIER](state) {
+    state.updatedCarrier = {};
   },
 
   [types.DRIVERS](state, drivers) {
@@ -140,6 +141,9 @@ export default {
   [types.DELETE_DRIVER](state, driver) {
     state.deletedDriver = driver;
     state.drivers = state.drivers.filter(item => item.id !== driver.id);
+  },
+  [types.CLEAN_UPDATED_DRIVER](state) {
+    state.updatedDriver = {};
   },
 
   [types.STORAGES](state, storages) {
@@ -165,6 +169,9 @@ export default {
   [types.STORAGE_TYPES](state, storageTypes) {
     state.storageTypes = storageTypes;
   },
+  [types.CLEAN_UPDATED_STORAGE](state) {
+    state.updatedStorage = {};
+  },
 
   [types.SENDERS](state, senders) {
     state.senders = senders;
@@ -185,6 +192,9 @@ export default {
   [types.DELETE_SENDER](state, sender) {
     state.deletedSender = sender;
     state.senders = state.senders.filter(item => item.id !== sender.id);
+  },
+  [types.CLEAN_UPDATED_SENDER](state) {
+    state.updatedSender = {};
   },
 
   [types.RECEIVERS](state, receivers) {
@@ -207,6 +217,9 @@ export default {
     state.deletedReceiver = receiver;
     state.receivers = state.receivers.filter(item => item.id !== receiver.id);
   },
+  [types.CLEAN_UPDATED_RECEIVER](state) {
+    state.updatedReceiver = {};
+  },
 
   [types.TRANSPORT](state, transport) {
     state.transport = transport;
@@ -228,6 +241,9 @@ export default {
     state.deletedTransport = transport;
     state.transport = state.transport.filter(item => item.id !== transport.id);
   },
+  [types.CLEAN_UPDATED_TRANSPORT](state) {
+    state.updatedTransport = {};
+  },
 
   [types.TTN](state, TTN) {
     state.TTN = TTN;
@@ -242,8 +258,18 @@ export default {
     state.deletedTTN = TTN;
     state.TTN = state.TTN.filter(item => item.id !== TTN.id);
   },
+  [types.CLEAN_UPDATED_TTN](state) {
+    state.updatedTTN = {};
+  },
 
   [types.SET_TOAST](state, toast) {
     state.toast = toast;
+  },
+
+  [types.REQUEST](state) {
+    state.loading = true;
+  },
+  [types.SUCCESS](state) {
+    state.loading = false;
   }
 };

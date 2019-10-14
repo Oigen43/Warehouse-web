@@ -84,21 +84,16 @@
         },
         methods: {
             ...mapActions({
-                getUpdatedCarrierData: 'getUpdatedCarrier',
-                setCurrentCarrier: 'setCurrentCarrier',
                 sendUpdatedCarrier: 'sendUpdatedCarrier'
             }),
             clickedDriversButton(item) {
-                this.setCurrentCarrier({ id: item.id, carrierName: item.name });
-                router.push('/drivers');
+                router.push(`/carriers/${item.id}/drivers`);
             },
             clickedTransportButton(item) {
-                this.setCurrentCarrier({ id: item.id, name: item.name });
-                router.push('/transport');
+                router.push(`/carriers/${item.id}/transport`);
             },
             clickedUpdateButton(item) {
-                this.getUpdatedCarrierData(item);
-                router.push('/carriers/update');
+                router.push(`/carriers/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.CARRIER_TEXT, {

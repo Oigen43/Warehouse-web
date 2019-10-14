@@ -40,8 +40,7 @@
       type="submit"
       variant="outline-dark"
       size="lg"
-      class="w-drivers-form-button"
-    >
+      class="w-drivers-form-button">
       {{submitButtonName}}
     </b-button>
   </b-form>

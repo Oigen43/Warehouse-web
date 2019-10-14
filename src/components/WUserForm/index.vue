@@ -84,8 +84,7 @@
         type="submit"
         variant="outline-dark"
         size="lg"
-        class="w-users-form-button"
-      >
+        class="w-users-form-button">
         {{ submitButtonName }}
       </b-button>
     </b-form>
@@ -93,6 +92,7 @@
 
 <script>
     import { BForm, BFormInput, BButton } from 'bootstrap-vue';
+
     import * as userRoles from '../../constants/roles';
     import WMultiselect from '../WMultiselect';
 

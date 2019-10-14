@@ -1,6 +1,6 @@
 <template>
   <b-row>
-    <b-col class="w-users-add-form" lg="3" sm="12" offset-lg="4">
+    <b-col class="w-users-add-form" lg="4" offset-lg="4">
       <h1 class="w-user-add-form-h1">Add User</h1>
       <w-form
         @form-submitted="sendData"
