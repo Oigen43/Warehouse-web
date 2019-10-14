@@ -44,9 +44,7 @@ Vue.use(Router);
 const ifAuthenticated = (to, from, next) => {
   const { authorize } = to.meta;
 
-  if (store.state.token) {
-    next();
-  } else {
+  if (!store.state.token) {
     next('/login');
     return;
   }

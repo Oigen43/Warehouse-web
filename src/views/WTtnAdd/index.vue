@@ -1,7 +1,8 @@
 <template>
+  <div>
+  <h1 class="w-ttn-add-form-h1">Create TTN</h1>
   <b-row>
-    <h1 class="w-ttn-add-form-h1">Create TTN</h1>
-    <b-col class="w-ttn-add-form-col" lg="4" sm="12" offset-lg="4">
+    <b-col class="w-ttn-add-form-col" lg="3" md="12" offset-lg="1" align-self="start">
       <w-form
         :number="number"
         :dischargeDate="dischargeDate"
@@ -23,7 +24,14 @@
       >Go Back
       </b-button>
     </b-col>
+    <b-col class="w-ttn-add-form-col" lg="6" md="12" offset-lg="1">
+      <w-goods
+        @added-good="addGood"
+        :goods="goods"
+      ></w-goods>
+    </b-col>
   </b-row>
+  </div>
 </template>
 
 <script>
@@ -31,14 +39,15 @@
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
     import WForm from '../../components/WTtnForm';
-
+    import WGoods from '../../components/WGoodsList';
     export default {
         name: 'WTtnAddForm',
         components: {
             BRow,
             BCol,
             BButton,
-            WForm
+            WForm,
+            WGoods
         },
         data() {
             return {
@@ -51,9 +60,15 @@
                 dispatcher: '',
                 description: '',
                 type: '',
-                goods: '',
+                goods: [ { name: 'Apples', volume: '400', count: '5', weight: '5', price: '533', recommendation: 'Coldasdasdasd' }, { name: 'Oranges', volume: '300' }, { name: 'Apples', volume: '400' }, { name: 'Oranges', volume: '300' } ],
                 warehouse: '',
             };
+        },
+        methods: {
+          addGood(good) {
+            console.log(good);
+            this.goods.push(good);
+          }
         }
     };
 </script>

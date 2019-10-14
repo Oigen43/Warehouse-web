@@ -3,6 +3,7 @@
       <b-form-input
         size="lg"
         v-model="form.number"
+        type="number"
         required
         placeholder="Number"
         class="w-ttn-form-input"
@@ -68,9 +69,7 @@
         size="lg"
         v-model="form.description"
         placeholder="Description"
-        rows="3"
-        max-rows="8"
-        no-auto-shrink
+        max-rows="4"
         class="w-ttn-form-input"
       ></b-form-textarea>
       <b-form-input
