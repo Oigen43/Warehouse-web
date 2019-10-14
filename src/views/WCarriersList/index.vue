@@ -1,10 +1,10 @@
 <template>
   <b-row>
-    <b-col lg="12" sm="12">
+    <b-col>
       <div class='w-carriers-list-page'>
         <h1>List of Carriers</h1>
         <b-row>
-          <b-col lg="12" sm="12">
+          <b-col>
             <b-button
               variant="dark"
               to="/carriers/add"
@@ -20,7 +20,7 @@
           ></w-list>
         </div>
         <b-row>
-          <b-col lg="12" sm="12">
+          <b-col>
             <div class="carriers-list-pagination">
               <w-pagination
                 v-if="carriersPageLimit > 1"

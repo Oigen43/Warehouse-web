@@ -1,10 +1,10 @@
 <template>
   <b-row>
-    <b-col lg="12" sm="12">
+    <b-col>
       <div class='w-ttn-list-page'>
         <h1>List of TTN</h1>
         <b-row>
-          <b-col lg="12" sm="12">
+          <b-col>
             <b-button
               variant="dark"
               to="/ttn/add"
@@ -21,7 +21,7 @@
           ></w-list>
         </div>
         <b-row>
-          <b-col lg="12" sm="12">
+          <b-col>
             <div class="w-ttn-list-pagination">
               <w-pagination
                 v-if="ttnPageLimit > 1"
