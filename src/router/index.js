@@ -36,7 +36,7 @@ import WDriversUpdateForm from '../views/WDriversUpdate';
 import WTransportList from '../views/WTransportList';
 import WTransportAddForm from '../views/WTransportAdd';
 import WTransportUpdateForm from '../views/WTransportUpdate';
-import WTTNList from '../views/WTTN';
+import WTTNList from '../views/WTTNList';
 import WNotFound from '../views/WNotFound';
 
 Vue.use(Router);

@@ -229,18 +229,18 @@ export default {
     state.transport = state.transport.filter(item => item.id !== transport.id);
   },
 
-  [types.TTN](state, ttn) {
-    state.ttn = ttn;
+  [types.TTN](state, TTN) {
+    state.TTN = TTN;
   },
-  [types.TTN_PAGE_LIMIT](state, ttnPageLimit) {
-    state.ttnPageLimit = ttnPageLimit;
+  [types.TTN_PAGE_LIMIT](state, TTNPageLimit) {
+    state.TTNPageLimit = TTNPageLimit;
   },
-  [types.SET_UPDATED_TTN](state, ttn) {
-    state.updatedTtn = ttn;
+  [types.SET_UPDATED_TTN](state, TTN) {
+    state.updatedTTN = TTN;
   },
-  [types.DELETE_TTN](state, ttn) {
-    state.deletedTtn = ttn;
-    state.ttn = state.ttn.filter(item => item.id !== ttn.id);
+  [types.DELETE_TTN](state, TTN) {
+    state.deletedTTN = TTN;
+    state.TTN = state.TTN.filter(item => item.id !== TTN.id);
   },
 
   [types.SET_TOAST](state, toast) {
