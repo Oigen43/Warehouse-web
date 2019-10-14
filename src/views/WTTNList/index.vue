@@ -1,32 +1,32 @@
 <template>
   <b-row>
     <b-col>
-      <div class='w-companies-list-page'>
-        <h1>List of Companies</h1>
+      <div class='w-ttn-list-page'>
+        <h1>List of TTN</h1>
         <b-row>
           <b-col>
             <b-button
               variant="dark"
-              to="/companies/add"
-              class="w-companies-add-button"
-              v-if="hasPermissions(routesPermissions.companies.create)"
-            >add company
+              to="/ttn/add"
+              class="w-ttn-add-button"
+            >add TTN
             </b-button>
           </b-col>
         </b-row>
-        <div class="companies-list">
+        <div class="w-ttn-list">
           <w-list
+            :ttn="ttn"
             @delete-button-clicked="clickedDeleteButton"
-            :companies="companies"
+            @take-out-button-clicked="clickedTakeOutButton"
           ></w-list>
         </div>
         <b-row>
           <b-col>
-            <div class="companies-list-pagination">
+            <div class="w-ttn-list-pagination">
               <w-pagination
-                v-if="companiesPageLimit > 1"
+                v-if="ttnPageLimit > 1"
                 :current="currentPage"
-                :pageLimit="companiesPageLimit"
+                :pageLimit="ttnPageLimit"
                 @page-changed="sendRequest"
               ></w-pagination>
             </div>
@@ -41,14 +41,11 @@
     import { mapActions, mapState } from 'vuex';
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
-    import { validation } from '../../components/mixins/validation';
-    import routesPermissions from '../../constants/routesPermissions';
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
 
     export default {
-        name: 'WCompaniesListPage',
-        mixins: [validation],
+        name: 'WTTNListPage',
         components: {
             BRow,
             BCol,
@@ -58,39 +55,42 @@
         },
         data: function () {
             return {
-                currentPage: 1
+                currentPage: 1,
+                perPage: 8
             };
         },
         computed: {
             ...mapState([
-                'companies',
-                'companiesPageLimit'
-            ]),
-            routesPermissions: function() {
-              return routesPermissions;
-            }
+                'ttn',
+                'ttnPageLimit'
+            ])
         },
         methods: {
             ...mapActions({
-                fetchCompaniesList: 'fetchCompaniesList',
-                sendDeletedCompanyData: 'sendDeletedCompany',
-                deletedCompanyData: 'deleteCompany'
+                fetchTtnList: 'fetchTtnList',
+                sendDeletedTtnData: 'sendDeletedTtn',
+                deletedTtnData: 'deleteTtn',
+                sendTakeOutTtnData: 'takeOutTtn'
             }),
             sendRequest(page) {
                 this.currentPage = page;
-                this.fetchCompaniesList(this.currentPage);
+                this.fetchTtnList(this.currentPage);
             },
             async clickedDeleteButton(item) {
-                await this.sendDeletedCompanyData(item.id);
-                this.deletedCompanyData(item);
-                if (this.companies.length === 0 && this.currentPage > 1) {
+                await this.sendDeletedTtnData(item.id);
+                this.deletedTtnData(item);
+                if (this.ttn.length === 0 && this.currentPage > 1) {
                     this.currentPage -= 1;
                 }
-                this.fetchCompaniesList(this.currentPage);
+                this.fetchTtnList(this.currentPage);
+            },
+            async clickedTakeOutButton(item) {
+                await this.sendTakeOutTtnData(item);
+                this.fetchTtnList();
             }
         },
         created: function () {
-            this.fetchCompaniesList();
+            this.fetchTtnList();
         }
     };
 </script>

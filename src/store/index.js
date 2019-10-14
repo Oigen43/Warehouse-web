@@ -75,6 +75,11 @@ export default new Vuex.Store({
     updatedTransport: {},
     deletedTransport: {},
 
+    ttn: [],
+    ttnPageLimit: 1,
+    newTtn: {},
+    updatedTtn: {},
+
     toast: {}
     },
   getters,

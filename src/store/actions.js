@@ -400,5 +400,33 @@ export default {
     const res = await api.delete(url.TRANSPORT_URL, { transportId });
 
     res.toast && commit(types.SET_TOAST, res.toast);
+  },
+
+  fetchTtnList: async ({ commit }, page = 1, perPage = 8) => {
+    const res = await api.get(url.TTN_URL, { page, perPage });
+
+    if (res.data) {
+      const pageLimit = helpers.calculatePageLimit(res.data.ttnTotal, perPage);
+
+      commit(types.TTN, res.data.ttn);
+      commit(types.TTN_PAGE_LIMIT, pageLimit);
+    }
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  getUpdatedTtn: async ({ commit }, req) => {
+    commit(types.SET_UPDATED_TTN, req);
+  },
+  deleteTtn: async ({ commit }, req) => {
+    commit(types.DELETE_TTN, req);
+  },
+  sendDeletedTtn: async ({ commit }, ttnId) => {
+    const res = await api.delete(url.TTN_URL, { ttnId });
+
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  takeOutTtn: async ({ commit }, req) => {
+    const res = await api.put(url.TTN_URL, req);
+
+    res.toast && commit(types.SET_TOAST, res.toast);
   }
  };

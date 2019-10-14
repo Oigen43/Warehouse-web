@@ -10,5 +10,6 @@ export const RECEIVERS_URL = '/receivers';
 export const CARRIERS_URL = '/carriers';
 export const DRIVERS_URL = '/drivers';
 export const TRANSPORT_URL = '/transport';
+export const TTN_URL = '/ttn';
 export const REFRESH_TOKEN_URL = '/refresh';
 export const CONFIRMATION_URL = '/confirmation';
