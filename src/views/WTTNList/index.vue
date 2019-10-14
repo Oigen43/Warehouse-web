@@ -15,7 +15,7 @@
         </b-row>
         <div class="w-ttn-list">
           <w-list
-            :ttn="ttn"
+            :TTN="TTN"
             @delete-button-clicked="clickedDeleteButton"
             @take-out-button-clicked="clickedTakeOutButton"
           ></w-list>
@@ -24,9 +24,9 @@
           <b-col>
             <div class="w-ttn-list-pagination">
               <w-pagination
-                v-if="ttnPageLimit > 1"
+                v-if="TTNPageLimit > 1"
                 :current="currentPage"
-                :pageLimit="ttnPageLimit"
+                :pageLimit="TTNPageLimit"
                 @page-changed="sendRequest"
               ></w-pagination>
             </div>
@@ -61,36 +61,36 @@
         },
         computed: {
             ...mapState([
-                'ttn',
-                'ttnPageLimit'
+                'TTN',
+                'TTNPageLimit'
             ])
         },
         methods: {
             ...mapActions({
-                fetchTtnList: 'fetchTtnList',
-                sendDeletedTtnData: 'sendDeletedTtn',
-                deletedTtnData: 'deleteTtn',
-                sendTakeOutTtnData: 'takeOutTtn'
+                fetchTTNList: 'fetchTTNList',
+                sendDeletedTTNData: 'sendDeletedTTN',
+                deletedTTNData: 'deleteTTN',
+                sendTakeOutTTNData: 'takeOutTTN'
             }),
             sendRequest(page) {
                 this.currentPage = page;
-                this.fetchTtnList(this.currentPage);
+                this.fetchTTNList(this.currentPage);
             },
             async clickedDeleteButton(item) {
-                await this.sendDeletedTtnData(item.id);
-                this.deletedTtnData(item);
-                if (this.ttn.length === 0 && this.currentPage > 1) {
+                await this.sendDeletedTTNData(item.id);
+                this.deletedTTNData(item);
+                if (this.TTN.length === 0 && this.currentPage > 1) {
                     this.currentPage -= 1;
                 }
-                this.fetchTtnList(this.currentPage);
+                this.fetchTTNList(this.currentPage);
             },
             async clickedTakeOutButton(item) {
-                await this.sendTakeOutTtnData(item);
-                this.fetchTtnList();
+                await this.sendTakeOutTTNData(item);
+                this.fetchTTNList();
             }
         },
         created: function () {
-            this.fetchTtnList();
+            this.fetchTTNList();
         }
     };
 </script>

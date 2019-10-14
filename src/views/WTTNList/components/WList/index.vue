@@ -60,7 +60,7 @@
             BButton,
             WTable
         },
-        props: ['ttn'],
+        props: ['TTN'],
         computed: {
             fields: function () {
                 const fieldsList = [
@@ -75,25 +75,25 @@
                 return fieldsList;
             },
             hasButtonsColumn() {
-                return this.ttn.some(item => {
+                return this.TTN.some(item => {
                     return item.status === statuses.REGISTERED_STATUS &&
-                        this.hasPermissions(this.routesPermissions.ttn.update) &&
-                        this.hasPermissions(this.routesPermissions.ttn.delete);
+                        this.hasPermissions(this.routesPermissions.TTN.update) &&
+                        this.hasPermissions(this.routesPermissions.TTN.delete);
                 });
             },
             hasOptionsColumn() {
-                return this.ttn.some(item => {
+                return this.TTN.some(item => {
                     return item.status === statuses.CONFIRMED_STATUS ||
                         item.status === statuses.RELEASE_ALLOWED_STATUS;
                 });
             },
 
             items: function() {
-                this.ttn.forEach(item => {
+                this.TTN.forEach(item => {
                     item.registrationDate = item.registrationDate.slice(0, 10);
                 });
 
-                return this.ttn;
+                return this.TTN;
             },
 
             routesPermissions: function () {
@@ -102,27 +102,27 @@
         },
         methods: {
             ...mapActions({
-                getUpdatedTtnData: 'getUpdatedTtn'
+                getUpdatedTTNData: 'getUpdatedTTN'
             }),
             hasUpdateAction(item) {
               return item.status === statuses.REGISTERED_STATUS &&
-                this.hasPermissions(this.routesPermissions.ttn.update);
+                this.hasPermissions(this.routesPermissions.TTN.update);
             },
             hasDeleteAction(item) {
               return item.status === statuses.REGISTERED_STATUS &&
-                this.hasPermissions(this.routesPermissions.ttn.delete);
+                this.hasPermissions(this.routesPermissions.TTN.delete);
             },
             hasCheckAction(item) {
               return (item.status === statuses.REGISTERED_STATUS ||
                 item.status === statuses.RELEASE_ALLOWED_STATUS) &&
-                this.hasPermissions(this.routesPermissions.ttn.check);
+                this.hasPermissions(this.routesPermissions.TTN.check);
             },
             hasTakeOutAction(item) {
               return item.status === statuses.CONFIRMED_STATUS &&
-                this.hasPermissions(this.routesPermissions.ttn.takeOut);
+                this.hasPermissions(this.routesPermissions.TTN.takeOut);
             },
             clickedUpdateButton(item) {
-                this.getUpdatedTtnData(item);
+                this.getUpdatedTTNData(item);
                 router.push('/ttn/update');
             },
             clickedDeleteButton(item) {
@@ -130,9 +130,9 @@
                     title: `${modal.TTN_DELETE_TITLE} ${item.number} ${item.registrationDate}`,
                     ...modal.CONFIRM_MODAL_OPTIONS
                 })
-                    .then(value => value && this.deleteTtn(item));
+                    .then(value => value && this.deleteTTN(item));
             },
-            deleteTtn(item) {
+            deleteTTN(item) {
                 this.$emit('delete-button-clicked', item);
             },
             clickedTakeOutButton(item) {
@@ -140,9 +140,9 @@
                     title: `${modal.TTN_TAKE_OUT_TITLE} ${item.number} ${item.registrationDate}`,
                     ...modal.CONFIRM_MODAL_OPTIONS
                 })
-                    .then(value => value && this.takeOutTtn(item));
+                    .then(value => value && this.takeOutTTN(item));
             },
-            takeOutTtn(item) {
+            takeOutTTN(item) {
                 this.$emit('take-out-button-clicked', item);
             }
         }

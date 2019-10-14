@@ -366,29 +366,29 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
 
-  fetchTtnList: async ({ commit }, page = 1, perPage = 8) => {
+  fetchTTNList: async ({ commit }, page = 1, perPage = 8) => {
     const res = await api.get(url.TTN_URL, { page, perPage });
 
     if (res.data) {
-      const pageLimit = helpers.calculatePageLimit(res.data.ttnTotal, perPage);
+      const pageLimit = helpers.calculatePageLimit(res.data.TTNTotal, perPage);
 
-      commit(types.TTN, res.data.ttn);
+      commit(types.TTN, res.data.TTN);
       commit(types.TTN_PAGE_LIMIT, pageLimit);
     }
     res.toast && commit(types.SET_TOAST, res.toast);
   },
-  getUpdatedTtn: async ({ commit }, req) => {
+  getUpdatedTTN: async ({ commit }, req) => {
     commit(types.SET_UPDATED_TTN, req);
   },
-  deleteTtn: async ({ commit }, req) => {
+  deleteTTN: async ({ commit }, req) => {
     commit(types.DELETE_TTN, req);
   },
-  sendDeletedTtn: async ({ commit }, ttnId) => {
-    const res = await api.delete(url.TTN_URL, { ttnId });
+  sendDeletedTTN: async ({ commit }, TTNId) => {
+    const res = await api.delete(url.TTN_URL, { TTNId });
 
     res.toast && commit(types.SET_TOAST, res.toast);
   },
-  takeOutTtn: async ({ commit }, req) => {
+  takeOutTTN: async ({ commit }, req) => {
     const res = await api.put(url.TTN_URL, req);
 
     res.toast && commit(types.SET_TOAST, res.toast);
