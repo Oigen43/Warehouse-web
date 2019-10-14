@@ -17,7 +17,7 @@
     import WNavigation from '../components/WNavigation';
     import WToastNotification from '../components/WToastNotification';
     import WFooter from '../components/WFooter';
-    import WSpinner from "../components/WSpinner";
+    import WSpinner from '../components/WSpinner';
 
     Vue.use(ModalPlugin);
 

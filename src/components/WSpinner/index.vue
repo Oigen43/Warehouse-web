@@ -1,5 +1,7 @@
 <template>
-  <div class="d-flex justify-content-center mb-3">
+  <div
+    class="d-flex justify-content-center mb-3"
+    :class="loading ? 'w-spinner-container-show' : 'w-spinner-container'">
     <b-spinner
       v-if="loading"
       style="width: 5rem; height: 5rem;"
@@ -13,7 +15,7 @@
     import { BSpinner } from 'bootstrap-vue';
 
     export default {
-        name: "WSpinner",
+        name: 'WSpinner',
         components: {
             BSpinner
         },
@@ -22,7 +24,7 @@
                 'loading'
             ])
         }
-    }
+    };
 </script>
 
 <style lang="scss">
