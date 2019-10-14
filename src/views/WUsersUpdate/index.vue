@@ -1,6 +1,10 @@
 <template>
   <b-row>
-    <b-col v-if="updatedUser.id" class="w-users-update-form" lg="4" sm="12" offset-lg="4">
+    <b-col
+      v-if="updatedUser.id"
+      class="w-users-update-form"
+      lg="4"
+      offset-lg="4">
       <h1 class="w-users-update-form-h1">Update User</h1>
       <w-form
         @form-submitted="sendData"
@@ -43,7 +47,6 @@
         },
         computed: {
             ...mapState([
-                'loading',
                 'updatedUser'
             ]),
             userId() {

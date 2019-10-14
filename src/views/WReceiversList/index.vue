@@ -1,10 +1,10 @@
 <template>
   <b-row>
-    <b-col lg="12" sm="12">
+    <b-col>
       <div class='w-receivers-list-page'>
         <h1>List of Receivers</h1>
         <b-row>
-          <b-col lg="12" sm="12">
+          <b-col>
             <b-button
               variant="dark"
               to="/receivers/add"
@@ -20,7 +20,7 @@
           ></w-list>
         </div>
         <b-row>
-          <b-col lg="12" sm="12">
+          <b-col>
             <div class="w-receivers-list-pagination">
               <w-pagination
                 v-if="receiversPageLimit > 1"

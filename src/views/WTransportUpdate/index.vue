@@ -1,6 +1,10 @@
 <template>
   <b-row>
-    <b-col v-if="updatedTransport.id" class="w-transport-update-form" lg="4" sm="12" offset-lg="4">
+    <b-col
+      v-if="updatedTransport.id"
+      class="w-transport-update-form"
+      lg="4"
+      offset-lg="4">
       <h1 class="w-transport-update-form-h1">Update Transport</h1>
       <w-form
         @form-submitted="sendData"
@@ -36,7 +40,6 @@
         },
         computed: {
             ...mapState([
-                'loading',
                 'updatedTransport'
             ]),
             carrierId() {

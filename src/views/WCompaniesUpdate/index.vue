@@ -1,6 +1,10 @@
 <template>
   <b-row>
-    <b-col v-if="updatedCompany.id" class="w-companies-update-form" lg="4" sm="12" offset-lg="4">
+    <b-col
+      v-if="updatedCompany.id"
+      class="w-companies-update-form"
+      lg="4"
+      offset-lg="4">
       <h1 class="w-company-update-form-h1">Update Company</h1>
       <w-form
         @form-submitted="sendData"
@@ -37,8 +41,7 @@
         },
         computed: {
             ...mapState([
-                'updatedCompany',
-                'loading'
+                'updatedCompany'
             ]),
             companyId() {
                 return +this.$route.params.companyId;
