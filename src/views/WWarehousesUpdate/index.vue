@@ -1,9 +1,8 @@
 <template>
   <b-row>
-    <b-col class="w-warehouses-update-form" lg="4" sm="12" offset-lg="4">
+    <b-col v-if="updatedWarehouse.id" class="w-warehouses-update-form" lg="4" sm="12" offset-lg="4">
       <h1 class="w-warehouses-update-form-h1">Update Warehouse</h1>
       <w-form
-        v-if="!loading"
         @form-submitted="sendData"
         submitButtonName="UPDATE WAREHOUSE"
         :id="warehouseId"

@@ -1,9 +1,8 @@
 <template>
   <b-row>
-    <b-col class="w-drivers-update-form" lg="4" sm="12" offset-lg="4">
+    <b-col v-if="updatedDriver.id" class="w-drivers-update-form" lg="4" sm="12" offset-lg="4">
       <h1 class="w-drivers-update-form-h1">Update Driver</h1>
       <w-form
-        v-if="!loading"
         @form-submitted="sendData"
         submitButtonName="UPDATE DRIVER"
         :id="driverId"
