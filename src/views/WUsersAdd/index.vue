@@ -6,13 +6,8 @@
         @form-submitted="sendData"
         submitButtonName="ADD USER"
         :firstName="firstName"
-        :surname="surname"
-        :patronymic="patronymic"
         :email="email"
-        :address="address"
-        :birthDate="birthDate"
-        :login="login"
-        :password="password"
+        add-user
       ></w-form>
       <b-button
         variant="link"
@@ -26,7 +21,7 @@
 
 <script>
     import router from '../../router';
-    import { mapActions } from 'vuex';
+    import { mapActions, mapState } from 'vuex';
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
     import WForm from '../../components/WUserForm';
@@ -42,14 +37,13 @@
         data() {
             return {
                 firstName: '',
-                surname: '',
-                patronymic: '',
                 email: '',
-                address: '',
-                birthDate: '',
-                login: '',
-                password: ''
             };
+        },
+        computed: {
+            ...mapState([
+                'roles'
+            ]),
         },
         methods: {
             ...mapActions({

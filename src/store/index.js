@@ -23,6 +23,7 @@ export default new Vuex.Store({
     currentCompany: {},
 
     warehouses: [],
+    warehousesId: [],
     warehousesPageLimit: 1,
     newWarehouse: {},
     updatedWarehouse: {},
