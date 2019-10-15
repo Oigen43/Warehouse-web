@@ -49,13 +49,6 @@
               @click="clickedUpdateButton(good)">
               Update
             </b-button>
-            <b-modal ref="modal-update-goods" id="modal-update-goods" hide-header hide-footer>
-              <w-form
-                @form-submitted="addGood"
-                headerName='Add new item'
-                submitButtonName='ADD ITEM'
-              ></w-form>
-            </b-modal>
             <b-button
               class="w-goods-delete-card-button"
               variant="light"
@@ -65,6 +58,19 @@
           </b-card-footer>
         </b-card>
       </b-col>
+      <b-modal ref="modal-update-goods" id="modal-update-goods" hide-header hide-footer>
+        <w-form
+          @form-submitted="updateGood"
+          headerName='Update item'
+          submitButtonName='UPDATE ITEM'
+          :name="currentGood.name"
+          :volume="currentGood.volume"
+          :count="currentGood.count"
+          :weight="currentGood.weight"
+          :price="currentGood.price"
+          :recommendation="currentGood.recommendation"
+        ></w-form>
+      </b-modal>
     </b-row>
 </template>
 
@@ -99,15 +105,24 @@
             BButton,
             WForm
         },
+        data() {
+          return {
+            currentGood: ''
+          };
+        },
         props: ['goods'],
         methods: {
           clickedUpdateButton(good) {
-            console.log(good);
+            this.currentGood = good;
+            console.log(this.currentGood);
           },
           addGood(form) {
             this.$emit('added-good', form);
             this.$refs['modal-add-goods'].hide();
           },
+          updateGood(form) {
+            console.log(form);
+          }
         }
     };
 </script>

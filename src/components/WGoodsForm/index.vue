@@ -79,6 +79,9 @@
             volume: {
                 type: String
             },
+            count: {
+              type: String
+            },
             weight: {
                 type: String
             },
