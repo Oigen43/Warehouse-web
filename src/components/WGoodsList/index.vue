@@ -76,7 +76,6 @@
 </template>
 
 <script>
-    import Vue from 'vue';
     import {
         BRow,
         BCol,
@@ -85,13 +84,10 @@
         BCardBody,
         BCardText,
         BCardFooter,
-        BButton,
-        ModalPlugin
+        BButton
     } from 'bootstrap-vue';
 
     import WForm from '../../components/WGoodsForm';
-
-    Vue.use(ModalPlugin);
 
     export default {
         name: 'WGoodsList',

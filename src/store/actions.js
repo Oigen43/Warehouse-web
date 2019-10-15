@@ -453,6 +453,7 @@ export default {
   },
 
   fetchDriversList: async ({ commit }, req) => {
+    commit(types.CLEAN_DRIVERS);
     commit(types.REQUEST);
 
     const res = await api.get(url.DRIVERS_URL, {
@@ -513,6 +514,7 @@ export default {
   },
 
   fetchTransportList: async ({ commit }, req) => {
+    commit(types.CLEAN_DRIVERS);
     commit(types.REQUEST);
 
     const res = await api.get(url.TRANSPORT_URL, {
@@ -615,5 +617,13 @@ export default {
 
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
-  }
+  },
+  fetchUserInfo: async ({ commit }, req) => {
+    commit(types.REQUEST);
+
+    const res = await api.getUserInfo(url.USERS_URL, req);
+
+    commit(types.USER_INFO, res.data);
+    commit(types.SUCCESS);
+  },
 };

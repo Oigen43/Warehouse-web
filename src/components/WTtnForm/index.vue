@@ -17,45 +17,58 @@
         class="w-ttn-form-input"
       ></b-form-input>
       <w-multiselect
-        :value="form.selectedSender"
-        :options="sendersList"
+        label="senderName"
+        :options="senders"
         :multiple="false"
         :searchable="true"
         :taggable="false"
         :placeholder="senderPlaceholder"
-        @input="updateSenderValue"
+        v-model="form.sender"
         class="w-ttn-form-input"
-    ></w-multiselect>
+      ></w-multiselect>
       <w-multiselect
-        :value="form.selectedCarrier"
-        :options="carriersList"
+        label="name"
+        :options="carriers"
         :multiple="false"
         :searchable="true"
         :taggable="false"
         :placeholder="carrierPlaceholder"
-        @input="updateCarrierValue"
+        v-model="form.carrier"
+        @select="clickSelectCarrier"
         class="w-ttn-form-input"
-    ></w-multiselect>
+      ></w-multiselect>
       <w-multiselect
-        :value="form.selectedTransport"
-        :options="transportsList"
+        v-if="transports.length"
+        :custom-label="transportTypeWithNumber"
+        :options="transports"
         :multiple="false"
         :searchable="true"
         :taggable="false"
         :placeholder="transportPlaceholder"
-        @input="updateTransportValue"
+        v-model="form.transport"
         class="w-ttn-form-input"
-    ></w-multiselect>
+      ></w-multiselect>
       <w-multiselect
-        :value="form.selectedDriver"
-        :options="driversList"
+        v-if="drivers.length"
+        :custom-label="driverNameWithPassport"
+        :options="drivers"
         :multiple="false"
         :searchable="true"
         :taggable="false"
         :placeholder="driverPlaceholder"
-        @input="updateDriverValue"
+        v-model="form.driver"
         class="w-ttn-form-input"
-    ></w-multiselect>
+      ></w-multiselect>
+      <w-multiselect
+        label="warehouseName"
+        :options="warehouses"
+        :multiple="false"
+        :searchable="true"
+        :taggable="false"
+        :placeholder="warehousePlaceholder"
+        v-model="form.warehouse"
+        class="w-ttn-form-input"
+      ></w-multiselect>
       <b-form-input
         v-if="addForm"
         size="lg"
@@ -80,7 +93,7 @@
       ></b-form-input>
       <b-form-input
         size="lg"
-        v-model="form.warehouse"
+        v-model="form.type"
         disabled
         class="w-ttn-form-input"
       ></b-form-input>
@@ -100,7 +113,7 @@
     import WMultiselect from '../WMultiselect';
 
     export default {
-        name: 'WTtnForm',
+        name: 'WTTnForm',
         components: {
             BForm,
             BFormInput,
@@ -123,37 +136,25 @@
                 type: Object
             },
             senders: {
-                type: Array,
-                default: function () {
-                    return ['A', 'B'];
-                }
+                type: Array
             },
             selectedCarrier: {
                 type: Object
             },
             carriers: {
-                type: Array,
-                default: function () {
-                    return ['A', 'B'];
-                }
+                type: Array
             },
             selectedTransport: {
                 type: Object
             },
             transports: {
-                type: Array,
-                default: function () {
-                    return ['A', 'B'];
-                }
+                type: Array
             },
             selectedDriver: {
                 type: Object
             },
             drivers: {
                 type: Array,
-                default: function () {
-                    return ['A', 'B'];
-                }
             },
             dispatcher: {
                 type: String
@@ -167,8 +168,8 @@
             type: {
                 type: String
             },
-            warehouse: {
-                type: String
+            warehouses: {
+                type: Array
             },
             submitButtonName: {
                 type: String
@@ -179,40 +180,38 @@
                 form: {
                     number: this.number,
                     dischargeDate: this.dischargeDate,
-                    selectedSender: this.selectedSender,
-                    selectedCarrier: this.selectedCarrier,
-                    selectedTransport: this.selectedTransport,
-                    selectedDriver: this.selectedDriver,
+                    sender: this.selectedSender,
+                    carrier: this.selectedCarrier,
+                    transport: this.selectedTransport,
+                    driver: this.selectedDriver,
                     dispatcher: this.dispatcher,
                     registrationDate: this.registrationDate,
                     description: this.description,
                     type: this.type,
-                    warehouse: this.warehouse
+                    warehouse: this.selectedWarehouse,
+                    status: 'registrated'
                 },
 
-                sendersList: this.senders,
                 senderPlaceholder: 'Please select a sender',
-                carriersList: this.carriers,
                 carrierPlaceholder: 'Please select a carrier',
-                transportsList: this.transports,
                 transportPlaceholder: 'Please select a transport',
-                driversList: this.drivers,
-                driverPlaceholder: 'Please select a driver'
+                driverPlaceholder: 'Please select a driver',
+                warehousePlaceholder: 'Please select a warehouse'
             };
         },
         methods: {
-            updateSenderValue(newSender) {
-                  this.form.selectedSender = newSender;
+            onSubmit() {
+                this.$emit('form-submitted', this.form);
             },
-            updateCarrierValue(newCarrier) {
-                  this.form.selectedCarrier = newCarrier;
+            clickSelectCarrier(selectedOption) {
+                this.$emit('carrier-selected', selectedOption.id);
             },
-            updateTransportValue(newTransport) {
-                  this.form.selectedTransport = newTransport;
+            driverNameWithPassport({ firstName, surname, passportNumber }) {
+                return `${surname} - passport: ${passportNumber}`;
             },
-            updateDriverValue(newDriver) {
-                  this.form.selectedDriver = newDriver;
-            },
+            transportTypeWithNumber({ transportType, transportNumber }) {
+                return `${transportType} ${transportNumber}`;
+            }
         }
     };
 </script>

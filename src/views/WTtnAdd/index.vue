@@ -2,24 +2,27 @@
   <div>
   <h1 class="w-ttn-add-form-h1">Create TTN</h1>
   <b-row>
-    <b-col class="w-ttn-add-form-col" lg="3" md="12" offset-lg="1" align-self="start">
+    <b-col v-if='senders' class="w-ttn-add-form-col" lg="3" md="12" offset-lg="1" align-self="start">
       <w-form
+        @form-submitted="sendData"
+        @carrier-selected="getTransportsAndDrivers"
+        @warehouse-selected="getWarehouses"
         :number="number"
         :dischargeDate="dischargeDate"
-        :sender="sender"
-        :carrier="carrier"
-        :transport="transport"
-        :driver="driver"
+        :senders="senders"
+        :carriers="carriers"
+        :transports="transport"
+        :drivers="drivers"
         :dispatcher="dispatcher"
         :description="description"
         :type="type"
-        :warehouse="warehouse"
+        :warehouses="warehouses"
         :addForm="false"
         submitButtonName="Create"
       ></w-form>
       <b-button
         variant="link"
-        to="/users"
+        to="/ttn"
         class="w-ttn-go-back-link"
       >Go Back
       </b-button>
@@ -39,8 +42,9 @@
 <script>
 
     import { BRow, BCol, BButton } from 'bootstrap-vue';
+    import { mapActions, mapState } from 'vuex';
 
-    import WForm from '../../components/WTtnForm';
+    import WForm from '../../components/WTTnForm';
     import WGoods from '../../components/WGoodsList';
     export default {
         name: 'WTtnAddForm',
@@ -55,27 +59,70 @@
             return {
                 number: '',
                 dischargeDate: '',
-                sender: '',
-                carrier: '',
-                transport: '',
-                driver: '',
-                dispatcher: '',
                 description: '',
-                type: '',
-                goods: [ { name: 'Apples', volume: '400', count: '5', weight: '5', price: '533', recommendation: 'Coldasdasdasd' }, { name: 'Oranges', volume: '300' }, { name: 'Apples', volume: '400' }, { name: 'Oranges', volume: '300' } ],
-                warehouse: '',
+                type: 'incoming',
+                goods: [],
             };
         },
+        computed: {
+          ...mapState([
+                'userInfo',
+                'senders',
+                'carriers',
+                'transport',
+                'drivers',
+                'warehouses'
+            ]),
+            dispatcher: function() {
+              return this.userInfo.firstName;
+            }
+        },
         methods: {
+          ...mapActions({
+              fetchUserInfo: 'fetchUserInfo',
+              fetchSendersList: 'fetchSendersList',
+              fetchCarriersList: 'fetchCarriersList',
+              fetchTransportList: 'fetchTransportList',
+              fetchDriversList: 'fetchDriversList',
+              fetchWarehousesList: 'fetchWarehousesList',
+              sendNewStorageData: 'createStorage'
+          }),
           addGood(good) {
-            this.goods.push(good);
+              this.goods.push(good);
           },
           updateGood(good, index) {
-            this.goods.splice(index, 1, good);
+              this.goods.splice(index, 1, good);
           },
           deleteGood(index) {
-            this.goods.splice(index, 1);
+              this.goods.splice(index, 1);
+          },
+          sendData(form) {
+              form.registrationDate = new Date().toLocaleString();
+          },
+          getWarehouses(id) {
+              this.fetchWarehousesList({
+                  page: 1,
+                  perPage: 20,
+                  companyId: id
+              });
+          },
+          getTransportsAndDrivers(id) {
+              this.fetchTransportList({
+                  page: 1,
+                  perPage: 20,
+                  carrierId: id
+              });
+              this.fetchDriversList({
+                  page: 1,
+                  perPage: 20,
+                  carrierId: id
+              });
           }
+        },
+        created: async function() {
+            await this.fetchUserInfo();
+            await this.fetchSendersList();
+            await this.fetchCarriersList();
         }
     };
 </script>
