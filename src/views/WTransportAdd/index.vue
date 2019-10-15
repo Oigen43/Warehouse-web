@@ -1,6 +1,6 @@
 <template>
   <b-row>
-    <b-col class="w-transport-add-form" lg="4" sm="12" offset-lg="4">
+    <b-col class="w-transport-add-form" lg="4" offset-lg="4">
       <h1 class="w-transport-add-form-h1">Add a New Transport</h1>
       <w-form
         @form-submitted="sendData"
@@ -10,7 +10,7 @@
       ></w-form>
       <b-button
         variant="link"
-        to="/transport"
+        @click="redirect"
         class="w-transport-go-back-link"
       >Go Back
       </b-button>
@@ -20,7 +20,7 @@
 
 <script>
     import { BRow, BCol, BButton } from 'bootstrap-vue';
-    import { mapState, mapActions } from 'vuex';
+    import { mapActions } from 'vuex';
 
     import WForm from '../../components/WTransportForm';
     import router from '../../router';
@@ -40,19 +40,22 @@
             };
         },
         computed: {
-            ...mapState([
-                'currentCarrier'
-            ])
+            carrierId() {
+                return +this.$route.params.carrierId;
+            },
+            transportId() {
+                return +this.$route.params.transportId;
+            },
         },
         methods: {
             ...mapActions({
                 sendNewTransportData: 'createTransport'
             }),
             redirect() {
-                router.push('/transport');
+                router.push(`/carriers/${this.carrierId}/transport`);
             },
             async sendData(newTransport) {
-                newTransport.carrierInfo = this.currentCarrier;
+                newTransport.carrierId = this.carrierId;
                 const res = await this.sendNewTransportData(newTransport);
                 !res.error && this.redirect();
             }

@@ -22,8 +22,7 @@
         type="submit"
         variant="outline-dark"
         size="lg"
-        class="w-warehouses-form-button"
-      >
+        class="w-warehouses-form-button">
         {{ submitButtonName }}
       </b-button>
     </b-form>

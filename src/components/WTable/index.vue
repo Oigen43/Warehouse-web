@@ -1,22 +1,22 @@
 <template>
-  <div v-if="isItemsExists" class="w-table">
-    <b-table
-      head-variant="dark"
-      class="w-list-table"
-      borderless
-      stacked="lg"
-      v-bind="$attrs">
-      <template
-        v-for="slot in Object.keys($scopedSlots)"
-        :slot="slot"
-        slot-scope="scope">
-        <slot
-        :name="slot"
-        v-bind="scope"/>
-      </template>
-    </b-table>
-  </div>
-  <w-empty-table v-else></w-empty-table>
+    <div v-if="isItemsExists" class="w-table">
+      <b-table
+        head-variant="dark"
+        class="w-list-table"
+        borderless
+        stacked="lg"
+        v-bind="$attrs">
+        <template
+          v-for="slot in Object.keys($scopedSlots)"
+          :slot="slot"
+          slot-scope="scope">
+          <slot
+            :name="slot"
+            v-bind="scope"/>
+        </template>
+      </b-table>
+    </div>
+    <w-empty-table v-else></w-empty-table>
 </template>
 
 <script>

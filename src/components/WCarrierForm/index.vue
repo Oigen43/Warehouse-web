@@ -31,8 +31,7 @@
         type="submit"
         variant="outline-dark"
         size="lg"
-        class="w-carriers-form-button"
-      >
+        class="w-carriers-form-button">
         {{submitButtonName}}
       </b-button>
     </b-form>

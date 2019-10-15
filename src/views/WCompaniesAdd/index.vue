@@ -1,26 +1,26 @@
 <template>
-    <b-row>
-      <b-col class="w-companies-add-form" lg="4" sm="12" offset-lg="4">
-        <h1 class="w-company-add-form-h1">Add a New Company</h1>
-        <w-form
-          @form-submitted="sendData"
-          submitButtonName="ADD COMPANY"
-          :companyName="companyName"
-          :address="address"
-          :description="description"
-          :adminName="adminName"
-          :adminEmail="adminEmail"
-          :disableState="disableState"
-          with-admin-fields
-        ></w-form>
-        <b-button
-          variant="link"
-          to="/companies"
-          class="w-companies-go-back-link"
-        >Go Back
-        </b-button>
-      </b-col>
-    </b-row>
+  <b-row>
+    <b-col class="w-companies-add-form" lg="4" offset-lg="4">
+      <h1 class="w-company-add-form-h1">Add a New Company</h1>
+      <w-form
+        @form-submitted="sendData"
+        submitButtonName="ADD COMPANY"
+        :companyName="companyName"
+        :address="address"
+        :description="description"
+        :adminName="adminName"
+        :adminEmail="adminEmail"
+        :disableState="disableState"
+        with-admin-fields
+      ></w-form>
+      <b-button
+        variant="link"
+        to="/companies"
+        class="w-companies-go-back-link">
+        Go Back
+      </b-button>
+    </b-col>
+  </b-row>
 </template>
 
 <script>
@@ -56,7 +56,7 @@
                 router.push('/companies');
             },
             changeDisableState() {
-              this.disableState = !this.disableState;
+                this.disableState = !this.disableState;
             },
             async sendData(newCompany) {
                 this.changeDisableState();

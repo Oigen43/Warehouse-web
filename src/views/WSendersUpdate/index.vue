@@ -1,6 +1,10 @@
 <template>
   <b-row>
-    <b-col class="w-senders-update-form" lg="4" sm="12" offset-lg="4">
+    <b-col
+      v-if="updatedSender.id"
+      class="w-senders-update-form"
+      lg="4"
+      offset-lg="4">
       <h1 class="w-senders-update-form-h1">Update Sender</h1>
       <w-form
         @form-submitted="sendData"
@@ -40,7 +44,7 @@
                 'updatedSender'
             ]),
             senderId() {
-                return this.updatedSender.id;
+                return +this.$route.params.senderId;
             },
             senderName() {
                 return this.updatedSender.senderName;
@@ -54,6 +58,7 @@
         },
         methods: {
             ...mapActions({
+                getUpdatedSenderData: 'getUpdatedSender',
                 sendUpdatedSenderData: 'sendUpdatedSender'
             }),
             redirect() {
@@ -64,6 +69,9 @@
                 !res.error && this.redirect();
             }
         },
+        created: function() {
+            this.getUpdatedSenderData(this.senderId);
+        }
     };
 </script>
 

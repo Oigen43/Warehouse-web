@@ -1,6 +1,10 @@
 <template>
   <b-row>
-    <b-col class="w-transport-update-form" lg="4" sm="12" offset-lg="4">
+    <b-col
+      v-if="updatedTransport.id"
+      class="w-transport-update-form"
+      lg="4"
+      offset-lg="4">
       <h1 class="w-transport-update-form-h1">Update Transport</h1>
       <w-form
         @form-submitted="sendData"
@@ -11,7 +15,7 @@
       ></w-form>
       <b-button
         variant="link"
-        to="/transport"
+        @click="redirect"
         class="w-transport-go-back-link"
       >Go Back
       </b-button>
@@ -38,8 +42,11 @@
             ...mapState([
                 'updatedTransport'
             ]),
+            carrierId() {
+                return +this.$route.params.carrierId;
+            },
             transportId() {
-                return this.updatedTransport.id;
+                return +this.$route.params.transportId;
             },
             transportType() {
                 return this.updatedTransport.transportType;
@@ -50,16 +57,20 @@
         },
         methods: {
             ...mapActions({
+                getUpdatedTransportData: 'getUpdatedTransport',
                 sendUpdatedTransportData: 'sendUpdatedTransport'
             }),
             redirect() {
-                router.push('/transport');
+                router.push(`/carriers/${this.carrierId}/transport`);
             },
             async sendData(transport) {
                 const res = await this.sendUpdatedTransportData(transport);
                 !res.error && this.redirect();
             }
         },
+        created: function() {
+            this.getUpdatedTransportData(this.transportId);
+        }
     };
 </script>
 

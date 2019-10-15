@@ -62,12 +62,10 @@
         },
         methods: {
             ...mapActions({
-                getUpdatedReceiverData: 'getUpdatedReceiver',
                 sendDeletedReceiverData: 'deleteReceiver'
             }),
             clickedUpdateButton(item) {
-                this.getUpdatedReceiverData(item);
-                router.push('/receivers/update');
+                router.push(`/receivers/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.RECEIVER_TEXT, {

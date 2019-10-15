@@ -104,12 +104,12 @@
 
       <w-multiselect
         v-if="isManagerRoleSelected"
-        :value="selectedWarehouseId"
+        v-model="form.warehouseId"
         :options="warehousesId"
-        :multiple="true"
+        :multiple="false"
         :close-on-select="false"
         :placeholder="addIdPlaceholder"
-        @input="updateWarehouses"
+
         class="w-users-form-input"
       ></w-multiselect>
 
@@ -117,8 +117,7 @@
         type="submit"
         variant="outline-dark"
         size="lg"
-        class="w-users-form-button"
-      >
+        class="w-users-form-button">
         {{ submitButtonName }}
       </b-button>
     </b-form>
@@ -188,11 +187,13 @@
                     return [];
                 }
             },
+            companyId: {
+                type: Number,
+                default: null
+            },
             selectedWarehouses: {
-                type: Array,
-                default: function () {
-                    return [];
-                }
+                type: Number,
+                default: null
             },
             addUser: {
                 type: Boolean,
@@ -210,10 +211,10 @@
                     address: this.address,
                     birthDate: this.birthDate,
                     login: this.login,
-                    password: this.password
+                    password: this.password,
+                    warehouseId: this.selectedWarehouses
                 },
 
-                selectedWarehouseId: this.selectedWarehouses,
                 rolesForCreating: userRoles.ROLES_FOR_CREATING,
                 rolesForCreatingCompanyUsers: userRoles.ROLES_FOR_CREATING_COMPANY_USERS,
                 selectedRoles: this.userRoles,
@@ -225,9 +226,7 @@
         computed: {
           ...mapState([
               'roles',
-              'currentCompany',
-              'warehousesId',
-              'companies'
+              'warehousesId'
           ]),
           checkRolesForCompanyUsers() {
               return this.roles.includes(userRoles.COMPANY_ADMIN_ROLE);
@@ -239,26 +238,23 @@
               }
 
               return role;
-          }
+          },
         },
         methods: {
             ...mapActions({
                 fetchWarehousesId: 'fetchWarehousesId'
             }),
             getWarehouses() {
-                this.fetchWarehousesId({ companyId: this.companies.id, status: 'getNames' });
+                this.fetchWarehousesId({ companyId: this.companyId, status: 'getNames' });
             },
             updateValue(newRoles) {
               this.selectedRoles = newRoles;
             },
-            updateWarehouses(id) {
-                this.selectedWarehouseId = id;
-            },
+
             onSubmit() {
                 this.$emit('form-submitted', { user: {
                     data: this.form,
-                    selectedRoles: this.selectedRoles,
-                    warehouseId: this.warehouseId
+                    selectedRoles: this.selectedRoles
                 } });
             }
         }

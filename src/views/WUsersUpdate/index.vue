@@ -1,27 +1,33 @@
 <template>
   <b-row>
-    <b-col lg="4" sm="12" offset-lg="4">
-    <h1 class="w-user-update-form-h1">Update User</h1>
-    <w-form
-      @form-submitted="sendData"
-      submitButtonName="UPDATE USER"
-      :id="userId"
-      :firstName="firstName"
-      :surname="surname"
-      :patronymic="patronymic"
-      :email="email"
-      :address="address"
-      :birthDate="birthDate"
-      :login="login"
-      :userRoles="roles"
-      :passwordDisplay="false"
-    ></w-form>
-    <b-button
-      variant="link"
-      to="/users"
-      class="w-users-go-back-link"
-    >Go Back
-    </b-button>
+    <b-col
+      v-if="updatedUser.id"
+      class="w-users-update-form"
+      lg="4"
+      offset-lg="4">
+      <h1 class="w-users-update-form-h1">Update User</h1>
+      <w-form
+        @form-submitted="sendData"
+        submitButtonName="UPDATE USER"
+        :id="userId"
+        :firstName="firstName"
+        :surname="surname"
+        :patronymic="patronymic"
+        :email="email"
+        :address="address"
+        :birthDate="birthDate"
+        :login="login"
+        :userRoles="roles"
+        :companyId="companyId"
+        :selected-warehouses="warehouseId"
+        :passwordDisplay="false"
+      ></w-form>
+      <b-button
+        variant="link"
+        to="/users"
+        class="w-users-go-back-link"
+      >Go Back
+      </b-button>
     </b-col>
   </b-row>
 </template>
@@ -46,7 +52,7 @@
                 'updatedUser'
             ]),
             userId() {
-                return this.updatedUser.id;
+                return +this.$route.params.userId;
             },
             firstName() {
                 return this.updatedUser.firstName;
@@ -71,10 +77,17 @@
             },
             roles() {
                 return this.updatedUser.roles.map(role => role.title);
+            },
+            companyId() {
+                return this.updatedUser.companyId;
+            },
+            warehouseId() {
+                return this.updatedUser.warehouseId;
             }
         },
         methods: {
             ...mapActions({
+                getUpdatedUserData: 'getUpdatedUser',
                 sendUpdatedUserData: 'sendUpdatedUser'
             }),
             redirect() {
@@ -84,6 +97,9 @@
                 const res = await this.sendUpdatedUserData(user);
                 !res.error && this.redirect();
             }
+        },
+        created: function () {
+            this.getUpdatedUserData(this.userId);
         }
     };
 </script>

@@ -1,6 +1,10 @@
 <template>
   <b-row>
-    <b-col class="w-storages-update-form" lg="4" sm="12" offset-lg="4">
+    <b-col
+      v-if="updatedStorage.id"
+      class="w-storages-update-form"
+      lg="4"
+      offset-lg="4">
       <h1 class="w-storages-update-form-h1">Update Storage</h1>
       <w-form
         @form-submitted="sendData"
@@ -12,7 +16,7 @@
       ></w-form>
       <b-button
         variant="link"
-        to="/storages"
+        @click="redirect"
         class="w-storages-go-back-link"
       >Go Back
       </b-button>
@@ -40,8 +44,14 @@
                 'updatedStorage',
                 'storageTypes'
             ]),
+            companyId() {
+                return this.$route.params.companyId;
+            },
+            warehouseId() {
+              return this.$route.params.warehouseId;
+            },
             storageId() {
-                return this.updatedStorage.id;
+                return +this.$route.params.storageId;
             },
             storageType() {
                 return this.updatedStorage.StorageType;
@@ -52,16 +62,22 @@
         },
         methods: {
             ...mapActions({
+                fetchStorageTypes: 'fetchStorageTypes',
+                getUpdatedStorageData: 'getUpdatedStorage',
                 sendUpdatedStorageData: 'sendUpdatedStorage'
             }),
             redirect() {
-                router.push('/storages');
+                router.push(`/companies/${this.companyId}/warehouses/${this.warehouseId}/storages`);
             },
             async sendData(storage) {
                 const res = await this.sendUpdatedStorageData(storage);
                 !res.error && this.redirect();
             }
         },
+        created: async function() {
+            await this.getUpdatedStorageData(this.storageId);
+            await this.fetchStorageTypes();
+        }
     };
 </script>
 

@@ -62,12 +62,10 @@
         },
         methods: {
             ...mapActions({
-                getUpdatedSenderData: 'getUpdatedSender',
                 sendDeletedSenderData: 'deleteSender'
             }),
             clickedUpdateButton(item) {
-                this.getUpdatedSenderData(item);
-                router.push('/senders/update');
+                router.push(`/senders/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.SENDER_TEXT, {

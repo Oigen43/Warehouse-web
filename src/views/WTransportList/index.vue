@@ -7,7 +7,7 @@
           <b-col>
             <b-button
               variant="dark"
-              to="/transport/add"
+              to="transport/add"
               class="w-transport-add-button"
             >add transport
             </b-button>
@@ -61,9 +61,11 @@
         computed: {
             ...mapState([
                 'transport',
-                'transportPageLimit',
-                'currentCarrier'
-            ])
+                'transportPageLimit'
+            ]),
+            carrierId: function() {
+                return this.$route.params.carrierId;
+            }
         },
         methods: {
             ...mapActions({
@@ -76,7 +78,7 @@
                 this.fetchTransportList({
                     page: this.currentPage,
                     perPage: this.perPage,
-                    carrierId: this.currentCarrier.id
+                    carrierId: this.carrierId
                 });
             },
             async clickedDeleteButton(item) {
@@ -88,7 +90,7 @@
                 this.fetchTransportList({
                     page: this.currentPage,
                     perPage: this.perPage,
-                    carrierId: this.currentCarrier.id
+                    carrierId: this.carrierId
                 });
             }
         },
@@ -96,7 +98,7 @@
             this.fetchTransportList({
                 page: this.currentPage,
                 perPage: this.perPage,
-                carrierId: this.currentCarrier.id
+                carrierId: this.carrierId
             });
         }
     };

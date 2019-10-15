@@ -6,7 +6,7 @@
         <b-row>
           <b-col>
             <b-button
-              to="/drivers/add"
+              to="drivers/add"
               class="w-drivers-add-button"
               variant="dark">
               add driver
@@ -62,9 +62,11 @@
         computed: {
             ...mapState([
                 'drivers',
-                'driversPageLimit',
-                'currentCarrier'
-            ])
+                'driversPageLimit'
+            ]),
+            carrierId: function() {
+                return this.$route.params.carrierId;
+            }
         },
         methods: {
             ...mapActions({
@@ -77,7 +79,7 @@
                 this.fetchDriversList({
                     page: this.currentPage,
                     perPage: this.perPage,
-                    carrierId: this.currentCarrier.id
+                    carrierId: this.carrierId
                 });
             },
             async clickedDeleteButton(item) {
@@ -89,7 +91,7 @@
                 this.fetchDriversList({
                     page: this.currentPage,
                     perPage: this.perPage,
-                    carrierId: this.currentCarrier.id
+                    carrierId: this.carrierId
                 });
             }
         },
@@ -97,7 +99,7 @@
             this.fetchDriversList({
                 page: this.currentPage,
                 perPage: this.perPage,
-                carrierId: this.currentCarrier.id
+                carrierId: this.carrierId
             });
         }
     };
