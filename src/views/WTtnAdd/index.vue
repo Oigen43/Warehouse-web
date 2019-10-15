@@ -27,6 +27,8 @@
     <b-col class="w-ttn-add-form-col" lg="6" md="12" offset-lg="1">
       <w-goods
         @added-good="addGood"
+        @updated-good="updateGood"
+        @deleted-good="deleteGood"
         :goods="goods"
       ></w-goods>
     </b-col>
@@ -66,8 +68,13 @@
         },
         methods: {
           addGood(good) {
-            console.log(good);
             this.goods.push(good);
+          },
+          updateGood(good, index) {
+            this.goods.splice(index, 1, good);
+          },
+          deleteGood(index) {
+            this.goods.splice(index, 1);
           }
         }
     };

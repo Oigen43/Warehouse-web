@@ -52,7 +52,8 @@
             <b-button
               class="w-goods-delete-card-button"
               variant="light"
-              size="sm">
+              size="sm"
+              @click="clickedDeleteButton(good)">
               ✕
             </b-button>
           </b-card-footer>
@@ -107,21 +108,26 @@
         },
         data() {
           return {
-            currentGood: ''
+            currentGood: '',
+            currentGoodIndex: 0
           };
         },
         props: ['goods'],
         methods: {
-          clickedUpdateButton(good) {
-            this.currentGood = good;
-            console.log(this.currentGood);
-          },
           addGood(form) {
             this.$emit('added-good', form);
             this.$refs['modal-add-goods'].hide();
           },
           updateGood(form) {
-            console.log(form);
+            this.$emit('updated-good', form, this.currentGoodIndex);
+            this.$refs['modal-update-goods'].hide();
+          },
+          clickedUpdateButton(good) {
+            this.currentGood = good;
+            this.currentGoodIndex = this.goods.indexOf(good);
+          },
+          clickedDeleteButton(good) {
+            this.$emit('deleted-good', this.goods.indexOf(good));
           }
         }
     };
