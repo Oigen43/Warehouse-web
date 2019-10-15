@@ -14,7 +14,7 @@
               submitButtonName="Create"
             ></w-form>
           </b-col>
-          <b-col v-if="storages" lg="6" md="12" offset-lg="1">
+          <b-col v-if="storages.length" lg="6" md="12" offset-lg="1">
             <b-row class="w-goods-card-container">
               <b-col lg="6" sm="4" v-for="good in goods" v-bind:key="good.id">
                 <b-card no-body class="overflow-hidden w-goods-card">
@@ -29,17 +29,11 @@
                       {{good.storageType}}
                     </b-card-text>
                   </b-card-body>
+                  <b-button v-if="!good.storageId" @click="clickedGoodsCard(good)">Choose Storage
+                  </b-button>
+                  <b-button v-if="good.storageId" @click="clickedGoodsCard(good)">Change Storage
+                  </b-button>
                 </b-card>
-                <w-multiselect
-                  :options="storages"
-                  :multiple="false"
-                  :custom-label="typeWithCapacity"
-                  size="lg"
-                  :allow-empty="false"
-                  :close-on-select="true"
-                  :placeholder="placeholder"
-                  v-model="good.storage"
-                ></w-multiselect>
               </b-col>
             </b-row>
           </b-col>
@@ -66,13 +60,13 @@
         BButton
     } from 'bootstrap-vue';
 
+    import router from '../../router';
     import WForm from './components/WForm';
     import WMultiselect from '../../components/WMultiselect/index';
 
     export default {
         name: 'WGoodsForm',
         components: {
-            WMultiselect,
             BRow,
             BCol,
             BCard,
@@ -96,38 +90,37 @@
                         name: 'apples',
                         size: 20,
                         storageType: 'cold',
-                        storage: null
+                        storageId: null
                     },
                     {
                         id: 2,
                         name: 'wine',
                         size: 11,
                         storageType: 'heated',
-                        storage: null
+                        storageId: null
                     },
                     {
                         id: 3,
                         name: 'fish',
                         size: 30,
                         storageType: 'refrigerated',
-                        storage: null
+                        storageId: null
                     },
                     {
                         id: 4,
                         name: 'bricks',
                         size: 28,
                         storageType: 'outside',
-                        storage: null
+                        storageId: null
                     },
                     {
                         id: 5,
                         name: 'cucumbers',
                         size: 21,
                         storageType: 'refrigerated',
-                        storage: null
+                        storageId: null
                     },
-                ],
-                placeholder: 'Please select storage'
+                ]
             };
         },
         computed: {
@@ -143,46 +136,11 @@
             ...mapMutations({
                 setToast: 'SET_TOAST'
             }),
-            typeWithCapacity({ StorageType, storageCapacity }) {
-                return `${StorageType.type} — [${storageCapacity}]`;
-            },
             clickedSubmitButton() {
-                const chosenStorages = this.goods.map(item => item.storage.id);
-                const distinct = (value, index, self) => {
-                    return self.indexOf(value) === index;
-                };
-                const distinctStorages = chosenStorages.filter(distinct);
-
-                const storageFit = function () {
-                    if (chosenStorages.length === distinctStorages.length) {
-                        return true;
-                    } else {
-                        const newToast = {
-                            title: 'Error!',
-                            variant: 'danger',
-                            message: 'Storage should be unique!'
-                        };
-                        this.setToast(newToast);
-
-                        return false;
-                    }
-                }.bind(this);
-
-                const sizeFit = this.goods.every(function (item) {
-                    if (+item.storage.storageCapacity < +item.size) {
-                        const newToast = {
-                            title: 'Error!',
-                            variant: 'danger',
-                            message: `Storage for ${item.name} is too small. Please choose another one!`
-                        };
-                        this.setToast(newToast);
-
-                        return false;
-                    } else {
-                        return true;
-                    }
-                }.bind(this));
-                storageFit() && sizeFit && console.log(this.goods);
+                console.log(this.goods);
+            },
+            clickedGoodsCard(item) {
+                router.push(`/goods-form/${item.id}`);
             }
         },
         created: function () {

@@ -38,6 +38,7 @@ import WTransportAddForm from '../views/WTransportAdd';
 import WTransportUpdateForm from '../views/WTransportUpdate';
 import WTTNList from '../views/WTTNList';
 import WGoodsForm from '../views/WGoodsForm';
+import WGoodsStorageForm from '../views/WGoodsStorageForm';
 import WNotFound from '../views/WNotFound';
 
 Vue.use(Router);
@@ -296,6 +297,11 @@ export default new Router({
       path: '/goods-form',
       name: 'goods-form',
       component: WGoodsForm
+    },
+    {
+      path: '/goods-form/:goodsId',
+      name: 'goods-storage-form',
+      component: WGoodsStorageForm
     },
     {
       path: '*',
