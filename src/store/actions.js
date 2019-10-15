@@ -222,7 +222,6 @@ export default {
       warehouseId: req.warehouseId
     });
 
-    console.log(res.data)
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.storagesTotal, req.perPage);
 
