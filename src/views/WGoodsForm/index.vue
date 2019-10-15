@@ -1,37 +1,56 @@
 <template>
   <b-row>
-  <b-row v-if="storages">
-    <b-col lg="3" sm="6" v-for="good in goods" v-bind:key="good.id">
-      <b-card no-body class="overflow-hidden w-drivers-card">
-        <b-card-body>
-          <b-card-title class="mb-0 w-drivers-card-text">{{good.name}}</b-card-title>
-          <hr>
-          <b-card-text class="w-drivers-card-text"><span class="w-drivers-card-text-bold">Size:</span>
-            {{good.size}} m<sup><small>2</small></sup>
-          </b-card-text>
-          <b-card-text class="w-drivers-card-text"><span
-            class="w-drivers-card-text-bold">Recommended storage type:</span>
-            {{good.storageType}}
-          </b-card-text>
-        </b-card-body>
-      </b-card>
-      <w-multiselect
-        :options="storages"
-        :multiple="false"
-        :custom-label="typeWithCapacity"
-        size="lg"
-        :allow-empty="false"
-        :close-on-select="true"
-        :placeholder="placeholder"
-        v-model="good.storage"
-      ></w-multiselect>
-    </b-col>
-  </b-row>
-  <b-row>
     <b-col>
-      <b-button variant="primary" size="lg" @click="clickedSubmitButton">Submit</b-button>
+      <div class='w-goods-list-page'>
+        <h1 class="w-goods-add-form-h1">Storage Goods Form</h1>
+        <b-row>
+          <b-col class="w-goods-add-form-container" lg="3" md="12" offset-lg="1" align-self="start">
+            <w-form
+              :number="data.number"
+              :registrationDate="data.registrationDate"
+              :warehouseManager="data.warehouseManager"
+              :date="data.date"
+              :addForm="false"
+              submitButtonName="Create"
+            ></w-form>
+          </b-col>
+          <b-col v-if="storages" lg="6" md="12" offset-lg="1">
+            <b-row class="w-goods-card-container">
+              <b-col lg="6" sm="4" v-for="good in goods" v-bind:key="good.id">
+                <b-card no-body class="overflow-hidden w-goods-card">
+                  <b-card-body>
+                    <b-card-title class="mb-0 w-goods-card-text">{{good.name}}</b-card-title>
+                    <hr>
+                    <b-card-text class="w-goods-card-text"><span class="w-goods-card-text-bold">Size:</span>
+                      {{good.size}} m<sup><small>2</small></sup>
+                    </b-card-text>
+                    <b-card-text class="w-goods-card-text"><span
+                      class="w-goods-card-text-bold">Recommended storage type:</span>
+                      {{good.storageType}}
+                    </b-card-text>
+                  </b-card-body>
+                </b-card>
+                <w-multiselect
+                  :options="storages"
+                  :multiple="false"
+                  :custom-label="typeWithCapacity"
+                  size="lg"
+                  :allow-empty="false"
+                  :close-on-select="true"
+                  :placeholder="placeholder"
+                  v-model="good.storage"
+                ></w-multiselect>
+              </b-col>
+            </b-row>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <b-button class="w-goods-form-button" variant="dark" size="lg" @click="clickedSubmitButton">Submit</b-button>
+          </b-col>
+        </b-row>
+      </div>
     </b-col>
-  </b-row>
   </b-row>
 </template>
 
@@ -47,6 +66,7 @@
         BButton
     } from 'bootstrap-vue';
 
+    import WForm from './components/WForm';
     import WMultiselect from '../../components/WMultiselect/index';
 
     export default {
@@ -59,10 +79,17 @@
             BCardTitle,
             BCardText,
             BCardBody,
-            BButton
+            BButton,
+            WForm
         },
         data() {
             return {
+                data: {
+                    number: '356',
+                    registrationDate: '2019-01-21',
+                    warehouseManager: 'Ron Weasley',
+                    date: '2019-08-31'
+                },
                 goods: [
                     {
                         id: 1,
@@ -117,16 +144,16 @@
                 setToast: 'SET_TOAST'
             }),
             typeWithCapacity({ StorageType, storageCapacity }) {
-                    return `${StorageType.type} — [${storageCapacity}]`;
+                return `${StorageType.type} — [${storageCapacity}]`;
             },
-            clickedSubmitButton () {
+            clickedSubmitButton() {
                 const chosenStorages = this.goods.map(item => item.storage.id);
                 const distinct = (value, index, self) => {
                     return self.indexOf(value) === index;
                 };
                 const distinctStorages = chosenStorages.filter(distinct);
 
-                const storageFit = function() {
+                const storageFit = function () {
                     if (chosenStorages.length === distinctStorages.length) {
                         return true;
                     } else {
@@ -141,7 +168,7 @@
                     }
                 }.bind(this);
 
-                const sizeFit = this.goods.every(function(item) {
+                const sizeFit = this.goods.every(function (item) {
                     if (+item.storage.storageCapacity < +item.size) {
                         const newToast = {
                             title: 'Error!',
@@ -168,6 +195,6 @@
     };
 </script>
 
-<style scoped>
-
+<style lang="scss" scoped>
+  @import './styles.scss';
 </style>
