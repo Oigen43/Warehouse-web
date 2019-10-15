@@ -1,0 +1,17 @@
+.w-spinner {
+  position: absolute;
+  top: 45%;
+}
+
+.w-spinner-container-show {
+  animation: show 1s ease-in;
+}
+
+@keyframes show {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

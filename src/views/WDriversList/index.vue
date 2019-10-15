@@ -1,10 +1,10 @@
 <template>
   <b-row>
-    <b-col lg="12" sm="12">
+    <b-col>
       <div class="w-drivers-list-page">
         <h1>List of Drivers</h1>
         <b-row>
-          <b-col lg="12" sm="12">
+          <b-col>
             <b-button
               to="drivers/add"
               class="w-drivers-add-button"
@@ -21,7 +21,7 @@
           ></w-list>
         </div>
         <b-row>
-          <b-col lg="12" sm="12">
+          <b-col>
             <div class="drivers-list-pagination">
               <w-pagination
                 v-if="driversPageLimit > 1"

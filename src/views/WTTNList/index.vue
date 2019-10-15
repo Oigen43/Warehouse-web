@@ -1,31 +1,32 @@
 <template>
   <b-row>
     <b-col>
-      <div class='w-receivers-list-page'>
-        <h1>List of Receivers</h1>
+      <div class='w-ttn-list-page'>
+        <h1>List of TTN</h1>
         <b-row>
           <b-col>
             <b-button
               variant="dark"
-              to="/receivers/add"
-              class="w-receivers-add-button"
-            >add receiver
+              to="/ttn/add"
+              class="w-ttn-add-button"
+            >add TTN
             </b-button>
           </b-col>
         </b-row>
-        <div class="w-receivers-list">
+        <div class="w-ttn-list">
           <w-list
+            :TTN="TTN"
             @delete-button-clicked="clickedDeleteButton"
-            :receivers="receivers"
+            @take-out-button-clicked="clickedTakeOutButton"
           ></w-list>
         </div>
         <b-row>
           <b-col>
-            <div class="w-receivers-list-pagination">
+            <div class="w-ttn-list-pagination">
               <w-pagination
-                v-if="receiversPageLimit > 1"
+                v-if="TTNPageLimit > 1"
                 :current="currentPage"
-                :pageLimit="receiversPageLimit"
+                :pageLimit="TTNPageLimit"
                 @page-changed="sendRequest"
               ></w-pagination>
             </div>
@@ -44,7 +45,7 @@
     import WPagination from '../../components/WPagination';
 
     export default {
-        name: 'WReceiverListPage',
+        name: 'WTTNListPage',
         components: {
             BRow,
             BCol,
@@ -54,36 +55,42 @@
         },
         data: function () {
             return {
-                currentPage: 1
+                currentPage: 1,
+                perPage: 8
             };
         },
         computed: {
             ...mapState([
-                'receivers',
-                'receiversPageLimit'
+                'TTN',
+                'TTNPageLimit'
             ])
         },
         methods: {
             ...mapActions({
-                fetchReceiversList: 'fetchReceiversList',
-                sendDeletedReceiverData: 'sendDeletedReceiver',
-                deletedReceiverData: 'deleteReceiver'
+                fetchTTNList: 'fetchTTNList',
+                sendDeletedTTNData: 'sendDeletedTTN',
+                deletedTTNData: 'deleteTTN',
+                sendTakeOutTTNData: 'takeOutTTN'
             }),
             sendRequest(page) {
                 this.currentPage = page;
-                this.fetchReceiversList(this.currentPage);
+                this.fetchTTNList(this.currentPage);
             },
             async clickedDeleteButton(item) {
-                await this.sendDeletedReceiverData(item.id);
-                this.deletedReceiverData(item);
-                if (this.receivers.length === 0 && this.currentPage > 1) {
+                await this.sendDeletedTTNData(item.id);
+                this.deletedTTNData(item);
+                if (this.TTN.length === 0 && this.currentPage > 1) {
                     this.currentPage -= 1;
                 }
-                this.fetchReceiversList(this.currentPage);
+                this.fetchTTNList(this.currentPage);
+            },
+            async clickedTakeOutButton(item) {
+                await this.sendTakeOutTTNData(item);
+                this.fetchTTNList();
             }
         },
         created: function () {
-            this.fetchReceiversList();
+            this.fetchTTNList();
         }
     };
 </script>

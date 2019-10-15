@@ -1,6 +1,6 @@
 <template>
   <b-row class="w-home-page">
-    <b-col lg="8" sm="12" offset-lg="2">
+    <b-col lg="8" offset-lg="2">
       <div class="w-content-container">
         <h1 class="w-content-h1">Warehouse Online</h1>
         <h3>Big or small… We can handle it all.</h3>

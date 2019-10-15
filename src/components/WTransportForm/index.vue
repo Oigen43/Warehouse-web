@@ -21,22 +21,19 @@
       variant="outline-dark"
       size="lg"
       class="w-transport-form-button">
-      <b-spinner v-if="loading" class="w-transport-form-button-spinner"></b-spinner>
       {{ submitButtonName }}
     </b-button>
   </b-form>
 </template>
 
 <script>
-    import { mapState } from 'vuex';
-    import { BForm, BFormInput, BSpinner, BButton } from 'bootstrap-vue';
+    import { BForm, BFormInput, BButton } from 'bootstrap-vue';
 
     export default {
         name: 'WSenderForm',
         components: {
             BForm,
             BFormInput,
-            BSpinner,
             BButton
         },
         props: {
@@ -63,11 +60,6 @@
                     transportNumber: this.transportNumber
                 }
             };
-        },
-        computed: {
-            ...mapState([
-                'loading'
-            ])
         },
         methods: {
             onSubmit() {

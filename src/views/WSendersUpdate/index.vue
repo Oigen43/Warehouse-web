@@ -1,9 +1,12 @@
 <template>
   <b-row>
-    <b-col class="w-senders-update-form" lg="4" sm="12" offset-lg="4">
+    <b-col
+      v-if="updatedSender.id"
+      class="w-senders-update-form"
+      lg="4"
+      offset-lg="4">
       <h1 class="w-senders-update-form-h1">Update Sender</h1>
       <w-form
-        v-if="!loading"
         @form-submitted="sendData"
         submitButtonName="UPDATE SENDER"
         :id="senderId"
@@ -38,7 +41,6 @@
         },
         computed: {
             ...mapState([
-                'loading',
                 'updatedSender'
             ]),
             senderId() {

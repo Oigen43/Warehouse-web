@@ -1,6 +1,6 @@
 <template>
   <b-row>
-    <b-col class="w-storages-add-form" lg="4" sm="12" offset-lg="4">
+    <b-col class="w-storages-add-form" lg="4" offset-lg="4">
       <h1 class="w-storages-add-form-h1">Add a New Storage</h1>
       <w-form
         v-if="!loading"

@@ -1,9 +1,12 @@
 <template>
   <b-row>
-    <b-col class="w-carriers-update-form" lg="4" sm="12" offset-lg="4">
+    <b-col
+      v-if="updatedCarrier.id"
+      class="w-carriers-update-form"
+      lg="4"
+      offset-lg="4">
       <h1 class="w-carriers-update-form-h1">Update Carrier</h1>
       <w-form
-        v-if="!loading"
         @form-submitted="sendData"
         submitButtonName="UPDATE CARRIER"
         :id="carrierId"
@@ -22,8 +25,8 @@
 </template>
 
 <script>
-    import { mapState, mapActions } from 'vuex';
-    import { BRow, BCol, BButton } from 'bootstrap-vue';
+    import {mapState, mapActions} from 'vuex';
+    import {BRow, BCol, BButton} from 'bootstrap-vue';
 
     import router from '../../router';
     import WForm from '../../components/WCarrierForm';
@@ -38,7 +41,6 @@
         },
         computed: {
             ...mapState([
-                'loading',
                 'updatedCarrier'
             ]),
             carrierId() {
@@ -67,7 +69,7 @@
                 !res.error && this.redirect();
             }
         },
-        created: function() {
+        created: function () {
             this.getUpdatedCarrierData(this.carrierId);
         }
     };
