@@ -514,7 +514,7 @@ export default {
   },
 
   fetchTransportList: async ({ commit }, req) => {
-    commit(types.CLEAN_DRIVERS);
+    commit(types.CLEAN_TRANSPORT);
     commit(types.REQUEST);
 
     const res = await api.get(url.TRANSPORT_URL, {
@@ -622,7 +622,7 @@ export default {
     commit(types.REQUEST);
 
     const res = await api.getUserInfo(url.USERS_URL, req);
-
+    console.log(res.data);
     commit(types.USER_INFO, res.data);
     commit(types.SUCCESS);
   },

@@ -113,7 +113,7 @@
     import WMultiselect from '../WMultiselect';
 
     export default {
-        name: 'WTTnForm',
+        name: 'WTTNForm',
         components: {
             BForm,
             BFormInput,
@@ -204,6 +204,8 @@
                 this.$emit('form-submitted', this.form);
             },
             clickSelectCarrier(selectedOption) {
+                this.form.driver = '';
+                this.form.transport = '';
                 this.$emit('carrier-selected', selectedOption.id);
             },
             driverNameWithPassport({ firstName, surname, passportNumber }) {
@@ -212,6 +214,9 @@
             transportTypeWithNumber({ transportType, transportNumber }) {
                 return `${transportType} ${transportNumber}`;
             }
+        },
+        created: function() {
+          console.log(this.dispatcher);
         }
     };
 </script>

@@ -6,14 +6,13 @@
       <w-form
         @form-submitted="sendData"
         @carrier-selected="getTransportsAndDrivers"
-        @warehouse-selected="getWarehouses"
         :number="number"
         :dischargeDate="dischargeDate"
         :senders="senders"
         :carriers="carriers"
         :transports="transport"
         :drivers="drivers"
-        :dispatcher="dispatcher"
+        :dispatcher="userInfo.surname"
         :description="description"
         :type="type"
         :warehouses="warehouses"
@@ -44,7 +43,7 @@
     import { BRow, BCol, BButton } from 'bootstrap-vue';
     import { mapActions, mapState } from 'vuex';
 
-    import WForm from '../../components/WTTnForm';
+    import WForm from '../../components/WTTNForm';
     import WGoods from '../../components/WGoodsList';
     export default {
         name: 'WTtnAddForm',
@@ -99,13 +98,6 @@
           sendData(form) {
               form.registrationDate = new Date().toLocaleString();
           },
-          getWarehouses(id) {
-              this.fetchWarehousesList({
-                  page: 1,
-                  perPage: 20,
-                  companyId: id
-              });
-          },
           getTransportsAndDrivers(id) {
               this.fetchTransportList({
                   page: 1,
@@ -119,10 +111,15 @@
               });
           }
         },
-        created: async function() {
-            await this.fetchUserInfo();
-            await this.fetchSendersList();
-            await this.fetchCarriersList();
+        created: function() {
+            this.fetchUserInfo();
+            this.fetchWarehousesList({
+                page: 1,
+                perPage: 20,
+                companyId: this.userInfo.companyId
+            });
+            this.fetchSendersList();
+            this.fetchCarriersList();
         }
     };
 </script>

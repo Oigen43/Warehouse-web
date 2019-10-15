@@ -270,7 +270,6 @@ export default {
   [types.USER_INFO](state, userInfo) {
     state.userInfo = userInfo;
   },
-
   [types.SET_TOAST](state, toast) {
     state.toast = toast;
   },
