@@ -590,6 +590,7 @@ export default {
   },
   createTTN: async ({ commit }, req) => {
     commit(types.REQUEST);
+    commit(types.CREATE_TTN, req);
 
     const res = await api.post(url.TTN_URL, req);
 

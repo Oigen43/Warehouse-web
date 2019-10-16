@@ -11,52 +11,47 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item>
+          <b-nav-item v-if="hasPermissions(routesPermissions.companies.read)">
             <b-button
               variant="light"
               to='/companies'
-              class="w-navigation-link"
-              v-if="hasPermissions(routesPermissions.companies.read)">
+              class="w-navigation-link">
               Companies
             </b-button>
           </b-nav-item>
-          <b-nav-item>
+          <b-nav-item v-if="hasPermissions(routesPermissions.users.read)">
             <b-button
               variant="light"
               to='/users'
-              class="w-navigation-link"
-              v-if="hasPermissions(routesPermissions.users.read)">
+              class="w-navigation-link">
               Users
             </b-button>
           </b-nav-item>
-          <b-nav-item>
+          <b-nav-item v-if="hasPermissions(routesPermissions.senders.read)">
             <b-button
               variant="light"
               to='/senders'
-              class="w-navigation-link"
-              v-if="hasPermissions(routesPermissions.senders.read)">
+              class="w-navigation-link">
               Senders
             </b-button>
           </b-nav-item>
-          <b-nav-item>
+          <b-nav-item v-if="hasPermissions(routesPermissions.receivers.read)">
             <b-button
               variant="light"
               to='/receivers'
-              class="w-navigation-link"
-              v-if="hasPermissions(routesPermissions.receivers.read)">
+              class="w-navigation-link">
               Receivers
             </b-button>
           </b-nav-item>
-          <b-nav-item>
+          <b-nav-item v-if="hasPermissions(routesPermissions.carriers.read)">
             <b-button
               variant="light"
               to='/carriers'
-              class="w-navigation-link"
-              v-if="hasPermissions(routesPermissions.carriers.read)">
+              class="w-navigation-link">
               Carriers
             </b-button>
           </b-nav-item>
-          <b-nav-item>
+          <b-nav-item v-if="hasPermissions(routesPermissions.TTN.read)">
             <b-button
               variant="light"
               to='/ttn'

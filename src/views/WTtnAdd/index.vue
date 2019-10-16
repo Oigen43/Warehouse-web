@@ -97,10 +97,10 @@
           deleteGood(index) {
               this.goods.splice(index, 1);
           },
-          sendData(form) {
-              form.registrationDate = new Date().toLocaleString();
-              this.sendNewTTN({ TTN: form, goods: this.goods });
-              router.push('/ttn');
+          async sendData(form) {
+              form.registrationDate = new Date();
+              const res = await this.sendNewTTN({ TTN: form, goods: this.goods });
+              !res.error && router.push('/ttn');
           },
           getTransportsAndDrivers(id) {
               this.fetchTransportList({

@@ -288,16 +288,20 @@ export default new Router({
     {
       path: '/ttn',
       name: 'ttn',
-      component: WTTNList
-    },
-    {
-      path: '*',
-      component: WNotFound,
+      component: WTTNList,
+      meta: { authorize: routesPermissions.TTN.read },
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/ttn/add',
       name: 'ttnAddForm',
       component: WTTNAddForm,
+      meta: { authorize: routesPermissions.TTN.create },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '*',
+      component: WNotFound,
     },
   ]
 });

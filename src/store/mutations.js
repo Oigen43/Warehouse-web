@@ -254,6 +254,9 @@ export default {
   [types.TTN](state, TTN) {
     state.TTN = TTN;
   },
+  [types.CREATE_TTN](state, TTN) {
+    state.newTTN = TTN;
+  },
   [types.TTN_PAGE_LIMIT](state, TTNPageLimit) {
     state.TTNPageLimit = TTNPageLimit;
   },
