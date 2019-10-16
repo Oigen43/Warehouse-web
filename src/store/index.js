@@ -77,6 +77,7 @@ export default new Vuex.Store({
     TTNPageLimit: 1,
     newTTN: {},
     updatedTTN: {},
+    userInfo: {},
 
     toast: {},
     loading: false

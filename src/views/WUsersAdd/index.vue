@@ -7,7 +7,7 @@
         submitButtonName="ADD USER"
         :firstName="firstName"
         :email="email"
-        :company-id="updatedUser.companyId"
+        :company-id="userInfo.companyId"
         add-user
       ></w-form>
       <b-button
@@ -24,9 +24,7 @@
     import router from '../../router';
     import { mapActions, mapState } from 'vuex';
     import { BRow, BCol, BButton } from 'bootstrap-vue';
-    import jwtDecode from 'jwt-decode';
 
-    import store from '../../store';
     import WForm from '../../components/WUserForm';
 
     export default {
@@ -46,28 +44,25 @@
         computed: {
             ...mapState([
                 'roles',
-                'updatedUser'
-            ]),
-            store() {
-                return store;
-            }
+                'userInfo'
+            ])
         },
         methods: {
             ...mapActions({
                 sendNewUserData: 'createUser',
-                getCurrentUser: 'getUpdatedUser'
+                getCurrentUser: 'fetchUserInfo'
             }),
             redirect() {
                 router.push('/users');
             },
             async sendData(newUser) {
-                newUser.user.data.companyId = this.updatedUser.companyId;
+                newUser.user.data.companyId = this.userInfo.companyId;
                 const res = await this.sendNewUserData(newUser);
                 !res.error && this.redirect();
             }
         },
         created() {
-            this.getCurrentUser(jwtDecode(this.store.state.token).id);
+            this.getCurrentUser();
         }
     };
 </script>

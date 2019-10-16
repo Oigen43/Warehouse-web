@@ -1,6 +1,7 @@
 export const BASE_URL = 'http://localhost:3030';
 export const COMPANIES_URL = '/companies';
 export const WAREHOUSES_URL = '/warehouses';
+export const WAREHOUSES_URL_IDS = '/warehouses/ids';
 export const USERS_URL = '/users';
 export const LOGIN_URL = '/login';
 export const STORAGES_URL = '/storages';
@@ -11,5 +12,6 @@ export const CARRIERS_URL = '/carriers';
 export const DRIVERS_URL = '/drivers';
 export const TRANSPORT_URL = '/transport';
 export const TTN_URL = '/ttn';
+export const USER_INFO_URL = '/users/userInfo';
 export const REFRESH_TOKEN_URL = '/refresh';
 export const CONFIRMATION_URL = '/confirmation';

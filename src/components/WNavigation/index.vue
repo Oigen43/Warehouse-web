@@ -109,9 +109,7 @@
         BCollapse,
         BButton
     } from 'bootstrap-vue';
-    import jwtDecode from 'jwt-decode';
 
-    import store from '../../store';
     import router from '../../router';
     import * as userRoles from '../../constants/roles';
     import routesPermissions from '../../constants/routesPermissions';
@@ -131,7 +129,8 @@
         computed: {
             ...mapState([
               'registrationToken',
-              'updatedUser'
+              'updatedUser',
+              'userInfo'
             ]),
             ...mapGetters([
                 'isAuthorized',
@@ -139,14 +138,11 @@
             routesPermissions: function() {
               return routesPermissions;
             },
-            store() {
-                return store;
-            },
             userRoles() {
                 return userRoles;
             },
             isWarehousesRoles() {
-                return this.hasPermissions(userRoles.WAREHOUSE_ROLES) && this.getCurrentUser(jwtDecode(this.store.state.token).id);
+                return this.hasPermissions(userRoles.WAREHOUSE_ROLES);
             }
         },
         methods: {
@@ -158,7 +154,7 @@
                 router.push('/login');
             },
             clickedWarehousesButton() {
-                router.push(`companies/${this.updatedUser.companyId}/warehouses`);
+                router.push(`companies/${this.userInfo.companyId}/warehouses`);
             },
             async logout() {
                 await this.logoutUser();

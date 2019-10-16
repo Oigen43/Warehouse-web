@@ -96,6 +96,8 @@
         :value="selectedRoles"
         :options="checkRolesForCompanyUsers ? rolesForCreatingCompanyUsers : rolesForCreating"
         :multiple="true"
+        :searchable="false"
+        :taggable="true"
         :close-on-select="false"
         :placeholder="placeholder"
         @input="updateValue"
@@ -238,14 +240,14 @@
               }
 
               return role;
-          },
+          }
         },
         methods: {
             ...mapActions({
                 fetchWarehousesId: 'fetchWarehousesId'
             }),
             getWarehouses() {
-                this.fetchWarehousesId({ companyId: this.companyId, status: '/ids' });
+                this.fetchWarehousesId({ companyId: this.companyId });
             },
             updateValue(newRoles) {
               this.selectedRoles = newRoles;
