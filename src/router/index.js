@@ -38,15 +38,14 @@ import WTransportAddForm from '../views/WTransportAdd';
 import WTransportUpdateForm from '../views/WTransportUpdate';
 import WTTNList from '../views/WTTNList';
 import WNotFound from '../views/WNotFound';
+import WTTNAddForm from '../views/WTTNAdd';
 
 Vue.use(Router);
 
 const ifAuthenticated = (to, from, next) => {
   const { authorize } = to.meta;
 
-  if (store.state.token) {
-    next();
-  } else {
+  if (!store.state.token) {
     next('/login');
     return;
   }
@@ -294,6 +293,11 @@ export default new Router({
     {
       path: '*',
       component: WNotFound,
-    }
+    },
+    {
+      path: '/ttn/add',
+      name: 'ttnAddForm',
+      component: WTTNAddForm,
+    },
   ]
 });

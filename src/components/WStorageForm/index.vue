@@ -3,6 +3,7 @@
     <b-form-input
       size="lg"
       v-model="form.storageCapacity"
+      type="number"
       required
       placeholder="Storage Size"
       class="w-storages-form-input"
@@ -11,6 +12,8 @@
     <w-multiselect
       :options="storageTypes"
       :multiple="false"
+      :searchable="false"
+      :taggable="false"
       label="type"
       size="lg"
       :allow-empty="false"

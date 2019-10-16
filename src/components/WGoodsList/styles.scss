@@ -1,0 +1,44 @@
+.w-goods-card {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.w-goods-card-text {
+    margin-bottom: 0.5rem;
+    white-space: nowrap;
+    white-space: initial;
+}
+  
+.w-goods-card-text-bold {
+    font-weight: bold;
+}
+  
+.w-goods-card-footer {
+    display: flex;
+    justify-content: center;
+    bottom: 0;
+    background-color: #FFFFFF;
+}
+  
+.w-goods-update-card-button {
+    background-color: #2C3E50;
+    margin: 0.5rem 1rem 0.5rem 0;
+    font-size: 1rem;
+}
+
+.w-goods-delete-card-button {
+    margin: 0.5rem 1rem 0.5rem 0;
+}
+
+.w-goods-add-card {
+    height: calc(100% - 2rem);
+}
+
+.w-good-form-button {
+    height: 100%;
+    width: 100%;
+  }
+    
+.w-good-form-button:hover {
+    background-color: #2C3E50;
+}

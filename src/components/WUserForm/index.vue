@@ -74,6 +74,8 @@
         :value="selectedRoles"
         :options="roles"
         :multiple="true"
+        :searchable="false"
+        :taggable="true"
         :close-on-select="false"
         :placeholder="placeholder"
         @input="updateValue"

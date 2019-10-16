@@ -145,6 +145,9 @@ export default {
   [types.CLEAN_UPDATED_DRIVER](state) {
     state.updatedDriver = {};
   },
+  [types.CLEAN_DRIVERS](state) {
+    state.drivers = [];
+  },
 
   [types.STORAGES](state, storages) {
     state.storages = storages;
@@ -244,6 +247,9 @@ export default {
   [types.CLEAN_UPDATED_TRANSPORT](state) {
     state.updatedTransport = {};
   },
+  [types.CLEAN_TRANSPORT](state) {
+    state.transport = [];
+  },
 
   [types.TTN](state, TTN) {
     state.TTN = TTN;
@@ -261,7 +267,9 @@ export default {
   [types.CLEAN_UPDATED_TTN](state) {
     state.updatedTTN = {};
   },
-
+  [types.USER_INFO](state, userInfo) {
+    state.userInfo = userInfo;
+  },
   [types.SET_TOAST](state, toast) {
     state.toast = toast;
   },
