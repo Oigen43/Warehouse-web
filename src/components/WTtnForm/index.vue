@@ -87,7 +87,7 @@
       ></b-form-textarea>
       <b-form-input
         size="lg"
-        v-model="form.dispatcher"
+        :value="dispatcher"
         disabled
         class="w-ttn-form-input"
       ></b-form-input>
@@ -201,6 +201,7 @@
         },
         methods: {
             onSubmit() {
+                this.form.dispatcher = this.dispatcher;
                 this.$emit('form-submitted', this.form);
             },
             clickSelectCarrier(selectedOption) {
@@ -214,9 +215,6 @@
             transportTypeWithNumber({ transportType, transportNumber }) {
                 return `${transportType} ${transportNumber}`;
             }
-        },
-        created: function() {
-          console.log(this.dispatcher);
         }
     };
 </script>

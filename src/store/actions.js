@@ -588,6 +588,15 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
+  createTTN: async ({ commit }, req) => {
+    commit(types.REQUEST);
+
+    const res = await api.post(url.TTN_URL, req);
+
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
   getUpdatedTTN: async ({ commit }, id) => {
     commit(types.CLEAN_UPDATED_TTN);
     commit(types.REQUEST);
@@ -622,7 +631,6 @@ export default {
     commit(types.REQUEST);
 
     const res = await api.getUserInfo(url.USERS_URL, req);
-    console.log(res.data);
     commit(types.USER_INFO, res.data);
     commit(types.SUCCESS);
   },

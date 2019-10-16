@@ -12,7 +12,7 @@
         :carriers="carriers"
         :transports="transport"
         :drivers="drivers"
-        :dispatcher="userInfo.surname"
+        :dispatcher="`${userInfo.firstName} ${userInfo.surname}`"
         :description="description"
         :type="type"
         :warehouses="warehouses"
@@ -42,6 +42,7 @@
 
     import { BRow, BCol, BButton } from 'bootstrap-vue';
     import { mapActions, mapState } from 'vuex';
+    import router from '../../router';
 
     import WForm from '../../components/WTTNForm';
     import WGoods from '../../components/WGoodsList';
@@ -84,7 +85,8 @@
               fetchTransportList: 'fetchTransportList',
               fetchDriversList: 'fetchDriversList',
               fetchWarehousesList: 'fetchWarehousesList',
-              sendNewStorageData: 'createStorage'
+              sendNewStorageData: 'createStorage',
+              sendNewTTN: 'createTTN'
           }),
           addGood(good) {
               this.goods.push(good);
@@ -97,6 +99,8 @@
           },
           sendData(form) {
               form.registrationDate = new Date().toLocaleString();
+              this.sendNewTTN({ TTN: form, goods: this.goods });
+              router.push('/ttn');
           },
           getTransportsAndDrivers(id) {
               this.fetchTransportList({
@@ -111,15 +115,15 @@
               });
           }
         },
-        created: function() {
-            this.fetchUserInfo();
-            this.fetchWarehousesList({
+        created: async function() {
+            await this.fetchUserInfo();
+            await this.fetchWarehousesList({
                 page: 1,
                 perPage: 20,
                 companyId: this.userInfo.companyId
             });
-            this.fetchSendersList();
-            this.fetchCarriersList();
+            await this.fetchSendersList();
+            await this.fetchCarriersList();
         }
     };
 </script>
