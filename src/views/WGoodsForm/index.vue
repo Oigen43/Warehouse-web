@@ -29,9 +29,9 @@
                       {{good.storageType}}
                     </b-card-text>
                   </b-card-body>
-                  <b-button v-if="!good.storageId" @click="clickedGoodsCard(good)">Choose Storage
+                  <b-button v-if="!good.storages.length" @click="clickedGoodsCard(good)">Choose Storage
                   </b-button>
-                  <b-button v-if="good.storageId" @click="clickedGoodsCard(good)">Change Storage
+                  <b-button v-if="good.storages.length" @click="clickedGoodsCard(good)">Change Storage
                   </b-button>
                 </b-card>
               </b-col>
@@ -62,7 +62,6 @@
 
     import router from '../../router';
     import WForm from './components/WForm';
-    import WMultiselect from '../../components/WMultiselect/index';
 
     export default {
         name: 'WGoodsForm',
@@ -83,61 +82,26 @@
                     registrationDate: '2019-01-21',
                     warehouseManager: 'Ron Weasley',
                     date: '2019-08-31'
-                },
-                goods: [
-                    {
-                        id: 1,
-                        name: 'apples',
-                        size: 20,
-                        storageType: 'cold',
-                        storageId: null
-                    },
-                    {
-                        id: 2,
-                        name: 'wine',
-                        size: 11,
-                        storageType: 'heated',
-                        storageId: null
-                    },
-                    {
-                        id: 3,
-                        name: 'fish',
-                        size: 30,
-                        storageType: 'refrigerated',
-                        storageId: null
-                    },
-                    {
-                        id: 4,
-                        name: 'bricks',
-                        size: 28,
-                        storageType: 'outside',
-                        storageId: null
-                    },
-                    {
-                        id: 5,
-                        name: 'cucumbers',
-                        size: 21,
-                        storageType: 'refrigerated',
-                        storageId: null
-                    },
-                ]
+                }
             };
         },
         computed: {
             ...mapState([
                 'storages',
+                'goods',
                 'toast'
             ])
         },
         methods: {
             ...mapActions({
-                fetchStoragesList: 'fetchStoragesList'
+                fetchStoragesList: 'fetchStoragesList',
+                fetchGoodsList: 'fetchGoodsList'
             }),
             ...mapMutations({
                 setToast: 'SET_TOAST'
             }),
             clickedSubmitButton() {
-                console.log(this.goods);
+                // console.log(this.goods);
             },
             clickedGoodsCard(item) {
                 router.push(`/goods-form/${item.id}`);
@@ -149,6 +113,7 @@
                 perPage: 20,
                 warehouseId: 1
             });
+            this.fetchGoodsList();
         }
     };
 </script>

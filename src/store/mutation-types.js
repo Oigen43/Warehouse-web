@@ -85,6 +85,9 @@ export const SET_UPDATED_TTN = 'SET_UPDATED_TTN';
 export const DELETE_TTN = 'DELETE_TTN';
 export const CLEAN_UPDATED_TTN = 'CLEAN_UPDATED_TTN';
 
+export const GOODS = 'GOODS';
+export const GOODS_ITEM = 'GOODS_ITEM';
+
 export const SET_TOAST = 'SET_TOAST';
 
 export const REQUEST = 'REQUEST';

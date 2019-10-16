@@ -77,6 +77,9 @@ export default new Vuex.Store({
     newTTN: {},
     updatedTTN: {},
 
+    goods: [],
+    goodsItem: {},
+
     toast: {},
     loading: false
   },

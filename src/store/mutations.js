@@ -262,6 +262,13 @@ export default {
     state.updatedTTN = {};
   },
 
+  [types.GOODS](state, goods) {
+    state.goods = goods;
+  },
+  [types.GOODS_ITEM](state, goodsItem) {
+    state.goodsItem = goodsItem;
+  },
+
   [types.SET_TOAST](state, toast) {
     state.toast = toast;
   },

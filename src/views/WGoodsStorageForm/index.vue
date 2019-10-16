@@ -6,31 +6,34 @@
         <b-row>
           <b-col lg="10" md="12" offset-lg="1">
             <b-row class="w-goods-storage-card-container">
-              <b-col lg="4" offset-lg="1">
+              <b-col v-if="goodsName" lg="4" offset-lg="1">
                 <b-card no-body class="overflow-hidden w-goods-storage-card">
                   <b-card-body>
-                    <b-card-title class="mb-0 w-goods-storage-card-text">{{goods.name}}</b-card-title>
+                    <b-card-title class="mb-0 w-goods-storage-card-text">{{goodsName}}</b-card-title>
                     <hr>
-                    <b-card-text class="w-goods-storage-card-text"><span class="w-goods-storage-card-text-bold">Size:</span>
-                      {{goods.size}} m<sup><small>2</small></sup>
+                    <b-card-text class="w-goods-storage-card-text"><span
+                      class="w-goods-storage-card-text-bold">Size:</span>
+                      {{goodsSize}} m<sup><small>2</small></sup>
                     </b-card-text>
                     <b-card-text class="w-goods-storage-card-text"><span
                       class="w-goods-storage-card-text-bold">Recommended storage type:</span>
-                      {{goods.storageType}}
+                      {{goodsStorageType}}
                     </b-card-text>
                   </b-card-body>
                 </b-card>
+                <b-button variant="dark" class="w-goods-storage-button">Save</b-button>
+                <b-button variant="dark" class="w-goods-storage-button">Cancel</b-button>
               </b-col>
               <b-col v-if="storages.length" lg="5" offset-lg="1">
-                  <b-list-group class="w-storages-list">
-                    <b-list-group-item
-                      v-bind:key="storage.id"
-                      v-for="storage in storages"
-                      :class="storage.clicked ? 'w-storage-chosen' : 'w-storage'"
-                      @click="clickedStorage(storage)">
-                      {{storage.StorageType.type}} - {{storage.storageCapacity}}
-                    </b-list-group-item>
-                  </b-list-group>
+                <b-list-group class="w-storages-list">
+                  <b-list-group-item
+                    v-bind:key="storage.id"
+                    v-for="storage in storages"
+                    :class="storage.clicked ? 'w-storage-chosen' : 'w-storage'"
+                    @click="clickedStorage(storage)">
+                    {{storage.StorageType.type}} - {{storage.currentCapacity}}
+                  </b-list-group-item>
+                </b-list-group>
               </b-col>
             </b-row>
           </b-col>
@@ -49,6 +52,7 @@
         BCardTitle,
         BCardBody,
         BCardText,
+        BButton,
         BListGroup,
         BListGroupItem
     } from 'bootstrap-vue';
@@ -62,51 +66,51 @@
             BCardTitle,
             BCardText,
             BCardBody,
+            BButton,
             BListGroup,
             BListGroupItem
         },
         data() {
             return {
-                goods:
-                    {
-                        id: 1,
-                        name: 'apples',
-                        size: 20,
-                        storageType: 'cold',
-                        storages: []
-                    }
+                goodsStorageData: []
             };
         },
         computed: {
             ...mapState([
-                'storages'
-            ])
+                'storages',
+                'goodsItem'
+            ]),
+            goodsId() {
+                return +this.$route.params.goodsId;
+            },
+            goodsName() {
+                return this.goodsItem.name;
+            },
+            goodsSize() {
+                return this.goodsItem.size;
+            },
+            goodsStorageType() {
+                return this.goodsItem.storageType;
+            }
         },
         methods: {
             ...mapActions({
-                fetchStoragesList: 'fetchStoragesList'
+                fetchStoragesList: 'fetchStoragesList',
+                fetchGoodsItemData: 'fetchGoodsItemData'
             }),
             clickedStorage(item) {
-                console.log(item.clicked);
-                if (item.clicked) {
-                    item.clicked = false;
+                if (this.goodsSize < item.currentCapacity) {
+                    this.goodsStorageData.push({
+                        goodsId: this.goodsId,
+                        storageId: item.id,
+                        size: this.goodsSize
+                    });
                 } else {
-                    item.clicked = true;
-                    if (this.goods.size < item.storageCapacity) {
-                        this.goods.storages.push({
-                            goodsId: this.goods.id,
-                            storageId: item.id,
-                            size: this.goods.size
-                        });
-                        this.goods.size = 0;
-                    } else {
-                        this.goods.storages.push({
-                            goodsId: this.goods.id,
-                            storageId: item.id,
-                            size: item.storageCapacity
-                        });
-                        this.goods.size = this.goods.size - item.storageCapacity;
-                    }
+                    this.goodsStorageData.push({
+                        goodsId: this.goodsId,
+                        storageId: item.id,
+                        size: item.currentCapacity
+                    });
                 }
             }
         },
@@ -116,6 +120,7 @@
                 perPage: 20,
                 warehouseId: 1
             });
+            this.fetchGoodsItemData(this.goodsId);
         }
     };
 </script>

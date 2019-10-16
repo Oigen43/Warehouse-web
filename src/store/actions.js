@@ -615,5 +615,27 @@ export default {
 
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
-  }
+  },
+  fetchGoodsList: async ({ commit }) => {
+    commit(types.REQUEST);
+
+    const res = await api.get(url.GOODS_URL);
+
+    if (res.data) {
+      commit(types.GOODS, res.data.goods);
+    }
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  fetchGoodsItemData: async ({ commit }, id) => {
+    commit(types.REQUEST);
+
+    const res = await api.getById(url.GOODS_URL, id);
+
+    if (res.data) {
+      commit(types.GOODS_ITEM, res.data.goodsItem);
+    }
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
 };
