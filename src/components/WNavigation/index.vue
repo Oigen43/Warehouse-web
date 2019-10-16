@@ -23,6 +23,15 @@
           <b-nav-item>
             <b-button
               variant="light"
+              @click="clickedWarehousesButton"
+              class="w-navigation-link"
+              v-if="isWarehousesRoles">
+              Warehouse
+            </b-button>
+          </b-nav-item>
+          <b-nav-item>
+            <b-button
+              variant="light"
               to='/users'
               class="w-navigation-link"
               v-if="hasPermissions(routesPermissions.users.read)">
@@ -100,8 +109,11 @@
         BCollapse,
         BButton
     } from 'bootstrap-vue';
+    import jwtDecode from 'jwt-decode';
 
+    import store from '../../store';
     import router from '../../router';
+    import * as userRoles from '../../constants/roles';
     import routesPermissions from '../../constants/routesPermissions';
 
     export default {
@@ -118,21 +130,35 @@
         },
         computed: {
             ...mapState([
-              'registrationToken'
+              'registrationToken',
+              'updatedUser'
             ]),
             ...mapGetters([
                 'isAuthorized',
             ]),
             routesPermissions: function() {
               return routesPermissions;
+            },
+            store() {
+                return store;
+            },
+            userRoles() {
+                return userRoles;
+            },
+            isWarehousesRoles() {
+                return this.hasPermissions(userRoles.WAREHOUSE_ROLES) && this.getCurrentUser(jwtDecode(this.store.state.token).id);
             }
         },
         methods: {
             ...mapActions({
-                logoutUser: 'logout'
+                logoutUser: 'logout',
+                getCurrentUser: 'getUpdatedUser'
             }),
             redirect() {
                 router.push('/login');
+            },
+            clickedWarehousesButton() {
+                router.push(`companies/${this.updatedUser.companyId}/warehouses`);
             },
             async logout() {
                 await this.logoutUser();

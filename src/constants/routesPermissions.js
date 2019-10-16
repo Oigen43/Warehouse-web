@@ -9,13 +9,13 @@ export default {
   },
   warehouses: {
     create: [roles.COMPANY_ADMIN_ROLE],
-    read: [roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE],
+    read: [roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE, roles.WAREHOUSE_MANAGER_ROLE, roles.WAREHOUSE_DISPATCHER_ROLE, roles.WAREHOUSE_CONTROLLER_ROLE],
     update: [roles.COMPANY_ADMIN_ROLE],
     delete: [roles.COMPANY_ADMIN_ROLE]
   },
   storages: {
     create: [roles.COMPANY_ADMIN_ROLE],
-    read: [roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE],
+    read: [roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE, roles.WAREHOUSE_MANAGER_ROLE, roles.WAREHOUSE_DISPATCHER_ROLE, roles.WAREHOUSE_CONTROLLER_ROLE],
     update: [roles.COMPANY_ADMIN_ROLE],
     delete: [roles.COMPANY_ADMIN_ROLE]
   },

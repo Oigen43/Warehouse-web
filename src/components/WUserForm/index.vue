@@ -103,7 +103,7 @@
       ></w-multiselect>
 
       <w-multiselect
-        v-if="isManagerRoleSelected"
+        v-if="isWarehousesRoleSelected"
         v-model="form.warehouseId"
         :options="warehousesId"
         :multiple="false"
@@ -231,8 +231,8 @@
           checkRolesForCompanyUsers() {
               return this.roles.includes(userRoles.COMPANY_ADMIN_ROLE);
           },
-          isManagerRoleSelected() {
-              const role = this.selectedRoles.includes(userRoles.WAREHOUSE_MANAGER_ROLE);
+          isWarehousesRoleSelected() {
+              const role = this.selectedRoles.some(item => userRoles.WAREHOUSE_ROLES.includes((item)));
               if (role) {
                   this.getWarehouses();
               }
@@ -245,7 +245,7 @@
                 fetchWarehousesId: 'fetchWarehousesId'
             }),
             getWarehouses() {
-                this.fetchWarehousesId({ companyId: this.companyId, status: 'getNames' });
+                this.fetchWarehousesId({ companyId: this.companyId, status: '/ids' });
             },
             updateValue(newRoles) {
               this.selectedRoles = newRoles;
