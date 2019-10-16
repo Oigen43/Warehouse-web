@@ -60,14 +60,15 @@
         },
         methods: {
             ...mapActions({
-                loginUser: 'login'
+                loginUser: 'login',
+                getCurrentUser: 'fetchUserInfo'
             }),
             redirect() {
                 router.push('/');
             },
             async login() {
                 const res = await this.loginUser(this.form);
-                !res.error && this.redirect();
+                !res.error && this.getCurrentUser() && this.redirect();
             }
         }
     };

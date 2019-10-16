@@ -6,13 +6,9 @@
         @form-submitted="sendData"
         submitButtonName="ADD USER"
         :firstName="firstName"
-        :surname="surname"
-        :patronymic="patronymic"
         :email="email"
-        :address="address"
-        :birthDate="birthDate"
-        :login="login"
-        :password="password"
+        :company-id="userInfo.companyId"
+        add-user
       ></w-form>
       <b-button
         variant="link"
@@ -26,7 +22,7 @@
 
 <script>
     import router from '../../router';
-    import { mapActions } from 'vuex';
+    import { mapActions, mapState } from 'vuex';
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
     import WForm from '../../components/WUserForm';
@@ -42,27 +38,32 @@
         data() {
             return {
                 firstName: '',
-                surname: '',
-                patronymic: '',
                 email: '',
-                address: '',
-                birthDate: '',
-                login: '',
-                password: ''
             };
+        },
+        computed: {
+            ...mapState([
+                'roles',
+                'userInfo'
+            ])
         },
         methods: {
             ...mapActions({
-                sendNewUserData: 'createUser'
+                sendNewUserData: 'createUser',
+                getCurrentUser: 'fetchUserInfo'
             }),
             redirect() {
                 router.push('/users');
             },
             async sendData(newUser) {
+                newUser.user.data.companyId = this.userInfo.companyId;
                 const res = await this.sendNewUserData(newUser);
                 !res.error && this.redirect();
             }
         },
+        created() {
+            this.getCurrentUser();
+        }
     };
 </script>
 

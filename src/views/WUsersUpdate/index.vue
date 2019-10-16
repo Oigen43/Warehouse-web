@@ -18,6 +18,8 @@
         :birthDate="birthDate"
         :login="login"
         :userRoles="roles"
+        :companyId="companyId"
+        :selected-warehouses="warehouseId"
         :passwordDisplay="false"
       ></w-form>
       <b-button
@@ -75,6 +77,12 @@
             },
             roles() {
                 return this.updatedUser.roles ? this.updatedUser.roles.map(role => role.title) : [];
+            },
+            companyId() {
+                return this.updatedUser.companyId;
+            },
+            warehouseId() {
+                return this.updatedUser.warehouseId;
             }
         },
         methods: {

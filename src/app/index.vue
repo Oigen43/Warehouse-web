@@ -13,6 +13,7 @@
 <script>
     import Vue from 'vue';
     import { BContainer, ModalPlugin } from 'bootstrap-vue';
+    import { mapActions } from 'vuex';
 
     import WNavigation from '../components/WNavigation';
     import WToastNotification from '../components/WToastNotification';
@@ -30,6 +31,14 @@
             WToastNotification,
             WFooter
         },
+        methods: {
+            ...mapActions({
+                getCurrentUser: 'fetchUserInfo'
+            })
+        },
+        created() {
+            this.getCurrentUser();
+        }
     };
 
 </script>

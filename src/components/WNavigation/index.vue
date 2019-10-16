@@ -22,6 +22,15 @@
           <b-nav-item v-if="hasPermissions(routesPermissions.users.read)">
             <b-button
               variant="light"
+              @click="clickedWarehousesButton"
+              class="w-navigation-link"
+              v-if="isWarehousesRoles">
+              Warehouse
+            </b-button>
+          </b-nav-item>
+          <b-nav-item>
+            <b-button
+              variant="light"
               to='/users'
               class="w-navigation-link">
               Users
@@ -97,6 +106,7 @@
     } from 'bootstrap-vue';
 
     import router from '../../router';
+    import * as userRoles from '../../constants/roles';
     import routesPermissions from '../../constants/routesPermissions';
 
     export default {
@@ -113,21 +123,33 @@
         },
         computed: {
             ...mapState([
-              'registrationToken'
+              'registrationToken',
+              'updatedUser',
+              'userInfo'
             ]),
             ...mapGetters([
                 'isAuthorized',
             ]),
             routesPermissions: function() {
               return routesPermissions;
+            },
+            userRoles() {
+                return userRoles;
+            },
+            isWarehousesRoles() {
+                return this.hasPermissions(userRoles.WAREHOUSE_ROLES);
             }
         },
         methods: {
             ...mapActions({
-                logoutUser: 'logout'
+                logoutUser: 'logout',
+                getCurrentUser: 'getUpdatedUser'
             }),
             redirect() {
                 router.push('/login');
+            },
+            clickedWarehousesButton() {
+                router.push(`companies/${this.userInfo.companyId}/warehouses`);
             },
             async logout() {
                 await this.logoutUser();

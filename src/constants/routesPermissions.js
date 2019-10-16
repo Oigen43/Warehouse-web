@@ -9,13 +9,13 @@ export default {
   },
   warehouses: {
     create: [roles.COMPANY_ADMIN_ROLE],
-    read: [roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE],
+    read: [roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE, roles.WAREHOUSE_MANAGER_ROLE, roles.WAREHOUSE_DISPATCHER_ROLE, roles.WAREHOUSE_CONTROLLER_ROLE],
     update: [roles.COMPANY_ADMIN_ROLE],
     delete: [roles.COMPANY_ADMIN_ROLE]
   },
   storages: {
     create: [roles.COMPANY_ADMIN_ROLE],
-    read: [roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE],
+    read: [roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE, roles.WAREHOUSE_MANAGER_ROLE, roles.WAREHOUSE_DISPATCHER_ROLE, roles.WAREHOUSE_CONTROLLER_ROLE],
     update: [roles.COMPANY_ADMIN_ROLE],
     delete: [roles.COMPANY_ADMIN_ROLE]
   },
@@ -50,17 +50,17 @@ export default {
     delete: [roles.SYSTEM_ADMIN_ROLE]
   },
   users: {
-    create: [roles.SYSTEM_ADMIN_ROLE],
-    read: [roles.SYSTEM_ADMIN_ROLE],
-    update: [roles.SYSTEM_ADMIN_ROLE],
-    delete: [roles.SYSTEM_ADMIN_ROLE]
+    create: [roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE],
+    read: [roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE],
+    update: [roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE],
+    delete: [roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE]
   },
   TTN: {
     create: [roles.COMPANY_ADMIN_ROLE],
     read: [roles.COMPANY_ADMIN_ROLE],
     update: [roles.WAREHOUSE_DISPATCHER_ROLE, roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE],
     delete: [roles.WAREHOUSE_DISPATCHER_ROLE, roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE],
-    check: [roles.CONTROLLER_ROLE, roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE],
-    takeOut: [roles.MANAGER_ROLE, roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE]
+    check: [roles.WAREHOUSE_CONTROLLER_ROLE, roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE],
+    takeOut: [roles.WAREHOUSE_MANAGER_ROLE, roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE]
   }
 };
