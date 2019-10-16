@@ -630,7 +630,8 @@ export default {
   fetchUserInfo: async ({ commit }, req) => {
     commit(types.REQUEST);
 
-    const res = await api.getUserInfo(url.USERS_URL, req);
+    const res = await api.getUserInfo(url.USER_INFO_URL, req);
+
     commit(types.USER_INFO, res.data);
     commit(types.SUCCESS);
   },
