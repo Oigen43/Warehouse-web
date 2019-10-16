@@ -105,6 +105,7 @@ export default {
   'transport.delete.success': 'Transport deleted!',
   'transport.delete.error': 'Can not delete transport',
 
+  'ttn.number.conflict': 'TNN is already exists',
   'ttn.list.get.error': 'Can not get TTN list',
   'ttn.get.unknown': 'This TTN does not exist',
   'ttn.name.conflict': 'This TTN already exists!',

@@ -108,10 +108,12 @@
 </template>
 
 <script>
+    import { mapMutations } from 'vuex';
+    import * as types from '../../store/mutation-types';
+
     import { BForm, BFormInput, BButton, BFormTextarea } from 'bootstrap-vue';
 
     import WMultiselect from '../WMultiselect';
-
     export default {
         name: 'WTTNForm',
         components: {
@@ -189,7 +191,7 @@
                     description: this.description,
                     type: this.type,
                     warehouse: this.selectedWarehouse,
-                    status: 'registrated'
+                    status: 'registered'
                 },
 
                 senderPlaceholder: 'Please select a sender',
@@ -200,6 +202,10 @@
             };
         },
         methods: {
+            ...mapMutations({
+              clearDrivers: types.CLEAN_DRIVERS,
+              clearTransport: types.CLEAN_TRANSPORT
+            }),
             onSubmit() {
                 this.form.dispatcher = this.dispatcher;
                 this.$emit('form-submitted', this.form);
@@ -215,6 +221,10 @@
             transportTypeWithNumber({ transportType, transportNumber }) {
                 return `${transportType} ${transportNumber}`;
             }
+        },
+        created: function() {
+            this.clearDrivers();
+            this.clearTransport();
         }
     };
 </script>

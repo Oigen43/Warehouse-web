@@ -56,6 +56,8 @@ export default {
     delete: [roles.SYSTEM_ADMIN_ROLE]
   },
   TTN: {
+    create: [roles.COMPANY_ADMIN_ROLE],
+    read: [roles.COMPANY_ADMIN_ROLE],
     update: [roles.WAREHOUSE_DISPATCHER_ROLE, roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE],
     delete: [roles.WAREHOUSE_DISPATCHER_ROLE, roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE],
     check: [roles.CONTROLLER_ROLE, roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE],

@@ -49,7 +49,6 @@
     import { validation } from '../../../../components/mixins/validation';
     import routesPermissions from '../../../../constants/routesPermissions';
     import WTable from '../../../../components/WTable';
-    import router from '../../../../router';
     import * as modal from '../../../../constants/modal';
     import * as statuses from '../../../../constants/statuses';
 
@@ -64,7 +63,7 @@
         computed: {
             fields: function () {
                 const fieldsList = [
-                    'number', 'registrationDate', 'type', 'status', 'carrier', 'sender_receiver',
+                    'number', 'registrationDate', 'type', 'status', 'carrier', 'sender',
                   { key: 'blank', label: '', class: 'w-blank-column' }
                 ];
 
@@ -87,7 +86,6 @@
                         item.status === statuses.RELEASE_ALLOWED_STATUS;
                 });
             },
-
             items: function() {
                 this.TTN.forEach(item => {
                     item.registrationDate = item.registrationDate.slice(0, 10);
@@ -95,7 +93,6 @@
 
                 return this.TTN;
             },
-
             routesPermissions: function () {
               return routesPermissions;
             },
@@ -122,8 +119,6 @@
                 this.hasPermissions(this.routesPermissions.TTN.takeOut);
             },
             clickedUpdateButton(item) {
-                this.getUpdatedTTNData(item);
-                router.push('/ttn/update');
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.TTN_DELETE_TEXT, {
