@@ -145,39 +145,30 @@
             },
             id: {
                 type: Number,
-                default: null
             },
             firstName: {
                 type: String,
-                default: ''
             },
             surname: {
                 type: String,
-                default: ''
             },
             patronymic: {
                 type: String,
-                default: ''
             },
             email: {
                 type: String,
-                default: ''
             },
             address: {
                 type: String,
-                default: ''
             },
             birthDate: {
                 type: String,
-                default: ''
             },
             login: {
                 type: String,
-                default: ''
             },
             password: {
                 type: String,
-                default: ''
             },
             passwordDisplay: {
                 type: Boolean,

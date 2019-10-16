@@ -32,6 +32,7 @@ export default {
   },
   logout: async ({ commit }) => {
     localStorage.removeItem(constant.TOKEN_KEY);
+    localStorage.removeItem(constant.REFRESH_TOKEN_KEY);
     localStorage.removeItem(constant.ROLES_LIST);
     commit(types.LOGOUT, initialState);
   },

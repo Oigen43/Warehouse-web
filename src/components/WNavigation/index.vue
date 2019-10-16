@@ -19,16 +19,16 @@
               Companies
             </b-button>
           </b-nav-item>
-          <b-nav-item v-if="hasPermissions(routesPermissions.users.read)">
+          <b-nav-item v-if="hasPermissions(routesPermissions.warehouses.read) && isWarehousesRoles">
             <b-button
               variant="light"
               @click="clickedWarehousesButton"
               class="w-navigation-link"
-              v-if="isWarehousesRoles">
+              >
               Warehouse
             </b-button>
           </b-nav-item>
-          <b-nav-item>
+          <b-nav-item v-if="hasPermissions(routesPermissions.users.read)">
             <b-button
               variant="light"
               to='/users'
@@ -149,7 +149,7 @@
                 router.push('/login');
             },
             clickedWarehousesButton() {
-                router.push(`companies/${this.userInfo.companyId}/warehouses`);
+                router.push(`/companies/${this.userInfo.companyId}/warehouses`);
             },
             async logout() {
                 await this.logoutUser();
