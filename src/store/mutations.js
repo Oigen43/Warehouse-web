@@ -272,6 +272,11 @@ export default {
     state.goodsItemComputedSize = goodsItemSize;
   },
 
+  [types.SET_STORAGE_ACTIVE](state, id) {
+    // state.storages = [ ...state.storages.map(item => item.id === id ? item.currentCapacity = 1 : item) ];
+    console.log(state.storages)
+  },
+
   [types.SET_TOAST](state, toast) {
     state.toast = toast;
   },

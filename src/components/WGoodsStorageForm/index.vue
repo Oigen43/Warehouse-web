@@ -23,6 +23,7 @@
             <b-list-group-item
               :key="storage.id"
               v-for="storage in storages"
+              :active="storage.active"
               @click="clickedStorage(storage)">
               {{storage.StorageType.type}} - {{storage.currentCapacity}}
             </b-list-group-item>
@@ -84,9 +85,12 @@
         },
         methods: {
             ...mapMutations({
-                goodsItemSize: 'GOODS_ITEM_COMPUTED_SIZE'
+                goodsItemSize: 'GOODS_ITEM_COMPUTED_SIZE',
+                setStorageActive: 'SET_STORAGE_ACTIVE'
             }),
             clickedStorage(item) {
+                this.setStorageActive(item.id)
+
                 if (this.goodsSize < item.currentCapacity) {
                     this.goodsStorageData.push({
                         goodsId: this.goodsId,
@@ -104,6 +108,7 @@
                     const size = this.goodsItemComputedSize - item.currentCapacity;
                     this.goodsItemSize(size);
                 }
+                console.log(this.goodsStorageData)
             },
             clickedSaveButton() {
                 this.$emit('sendData', { data: this.goodsStorageData });
