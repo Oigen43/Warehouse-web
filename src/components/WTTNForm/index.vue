@@ -18,6 +18,7 @@
         class="w-ttn-form-input"
       ></b-form-input>
       <w-multiselect
+        v-if="senders.length"
         label="senderName"
         :options="senders"
         :multiple="false"
@@ -28,6 +29,7 @@
         class="w-ttn-form-input"
       ></w-multiselect>
       <w-multiselect
+        v-if="carriers.length"
         label="name"
         :options="carriers"
         :multiple="false"
@@ -61,6 +63,7 @@
         class="w-ttn-form-input"
       ></w-multiselect>
       <w-multiselect
+        v-if="warehouses.length"
         label="warehouseName"
         :options="warehouses"
         :multiple="false"
@@ -87,7 +90,7 @@
       ></b-form-input>
       <b-form-input
         size="lg"
-        :value="dispatcher"
+        :value="`${dispatcher.surname} ${dispatcher.firstName}`"
         disabled
         class="w-ttn-form-input"
       ></b-form-input>
@@ -163,7 +166,7 @@
                 type: Array,
             },
             dispatcher: {
-                type: String
+                type: Object
             },
             registrationDate: {
                 type: String
@@ -190,7 +193,7 @@
                     carrier: this.selectedCarrier,
                     transport: this.selectedTransport,
                     driver: this.selectedDriver,
-                    dispatcher: this.dispatcher,
+                    dispatcher: this.dispatcher.id,
                     registrationDate: this.registrationDate,
                     description: this.description,
                     type: this.type,
@@ -211,7 +214,7 @@
               clearTransport: types.CLEAN_TRANSPORT,
             }),
             onSubmit() {
-                this.form.dispatcher = this.dispatcher;
+                this.form.warehouse = this.form.warehouse.id;
                 this.form.registrationDate = new Date();
                 helper.checkEmptyFields(this.form) ? this.makeToast(customToasts.emptyTTNFields) : this.$emit('form-submitted', this.form);
             },
@@ -237,6 +240,7 @@
         created: function() {
             this.clearDrivers();
             this.clearTransport();
+            console.log(this.dispatcher);
         }
     };
 </script>

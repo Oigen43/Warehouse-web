@@ -1,6 +1,6 @@
 <template>
   <w-table
-    :items="TTN"
+    :items="items"
     :fields="fields">
     <template
       v-slot:cell(buttons)="data">
@@ -86,6 +86,13 @@
                     return item.status === statuses.CONFIRMED_STATUS ||
                         item.status === statuses.RELEASE_ALLOWED_STATUS;
                 });
+            },
+            items: function() {
+                this.TTN.forEach(item => {
+                    item.registrationDate = `${item.registrationDate.slice(0, 10)} ${item.registrationDate.slice(11, 19)}`;
+                });
+
+                return this.TTN;
             },
             routesPermissions: function () {
               return routesPermissions;

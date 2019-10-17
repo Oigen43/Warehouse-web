@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div v-if='userInfo.surname'>
     <h1 class="w-ttn-add-form-h1">Create TTN</h1>
     <b-row>
-      <b-col v-if='senders' class="w-ttn-add-form-col" lg="3" md="12" offset-lg="1" align-self="start">
+      <b-col class="w-ttn-add-form-col" lg="3" md="12" offset-lg="1" align-self="start">
         <w-form
           @form-submitted="sendData"
           @carrier-selected="getTransportsAndDrivers"
@@ -10,7 +10,7 @@
           :carriers="carriers"
           :transports="transport"
           :drivers="drivers"
-          :dispatcher="`${userInfo.firstName} ${userInfo.surname}`"
+          :dispatcher="userInfo"
           :type="type"
           :warehouses="warehouses"
           :addForm="false"
@@ -92,6 +92,7 @@
               this.goods.splice(index, 1);
           },
           async sendData(form) {
+            console.log(form);
               const res = await this.sendNewTTN({ TTN: form, goods: this.goods });
               !res.error && router.push('/ttn');
           },
