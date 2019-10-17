@@ -5,5 +5,16 @@ export default {
 
   isItemsExists: (items) => {
     return items.length > 0;
+  },
+  checkEmptyFields: (form) => {
+    for (let i in form) {
+      if (i === 'driver' || i === 'registrationDate') {
+        continue;
+      }
+      if (!form[i]) {
+        return true;
+      }
+    }
+    return false;
   }
 };

@@ -23,7 +23,7 @@
         },
         methods: {
             makeToast(toast) {
-                this.$bvToast.toast(this.toast.message, {
+                this.$bvToast.toast(toast.message, {
                     title: toast.title,
                     variant: toast.variant,
                     solid: true

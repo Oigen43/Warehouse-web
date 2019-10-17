@@ -1,6 +1,6 @@
 <template>
   <w-table
-    :items="items"
+    :items="TTN"
     :fields="fields">
     <template
       v-slot:cell(buttons)="data">
@@ -46,6 +46,7 @@
     import { mapActions } from 'vuex';
     import { BButton } from 'bootstrap-vue';
 
+    import router from '../../../../router';
     import { validation } from '../../../../components/mixins/validation';
     import routesPermissions from '../../../../constants/routesPermissions';
     import WTable from '../../../../components/WTable';
@@ -86,13 +87,6 @@
                         item.status === statuses.RELEASE_ALLOWED_STATUS;
                 });
             },
-            items: function() {
-                this.TTN.forEach(item => {
-                    item.registrationDate = item.registrationDate.slice(0, 10);
-                });
-
-                return this.TTN;
-            },
             routesPermissions: function () {
               return routesPermissions;
             },
@@ -102,23 +96,24 @@
                 getUpdatedTTNData: 'getUpdatedTTN'
             }),
             hasUpdateAction(item) {
-              return item.status === statuses.REGISTERED_STATUS &&
+                return item.status === statuses.REGISTERED_STATUS &&
                 this.hasPermissions(this.routesPermissions.TTN.update);
             },
             hasDeleteAction(item) {
-              return item.status === statuses.REGISTERED_STATUS &&
+                return item.status === statuses.REGISTERED_STATUS &&
                 this.hasPermissions(this.routesPermissions.TTN.delete);
             },
             hasCheckAction(item) {
-              return (item.status === statuses.REGISTERED_STATUS ||
+                return (item.status === statuses.REGISTERED_STATUS ||
                 item.status === statuses.RELEASE_ALLOWED_STATUS) &&
                 this.hasPermissions(this.routesPermissions.TTN.check);
             },
             hasTakeOutAction(item) {
-              return item.status === statuses.CONFIRMED_STATUS &&
+                return item.status === statuses.CONFIRMED_STATUS &&
                 this.hasPermissions(this.routesPermissions.TTN.takeOut);
             },
             clickedUpdateButton(item) {
+                router.push(`/ttn/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.TTN_DELETE_TEXT, {

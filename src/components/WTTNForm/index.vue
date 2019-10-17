@@ -70,15 +70,6 @@
         v-model="form.warehouse"
         class="w-ttn-form-input"
       ></w-multiselect>
-      <b-form-input
-        v-if="addForm"
-        size="lg"
-        v-model="form.registrationDate"
-        type="date"
-        disabled
-        placeholder="Registration date"
-        class="w-ttn-form-input"
-      ></b-form-input>
       <b-form-textarea
         size="lg"
         v-model="form.description"
@@ -86,6 +77,14 @@
         max-rows="4"
         class="w-ttn-form-input"
       ></b-form-textarea>
+      <b-form-input
+        v-if="addForm"
+        size="lg"
+        v-model="form.registrationDate"
+        disabled
+        placeholder="Registration date"
+        class="w-ttn-form-input"
+      ></b-form-input>
       <b-form-input
         size="lg"
         :value="dispatcher"
@@ -109,12 +108,17 @@
 </template>
 
 <script>
+    import Vue from 'vue';
     import { mapMutations } from 'vuex';
     import * as types from '../../store/mutation-types';
+    import helper from '../../utils/helpers';
+    import customToasts from '../../constants/customToasts';
 
-    import { BForm, BFormInput, BButton, BFormTextarea } from 'bootstrap-vue';
-
+    import { BForm, BFormInput, BButton, BFormTextarea, ToastPlugin } from 'bootstrap-vue';
     import WMultiselect from '../WMultiselect';
+
+    Vue.use(ToastPlugin);
+
     export default {
         name: 'WTTNForm',
         components: {
@@ -127,10 +131,9 @@
         props: {
             addForm: {
                 type: Boolean,
-                default: false
             },
             number: {
-                type: String
+                type: Number
             },
             dischargeDate: {
                 type: String
@@ -205,11 +208,19 @@
         methods: {
             ...mapMutations({
               clearDrivers: types.CLEAN_DRIVERS,
-              clearTransport: types.CLEAN_TRANSPORT
+              clearTransport: types.CLEAN_TRANSPORT,
             }),
             onSubmit() {
                 this.form.dispatcher = this.dispatcher;
-                this.$emit('form-submitted', this.form);
+                this.form.registrationDate = new Date();
+                helper.checkEmptyFields(this.form) ? this.makeToast(customToasts.emptyTTNFields) : this.$emit('form-submitted', this.form);
+            },
+            makeToast(toast) {
+                this.$bvToast.toast(toast.message, {
+                    title: toast.title,
+                    variant: toast.variant,
+                    solid: true
+                });
             },
             clickSelectCarrier(selectedOption) {
                 this.form.driver = '';

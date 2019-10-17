@@ -1,40 +1,37 @@
 <template>
   <div>
-  <h1 class="w-ttn-add-form-h1">Create TTN</h1>
-  <b-row>
-    <b-col v-if='senders' class="w-ttn-add-form-col" lg="3" md="12" offset-lg="1" align-self="start">
-      <w-form
-        @form-submitted="sendData"
-        @carrier-selected="getTransportsAndDrivers"
-        :number="number"
-        :dischargeDate="dischargeDate"
-        :senders="senders"
-        :carriers="carriers"
-        :transports="transport"
-        :drivers="drivers"
-        :dispatcher="`${userInfo.firstName} ${userInfo.surname}`"
-        :description="description"
-        :type="type"
-        :warehouses="warehouses"
-        :addForm="false"
-        submitButtonName="Create"
-      ></w-form>
-      <b-button
-        variant="link"
-        to="/ttn"
-        class="w-ttn-go-back-link"
-      >Go Back
-      </b-button>
-    </b-col>
-    <b-col class="w-ttn-add-form-col" lg="6" md="12" offset-lg="1">
-      <w-goods
-        @added-good="addGood"
-        @updated-good="updateGood"
-        @deleted-good="deleteGood"
-        :goods="goods"
-      ></w-goods>
-    </b-col>
-  </b-row>
+    <h1 class="w-ttn-add-form-h1">Create TTN</h1>
+    <b-row>
+      <b-col v-if='senders' class="w-ttn-add-form-col" lg="3" md="12" offset-lg="1" align-self="start">
+        <w-form
+          @form-submitted="sendData"
+          @carrier-selected="getTransportsAndDrivers"
+          :senders="senders"
+          :carriers="carriers"
+          :transports="transport"
+          :drivers="drivers"
+          :dispatcher="`${userInfo.firstName} ${userInfo.surname}`"
+          :type="type"
+          :warehouses="warehouses"
+          :addForm="false"
+          submitButtonName="Create"
+        ></w-form>
+        <b-button
+          variant="link"
+          to="/ttn"
+          class="w-ttn-go-back-link"
+        >Go Back
+        </b-button>
+      </b-col>
+      <b-col class="w-ttn-add-form-col" lg="6" md="12" offset-lg="1">
+        <w-goods
+          @added-good="addGood"
+          @updated-good="updateGood"
+          @deleted-good="deleteGood"
+          :goods="goods"
+        ></w-goods>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
@@ -57,9 +54,6 @@
         },
         data() {
             return {
-                number: '',
-                dischargeDate: '',
-                description: '',
                 type: 'incoming',
                 goods: [],
             };
@@ -98,7 +92,6 @@
               this.goods.splice(index, 1);
           },
           async sendData(form) {
-              form.registrationDate = new Date();
               const res = await this.sendNewTTN({ TTN: form, goods: this.goods });
               !res.error && router.push('/ttn');
           },

@@ -631,7 +631,7 @@ export default {
   takeOutTTN: async ({ commit }, req) => {
     commit(types.REQUEST);
 
-    const res = await api.put(url.TTN_URL, req);
+    const res = await api.put(url.TTN_CHANGE_STATUS_URL, req);
 
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
