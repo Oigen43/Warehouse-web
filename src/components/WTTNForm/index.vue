@@ -4,6 +4,7 @@
         size="lg"
         v-model="form.number"
         type="number"
+        min="1"
         required
         placeholder="Number"
         class="w-ttn-form-input"

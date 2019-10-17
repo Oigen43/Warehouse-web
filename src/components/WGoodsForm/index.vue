@@ -19,6 +19,7 @@
       size="lg"
       v-model="form.volume"
       type="number"
+      min="1"
       required
       placeholder="Volume(m²)"
       class="w-goods-form-input"
@@ -27,6 +28,7 @@
       size="lg"
       v-model="form.weight"
       type="number"
+      min="1"
       required
       placeholder="Weight(kg)"
       class="w-goods-form-input"
@@ -35,6 +37,7 @@
       size="lg"
       v-model="form.price"
       type="number"
+      min="1"
       required
       placeholder="Price($)"
       class="w-goods-form-input"
