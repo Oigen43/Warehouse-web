@@ -14,28 +14,13 @@
               submitButtonName="Create"
             ></w-form>
           </b-col>
-          <b-col v-if="storages.length" lg="6" md="12" offset-lg="1">
-            <b-row class="w-goods-card-container">
-              <b-col lg="6" sm="4" v-for="good in goods" v-bind:key="good.id">
-                <b-card no-body class="overflow-hidden w-goods-card">
-                  <b-card-body>
-                    <b-card-title class="mb-0 w-goods-card-text">{{good.name}}</b-card-title>
-                    <hr>
-                    <b-card-text class="w-goods-card-text"><span class="w-goods-card-text-bold">Size:</span>
-                      {{good.size}} m<sup><small>2</small></sup>
-                    </b-card-text>
-                    <b-card-text class="w-goods-card-text"><span
-                      class="w-goods-card-text-bold">Recommended storage type:</span>
-                      {{good.storageType}}
-                    </b-card-text>
-                  </b-card-body>
-                  <b-button v-if="!good.storages.length" @click="clickedGoodsCard(good)">Choose Storage
-                  </b-button>
-                  <b-button v-if="good.storages.length" @click="clickedGoodsCard(good)">Change Storage
-                  </b-button>
-                </b-card>
-              </b-col>
-            </b-row>
+          <b-col v-if="storages.length && goods.length" lg="6" md="12" offset-lg="1">
+              <w-card
+                @clickedChooseGoodsStorage="clickedChooseGoodsStorage"
+                @clickedChangeGoodsStorage="clickedChangeGoodsStorage"
+              :goods="goods"
+              :storages="storages"
+              ></w-card>
           </b-col>
         </b-row>
         <b-row>
@@ -53,27 +38,21 @@
     import {
         BRow,
         BCol,
-        BCard,
-        BCardTitle,
-        BCardBody,
-        BCardText,
         BButton
     } from 'bootstrap-vue';
 
     import router from '../../router';
     import WForm from './components/WForm';
+    import WCard from './components/WCard';
 
     export default {
         name: 'WGoodsForm',
         components: {
             BRow,
             BCol,
-            BCard,
-            BCardTitle,
-            BCardText,
-            BCardBody,
             BButton,
-            WForm
+            WForm,
+            WCard
         },
         data() {
             return {
@@ -103,8 +82,11 @@
             clickedSubmitButton() {
                 // console.log(this.goods);
             },
-            clickedGoodsCard(item) {
-                router.push(`/goods-form/${item.id}`);
+            clickedChooseGoodsStorage(item) {
+                router.push(`/goods-form/${item.id}/add`);
+            },
+            clickedChangeGoodsStorage(item) {
+                router.push(`/goods-form/${item.id}/update`);
             }
         },
         created: function () {

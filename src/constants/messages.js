@@ -114,4 +114,13 @@ export default {
   'ttn.update.error': 'Can not update TTN',
   'ttn.delete.success': 'TTN deleted!',
   'ttn.delete.error': 'Can not delete TTN',
+
+  'goods.list.get.error': 'Can not get goods list',
+  'goods.get.unknown': 'This goods does not exist',
+
+  'goods.storage.create.success': 'Storage was selected for the goods!',
+  'goods.storage.create.error': 'Can not selected storage',
+  'goods.storage.get.unknown': 'This goods does not exist',
+  'goods.storage.update.success': 'Storage was change for the goods!',
+  'goods.storage.update.error': 'Can not change storage for the goods',
 };

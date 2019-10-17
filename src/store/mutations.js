@@ -265,8 +265,11 @@ export default {
   [types.GOODS](state, goods) {
     state.goods = goods;
   },
-  [types.GOODS_ITEM](state, goodsItem) {
-    state.goodsItem = goodsItem;
+  [types.GOODS_ITEM_INIT](state, goodsItem) {
+    state.goodsItemInit = goodsItem;
+  },
+  [types.GOODS_ITEM_COMPUTED_SIZE](state, goodsItemSize) {
+    state.goodsItemComputedSize = goodsItemSize;
   },
 
   [types.SET_TOAST](state, toast) {

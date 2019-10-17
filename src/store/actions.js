@@ -621,11 +621,11 @@ export default {
 
     const res = await api.get(url.GOODS_URL);
 
-    if (res.data) {
-      commit(types.GOODS, res.data.goods);
-    }
-    commit(types.SUCCESS);
-    res.toast && commit(types.SET_TOAST, res.toast);
+      if (res.data) {
+        commit(types.GOODS, res.data.goods);
+      }
+      commit(types.SUCCESS);
+      res.toast && commit(types.SET_TOAST, res.toast);
   },
   fetchGoodsItemData: async ({ commit }, id) => {
     commit(types.REQUEST);
@@ -633,9 +633,28 @@ export default {
     const res = await api.getById(url.GOODS_URL, id);
 
     if (res.data) {
-      commit(types.GOODS_ITEM, res.data.goodsItem);
+      commit(types.GOODS_ITEM_INIT, res.data.goodsItem);
+      commit(types.GOODS_ITEM_COMPUTED_SIZE, res.data.goodsItem.size);
     }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
+  sendGoodsStorage: async ({ commit }, req) => {
+    commit(types.REQUEST);
+
+    const res = await api.post(url.GOODS_STORAGE_URL, req);
+
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  updateGoodsStorage: async ({ commit }, req) => {
+    commit(types.REQUEST);
+
+    const res = await api.put(url.GOODS_STORAGE_URL, req);
+
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  }
 };

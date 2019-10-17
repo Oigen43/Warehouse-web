@@ -14,3 +14,4 @@ export const TTN_URL = '/ttn';
 export const REFRESH_TOKEN_URL = '/refresh';
 export const CONFIRMATION_URL = '/confirmation';
 export const GOODS_URL = '/goods';
+export const GOODS_STORAGE_URL = '/goods_storage';
