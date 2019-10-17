@@ -106,12 +106,13 @@
 
       <w-multiselect
         v-if="isWarehousesRoleSelected"
-        v-model="form.warehouseId"
-        :options="warehousesId"
-        :multiple="false"
-        :close-on-select="false"
-        :placeholder="addIdPlaceholder"
-
+        v-model="selectedWarehouse"
+        :options="warehousesForSelect"
+        label="warehouseName"
+        :searchable="false"
+        :allow-empty="false"
+        :preselectFirst="true"
+        :placeholder="selectWarehousePlaceholder"
         class="w-users-form-input"
       ></w-multiselect>
 
@@ -127,7 +128,7 @@
 
 <script>
     import { BForm, BFormInput, BButton } from 'bootstrap-vue';
-    import { mapState, mapActions } from 'vuex';
+    import { mapState } from 'vuex';
     import * as userRoles from '../../constants/roles';
     import WMultiselect from '../WMultiselect';
 
@@ -184,9 +185,15 @@
                 type: Number,
                 default: null
             },
+            warehousesForSelect: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
+            },
             selectedWarehouses: {
-                type: Number,
-                default: null
+                type: Object,
+
             },
             addUser: {
                 type: Boolean,
@@ -204,47 +211,36 @@
                     address: this.address,
                     birthDate: this.birthDate,
                     login: this.login,
-                    password: this.password,
-                    warehouseId: this.selectedWarehouses
+                    password: this.password
                 },
 
+                selectedWarehouse: this.selectedWarehouses,
                 rolesForCreating: userRoles.ROLES_FOR_CREATING,
                 rolesForCreatingCompanyUsers: userRoles.ROLES_FOR_CREATING_COMPANY_USERS,
                 selectedRoles: this.userRoles,
                 placeholder: 'Add a role',
-                addIdPlaceholder: 'Add warehouse id'
-
+                selectWarehousePlaceholder: 'Please select the warehouse',
             };
         },
         computed: {
           ...mapState([
               'roles',
-              'warehousesId'
           ]),
           checkRolesForCompanyUsers() {
               return this.roles.includes(userRoles.COMPANY_ADMIN_ROLE);
           },
           isWarehousesRoleSelected() {
-              const role = this.selectedRoles.some(item => userRoles.WAREHOUSE_ROLES.includes((item)));
-              if (role) {
-                  this.getWarehouses();
-              }
-
-              return role;
+              return this.selectedRoles.some(item => userRoles.WAREHOUSE_ROLES.includes(item));
           }
         },
         methods: {
-            ...mapActions({
-                fetchWarehousesId: 'fetchWarehousesId'
-            }),
-            getWarehouses() {
-                this.fetchWarehousesId({ companyId: this.companyId });
-            },
             updateValue(newRoles) {
-              this.selectedRoles = newRoles;
+                this.selectedRoles = newRoles;
+                this.$emit('get-warehouses', this.selectedRoles);
             },
 
             onSubmit() {
+                this.form.warehouseId = this.selectedWarehouse.id;
                 this.$emit('form-submitted', { user: {
                     data: this.form,
                     selectedRoles: this.selectedRoles

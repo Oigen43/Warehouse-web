@@ -4,10 +4,12 @@
       <h1 class="w-user-add-form-h1">Add User</h1>
       <w-form
         @form-submitted="sendData"
+        @get-warehouses="getWarehousesData"
         submitButtonName="ADD USER"
         :firstName="firstName"
         :email="email"
         :company-id="userInfo.companyId"
+        :warehouses-for-select="warehousesForSelect"
         add-user
       ></w-form>
       <b-button
@@ -44,16 +46,21 @@
         computed: {
             ...mapState([
                 'roles',
-                'userInfo'
+                'userInfo',
+                'warehousesForSelect'
             ])
         },
         methods: {
             ...mapActions({
                 sendNewUserData: 'createUser',
-                getCurrentUser: 'fetchUserInfo'
+                getCurrentUser: 'fetchUserInfo',
+                fetchWarehousesSelect: 'fetchWarehousesSelect'
             }),
             redirect() {
                 router.push('/users');
+            },
+            async getWarehousesData() {
+                await this.fetchWarehousesSelect({ companyId: this.userInfo.companyId });
             },
             async sendData(newUser) {
                 newUser.user.data.companyId = this.userInfo.companyId;

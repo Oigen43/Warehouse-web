@@ -53,8 +53,8 @@ export default {
   [types.WAREHOUSES](state, warehouses) {
     state.warehouses = warehouses;
   },
-  [types.WAREHOUSES_ID](state, warehousesId) {
-    state.warehousesId = warehousesId;
+  [types.WAREHOUSES_NAMES](state, warehousesForSelect) {
+    state.warehousesForSelect = warehousesForSelect;
   },
   [types.WAREHOUSES_PAGE_LIMIT](state, warehousesPageLimit) {
     state.warehousesPageLimit = warehousesPageLimit;

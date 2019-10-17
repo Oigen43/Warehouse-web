@@ -110,11 +110,11 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
-  fetchWarehousesId: async ({ commit }, req) => {
-    const res = await api.get(url.WAREHOUSES_URL_IDS, { companyId: req.companyId });
+  fetchWarehousesSelect: async ({ commit }, req) => {
+    const res = await api.get(url.WAREHOUSES_URL_NAMES, { companyId: req.companyId });
 
     if (res.data) {
-      commit(types.WAREHOUSES_ID, res.data.warehouses);
+      commit(types.WAREHOUSES_NAMES, res.data.warehouses);
     }
   },
   createWarehouse: async ({ commit }, req) => {
