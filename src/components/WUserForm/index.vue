@@ -106,8 +106,8 @@
 
       <w-multiselect
         v-if="isWarehousesRoleSelected"
-        v-model="selectedWarehouse"
-        :options="warehousesForSelect"
+        v-model="selectedWarehouseData"
+        :options="warehousesNames"
         label="warehouseName"
         :searchable="false"
         :allow-empty="false"
@@ -120,7 +120,8 @@
         type="submit"
         variant="outline-dark"
         size="lg"
-        class="w-users-form-button">
+        class="w-users-form-button"
+        :disabled="disableState">
         {{ submitButtonName }}
       </b-button>
     </b-form>
@@ -185,15 +186,18 @@
                 type: Number,
                 default: null
             },
-            warehousesForSelect: {
+            warehousesNames: {
                 type: Array,
                 default: function () {
                     return [];
                 }
             },
-            selectedWarehouses: {
-                type: Object,
-
+            selectedWarehouse: {
+                type: Object
+            },
+            disableState: {
+                type: Boolean,
+                default: false
             },
             addUser: {
                 type: Boolean,
@@ -214,7 +218,7 @@
                     password: this.password
                 },
 
-                selectedWarehouse: this.selectedWarehouses,
+                selectedWarehouseData: this.selectedWarehouse,
                 rolesForCreating: userRoles.ROLES_FOR_CREATING,
                 rolesForCreatingCompanyUsers: userRoles.ROLES_FOR_CREATING_COMPANY_USERS,
                 selectedRoles: this.userRoles,
@@ -236,11 +240,11 @@
         methods: {
             updateValue(newRoles) {
                 this.selectedRoles = newRoles;
-                this.$emit('get-warehouses', this.selectedRoles);
+                this.$emit('role-selected', this.selectedRoles);
             },
 
             onSubmit() {
-                this.form.warehouseId = this.selectedWarehouse.id;
+                this.form.warehouseId = this.selectedWarehouseData.id;
                 this.$emit('form-submitted', { user: {
                     data: this.form,
                     selectedRoles: this.selectedRoles

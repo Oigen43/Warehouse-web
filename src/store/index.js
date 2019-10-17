@@ -23,7 +23,7 @@ export default new Vuex.Store({
 
     warehouses: [],
     warehousesPageLimit: 1,
-    warehousesForSelect: undefined,
+    warehousesNames: undefined,
     newWarehouse: {},
     updatedWarehouse: {},
     deletedWarehouse: {},

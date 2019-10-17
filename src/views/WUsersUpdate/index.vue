@@ -1,14 +1,14 @@
 <template>
   <b-row>
     <b-col
-      v-if="isFormShow"
+      v-if="isFormShown"
       class="w-users-update-form"
       lg="4"
       offset-lg="4">
       <h1 class="w-users-update-form-h1">Update User</h1>
       <w-form
         @form-submitted="sendData"
-        @get-warehouses="getWarehousesData"
+        @role-selected="getWarehousesData"
         submitButtonName="UPDATE USER"
         :id="userId"
         :firstName="firstName"
@@ -20,7 +20,7 @@
         :login="login"
         :userRoles="roles"
         :companyId="companyId"
-        :warehouses-for-select="warehousesForSelect"
+        :warehouses-names="warehousesNames"
         :selected-warehouses="warehouse"
         :passwordDisplay="false"
       ></w-form>
@@ -53,7 +53,7 @@
         computed: {
             ...mapState([
                 'updatedUser',
-                'warehousesForSelect'
+                'warehousesNames'
             ]),
             userId() {
                 return +this.$route.params.userId;
@@ -86,47 +86,44 @@
                 return this.updatedUser.companyId;
             },
             warehouse() {
-                if (this.warehousesForSelect) {
-                    const index = this.warehousesForSelect.findIndex(item => {
+                if (this.warehousesNames) {
+                    const index = this.warehousesNames.findIndex(item => {
                         return item.id === this.updatedUser.warehouseId;
                     });
 
-                    return index !== -1 ? this.warehousesForSelect[index] : {};
+                    return index !== -1 ? this.warehousesNames[index] : {};
                 } else {
                     return null;
                 }
             },
             hasWarehousesRole() {
-                return this.updatedUser.roles ? this.updatedUser.roles.some(item => this.userRoles.WAREHOUSE_ROLES.includes(item.title)) : false;
+                return this.updatedUser.roles &&
+                    this.updatedUser.roles.some(item => this.userRoles.WAREHOUSE_ROLES.includes(item.title));
             },
             userRoles() {
                 return userRoles;
             },
-            isFormShow() {
+            isFormShown() {
                 if (!this.updatedUser.id) {
                     return false;
-                } else {
-                    if (this.updatedUser.roles && this.updatedUser.roles.some(item => userRoles.WAREHOUSE_ROLES.includes(item.title))) {
-                        if (!this.warehousesForSelect) {
-                            return false;
-                        }
-                    }
                 }
-                return true;
+
+                return !(!this.warehousesNames && this.updatedUser.roles &&
+                    this.updatedUser.roles.some(item => userRoles.WAREHOUSE_ROLES.includes(item.title)));
             }
         },
         methods: {
             ...mapActions({
                 getUpdatedUserData: 'getUpdatedUser',
                 sendUpdatedUserData: 'sendUpdatedUser',
-                fetchWarehousesSelect: 'fetchWarehousesSelect'
+                fetchWarehousesNames: 'fetchWarehousesNames'
             }),
             redirect() {
                 router.push('/users');
             },
             async getWarehousesData(selectedRoles) {
                 selectedRoles.some(item => this.userRoles.WAREHOUSE_ROLES.includes(item)) &&
-                await this.fetchWarehousesSelect({ companyId: this.updatedUser.companyId });
+                await this.fetchWarehousesNames({ companyId: this.updatedUser.companyId });
             },
             async sendData(user) {
                 const res = await this.sendUpdatedUserData(user);
@@ -135,7 +132,7 @@
         },
         created: async function () {
             await this.getUpdatedUserData(this.userId);
-            this.hasWarehousesRole && await this.fetchWarehousesSelect({ companyId: this.updatedUser.companyId });
+            this.hasWarehousesRole && await this.fetchWarehousesNames({ companyId: this.updatedUser.companyId });
         }
     };
 </script>

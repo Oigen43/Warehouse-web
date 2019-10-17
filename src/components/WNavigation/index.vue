@@ -22,7 +22,7 @@
           <b-nav-item v-if="hasPermissions(routesPermissions.warehouses.read) && isWarehousesRoles">
             <b-button
               variant="light"
-              :to="toWarehouse"
+              :to="warehouseLink"
               class="w-navigation-link"
               >
               Warehouse
@@ -139,7 +139,7 @@
             isWarehousesRoles() {
                 return this.hasPermissions(userRoles.WAREHOUSE_ROLES);
             },
-            toWarehouse() {
+            warehouseLink() {
                 return `/companies/${this.userInfo.companyId}/warehouses`;
             }
         },
