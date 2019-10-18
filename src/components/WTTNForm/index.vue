@@ -193,7 +193,7 @@
                     carrier: this.selectedCarrier,
                     transport: this.selectedTransport,
                     driver: this.selectedDriver,
-                    dispatcher: this.dispatcher.id,
+                    dispatcher: this.dispatcher,
                     registrationDate: this.registrationDate,
                     description: this.description,
                     type: this.type,
@@ -214,7 +214,6 @@
               clearTransport: types.CLEAN_TRANSPORT,
             }),
             onSubmit() {
-                this.form.warehouse = this.form.warehouse.id;
                 this.form.registrationDate = new Date();
                 helper.checkEmptyFields(this.form) ? this.makeToast(customToasts.emptyTTNFields) : this.$emit('form-submitted', this.form);
             },
@@ -240,7 +239,6 @@
         created: function() {
             this.clearDrivers();
             this.clearTransport();
-            console.log(this.dispatcher);
         }
     };
 </script>

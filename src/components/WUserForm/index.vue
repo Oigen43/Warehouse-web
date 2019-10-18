@@ -235,10 +235,10 @@
         },
         methods: {
             ...mapActions({
-                fetchWarehousesId: 'fetchWarehousesId'
+                fetchWarehousesNames: 'fetchWarehousesNames'
             }),
             getWarehouses() {
-                this.fetchWarehousesId({ companyId: this.companyId });
+                this.fetchWarehousesNames({ companyId: this.companyId });
             },
             updateValue(newRoles) {
               this.selectedRoles = newRoles;

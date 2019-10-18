@@ -89,8 +89,8 @@
                 this.fetchTTNList();
             }
         },
-        created: function () {
-            this.fetchTTNList();
+        created: async function () {
+            await this.fetchTTNList();
         }
     };
 </script>

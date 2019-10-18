@@ -64,8 +64,10 @@
         computed: {
             fields: function () {
                 const fieldsList = [
-                    'number', 'registrationDate', 'type', 'status', 'carrier', 'sender',
-                  { key: 'blank', label: '', class: 'w-blank-column' }
+                    'number', 'registrationDate', 'type', 'status', 
+                    { key: 'Carrier.name', label: 'Carrier' },
+                    { key: 'Sender.senderName', label: 'Sender' },
+                    { key: 'blank', label: '', class: 'w-blank-column' }
                 ];
 
                 this.hasOptionsColumn && fieldsList.splice(fieldsList.length - 1, 0, { key: 'options', label: '', class: 'w-list-button' });
