@@ -12,7 +12,7 @@ export default {
 
   warehouses: [],
   warehousesPageLimit: 1,
-  warehousesForSelect: [],
+  warehousesNames: null,
   newWarehouse: {},
   updatedWarehouse: {},
   deletedWarehouse: {},

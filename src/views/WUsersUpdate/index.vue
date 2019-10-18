@@ -21,7 +21,7 @@
         :userRoles="roles"
         :companyId="companyId"
         :warehouses-names="warehousesNames"
-        :selected-warehouses="warehouse"
+        :selected-warehouse="warehouse"
         :passwordDisplay="false"
       ></w-form>
       <b-button
