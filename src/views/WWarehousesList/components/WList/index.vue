@@ -56,7 +56,7 @@
             BFormCheckbox,
             BButton
         },
-        props: ['warehousesList'],
+        props: ['warehouses'],
         data: function () {
             return {
                 clickedWarehouse: {}
@@ -77,6 +77,12 @@
                 }
 
                 return fieldList;
+            },
+            warehousesList: function() {
+                if (!(Array.isArray(this.warehouses))) {
+                    return new Array(this.warehouses);
+                }
+                return this.warehouses;
             },
             routesPermissions: function() {
                 return routesPermissions;

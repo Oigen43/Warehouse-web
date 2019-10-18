@@ -68,6 +68,7 @@
                 await this.fetchWarehousesNames({ companyId: this.userInfo.companyId });
             },
             async sendData(newUser) {
+                this.changeDisableState();
                 newUser.user.data.companyId = this.userInfo.companyId;
                 const res = await this.sendNewUserData(newUser);
                 res.error && this.changeDisableState();
