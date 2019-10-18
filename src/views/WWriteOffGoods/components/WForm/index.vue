@@ -3,7 +3,8 @@
       <b-form-input
         size="lg"
         v-model="form.number"
-        disabled
+        type="number"
+        min="1"
         required
         placeholder="Number"
         class="w-write-off-form-input"
@@ -42,9 +43,6 @@
             BButton
         },
         props: {
-            number: {
-                type: Number
-            },
             controller: {
                 type: Object
             },

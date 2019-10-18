@@ -103,12 +103,6 @@
             BButton
         },
         props: {
-            submitButtonName: {
-                type: String
-            },
-            headerName: {
-                type: String
-            },
             name: {
                 type: String
             },

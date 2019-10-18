@@ -5,7 +5,6 @@
       <b-col class="w-write-off-form-col" lg="3" md="12" offset-lg="1" align-self="start">
         <w-form
           @form-submitted="sendData"
-          :number="number"
           :controller="userInfo"
           :registrationDate="registrationDate"
           submitButtonName="Create"
@@ -47,8 +46,8 @@
         },
         data() {
             return {
-                number: '213',
-                registrationDate: new Date()
+                writeOffGoods: [],
+                registrationDate: '23-10-2019'
             };
         },
         computed: {
@@ -67,11 +66,10 @@
               sendNewWriteOffForm: 'createWriteOff'
           }),
           updateGood(good, index) {
-              this.goods.splice(index, 1, good);
+              this.writeOffGoods.splice(index, 1, good);
           },
           async sendData(form) {
-            console.log(form);
-              const res = await this.sendNewWriteOffForm({ writeOff: form, goods: this.goods });
+              const res = await this.sendNewWriteOffForm({ writeOff: form, goods: this.writeOffGoods });
               !res.error && router.push('/ttn');
           }
         },
