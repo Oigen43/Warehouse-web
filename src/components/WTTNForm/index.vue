@@ -83,14 +83,14 @@
       <b-form-input
         v-if="addForm"
         size="lg"
-        v-model="form.registrationDate"
+        :value="formattedRegistrationDate"
         disabled
         placeholder="Registration date"
         class="w-ttn-form-input"
       ></b-form-input>
       <b-form-input
         size="lg"
-        :value="`${dispatcher.surname} ${dispatcher.firstName}`"
+        :value="formattedDispatcherName"
         disabled
         class="w-ttn-form-input"
       ></b-form-input>
@@ -112,8 +112,6 @@
 
 <script>
     import Vue from 'vue';
-    import { mapMutations } from 'vuex';
-    import * as types from '../../store/mutation-types';
     import helper from '../../utils/helpers';
     import customToasts from '../../constants/customToasts';
 
@@ -177,6 +175,9 @@
             type: {
                 type: String
             },
+            selectedWarehouse: {
+                type: Object
+            },
             warehouses: {
                 type: Array
             },
@@ -208,13 +209,16 @@
                 warehousePlaceholder: 'Please select a warehouse'
             };
         },
+        computed: {
+            formattedRegistrationDate() {
+                return `${this.form.registrationDate.slice(0, 10)} ${this.form.registrationDate.slice(11, 19)}`;
+            },
+            formattedDispatcherName() {
+                return `${this.dispatcher.surname} ${this.dispatcher.firstName}`;
+            }
+        },
         methods: {
-            ...mapMutations({
-              clearDrivers: types.CLEAN_DRIVERS,
-              clearTransport: types.CLEAN_TRANSPORT,
-            }),
             onSubmit() {
-                this.form.registrationDate = new Date();
                 helper.checkEmptyFields(this.form) ? this.makeToast(customToasts.emptyTTNFields) : this.$emit('form-submitted', this.form);
             },
             makeToast(toast) {
@@ -236,10 +240,6 @@
                 return `${transportType} ${transportNumber}`;
             }
         },
-        created: function() {
-            this.clearDrivers();
-            this.clearTransport();
-        }
     };
 </script>
 

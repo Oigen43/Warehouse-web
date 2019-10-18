@@ -6,13 +6,13 @@
         <w-form
           @form-submitted="sendData"
           @carrier-selected="getTransportsAndDrivers"
-          :senders="senders"
-          :carriers="carriers"
-          :transports="transport"
-          :drivers="drivers"
+          :senders="sendersNames"
+          :carriers="carriersNames"
+          :transports="transportNames"
+          :drivers="driversNames"
+          :warehouses="warehousesNames"
           :dispatcher="userInfo"
           :type="type"
-          :warehouses="warehouses"
           :addForm="false"
           submitButtonName="Create"
         ></w-form>
@@ -38,7 +38,8 @@
 <script>
 
     import { BRow, BCol, BButton } from 'bootstrap-vue';
-    import { mapActions, mapState } from 'vuex';
+    import { mapActions, mapMutations, mapState } from 'vuex';
+    import * as types from '../../store/mutation-types';
     import router from '../../router';
 
     import WForm from '../../components/WTTNForm';
@@ -61,11 +62,11 @@
         computed: {
           ...mapState([
                 'userInfo',
-                'senders',
-                'carriers',
-                'transport',
-                'drivers',
-                'warehouses'
+                'warehousesNames',
+                'sendersNames',
+                'carriersNames',
+                'transportNames',
+                'driversNames'
             ]),
             dispatcher: function() {
               return this.userInfo.firstName;
@@ -74,13 +75,16 @@
         methods: {
           ...mapActions({
               fetchUserInfo: 'fetchUserInfo',
-              fetchSendersList: 'fetchSendersList',
-              fetchCarriersList: 'fetchCarriersList',
-              fetchTransportList: 'fetchTransportList',
-              fetchDriversList: 'fetchDriversList',
-              fetchWarehousesList: 'fetchWarehousesList',
-              sendNewStorageData: 'createStorage',
+              fetchSendersNames: 'fetchSendersNames',
+              fetchCarriersNames: 'fetchCarriersNames',
+              fetchTransportNames: 'fetchTransportNames',
+              fetchDriversNames: 'fetchDriversNames',
+              fetchWarehousesNames: 'fetchWarehousesNames',
               sendNewTTN: 'createTTN'
+          }),
+          ...mapMutations({
+              clearDrivers: types.CLEAN_DRIVERS_NAMES,
+              clearTransport: types.CLEAN_TRANSPORT_NAMES,
           }),
           addGood(good) {
               this.goods.push(good);
@@ -92,33 +96,23 @@
               this.goods.splice(index, 1);
           },
           async sendData(form) {
-            console.log(form);
+              form.registrationDate = new Date();
               const res = await this.sendNewTTN({ TTN: form, goods: this.goods });
               !res.error && router.push('/ttn');
           },
           getTransportsAndDrivers(id) {
-              this.fetchTransportList({
-                  page: 1,
-                  perPage: 20,
-                  carrierId: id
-              });
-              this.fetchDriversList({
-                  page: 1,
-                  perPage: 20,
-                  carrierId: id
-              });
-          }
+              this.fetchTransportNames({ carrierId: id });
+              this.fetchDriversNames({ carrierId: id });
+          },
         },
         created: async function() {
+            this.clearDrivers();
+            this.clearTransport();
             await this.fetchUserInfo();
-            await this.fetchWarehousesList({
-                page: 1,
-                perPage: 20,
-                companyId: this.userInfo.companyId
-            });
-            await this.fetchSendersList();
-            await this.fetchCarriersList();
-        }
+            await this.fetchWarehousesNames({ companyId: this.userInfo.companyId });
+            await this.fetchSendersNames();
+            await this.fetchCarriersNames();
+        },
     };
 </script>
 

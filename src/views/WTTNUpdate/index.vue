@@ -1,24 +1,30 @@
 <template>
-  <div v-if="updatedTTN.number">
+  <div
+      v-if="updatedTTN.number && userInfo.surname && transportNames.length">
     <h1 class="w-ttn-update-form-h1">Update TTN</h1>
     <b-row>
-      <b-col v-if='senders' class="w-ttn-update-form-col" lg="3" md="12" offset-lg="1" align-self="start">
+      <b-col v-if='sendersNames' class="w-ttn-update-form-col" lg="3" md="12" offset-lg="1" align-self="start">
           <w-form
               @form-submitted="sendData"
               @carrier-selected="getTransportsAndDrivers"
               :number="updatedTTN.number"
               :dischargeDate="updatedTTN.dischargeDate"
-              :senders="senders"
-              :carriers="carriers"
-              :transports="transport"
-              :drivers="drivers"
+              :senders="sendersNames"
+              :selectedSender="selectedSender()"
+              :carriers="carriersNames"
+              :selectedCarrier="selectedCarrier()"
+              :transports="transportNames"
+              :selectedTransport="selectedTransport()"
+              :drivers="driversNames"
+              :selectedDriver="selectedDriver()"
+              :warehouses="warehousesNames"
+              :selectedWarehouse="selectedWarehouse()"
               :dispatcher="userInfo"
               :description="updatedTTN.description"
-              :registrationDate="`${registrationDate.slice(0,10)} ${registrationDate.slice(11, 19)}`"
+              :registrationDate="updatedTTN.registrationDate"
               :type="updatedTTN.type"
-              :warehouses="warehouses"
               :addForm="true"
-              submitButtonName="Create"
+              submitButtonName="Update"
           ></w-form>
           <b-button
             variant="link"
@@ -50,11 +56,11 @@
             ...mapState([
                 'updatedTTN',
                 'userInfo',
-                'senders',
-                'carriers',
-                'transport',
-                'drivers',
-                'warehouses'
+                'warehousesNames',
+                'sendersNames',
+                'carriersNames',
+                'transportNames',
+                'driversNames'
             ]),
             registrationDate() {
                 return this.updatedTTN.registrationDate;
@@ -66,37 +72,44 @@
         methods: {
             ...mapActions({
                 getUpdatedTTNData: 'getUpdatedTTN',
-                fetchSendersList: 'fetchSendersList',
-                fetchCarriersList: 'fetchCarriersList',
-                fetchTransportList: 'fetchTransportList',
-                fetchDriversList: 'fetchDriversList',
-                fetchWarehousesList: 'fetchWarehousesList',
+                fetchUserInfo: 'fetchUserInfo',
+                fetchSendersNames: 'fetchSendersNames',
+                fetchCarriersNames: 'fetchCarriersNames',
+                fetchTransportNames: 'fetchTransportNames',
+                fetchDriversNames: 'fetchDriversNames',
+                fetchWarehousesNames: 'fetchWarehousesNames',
             }),
             getTransportsAndDrivers(id) {
-              this.fetchTransportList({
-                  page: 1,
-                  perPage: 20,
-                  carrierId: id
-              });
-              this.fetchDriversList({
-                  page: 1,
-                  perPage: 20,
-                  carrierId: id
-              });
-          },
+                this.fetchTransportNames({ carrierId: id });
+                this.fetchDriversNames({ carrierId: id });
+            },
             sendData(form) {
                 console.log(form);
+            },
+            selectedSender() {
+                return this.sendersNames.find(item => item.id === this.updatedTTN.senderId);
+            },
+            selectedCarrier() {
+                return this.carriersNames.find(item => item.id === this.updatedTTN.carrierId);
+            },
+            selectedTransport() {
+                return this.transportNames.find(item => item.id === this.updatedTTN.transportId);
+            },
+            selectedDriver() {
+                return this.driversNames.find(item => item.id === this.updatedTTN.driverId);
+            },
+            selectedWarehouse() {
+                return this.warehousesNames.find(item => item.id === this.updatedTTN.warehouseId);
             }
         },
         created: async function () {
             await this.getUpdatedTTNData(this.TTNId);
-            await this.fetchWarehousesList({
-                page: 1,
-                perPage: 20,
-                companyId: this.userInfo.companyId
-            });
-            await this.fetchSendersList();
-            await this.fetchCarriersList();
+            await this.fetchUserInfo();
+            await this.fetchWarehousesNames({ companyId: this.userInfo.companyId });
+            await this.fetchSendersNames();
+            await this.fetchCarriersNames();
+            await this.fetchTransportNames({ carrierId: this.updatedTTN.carrierId });
+            await this.fetchDriversNames({ carrierId: this.updatedTTN.carrierId });
         }
     };
 </script>
