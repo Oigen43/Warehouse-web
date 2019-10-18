@@ -622,11 +622,11 @@ export default {
 
     const res = await api.get(url.GOODS_URL);
 
-      if (res.data) {
-        commit(types.GOODS, res.data.goods);
-      }
-      commit(types.SUCCESS);
-      res.toast && commit(types.SET_TOAST, res.toast);
+    if (res.data) {
+      commit(types.GOODS, res.data.goods);
+    }
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
   },
   fetchGoodsItemData: async ({ commit }, id) => {
     commit(types.REQUEST);
@@ -644,15 +644,6 @@ export default {
     commit(types.REQUEST);
 
     const res = await api.post(url.GOODS_STORAGE_URL, req);
-
-    commit(types.SUCCESS);
-    res.toast && commit(types.SET_TOAST, res.toast);
-    return res;
-  },
-  updateGoodsStorage: async ({ commit }, req) => {
-    commit(types.REQUEST);
-
-    const res = await api.put(url.GOODS_STORAGE_URL, req);
 
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);

@@ -12,18 +12,16 @@
           class="w-goods-card-text-bold">Recommended storage type:</span>
           {{good.storageType}}
         </b-card-text>
+        <b-card-text v-if="good.storage.length" class="w-goods-card-text"><span
+          class="w-goods-card-text-bold">Storages:</span>
+          <span v-for="storage in good.storage" :key="storage.id"> № {{storage.id}} </span>
+        </b-card-text>
       </b-card-body>
       <b-button
         variant="dark"
         v-if="!good.storage.length"
         @click="clickedChooseGoodsStorage(good)"
         class="w-goods-card-button">Choose Storage
-      </b-button>
-      <b-button
-        variant="dark"
-        v-if="good.storage.length"
-        @click="clickedChangeGoodsStorage(good)"
-        class="w-goods-card-button">Change Storage
       </b-button>
     </b-card>
   </b-col>
@@ -63,9 +61,6 @@
         methods: {
             clickedChooseGoodsStorage(item) {
                 this.$emit('clickedChooseGoodsStorage', item);
-            },
-            clickedChangeGoodsStorage(item) {
-                this.$emit('clickedChangeGoodsStorage', item);
             }
         }
     };

@@ -39,7 +39,6 @@ import WTransportUpdateForm from '../views/WTransportUpdate';
 import WTTNList from '../views/WTTNList';
 import WGoodsForm from '../views/WGoodsForm';
 import WGoodsStorageAdd from '../views/WGoodsStorageAdd';
-import WGoodsStorageUpdate from '../views/WGoodsStorageUpdate';
 import WNotFound from '../views/WNotFound';
 
 Vue.use(Router);
@@ -303,11 +302,6 @@ export default new Router({
       path: '/goods-form/:goodsId/add',
       name: 'choose-goods-storage-form',
       component: WGoodsStorageAdd
-    },
-    {
-      path: '/goods-form/:goodsId/update',
-      name: 'change-goods-storage-form',
-      component: WGoodsStorageUpdate
     },
     {
       path: '*',

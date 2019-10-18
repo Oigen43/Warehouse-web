@@ -15,17 +15,17 @@
             ></w-form>
           </b-col>
           <b-col v-if="storages.length && goods.length" lg="6" md="12" offset-lg="1">
-              <w-card
-                @clickedChooseGoodsStorage="clickedChooseGoodsStorage"
-                @clickedChangeGoodsStorage="clickedChangeGoodsStorage"
+            <w-card
+              @clickedChooseGoodsStorage="clickedChooseGoodsStorage"
               :goods="goods"
               :storages="storages"
-              ></w-card>
+            ></w-card>
           </b-col>
         </b-row>
         <b-row>
           <b-col>
-            <b-button class="w-goods-form-button" variant="dark" size="lg" @click="clickedSubmitButton">Submit</b-button>
+            <b-button class="w-goods-form-button" variant="dark" size="lg" @click="clickedSubmitButton">Submit
+            </b-button>
           </b-col>
         </b-row>
       </div>
@@ -84,9 +84,6 @@
             },
             clickedChooseGoodsStorage(item) {
                 router.push(`/goods-form/${item.id}/add`);
-            },
-            clickedChangeGoodsStorage(item) {
-                router.push(`/goods-form/${item.id}/update`);
             }
         },
         created: function () {

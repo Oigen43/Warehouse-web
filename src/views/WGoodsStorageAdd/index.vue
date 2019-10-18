@@ -1,14 +1,15 @@
 <template>
   <b-row>
-    <b-col class="w-goods-storage-add" lg="10" offset-lg="1">
+    <b-col class="w-goods-storage-update" lg="10" offset-lg="1">
       <h1>Choose Storage for Goods</h1>
-        <w-goods-storage-form
-          @sendData="sendData"
-          :goodsId="goodsId"
-          :storages="storages"
-          :goodsItemInit="goodsItemInit"
-          :goodsItemComputedSize="goodsItemComputedSize"
-        ></w-goods-storage-form>
+      <w-goods-storage-form
+        @sendData="sendData"
+        :goodsId="goodsId"
+        :storages="storages"
+        :goodsItemInit="goodsItemInit"
+        :goodsItemComputedSize="goodsItemComputedSize"
+        :storagesComputedCapacity="storagesComputedCapacity"
+      ></w-goods-storage-form>
     </b-col>
   </b-row>
 </template>
@@ -31,11 +32,12 @@
             ...mapState([
                 'storages',
                 'goodsItemInit',
-                'goodsItemComputedSize'
+                'goodsItemComputedSize',
+                'storagesComputedCapacity'
             ]),
             goodsId() {
                 return +this.$route.params.goodsId;
-            }
+            },
         },
         methods: {
             ...mapActions({

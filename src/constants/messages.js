@@ -119,8 +119,6 @@ export default {
   'goods.get.unknown': 'This goods does not exist',
 
   'goods.storage.create.success': 'Storage was selected for the goods!',
-  'goods.storage.create.error': 'Can not selected storage',
-  'goods.storage.get.unknown': 'This goods does not exist',
-  'goods.storage.update.success': 'Storage was change for the goods!',
-  'goods.storage.update.error': 'Can not change storage for the goods',
+  'goods.storage.create.error': 'Can not select this storage',
+  'goods.storage.get.unknown': 'This goods does not exist'
 };
