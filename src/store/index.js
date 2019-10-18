@@ -80,6 +80,7 @@ export default new Vuex.Store({
     goods: [],
     goodsItemInit: {},
     goodsItemComputedSize: 0,
+    storagesComputedCapacity: [],
 
     toast: {},
     loading: false

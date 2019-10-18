@@ -226,6 +226,7 @@ export default {
       const pageLimit = helpers.calculatePageLimit(res.data.storagesTotal, req.perPage);
 
       commit(types.STORAGES, res.data.storages);
+      commit(types.STORAGE_CURRENT_CAPACITY, res.data.storages);
       commit(types.STORAGES_PAGE_LIMIT, pageLimit);
     }
     commit(types.SUCCESS);

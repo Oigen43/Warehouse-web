@@ -8,6 +8,7 @@
         :storages="storages"
         :goodsItemInit="goodsItemInit"
         :goodsItemComputedSize="goodsItemComputedSize"
+        :storagesComputedCapacity="storagesComputedCapacity"
       ></w-goods-storage-form>
     </b-col>
   </b-row>
@@ -31,7 +32,8 @@
             ...mapState([
                 'storages',
                 'goodsItemInit',
-                'goodsItemComputedSize'
+                'goodsItemComputedSize',
+                'storagesComputedCapacity'
             ]),
             goodsId() {
                 return +this.$route.params.goodsId;
