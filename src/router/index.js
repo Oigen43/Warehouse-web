@@ -40,6 +40,7 @@ import WTTNList from '../views/WTTNList';
 import WNotFound from '../views/WNotFound';
 import WTTNAddForm from '../views/WTTNAdd';
 import WTTNUpdateForm from '../views/WTTNUpdate';
+import WWriteOffGoodsForm from '../views/WWriteOffGoods';
 
 Vue.use(Router);
 
@@ -306,6 +307,11 @@ export default new Router({
       component: WTTNUpdateForm,
       meta: { authorize: routesPermissions.TTN.update },
       beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/write-off',
+      name: 'WriteOffGoodsForm',
+      component: WWriteOffGoodsForm
     },
     {
       path: '*',

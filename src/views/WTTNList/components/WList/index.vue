@@ -64,7 +64,7 @@
         computed: {
             fields: function () {
                 const fieldsList = [
-                    'number', 'registrationDate', 'type', 'status', 
+                    'number', 'registrationDate', 'type', 'status',
                     { key: 'Carrier.name', label: 'Carrier' },
                     { key: 'Sender.senderName', label: 'Sender' },
                     { key: 'blank', label: '', class: 'w-blank-column' }

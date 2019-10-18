@@ -90,6 +90,9 @@ export const DELETE_TTN = 'DELETE_TTN';
 export const CLEAN_UPDATED_TTN = 'CLEAN_UPDATED_TTN';
 export const USER_INFO = 'USER_INFO';
 
+export const GOODS = 'GOODS';
+export const CREATE_WRITE_OFF = 'CREATE_WRITE_OFF';
+
 export const SET_TOAST = 'SET_TOAST';
 
 export const REQUEST = 'REQUEST';

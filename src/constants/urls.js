@@ -16,3 +16,5 @@ export const TTN_CHANGE_STATUS_URL = '/ttn/changeStatus';
 export const USER_INFO_URL = '/users/userInfo';
 export const REFRESH_TOKEN_URL = '/refresh';
 export const CONFIRMATION_URL = '/confirmation';
+export const GOODS_URL = '/goods';
+export const WRITE_OFF_URL = '/write_off';

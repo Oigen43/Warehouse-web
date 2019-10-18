@@ -643,4 +643,25 @@ export default {
     commit(types.USER_INFO, res.data);
     commit(types.SUCCESS);
   },
+  fetchGoodsList: async ({ commit }, TTNId = 1) => {
+    commit(types.REQUEST);
+
+    const res = await api.get(url.GOODS_URL, { TTNId });
+
+    if (res.data) {
+      commit(types.GOODS, res.data.goods);
+    }
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  createWriteOff: async ({ commit }, req) => {
+  commit(types.REQUEST);
+  commit(types.CREATE_WRITE_OFF, req);
+
+  const res = await api.post(url.WRITE_OFF_URL, req);
+
+  commit(types.SUCCESS);
+  res.toast && commit(types.SET_TOAST, res.toast);
+  return res;
+},
 };
