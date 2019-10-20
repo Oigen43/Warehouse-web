@@ -7,6 +7,7 @@
           <w-form
               @form-submitted="sendData"
               @carrier-selected="getTransportsAndDrivers"
+              :id="updatedTTN.id"
               :number="updatedTTN.number"
               :dischargeDate="updatedTTN.dischargeDate"
               :senders="sendersNames"
@@ -33,24 +34,34 @@
             >Go Back
           </b-button>
       </b-col>
+      <b-col class="w-ttn-update-form-col" lg="6" md="12" offset-lg="1">
+        <w-goods
+          @added-good="addGood"
+          @updated-good="updateGood"
+          @deleted-good="deleteGood"
+          :goods="goods"
+        ></w-goods>
+      </b-col>
     </b-row>
   </div>
 </template>
 
 <script>
-    import { mapState, mapActions } from 'vuex';
     import { BRow, BCol, BButton } from 'bootstrap-vue';
-
-    import WForm from '../../components/WTTNForm';
+    import { mapState, mapMutations, mapActions } from 'vuex';
+    import * as types from '../../store/mutation-types';
     import router from '../../router';
 
+    import WForm from '../../components/WTTNForm';
+    import WGoods from '../../components/WGoodsList';
     export default {
         name: 'WUsersUpdateForm',
         components: {
             BRow,
             BCol,
+            BButton,
             WForm,
-            BButton
+            WGoods
         },
         computed: {
             ...mapState([
@@ -68,6 +79,9 @@
             TTNId() {
                 return +this.$route.params.TTNId;
             },
+            goods() {
+              return this.updatedTTN.goods;
+            }
         },
         methods: {
             ...mapActions({
@@ -78,13 +92,28 @@
                 fetchTransportNames: 'fetchTransportNames',
                 fetchDriversNames: 'fetchDriversNames',
                 fetchWarehousesNames: 'fetchWarehousesNames',
+                sendUpdatedTTNData: 'sendUpdatedTTN'
             }),
+            ...mapMutations({
+              clearDrivers: types.CLEAN_DRIVERS_NAMES,
+              clearTransport: types.CLEAN_TRANSPORT_NAMES,
+            }),
+            addGood(good) {
+                this.goods.push(good);
+            },
+            updateGood(good, index) {
+                this.goods.splice(index, 1, good);
+            },
+            deleteGood(index) {
+                this.goods.splice(index, 1);
+            },
+            async sendData(form) {
+                const res = await this.sendUpdatedTTNData({ TTN: form, goods: this.goods });
+                !res.error && router.push('/ttn');
+            },
             getTransportsAndDrivers(id) {
                 this.fetchTransportNames({ carrierId: id });
                 this.fetchDriversNames({ carrierId: id });
-            },
-            sendData(form) {
-                console.log(form);
             },
             selectedSender() {
                 return this.sendersNames.find(item => item.id === this.updatedTTN.senderId);
@@ -103,13 +132,15 @@
             }
         },
         created: async function () {
+            this.clearDrivers();
+            this.clearTransport();
             await this.getUpdatedTTNData(this.TTNId);
             await this.fetchUserInfo();
             await this.fetchWarehousesNames({ companyId: this.userInfo.companyId });
             await this.fetchSendersNames();
             await this.fetchCarriersNames();
-            await this.fetchTransportNames({ carrierId: this.updatedTTN.carrierId });
             await this.fetchDriversNames({ carrierId: this.updatedTTN.carrierId });
+            await this.fetchTransportNames({ carrierId: this.updatedTTN.carrierId });
         }
     };
 </script>

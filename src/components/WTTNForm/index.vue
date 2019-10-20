@@ -81,6 +81,12 @@
         class="w-ttn-form-input"
       ></b-form-textarea>
       <b-form-input
+        size="lg"
+        v-model="form.type"
+        disabled
+        class="w-ttn-form-input"
+      ></b-form-input>
+      <b-form-input
         v-if="addForm"
         size="lg"
         :value="formattedRegistrationDate"
@@ -91,12 +97,6 @@
       <b-form-input
         size="lg"
         :value="formattedDispatcherName"
-        disabled
-        class="w-ttn-form-input"
-      ></b-form-input>
-      <b-form-input
-        size="lg"
-        v-model="form.type"
         disabled
         class="w-ttn-form-input"
       ></b-form-input>
@@ -132,6 +132,9 @@
         props: {
             addForm: {
                 type: Boolean,
+            },
+            id: {
+              type: Number
             },
             number: {
                 type: Number
@@ -188,6 +191,7 @@
         data() {
             return {
                 form: {
+                    id: this.id,
                     number: this.number,
                     dischargeDate: this.dischargeDate,
                     sender: this.selectedSender,
@@ -219,6 +223,7 @@
         },
         methods: {
             onSubmit() {
+                console.log(this.form);
                 helper.checkEmptyFields(this.form) ? this.makeToast(customToasts.emptyTTNFields) : this.$emit('form-submitted', this.form);
             },
             makeToast(toast) {
@@ -229,8 +234,8 @@
                 });
             },
             clickSelectCarrier(selectedOption) {
-                this.form.driver = '';
-                this.form.transport = '';
+                this.form.driver = null;
+                this.form.transport = null;
                 this.$emit('carrier-selected', selectedOption.id);
             },
             driverNameWithPassport({ firstName, surname, passportNumber }) {
