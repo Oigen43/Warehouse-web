@@ -112,7 +112,7 @@
 
 <script>
     import Vue from 'vue';
-    import helper from '../../utils/helpers';
+    import helper from './helper';
     import customToasts from '../../constants/customToasts';
 
     import { BForm, BFormInput, BButton, BFormTextarea, ToastPlugin } from 'bootstrap-vue';
@@ -223,7 +223,6 @@
         },
         methods: {
             onSubmit() {
-                console.log(this.form);
                 helper.checkEmptyFields(this.form) ? this.makeToast(customToasts.emptyTTNFields) : this.$emit('form-submitted', this.form);
             },
             makeToast(toast) {
