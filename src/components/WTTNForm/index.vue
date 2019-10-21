@@ -18,7 +18,6 @@
         class="w-ttn-form-input"
       ></b-form-input>
       <w-multiselect
-        v-if="senders.length"
         label="senderName"
         :options="senders"
         :multiple="false"
@@ -29,7 +28,6 @@
         class="w-ttn-form-input"
       ></w-multiselect>
       <w-multiselect
-        v-if="carriers.length"
         label="name"
         :options="carriers"
         :multiple="false"
@@ -63,7 +61,6 @@
         class="w-ttn-form-input"
       ></w-multiselect>
       <w-multiselect
-        v-if="warehouses.length"
         label="warehouseName"
         :options="warehouses"
         :multiple="false"
