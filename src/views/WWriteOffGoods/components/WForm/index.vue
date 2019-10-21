@@ -28,7 +28,7 @@
         variant="outline-dark"
         size="lg"
         class="w-write-off-form-button">
-        CREATE
+        CONFIRM
       </b-button>
     </b-form>
 </template>

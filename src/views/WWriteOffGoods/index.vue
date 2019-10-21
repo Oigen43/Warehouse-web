@@ -1,5 +1,5 @@
 <template>
-  <div v-if='userInfo.surname'>
+  <div v-if='userInfo.id'>
     <h1 class="w-write-off-form-h1">Write-off of Goods Form</h1>
     <b-row>
       <b-col class="w-write-off-form-col" lg="3" md="12" offset-lg="1" align-self="start">

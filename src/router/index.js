@@ -317,7 +317,7 @@ export default new Router({
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/write-off',
+      path: '/ttn/:TTNId/write-off',
       name: 'WriteOffGoodsForm',
       component: WWriteOffGoodsForm
     },

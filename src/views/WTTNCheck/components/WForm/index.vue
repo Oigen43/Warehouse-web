@@ -33,6 +33,7 @@
       class="w-ttn-check-form-input"
     ></b-form-input>
     <b-form-input
+      v-if="driver"
       size="lg"
       v-model="driverNameWithPassport"
       disabled
@@ -69,17 +70,26 @@
       class="w-ttn-check-form-input"
     ></b-form-input>
     <b-button
+      variant="outline-dark"
+      size="lg"
+      @click="clickedWriteOffButton"
+    class="w-ttn-check-form-button">
+      WRITE-OFF
+    </b-button>
+    <b-button
       type="submit"
       variant="outline-dark"
       size="lg"
-      class="w-ttn-check-form-button">
-      {{ submitButtonName }}
+      class="w-ttn-check-form-button w-ttn-check-form-submit-button">
+      CONFIRM
     </b-button>
   </b-form>
 </template>
 
 <script>
     import { BForm, BFormInput, BButton, BFormTextarea } from 'bootstrap-vue';
+
+    import router from '../../../../router';
 
     export default {
         name: 'WForm',
@@ -90,12 +100,6 @@
             BFormTextarea
         },
         props: {
-            addForm: {
-                type: Boolean,
-            },
-            id: {
-                type: Number
-            },
             number: {
                 type: Number
             },
@@ -112,7 +116,7 @@
                 type: Object
             },
             driver: {
-                type: Object,
+                type: Object
             },
             dispatcher: {
                 type: Object
@@ -131,15 +135,11 @@
             },
             warehouse: {
                 type: String
-            },
-            submitButtonName: {
-                type: String
-            },
+            }
         },
         data() {
             return {
                 form: {
-                    id: this.id,
                     number: this.number,
                     dischargeDate: this.dischargeDate,
                     sender: this.sender,
@@ -171,12 +171,18 @@
             },
             driverNameWithPassport() {
                 return `${this.driver.surname} - passport: ${this.driver.passportNumber}`;
+            },
+            TTNId() {
+                return +this.$route.params.TTNId;
             }
         },
         methods: {
             onSubmit() {
                 this.$emit('form-submitted');
-            }
+            },
+            clickedWriteOffButton() {
+                router.push(`/ttn/${this.TTNId}/write-off`);
+            },
         },
     };
 </script>

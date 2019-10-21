@@ -1,11 +1,10 @@
 <template>
-  <div v-if="updatedTTN.id">
+  <div v-if="userInfo.id" class="w-ttn-check-form-page">
     <h1 class="w-ttn-check-form-h1">Check TTN</h1>
     <b-row>
       <b-col class="w-ttn-check-form-col" lg="3" md="12" offset-lg="1" align-self="start">
         <w-form
           @form-submitted="onSubmit"
-          :id="updatedTTN.id"
           :number="updatedTTN.number"
           :dischargeDate="updatedTTN.dischargeDate"
           :sender="updatedTTN.Sender.senderName"
@@ -18,7 +17,6 @@
           :description="updatedTTN.description"
           :registrationDate="updatedTTN.registrationDate"
           :type="updatedTTN.type"
-          submitButtonName="Check"
         ></w-form>
         <b-button
           variant="link"
@@ -41,7 +39,7 @@
     import { mapState, mapActions } from 'vuex';
 
     import WForm from './components/WForm';
-    import WGoods from '../../components/WGoodsList';
+    import WGoods from './components/WGoods';
 
     export default {
         name: 'WTTNCheckForm',

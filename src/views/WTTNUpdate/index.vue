@@ -11,15 +11,15 @@
               :number="updatedTTN.number"
               :dischargeDate="updatedTTN.dischargeDate"
               :senders="sendersNames"
-              :selectedSender="selectedSender()"
+              :selectedSender="updatedTTN.Sender"
               :carriers="carriersNames"
-              :selectedCarrier="selectedCarrier()"
+              :selectedCarrier="updatedTTN.Carrier"
               :transports="transportNames"
-              :selectedTransport="selectedTransport()"
+              :selectedTransport="updatedTTN.Transport"
               :drivers="driversNames"
-              :selectedDriver="selectedDriver()"
+              :selectedDriver="updatedTTN.Driver"
               :warehouses="warehousesNames"
-              :selectedWarehouse="selectedWarehouse()"
+              :selectedWarehouse="updatedTTN.Warehouse"
               :dispatcher="userInfo"
               :description="updatedTTN.description"
               :registrationDate="updatedTTN.registrationDate"
@@ -115,21 +115,6 @@
             getTransportsAndDrivers(id) {
                 this.fetchTransportNames({ carrierId: id });
                 this.fetchDriversNames({ carrierId: id });
-            },
-            selectedSender() {
-                return this.sendersNames.find(item => item.id === this.updatedTTN.senderId);
-            },
-            selectedCarrier() {
-                return this.carriersNames.find(item => item.id === this.updatedTTN.carrierId);
-            },
-            selectedTransport() {
-                return this.transportNames.find(item => item.id === this.updatedTTN.transportId);
-            },
-            selectedDriver() {
-                return this.driversNames.find(item => item.id === this.updatedTTN.driverId);
-            },
-            selectedWarehouse() {
-                return this.warehousesNames.find(item => item.id === this.updatedTTN.warehouseId);
             }
         },
         created: async function () {
