@@ -17,7 +17,6 @@
           <w-list
             :TTN="TTN"
             @delete-button-clicked="clickedDeleteButton"
-            @take-out-button-clicked="clickedTakeOutButton"
           ></w-list>
         </div>
         <b-row>
@@ -69,8 +68,7 @@
             ...mapActions({
                 fetchTTNList: 'fetchTTNList',
                 sendDeletedTTNData: 'sendDeletedTTN',
-                deletedTTNData: 'deleteTTN',
-                sendTakeOutTTNData: 'takeOutTTN'
+                deletedTTNData: 'deleteTTN'
             }),
             sendRequest(page) {
                 this.currentPage = page;
@@ -83,10 +81,6 @@
                     this.currentPage -= 1;
                 }
                 this.fetchTTNList(this.currentPage);
-            },
-            async clickedTakeOutButton(item) {
-                await this.sendTakeOutTTNData(item);
-                this.fetchTTNList();
             }
         },
         created: async function () {

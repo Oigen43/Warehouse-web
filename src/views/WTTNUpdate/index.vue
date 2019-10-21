@@ -54,6 +54,7 @@
 
     import WForm from '../../components/WTTNForm';
     import WGoods from '../../components/WGoodsList';
+
     export default {
         name: 'WUsersUpdateForm',
         components: {
@@ -141,7 +142,6 @@
             await this.fetchCarriersNames();
             await this.fetchDriversNames({ carrierId: this.updatedTTN.carrierId });
             await this.fetchTransportNames({ carrierId: this.updatedTTN.carrierId });
-            console.log(this.transportNames);
         }
     };
 </script>

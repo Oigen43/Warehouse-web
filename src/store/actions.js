@@ -665,16 +665,9 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
-  takeOutTTN: async ({ commit }, req) => {
-    commit(types.REQUEST);
-
-    const res = await api.put(url.TTN_CHANGE_STATUS_URL, req);
-
-    commit(types.SUCCESS);
-    res.toast && commit(types.SET_TOAST, res.toast);
-  },
   fetchUserInfo: async ({ commit }, req) => {
     commit(types.REQUEST);
+
     const res = await api.getUserInfo(url.USER_INFO_URL, req);
 
     commit(types.USER_INFO, res.data);

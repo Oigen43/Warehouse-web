@@ -23,15 +23,15 @@
         v-if="hasCheckAction(data.item)"
         class="w-table-check-button"
         variant="dark"
-        size="sm">
-        Check
+        size="sm"
+        @click="clickedCheckButton(data.item)">
+      Check
       </b-button>
     </template>
   </w-table>
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
     import { BButton } from 'bootstrap-vue';
 
     import router from '../../../../router';
@@ -73,9 +73,6 @@
             },
         },
         methods: {
-            ...mapActions({
-                getUpdatedTTNData: 'getUpdatedTTN'
-            }),
             hasUpdateAction(item) {
                 return item.status === statuses.REGISTERED_STATUS &&
                 this.hasPermissions(this.routesPermissions.TTN.update);
@@ -88,10 +85,6 @@
                 return (item.status === statuses.REGISTERED_STATUS ||
                 item.status === statuses.RELEASE_ALLOWED_STATUS) &&
                 this.hasPermissions(this.routesPermissions.TTN.check);
-            },
-            hasTakeOutAction(item) {
-                return item.status === statuses.CONFIRMED_STATUS &&
-                this.hasPermissions(this.routesPermissions.TTN.takeOut);
             },
             clickedUpdateButton(item) {
                 router.push(`/ttn/${item.id}/update`);
@@ -106,15 +99,8 @@
             deleteTTN(item) {
                 this.$emit('delete-button-clicked', item);
             },
-            clickedTakeOutButton(item) {
-                this.$bvModal.msgBoxConfirm(modal.TTN_TAKE_OUT_TEXT, {
-                    title: `${modal.TTN_TAKE_OUT_TITLE} ${item.number} ${item.registrationDate}`,
-                    ...modal.CONFIRM_MODAL_OPTIONS
-                })
-                    .then(value => value && this.takeOutTTN(item));
-            },
-            takeOutTTN(item) {
-                this.$emit('take-out-button-clicked', item);
+            clickedCheckButton(item) {
+                router.push(`/ttn/${item.id}/check`);
             }
         }
     };
