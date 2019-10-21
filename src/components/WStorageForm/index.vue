@@ -4,6 +4,7 @@
       size="lg"
       v-model="form.storageCapacity"
       type="number"
+      min="1"
       required
       placeholder="Storage Size"
       class="w-storages-form-input"
