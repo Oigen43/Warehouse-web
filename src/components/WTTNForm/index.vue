@@ -18,6 +18,7 @@
         class="w-ttn-form-input"
       ></b-form-input>
       <w-multiselect
+        v-if="senders.length"
         label="senderName"
         :options="senders"
         :multiple="false"
@@ -25,6 +26,17 @@
         :taggable="false"
         :placeholder="senderPlaceholder"
         v-model="form.sender"
+        class="w-ttn-form-input"
+      ></w-multiselect>
+      <w-multiselect
+        v-if="receivers.length"
+        label="receiverName"
+        :options="receivers"
+        :multiple="false"
+        :searchable="true"
+        :taggable="false"
+        :placeholder="receiverPlaceholder"
+        v-model="form.receiver"
         class="w-ttn-form-input"
       ></w-multiselect>
       <w-multiselect
@@ -145,6 +157,12 @@
             senders: {
                 type: Array
             },
+            selectedReceiver: {
+                type: Object
+            },
+            receivers: {
+                type: Array
+            },
             selectedCarrier: {
                 type: Object
             },
@@ -192,6 +210,7 @@
                     number: this.number,
                     dischargeDate: this.dischargeDate,
                     sender: this.selectedSender,
+                    receiver: this.selectedReceiver,
                     carrier: this.selectedCarrier,
                     transport: this.selectedTransport,
                     driver: this.selectedDriver,
@@ -204,6 +223,7 @@
                 },
 
                 senderPlaceholder: 'Please select a sender',
+                receiverPlaceholder: 'Please select a receiver',
                 carrierPlaceholder: 'Please select a carrier',
                 transportPlaceholder: 'Please select a transport',
                 driverPlaceholder: 'Please select a driver',

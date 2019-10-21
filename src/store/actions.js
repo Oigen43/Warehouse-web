@@ -369,6 +369,13 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
+  fetchReceiversNames: async ({ commit }, req) => {
+    const res = await api.get(url.RECEIVERS_URL_NAMES);
+
+    if (res.data) {
+      commit(types.RECEIVERS_NAMES, res.data.receivers);
+    }
+  },
   createReceiver: async ({ commit }, req) => {
     commit(types.REQUEST);
     commit(types.CREATE_RECEIVER, req);

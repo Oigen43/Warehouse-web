@@ -9,6 +9,7 @@ export const STORAGE_TYPES_URL = '/storage_types';
 export const SENDERS_URL = '/senders';
 export const SENDERS_URL_NAMES = '/senders/names';
 export const RECEIVERS_URL = '/receivers';
+export const RECEIVERS_URL_NAMES = '/receivers/names';
 export const CARRIERS_URL = '/carriers';
 export const CARRIERS_URL_NAMES = '/carriers/names';
 export const DRIVERS_URL = '/drivers';

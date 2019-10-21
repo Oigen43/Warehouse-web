@@ -97,6 +97,8 @@
             ...mapMutations({
               clearDrivers: types.CLEAN_DRIVERS_NAMES,
               clearTransport: types.CLEAN_TRANSPORT_NAMES,
+              clearSenders: types.CLEAN_SENDERS_NAMES,
+              clearReceivers: types.CLEAN_RECEIVERS_NAMES,
             }),
             addGood(good) {
                 this.goods.push(good);
@@ -132,6 +134,8 @@
             }
         },
         created: async function () {
+            this.clearSenders();
+            this.clearReceivers();
             this.clearDrivers();
             this.clearTransport();
             await this.getUpdatedTTNData(this.TTNId);
@@ -141,7 +145,6 @@
             await this.fetchCarriersNames();
             await this.fetchDriversNames({ carrierId: this.updatedTTN.carrierId });
             await this.fetchTransportNames({ carrierId: this.updatedTTN.carrierId });
-            console.log(this.transportNames);
         }
     };
 </script>

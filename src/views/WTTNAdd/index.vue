@@ -7,6 +7,7 @@
           @form-submitted="sendData"
           @carrier-selected="getTransportsAndDrivers"
           :senders="sendersNames"
+          :receivers="receiversNames"
           :carriers="carriersNames"
           :transports="transportNames"
           :drivers="driversNames"
@@ -55,7 +56,7 @@
         },
         data() {
             return {
-                type: 'incoming',
+                type: 'outcoming',
                 goods: [],
             };
         },
@@ -64,6 +65,7 @@
                 'userInfo',
                 'warehousesNames',
                 'sendersNames',
+                'receiversNames',
                 'carriersNames',
                 'transportNames',
                 'driversNames'
@@ -76,6 +78,7 @@
           ...mapActions({
               fetchUserInfo: 'fetchUserInfo',
               fetchSendersNames: 'fetchSendersNames',
+              fetchReceiversNames: 'fetchReceiversNames',
               fetchCarriersNames: 'fetchCarriersNames',
               fetchTransportNames: 'fetchTransportNames',
               fetchDriversNames: 'fetchDriversNames',
@@ -85,6 +88,8 @@
           ...mapMutations({
               clearDrivers: types.CLEAN_DRIVERS_NAMES,
               clearTransport: types.CLEAN_TRANSPORT_NAMES,
+              clearSenders: types.CLEAN_SENDERS_NAMES,
+              clearReceivers: types.CLEAN_RECEIVERS_NAMES,
           }),
           addGood(good) {
               this.goods.push(good);
@@ -106,11 +111,13 @@
           },
         },
         created: async function() {
+            this.clearSenders();
+            this.clearReceivers();
             this.clearDrivers();
             this.clearTransport();
             await this.fetchUserInfo();
             await this.fetchWarehousesNames({ companyId: this.userInfo.companyId });
-            await this.fetchSendersNames();
+            this.type === 'incoming' ? await this.fetchSendersNames() : await this.fetchReceiversNames();
             await this.fetchCarriersNames();
         },
     };
