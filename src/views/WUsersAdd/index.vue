@@ -4,10 +4,13 @@
       <h1 class="w-user-add-form-h1">Add User</h1>
       <w-form
         @form-submitted="sendData"
+        @role-selected="getWarehousesData"
         submitButtonName="ADD USER"
         :firstName="firstName"
         :email="email"
         :company-id="userInfo.companyId"
+        :warehouses-names="warehousesNames"
+        :disable-state="disableState"
         add-user
       ></w-form>
       <b-button
@@ -39,25 +42,36 @@
             return {
                 firstName: '',
                 email: '',
+                disableState: false
             };
         },
         computed: {
             ...mapState([
                 'roles',
-                'userInfo'
+                'userInfo',
+                'warehousesNames'
             ])
         },
         methods: {
             ...mapActions({
                 sendNewUserData: 'createUser',
-                getCurrentUser: 'fetchUserInfo'
+                getCurrentUser: 'fetchUserInfo',
+                fetchWarehousesNames: 'fetchWarehousesNames'
             }),
             redirect() {
                 router.push('/users');
             },
+            changeDisableState() {
+                this.disableState = !this.disableState;
+            },
+            async getWarehousesData() {
+                await this.fetchWarehousesNames({ companyId: this.userInfo.companyId });
+            },
             async sendData(newUser) {
+                this.changeDisableState();
                 newUser.user.data.companyId = this.userInfo.companyId;
                 const res = await this.sendNewUserData(newUser);
+                res.error && this.changeDisableState();
                 !res.error && this.redirect();
             }
         },

@@ -3,6 +3,7 @@
     <b-form-input
       size="lg"
       v-model="form.name"
+      type="string"
       required
       disabled
       class="w-goods-form-input"
@@ -17,6 +18,8 @@
     <b-form-input
       size="lg"
       v-model="form.updatedCount"
+      type="number"
+      min="1"
       required
       placeholder="Count"
       class="w-goods-form-input"
@@ -24,8 +27,6 @@
     <b-form-input
       size="lg"
       v-model="form.volume"
-      type="number"
-      min="1"
       required
       disabled
       class="w-goods-form-input"
@@ -42,8 +43,6 @@
     <b-form-input
       size="lg"
       v-model="form.weight"
-      type="number"
-      min="1"
       required
       disabled
       class="w-goods-form-input"
@@ -60,7 +59,6 @@
     <b-form-input
       size="lg"
       v-model="form.price"
-      type="number"
       required
       disabled
       class="w-goods-form-input"

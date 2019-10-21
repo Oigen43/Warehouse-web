@@ -22,7 +22,7 @@
           <b-nav-item v-if="hasPermissions(routesPermissions.warehouses.read) && isWarehousesRoles">
             <b-button
               variant="light"
-              @click="clickedWarehousesButton"
+              :to="warehouseLink"
               class="w-navigation-link"
               >
               Warehouse
@@ -138,6 +138,9 @@
             },
             isWarehousesRoles() {
                 return this.hasPermissions(userRoles.WAREHOUSE_ROLES);
+            },
+            warehouseLink() {
+                return `/companies/${this.userInfo.companyId}/warehouses`;
             }
         },
         methods: {
@@ -147,9 +150,6 @@
             }),
             redirect() {
                 router.push('/login');
-            },
-            clickedWarehousesButton() {
-                router.push(`/companies/${this.userInfo.companyId}/warehouses`);
             },
             async logout() {
                 await this.logoutUser();

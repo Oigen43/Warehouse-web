@@ -5,6 +5,7 @@
         v-model="form.number"
         type="number"
         min="1"
+        number
         required
         placeholder="Number"
         class="w-write-off-form-input"
