@@ -27,7 +27,7 @@
         variant="outline-dark"
         size="lg"
         class="w-write-off-form-button">
-        {{ submitButtonName }}
+        CREATE
       </b-button>
     </b-form>
 </template>
@@ -51,12 +51,12 @@
             },
             submitButtonName: {
                 type: String
-            },
+            }
         },
         data() {
             return {
                 form: {
-                    number: this.number,
+                    number: null,
                     controller: this.controller,
                     registrationDate: this.registrationDate,
                     TTNId: 1

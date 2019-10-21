@@ -658,7 +658,7 @@ export default {
   commit(types.REQUEST);
   commit(types.CREATE_WRITE_OFF, req);
 
-  console.log(req)
+  console.log(req);
   const res = await api.post(url.WRITE_OFF_URL, req);
 
   commit(types.SUCCESS);

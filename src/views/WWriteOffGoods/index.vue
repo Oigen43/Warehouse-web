@@ -7,7 +7,6 @@
           @form-submitted="sendData"
           :controller="userInfo"
           :registrationDate="registrationDate"
-          submitButtonName="Create"
         ></w-form>
         <b-button
           variant="link"

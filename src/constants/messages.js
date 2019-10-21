@@ -120,4 +120,8 @@ export default {
 
   'goods.create.error': 'Can not create goods',
   'goods.list.get.error': 'Can not get goods list',
+
+  'write.off.name.conflict': 'This write-off already exists!',
+  'write.off.create.success': 'Write-off created',
+  'write.off.create.error': 'Can not create write-off'
 };
