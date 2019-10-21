@@ -108,7 +108,7 @@
                     return false;
                 }
 
-                return !(!this.warehousesNames && this.updatedUser.roles &&
+                return !(!this.warehousesNames.length && this.updatedUser.roles &&
                     this.updatedUser.roles.some(item => userRoles.WAREHOUSE_ROLES.includes(item.title)));
             }
         },

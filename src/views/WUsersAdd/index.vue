@@ -28,6 +28,7 @@
     import { mapActions, mapState } from 'vuex';
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
+    import * as userRoles from '../../constants/roles';
     import WForm from '../../components/WUserForm';
 
     export default {
@@ -50,7 +51,10 @@
                 'roles',
                 'userInfo',
                 'warehousesNames'
-            ])
+            ]),
+            userRoles() {
+                return userRoles;
+            },
         },
         methods: {
             ...mapActions({
@@ -64,7 +68,8 @@
             changeDisableState() {
                 this.disableState = !this.disableState;
             },
-            async getWarehousesData() {
+            async getWarehousesData(selectedRoles) {
+                selectedRoles.some(item => this.userRoles.WAREHOUSE_ROLES.includes(item)) &&
                 await this.fetchWarehousesNames({ companyId: this.userInfo.companyId });
             },
             async sendData(newUser) {
