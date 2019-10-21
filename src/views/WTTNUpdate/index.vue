@@ -141,6 +141,7 @@
             await this.fetchCarriersNames();
             await this.fetchDriversNames({ carrierId: this.updatedTTN.carrierId });
             await this.fetchTransportNames({ carrierId: this.updatedTTN.carrierId });
+            console.log(this.transportNames);
         }
     };
 </script>
