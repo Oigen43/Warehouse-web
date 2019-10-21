@@ -39,6 +39,7 @@ import WTransportUpdateForm from '../views/WTransportUpdate';
 import WTTNList from '../views/WTTNList';
 import WNotFound from '../views/WNotFound';
 import WTTNAddForm from '../views/WTTNAdd';
+import WTTNUpdateForm from '../views/WTTNUpdate';
 
 Vue.use(Router);
 
@@ -287,16 +288,23 @@ export default new Router({
     },
     {
       path: '/ttn',
-      name: 'ttn',
+      name: 'TTN',
       component: WTTNList,
       meta: { authorize: routesPermissions.TTN.read },
       beforeEnter: ifAuthenticated,
     },
     {
       path: '/ttn/add',
-      name: 'ttnAddForm',
+      name: 'TTNAddForm',
       component: WTTNAddForm,
       meta: { authorize: routesPermissions.TTN.create },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/ttn/:TTNId/update',
+      name: 'TTNUpdateForm',
+      component: WTTNUpdateForm,
+      meta: { authorize: routesPermissions.TTN.update },
       beforeEnter: ifAuthenticated,
     },
     {

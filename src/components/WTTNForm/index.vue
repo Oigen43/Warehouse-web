@@ -18,6 +18,7 @@
         class="w-ttn-form-input"
       ></b-form-input>
       <w-multiselect
+        v-if="senders.length"
         label="senderName"
         :options="senders"
         :multiple="false"
@@ -28,6 +29,7 @@
         class="w-ttn-form-input"
       ></w-multiselect>
       <w-multiselect
+        v-if="carriers.length"
         label="name"
         :options="carriers"
         :multiple="false"
@@ -61,6 +63,7 @@
         class="w-ttn-form-input"
       ></w-multiselect>
       <w-multiselect
+        v-if="warehouses.length"
         label="warehouseName"
         :options="warehouses"
         :multiple="false"
@@ -70,15 +73,6 @@
         v-model="form.warehouse"
         class="w-ttn-form-input"
       ></w-multiselect>
-      <b-form-input
-        v-if="addForm"
-        size="lg"
-        v-model="form.registrationDate"
-        type="date"
-        disabled
-        placeholder="Registration date"
-        class="w-ttn-form-input"
-      ></b-form-input>
       <b-form-textarea
         size="lg"
         v-model="form.description"
@@ -88,13 +82,21 @@
       ></b-form-textarea>
       <b-form-input
         size="lg"
-        :value="dispatcher"
+        v-model="form.type"
         disabled
         class="w-ttn-form-input"
       ></b-form-input>
       <b-form-input
+        v-if="addForm"
         size="lg"
-        v-model="form.type"
+        :value="formattedRegistrationDate"
+        disabled
+        placeholder="Registration date"
+        class="w-ttn-form-input"
+      ></b-form-input>
+      <b-form-input
+        size="lg"
+        :value="formattedDispatcherName"
         disabled
         class="w-ttn-form-input"
       ></b-form-input>
@@ -109,12 +111,15 @@
 </template>
 
 <script>
-    import { mapMutations } from 'vuex';
-    import * as types from '../../store/mutation-types';
+    import Vue from 'vue';
+    import helper from './helper';
+    import customToasts from '../../constants/customToasts';
 
-    import { BForm, BFormInput, BButton, BFormTextarea } from 'bootstrap-vue';
-
+    import { BForm, BFormInput, BButton, BFormTextarea, ToastPlugin } from 'bootstrap-vue';
     import WMultiselect from '../WMultiselect';
+
+    Vue.use(ToastPlugin);
+
     export default {
         name: 'WTTNForm',
         components: {
@@ -127,10 +132,12 @@
         props: {
             addForm: {
                 type: Boolean,
-                default: false
+            },
+            id: {
+              type: Number
             },
             number: {
-                type: String
+                type: Number
             },
             dischargeDate: {
                 type: String
@@ -160,7 +167,7 @@
                 type: Array,
             },
             dispatcher: {
-                type: String
+                type: Object
             },
             registrationDate: {
                 type: String
@@ -170,6 +177,9 @@
             },
             type: {
                 type: String
+            },
+            selectedWarehouse: {
+                type: Object
             },
             warehouses: {
                 type: Array
@@ -181,6 +191,7 @@
         data() {
             return {
                 form: {
+                    id: this.id,
                     number: this.number,
                     dischargeDate: this.dischargeDate,
                     sender: this.selectedSender,
@@ -202,18 +213,28 @@
                 warehousePlaceholder: 'Please select a warehouse'
             };
         },
+        computed: {
+            formattedRegistrationDate() {
+                return `${this.form.registrationDate.slice(0, 10)} ${this.form.registrationDate.slice(11, 19)}`;
+            },
+            formattedDispatcherName() {
+                return `${this.dispatcher.surname} ${this.dispatcher.firstName}`;
+            }
+        },
         methods: {
-            ...mapMutations({
-              clearDrivers: types.CLEAN_DRIVERS,
-              clearTransport: types.CLEAN_TRANSPORT
-            }),
             onSubmit() {
-                this.form.dispatcher = this.dispatcher;
-                this.$emit('form-submitted', this.form);
+                helper.checkEmptyFields(this.form) ? this.makeToast(customToasts.emptyTTNFields) : this.$emit('form-submitted', this.form);
+            },
+            makeToast(toast) {
+                this.$bvToast.toast(toast.message, {
+                    title: toast.title,
+                    variant: toast.variant,
+                    solid: true
+                });
             },
             clickSelectCarrier(selectedOption) {
-                this.form.driver = '';
-                this.form.transport = '';
+                this.form.driver = null;
+                this.form.transport = null;
                 this.$emit('carrier-selected', selectedOption.id);
             },
             driverNameWithPassport({ firstName, surname, passportNumber }) {
@@ -223,10 +244,6 @@
                 return `${transportType} ${transportNumber}`;
             }
         },
-        created: function() {
-            this.clearDrivers();
-            this.clearTransport();
-        }
     };
 </script>
 

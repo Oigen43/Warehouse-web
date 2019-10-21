@@ -23,7 +23,7 @@ export default new Vuex.Store({
 
     warehouses: [],
     warehousesPageLimit: 1,
-    warehousesNames: null,
+    warehousesNames: [],
     newWarehouse: {},
     updatedWarehouse: {},
     deletedWarehouse: {},
@@ -44,6 +44,7 @@ export default new Vuex.Store({
 
     senders: [],
     sendersPageLimit: 1,
+    sendersNames: [],
     newSender: {},
     updatedSender: {},
     deletedSender: {},
@@ -56,6 +57,7 @@ export default new Vuex.Store({
 
     carriers: [],
     carriersPageLimit: 1,
+    carriersNames: [],
     newCarrier: {},
     updatedCarrier: {},
     deletedCarrier: {},
@@ -63,12 +65,14 @@ export default new Vuex.Store({
 
     drivers: [],
     driversPageLimit: 1,
+    driversNames: [],
     newDriver: {},
     updatedDriver: {},
     deletedDriver: {},
 
     transport: [],
     transportPageLimit: 1,
+    transportNames: [],
     newTransport: {},
     updatedTransport: {},
     deletedTransport: {},

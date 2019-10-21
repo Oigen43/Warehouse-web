@@ -46,6 +46,7 @@
     import { mapActions } from 'vuex';
     import { BButton } from 'bootstrap-vue';
 
+    import router from '../../../../router';
     import { validation } from '../../../../components/mixins/validation';
     import routesPermissions from '../../../../constants/routesPermissions';
     import WTable from '../../../../components/WTable';
@@ -63,8 +64,10 @@
         computed: {
             fields: function () {
                 const fieldsList = [
-                    'number', 'registrationDate', 'type', 'status', 'carrier', 'sender',
-                  { key: 'blank', label: '', class: 'w-blank-column' }
+                    'number', 'registrationDate', 'type', 'status',
+                    { key: 'Carrier.name', label: 'Carrier' },
+                    { key: 'Sender.senderName', label: 'Sender' },
+                    { key: 'blank', label: '', class: 'w-blank-column' }
                 ];
 
                 this.hasOptionsColumn && fieldsList.splice(fieldsList.length - 1, 0, { key: 'options', label: '', class: 'w-list-button' });
@@ -88,7 +91,7 @@
             },
             items: function() {
                 this.TTN.forEach(item => {
-                    item.registrationDate = item.registrationDate.slice(0, 10);
+                    item.registrationDate = `${item.registrationDate.slice(0, 10)} ${item.registrationDate.slice(11, 19)}`;
                 });
 
                 return this.TTN;
@@ -102,23 +105,24 @@
                 getUpdatedTTNData: 'getUpdatedTTN'
             }),
             hasUpdateAction(item) {
-              return item.status === statuses.REGISTERED_STATUS &&
+                return item.status === statuses.REGISTERED_STATUS &&
                 this.hasPermissions(this.routesPermissions.TTN.update);
             },
             hasDeleteAction(item) {
-              return item.status === statuses.REGISTERED_STATUS &&
+                return item.status === statuses.REGISTERED_STATUS &&
                 this.hasPermissions(this.routesPermissions.TTN.delete);
             },
             hasCheckAction(item) {
-              return (item.status === statuses.REGISTERED_STATUS ||
+                return (item.status === statuses.REGISTERED_STATUS ||
                 item.status === statuses.RELEASE_ALLOWED_STATUS) &&
                 this.hasPermissions(this.routesPermissions.TTN.check);
             },
             hasTakeOutAction(item) {
-              return item.status === statuses.CONFIRMED_STATUS &&
+                return item.status === statuses.CONFIRMED_STATUS &&
                 this.hasPermissions(this.routesPermissions.TTN.takeOut);
             },
             clickedUpdateButton(item) {
+                router.push(`/ttn/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.TTN_DELETE_TEXT, {

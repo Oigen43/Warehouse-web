@@ -306,6 +306,13 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
+  fetchSendersNames: async ({ commit }, req) => {
+    const res = await api.get(url.SENDERS_URL_NAMES);
+
+    if (res.data) {
+      commit(types.SENDERS_NAMES, res.data.senders);
+    }
+  },
   createSender: async ({ commit }, req) => {
     commit(types.REQUEST);
     commit(types.CREATE_SENDER, req);
@@ -418,6 +425,13 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
+  fetchCarriersNames: async ({ commit }, req) => {
+    const res = await api.get(url.CARRIERS_URL_NAMES);
+
+    if (res.data) {
+      commit(types.CARRIERS_NAMES, res.data.carriers);
+    }
+  },
   createCarrier: async ({ commit }, req) => {
     commit(types.REQUEST);
     commit(types.CREATE_CARRIER, req);
@@ -479,6 +493,13 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
+  fetchDriversNames: async ({ commit }, req) => {
+    const res = await api.get(url.DRIVERS_URL_NAMES, { carrierId: req.carrierId });
+
+    if (res.data) {
+      commit(types.DRIVERS_NAMES, res.data.drivers);
+    }
+  },
   sendDeletedDriver: async ({ commit }, driverId) => {
     commit(types.REQUEST);
 
@@ -539,6 +560,13 @@ export default {
     }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  fetchTransportNames: async ({ commit }, req) => {
+    const res = await api.get(url.TRANSPORT_URL_NAMES, { carrierId: req.carrierId });
+
+    if (res.data) {
+      commit(types.TRANSPORT_NAMES, res.data.transport);
+    }
   },
   createTransport: async ({ commit }, req) => {
     commit(types.REQUEST);
@@ -611,8 +639,16 @@ export default {
     commit(types.REQUEST);
 
     const res = await api.getById(url.TTN_URL, id);
-
     commit(types.SET_UPDATED_TTN, res.data.TTN);
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  sendUpdatedTTN: async ({ commit }, req) => {
+    commit(types.REQUEST);
+
+    const res = await api.put(url.TTN_URL, req);
+
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -631,7 +667,7 @@ export default {
   takeOutTTN: async ({ commit }, req) => {
     commit(types.REQUEST);
 
-    const res = await api.put(url.TTN_URL, req);
+    const res = await api.put(url.TTN_CHANGE_STATUS_URL, req);
 
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);

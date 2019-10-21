@@ -115,4 +115,10 @@ export default {
   'ttn.update.error': 'Can not update TTN',
   'ttn.delete.success': 'TTN deleted!',
   'ttn.delete.error': 'Can not delete TTN',
+  'ttn.status.update.success': 'TTN status updated',
+  'ttn.status.update.error': 'Can no update TTN status',
+
+  'goods.create.error': 'Can not create goods',
+  'goods.list.get.error': 'Can not get goods list',
+  'goods.delete.error': 'Can not delete goods'
 };
