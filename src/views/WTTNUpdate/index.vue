@@ -80,7 +80,7 @@
                 return +this.$route.params.TTNId;
             },
             goods() {
-              return this.updatedTTN.goods;
+              return this.updatedTTN.goods.data.goods;
             }
         },
         methods: {

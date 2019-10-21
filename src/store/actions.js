@@ -639,6 +639,7 @@ export default {
     commit(types.REQUEST);
 
     const res = await api.getById(url.TTN_URL, id);
+
     commit(types.SET_UPDATED_TTN, res.data.TTN);
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);

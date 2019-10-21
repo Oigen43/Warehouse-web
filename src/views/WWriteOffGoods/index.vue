@@ -4,7 +4,7 @@
     <b-row>
       <b-col class="w-write-off-form-col" lg="3" md="12" offset-lg="1" align-self="start">
         <w-form
-          @form-submitted="sendData"
+          @form-submitted="onSubmit"
           :controller="userInfo"
           :registrationDate="registrationDate"
         ></w-form>
@@ -26,13 +26,17 @@
 </template>
 
 <script>
-
-    import { BRow, BCol, BButton } from 'bootstrap-vue';
+    import Vue from 'vue';
+    import { BRow, BCol, BButton, ToastPlugin } from 'bootstrap-vue';
     import { mapActions, mapState } from 'vuex';
-    import router from '../../router';
 
+    import router from '../../router';
+    import customToasts from '../../constants/customToasts';
+    import helpers from '../../utils/helpers';
     import WForm from './components/WForm';
     import WGoods from './components/WGoods';
+
+    Vue.use(ToastPlugin);
 
     export default {
         name: 'WWriteOffForm',
@@ -50,29 +54,39 @@
             };
         },
         computed: {
-          ...mapState([
+            ...mapState([
                 'userInfo',
                 'goods'
             ]),
-            dispatcher: function() {
-              return this.userInfo.firstName;
+            dispatcher: function () {
+                return this.userInfo.firstName;
             }
         },
         methods: {
-          ...mapActions({
-              fetchUserInfo: 'fetchUserInfo',
-              fetchGoodsList: 'fetchGoodsList',
-              sendNewWriteOffForm: 'createWriteOff'
-          }),
-          updateGood(good, index) {
-              this.writeOffGoods.splice(index, 1, good);
-          },
-          async sendData(form) {
-              const res = await this.sendNewWriteOffForm({ writeOff: form, goods: this.writeOffGoods });
-              !res.error && router.push('/ttn');
-          }
+            ...mapActions({
+                fetchUserInfo: 'fetchUserInfo',
+                fetchGoodsList: 'fetchGoodsList',
+                sendNewWriteOffForm: 'createWriteOff'
+            }),
+            updateGood(good, index) {
+                this.writeOffGoods.splice(index, 1, good);
+            },
+            onSubmit(form) {
+                helpers.isArrayEmpty(this.writeOffGoods) ? this.makeToast(customToasts.emptyWriteOffGoodsList) : this.sendData(form, this.writeOffGoods);
+            },
+            async sendData(form, goods) {
+                const res = await this.sendNewWriteOffForm({ writeOff: form, goods: goods });
+                !res.error && router.push('/ttn');
+            },
+            makeToast(toast) {
+                this.$bvToast.toast(toast.message, {
+                    title: toast.title,
+                    variant: toast.variant,
+                    solid: true
+                });
+            },
         },
-        created: async function() {
+        created: async function () {
             await this.fetchUserInfo();
             await this.fetchGoodsList();
         }
