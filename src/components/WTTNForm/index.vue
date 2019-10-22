@@ -193,6 +193,9 @@
             type: {
                 type: String
             },
+            status: {
+                type: String
+            },
             selectedWarehouse: {
                 type: Object
             },
@@ -219,7 +222,7 @@
                     description: this.description,
                     type: this.type,
                     warehouse: this.selectedWarehouse,
-                    status: 'registered'
+                    status: this.status
                 },
 
                 senderPlaceholder: 'Please select a sender',

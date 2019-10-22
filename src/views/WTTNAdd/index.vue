@@ -14,6 +14,7 @@
           :warehouses="warehousesNames"
           :dispatcher="userInfo"
           :type="type"
+          :status="status"
           :addForm="false"
           submitButtonName="Create"
         ></w-form>
@@ -56,7 +57,8 @@
         },
         data() {
             return {
-                type: 'outcoming',
+                type: null,
+                status: null,
                 goods: [],
             };
         },
@@ -70,6 +72,9 @@
                 'transportNames',
                 'driversNames'
             ]),
+            TTNId() {
+                return this.$route.params.TTNId;
+            },
             dispatcher: function() {
               return this.userInfo.firstName;
             }
@@ -111,6 +116,7 @@
           },
         },
         created: async function() {
+            this.TTNId ? this.type = 'outcoming' && this.status = 'release allowed' : this.type = 'incoming';
             this.clearSenders();
             this.clearReceivers();
             this.clearDrivers();

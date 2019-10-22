@@ -1,5 +1,5 @@
 <template>
-  <b-row>
+  <b-row v-if="TTN">
     <b-col>
       <div class='w-ttn-list-page'>
         <h1>List of TTN</h1>
@@ -17,7 +17,6 @@
           <w-list
             :TTN="TTN"
             @delete-button-clicked="clickedDeleteButton"
-            @take-out-button-clicked="clickedTakeOutButton"
           ></w-list>
         </div>
         <b-row>
@@ -77,7 +76,6 @@
                 fetchTTNList: 'fetchTTNList',
                 sendDeletedTTNData: 'sendDeletedTTN',
                 deletedTTNData: 'deleteTTN',
-                sendTakeOutTTNData: 'takeOutTTN'
             }),
             sendRequest(page) {
                 this.currentPage = page;
@@ -90,10 +88,6 @@
                     this.currentPage -= 1;
                 }
                 this.fetchTTNList(this.currentPage);
-            },
-            async clickedTakeOutButton(item) {
-                await this.sendTakeOutTTNData(item);
-                this.fetchTTNList();
             }
         },
         created: async function () {

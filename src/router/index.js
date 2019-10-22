@@ -308,6 +308,13 @@ export default new Router({
       beforeEnter: ifAuthenticated,
     },
     {
+      path: '/ttn/:TTNId/addOut',
+      name: 'TTNAddOutForm',
+      component: WTTNAddForm,
+      meta: { authorize: routesPermissions.TTN.out },
+      beforeEnter: ifAuthenticated,
+    },
+    {
       path: '*',
       component: WNotFound,
     },
