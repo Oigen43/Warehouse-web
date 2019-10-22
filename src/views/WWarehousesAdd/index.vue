@@ -55,7 +55,9 @@
             },
             async sendData(newWarehouse) {
                 newWarehouse.companyId = this.companyId;
+
                 const res = await this.sendNewWarehouseData(newWarehouse);
+
                 !res.error && this.redirect();
             }
         }

@@ -66,6 +66,7 @@
             },
             async sendData(receiver) {
                 const res = await this.sendUpdatedReceiverData(receiver);
+
                 !res.error && this.redirect();
             }
         },

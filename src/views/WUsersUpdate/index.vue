@@ -132,6 +132,7 @@
             },
             async sendData(user) {
                 const res = await this.sendUpdatedUserData(user);
+
                 !res.error && this.redirect();
             }
         },

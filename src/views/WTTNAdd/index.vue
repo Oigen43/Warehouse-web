@@ -4,7 +4,7 @@
     <b-row>
       <b-col class="w-ttn-add-form-col" lg="3" md="12" offset-lg="1" align-self="start">
         <w-form
-          @form-submitted="sendData"
+          @form-submitted="onSubmit"
           @carrier-selected="getTransportsAndDrivers"
           :senders="sendersNames"
           :carriers="carriersNames"
@@ -36,14 +36,19 @@
 </template>
 
 <script>
-
-    import { BRow, BCol, BButton } from 'bootstrap-vue';
+    import Vue from 'vue';
+    import { BRow, BCol, BButton, ToastPlugin } from 'bootstrap-vue';
     import { mapActions, mapMutations, mapState } from 'vuex';
+
     import * as types from '../../store/mutation-types';
     import router from '../../router';
-
+    import customToasts from '../../constants/customToasts';
+    import helpers from '../../utils/helpers';
     import WForm from '../../components/WTTNForm';
     import WGoods from '../../components/WGoodsList';
+
+    Vue.use(ToastPlugin);
+
     export default {
         name: 'WTtnAddForm',
         components: {
@@ -60,7 +65,7 @@
             };
         },
         computed: {
-          ...mapState([
+            ...mapState([
                 'userInfo',
                 'warehousesNames',
                 'sendersNames',
@@ -68,42 +73,54 @@
                 'transportNames',
                 'driversNames'
             ]),
-            dispatcher: function() {
-              return this.userInfo.firstName;
+            dispatcher: function () {
+                return this.userInfo.firstName;
             }
         },
         methods: {
-          ...mapActions({
-              fetchUserInfo: 'fetchUserInfo',
-              fetchSendersNames: 'fetchSendersNames',
-              fetchCarriersNames: 'fetchCarriersNames',
-              fetchTransportNames: 'fetchTransportNames',
-              fetchDriversNames: 'fetchDriversNames',
-              fetchWarehousesNames: 'fetchWarehousesNames',
-              sendNewTTN: 'createTTN'
-          }),
-          ...mapMutations({
-              clearDrivers: types.CLEAN_DRIVERS_NAMES,
-              clearTransport: types.CLEAN_TRANSPORT_NAMES,
-          }),
-          addGood(good) {
-              this.goods.push(good);
-          },
-          updateGood(good, index) {
-              this.goods.splice(index, 1, good);
-          },
-          deleteGood(index) {
-              this.goods.splice(index, 1);
-          },
-          async sendData(form) {
-              form.registrationDate = new Date();
-              const res = await this.sendNewTTN({ TTN: form, goods: this.goods });
-              !res.error && router.push('/ttn');
-          },
-          getTransportsAndDrivers(id) {
-              this.fetchTransportNames({ carrierId: id });
-              this.fetchDriversNames({ carrierId: id });
-          },
+            ...mapActions({
+                fetchUserInfo: 'fetchUserInfo',
+                fetchSendersNames: 'fetchSendersNames',
+                fetchCarriersNames: 'fetchCarriersNames',
+                fetchTransportNames: 'fetchTransportNames',
+                fetchDriversNames: 'fetchDriversNames',
+                fetchWarehousesNames: 'fetchWarehousesNames',
+                sendNewTTN: 'createTTN'
+            }),
+            ...mapMutations({
+                clearDrivers: types.CLEAN_DRIVERS_NAMES,
+                clearTransport: types.CLEAN_TRANSPORT_NAMES,
+            }),
+            addGood(good) {
+                this.goods.push(good);
+            },
+            updateGood(good, index) {
+                this.goods.splice(index, 1, good);
+            },
+            deleteGood(index) {
+                this.goods.splice(index, 1);
+            },
+            onSubmit(form) {
+                helpers.isArrayEmpty(this.goods) ? this.makeToast(customToasts.emptyGoodsList) : this.sendData(form, this.goods);
+            },
+            async sendData(form, goods) {
+                form.registrationDate = new Date();
+
+                const res = await this.sendNewTTN({ TTN: form, goods: goods });
+
+                !res.error && router.push('/ttn');
+            },
+            getTransportsAndDrivers(id) {
+                this.fetchTransportNames({ carrierId: id });
+                this.fetchDriversNames({ carrierId: id });
+            },
+            makeToast(toast) {
+                this.$bvToast.toast(toast.message, {
+                    title: toast.title,
+                    variant: toast.variant,
+                    solid: true
+                });
+            },
         },
         created: async function() {
             this.clearDrivers();

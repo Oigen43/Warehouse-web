@@ -40,6 +40,8 @@ import WTTNList from '../views/WTTNList';
 import WNotFound from '../views/WNotFound';
 import WTTNAddForm from '../views/WTTNAdd';
 import WTTNUpdateForm from '../views/WTTNUpdate';
+import WTTNCheckForm from '../views/WTTNCheck';
+import WWriteOffGoodsForm from '../views/WWriteOffGoods';
 
 Vue.use(Router);
 
@@ -305,6 +307,20 @@ export default new Router({
       name: 'TTNUpdateForm',
       component: WTTNUpdateForm,
       meta: { authorize: routesPermissions.TTN.update },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/ttn/:TTNId/check',
+      name: 'TTNCheckForm',
+      component: WTTNCheckForm,
+      meta: { authorize: routesPermissions.TTN.check },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/ttn/:TTNId/write-off',
+      name: 'WriteOffGoodsForm',
+      component: WWriteOffGoodsForm,
+      meta: { authorize: routesPermissions.writeOffs.create },
       beforeEnter: ifAuthenticated,
     },
     {

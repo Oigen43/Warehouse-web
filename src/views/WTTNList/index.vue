@@ -8,6 +8,7 @@
             <b-button
               variant="dark"
               to="/ttn/add"
+              v-if="hasPermissions(routesPermissions.TTN.create)"
               class="w-ttn-add-button"
             >add TTN
             </b-button>
@@ -17,7 +18,6 @@
           <w-list
             :TTN="TTN"
             @delete-button-clicked="clickedDeleteButton"
-            @take-out-button-clicked="clickedTakeOutButton"
           ></w-list>
         </div>
         <b-row>
@@ -41,11 +41,14 @@
     import { mapActions, mapState } from 'vuex';
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
+    import { validation } from '../../components/mixins/validation';
+    import routesPermissions from '../../constants/routesPermissions';
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
 
     export default {
         name: 'WTTNListPage',
+        mixins: [validation],
         components: {
             BRow,
             BCol,
@@ -63,14 +66,16 @@
             ...mapState([
                 'TTN',
                 'TTNPageLimit'
-            ])
+            ]),
+            routesPermissions: function () {
+                return routesPermissions;
+            }
         },
         methods: {
             ...mapActions({
                 fetchTTNList: 'fetchTTNList',
                 sendDeletedTTNData: 'sendDeletedTTN',
-                deletedTTNData: 'deleteTTN',
-                sendTakeOutTTNData: 'takeOutTTN'
+                deletedTTNData: 'deleteTTN'
             }),
             sendRequest(page) {
                 this.currentPage = page;
@@ -83,10 +88,6 @@
                     this.currentPage -= 1;
                 }
                 this.fetchTTNList(this.currentPage);
-            },
-            async clickedTakeOutButton(item) {
-                await this.sendTakeOutTTNData(item);
-                this.fetchTTNList();
             }
         },
         created: async function () {

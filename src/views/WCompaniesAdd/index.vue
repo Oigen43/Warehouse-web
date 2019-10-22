@@ -60,7 +60,9 @@
             },
             async sendData(newCompany) {
                 this.changeDisableState();
+
                 const res = await this.sendNewCompanyData({ company: newCompany.company, user: newCompany.user });
+
                 res.error && this.changeDisableState();
                 !res.error && this.redirect();
             }
