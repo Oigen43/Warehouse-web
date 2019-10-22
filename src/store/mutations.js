@@ -174,7 +174,7 @@ export default {
   },
   [types.UPDATE_STORAGE](state, storage) {
     state.updatedStorage = storage;
-    state.storages = [...state.storages.map(item => item.id === storage.id ? storage : item)];
+    state.storages = [ ...state.storages.map(item => item.id === storage.id ? storage : item) ];
   },
   [types.DELETE_STORAGE](state, storage) {
     state.deletedStorage = storage;
@@ -204,7 +204,7 @@ export default {
   },
   [types.UPDATE_SENDER](state, sender) {
     state.updatedSender = sender;
-    state.senders = [...state.senders.map(item => item.id === sender.id ? sender : item)];
+    state.senders = [ ...state.senders.map(item => item.id === sender.id ? sender : item) ];
   },
   [types.DELETE_SENDER](state, sender) {
     state.deletedSender = sender;
@@ -228,7 +228,7 @@ export default {
   },
   [types.UPDATE_RECEIVER](state, receiver) {
     state.updatedReceiver = receiver;
-    state.receivers = [...state.receivers.map(item => item.id === receiver.id ? receiver : item)];
+    state.receivers = [ ...state.receivers.map(item => item.id === receiver.id ? receiver : item) ];
   },
   [types.DELETE_RECEIVER](state, receiver) {
     state.deletedReceiver = receiver;
@@ -255,7 +255,7 @@ export default {
   },
   [types.UPDATE_TRANSPORT](state, transport) {
     state.updatedTransport = transport;
-    state.transport = [...state.transport.map(item => item.id === transport.id ? transport : item)];
+    state.transport = [ ...state.transport.map(item => item.id === transport.id ? transport : item) ];
   },
   [types.DELETE_TRANSPORT](state, transport) {
     state.deletedTransport = transport;
