@@ -42,7 +42,6 @@
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
     import { validation } from '../../components/mixins/validation';
-    import routesPermissions from '../../constants/routesPermissions';
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
     import routesPermissions from '../../constants/routesPermissions';
@@ -57,7 +56,6 @@
             WList,
             WPagination
         },
-        mixins: [validation],
         data: function () {
             return {
                 currentPage: 1,

@@ -6,6 +6,7 @@
         <w-form
           @form-submitted="onSubmit"
           @carrier-selected="getTransportsAndDrivers"
+          :id="id"
           :senders="sendersNames"
           :receivers="receiversNames"
           :carriers="carriersNames"
@@ -31,6 +32,7 @@
           @updated-good="updateGood"
           @deleted-good="deleteGood"
           :goods="goods"
+          :type="type"
         ></w-goods>
       </b-col>
     </b-row>
@@ -62,6 +64,7 @@
         },
         data() {
             return {
+                id: null,
                 type: null,
                 status: null,
                 goods: [],
@@ -69,6 +72,7 @@
         },
         computed: {
             ...mapState([
+                'updatedTTN',
                 'userInfo',
                 'warehousesNames',
                 'sendersNames',
@@ -78,7 +82,7 @@
                 'driversNames'
             ]),
             TTNId() {
-                return this.$route.params.TTNId;
+                return +this.$route.params.TTNId;
             },
             dispatcher: function() {
               return this.userInfo.firstName;
@@ -86,6 +90,7 @@
         },
         methods: {
           ...mapActions({
+              getUpdatedTTNData: 'getUpdatedTTN',
               fetchUserInfo: 'fetchUserInfo',
               fetchSendersNames: 'fetchSendersNames',
               fetchReceiversNames: 'fetchReceiversNames',
@@ -101,6 +106,18 @@
               clearSenders: types.CLEAN_SENDERS_NAMES,
               clearReceivers: types.CLEAN_RECEIVERS_NAMES,
           }),
+          async checkTypeAndStatus() {
+              if (!this.TTNId) {
+                this.type = 'incoming';
+                this.status = 'registered';
+              } else {
+                this.id = this.TTNId;
+                this.type = 'outcoming';
+                this.status = 'release allowed';
+                await this.getUpdatedTTNData(this.id);
+                this.goods = this.updatedTTN.goods.data.goods;
+              }
+          },
           addGood(good) {
               this.goods.push(good);
           },
@@ -114,12 +131,7 @@
               this.fetchTransportNames({ carrierId: id });
               this.fetchDriversNames({ carrierId: id });
           },
-            dispatcher: function () {
-                return this.userInfo.firstName;
-            }
-        },
-
-            onSubmit(form) {
+          onSubmit(form) {
                 helpers.isArrayEmpty(this.goods) ? this.makeToast(customToasts.emptyGoodsList) : this.sendData(form, this.goods);
             },
             async sendData(form, goods) {
@@ -135,9 +147,10 @@
                     variant: toast.variant,
                     solid: true
                 });
+            },
         },
         created: async function() {
-            this.TTNId ? this.type = 'outcoming' : this.type = 'incoming';
+            this.checkTypeAndStatus();
             this.clearSenders();
             this.clearReceivers();
             this.clearDrivers();

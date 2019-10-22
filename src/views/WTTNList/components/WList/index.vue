@@ -64,7 +64,7 @@
                     { key: 'Carrier.name', label: 'Carrier' },
                     { key: 'Sender', label: 'Sender' },
                     { key: 'Receiver', label: 'Receiver' },
-                    { key: 'buttons', label: '', class: 'w-list-button' },
+                    { key: 'buttons', label: '' },
                 ]
             };
         },
@@ -83,11 +83,11 @@
         },
         methods: {
             hasUpdateAction(item) {
-                return item.status === statuses.REGISTERED_STATUS &&
+                return (item.status === statuses.REGISTERED_STATUS || item.status === statuses.RELEASE_ALLOWED_STATUS) &&
                     this.hasPermissions(this.routesPermissions.TTN.update);
             },
             hasDeleteAction(item) {
-                return item.status === statuses.REGISTERED_STATUS &&
+                return (item.status === statuses.REGISTERED_STATUS || item.status === statuses.RELEASE_ALLOWED_STATUS) &&
                     this.hasPermissions(this.routesPermissions.TTN.delete);
             },
             hasCheckAction(item) {

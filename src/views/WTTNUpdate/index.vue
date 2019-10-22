@@ -11,6 +11,8 @@
           :number="updatedTTN.number"
           :dischargeDate="updatedTTN.dischargeDate"
           :senders="sendersNames"
+          :receivers="receiversNames"
+          :selectedReceiver="updatedTTN.Receiver"
           :selectedSender="updatedTTN.Sender"
           :carriers="carriersNames"
           :selectedCarrier="updatedTTN.Carrier"
@@ -40,6 +42,7 @@
           @updated-good="updateGood"
           @deleted-good="deleteGood"
           :goods="goods"
+          :type="updatedTTN.type"
         ></w-goods>
       </b-col>
     </b-row>
@@ -70,6 +73,7 @@
                 'userInfo',
                 'warehousesNames',
                 'sendersNames',
+                'receiversNames',
                 'carriersNames',
                 'transportNames',
                 'driversNames'
@@ -89,6 +93,7 @@
                 getUpdatedTTNData: 'getUpdatedTTN',
                 fetchUserInfo: 'fetchUserInfo',
                 fetchSendersNames: 'fetchSendersNames',
+                fetchReceiversNames: 'fetchReceiversNames',
                 fetchCarriersNames: 'fetchCarriersNames',
                 fetchTransportNames: 'fetchTransportNames',
                 fetchDriversNames: 'fetchDriversNames',
@@ -128,7 +133,7 @@
             await this.getUpdatedTTNData(this.TTNId);
             await this.fetchUserInfo();
             await this.fetchWarehousesNames({ companyId: this.userInfo.companyId });
-            await this.fetchSendersNames();
+            this.updatedTTN.type === 'incoming' ? await this.fetchSendersNames() : await this.fetchReceiversNames();
             await this.fetchCarriersNames();
             await this.fetchDriversNames({ carrierId: this.updatedTTN.carrierId });
             await this.fetchTransportNames({ carrierId: this.updatedTTN.carrierId });
