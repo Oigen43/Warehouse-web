@@ -8,5 +8,10 @@ export default {
     message: 'Please, write-off goods',
     title: 'Error!',
     variant: 'danger'
+  },
+  emptyGoodsList: {
+    message: 'Please, add goods',
+    title: 'Error!',
+    variant: 'danger'
   }
 };

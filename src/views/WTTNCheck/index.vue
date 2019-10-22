@@ -1,5 +1,5 @@
 <template>
-  <div v-if="userInfo.id" class="w-ttn-check-form-page">
+  <div v-if="updatedTTN.id" class="w-ttn-check-form-page">
     <h1 class="w-ttn-check-form-h1">Check TTN</h1>
     <b-row>
       <b-col class="w-ttn-check-form-col" lg="3" md="12" offset-lg="1" align-self="start">
@@ -38,6 +38,7 @@
     import { BRow, BCol, BButton } from 'bootstrap-vue';
     import { mapState, mapActions } from 'vuex';
 
+    import router from '../../router';
     import WForm from './components/WForm';
     import WGoods from './components/WGoods';
 
@@ -65,10 +66,15 @@
         methods: {
             ...mapActions({
                 getUpdatedTTNData: 'getUpdatedTTN',
-                fetchUserInfo: 'fetchUserInfo'
+                fetchUserInfo: 'fetchUserInfo',
+                confirmTTN: 'confirmTTN'
             }),
             async onSubmit() {
-                console.log('submitted');
+                const res = await this.confirmTTN({ id: this.TTNId });
+                !res.error && this.redirect();
+            },
+            redirect() {
+                router.push('/ttn');
             }
         },
         created: async function () {

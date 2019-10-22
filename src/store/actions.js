@@ -673,7 +673,7 @@ export default {
     commit(types.USER_INFO, res.data);
     commit(types.SUCCESS);
   },
-  fetchGoodsList: async ({ commit }, TTNId = 1) => {
+  fetchGoodsList: async ({ commit }, TTNId) => {
     commit(types.REQUEST);
 
     const res = await api.get(url.GOODS_URL, { TTNId });
@@ -685,13 +685,22 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
   createWriteOff: async ({ commit }, req) => {
-  commit(types.REQUEST);
-  commit(types.CREATE_WRITE_OFF, req);
+    commit(types.REQUEST);
+    commit(types.CREATE_WRITE_OFF, req);
 
-  const res = await api.post(url.WRITE_OFF_URL, req);
+    const res = await api.post(url.WRITE_OFF_URL, req);
 
-  commit(types.SUCCESS);
-  res.toast && commit(types.SET_TOAST, res.toast);
-  return res;
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  confirmTTN: async ({ commit }, id) => {
+    commit(types.REQUEST);
+
+    const res = await api.put(url.TTN_CONFIRM_URL, id);
+
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
   }
 };

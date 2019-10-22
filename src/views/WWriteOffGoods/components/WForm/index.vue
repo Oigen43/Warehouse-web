@@ -7,14 +7,7 @@
         min="1"
         number
         required
-        placeholder="Number"
-        class="w-write-off-form-input"
-      ></b-form-input>
-      <b-form-input
-        size="lg"
-        v-model="form.registrationDate"
-        disabled
-        placeholder="Registration date"
+        placeholder="Write-Off Number"
         class="w-write-off-form-input"
       ></b-form-input>
       <b-form-input
@@ -47,8 +40,8 @@
             controller: {
                 type: Object
             },
-            registrationDate: {
-                type: String
+            TTNId: {
+                type: Number
             },
             submitButtonName: {
                 type: String
@@ -59,13 +52,13 @@
                 form: {
                     number: null,
                     controller: this.controller,
-                    registrationDate: this.registrationDate,
-                    TTNId: 1
+                    TTNId: this.TTNId
                 }
             };
         },
         methods: {
             onSubmit() {
+                this.form.registrationDate = new Date();
                 this.$emit('form-submitted', this.form);
             }
         }

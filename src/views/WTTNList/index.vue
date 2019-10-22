@@ -8,6 +8,7 @@
             <b-button
               variant="dark"
               to="/ttn/add"
+              v-if="hasPermissions(routesPermissions.TTN.create)"
               class="w-ttn-add-button"
             >add TTN
             </b-button>
@@ -40,11 +41,14 @@
     import { mapActions, mapState } from 'vuex';
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
+    import { validation } from '../../components/mixins/validation';
+    import routesPermissions from '../../constants/routesPermissions';
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
 
     export default {
         name: 'WTTNListPage',
+        mixins: [validation],
         components: {
             BRow,
             BCol,
@@ -62,7 +66,10 @@
             ...mapState([
                 'TTN',
                 'TTNPageLimit'
-            ])
+            ]),
+            routesPermissions: function() {
+                return routesPermissions;
+            }
         },
         methods: {
             ...mapActions({

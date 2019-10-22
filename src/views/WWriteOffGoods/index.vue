@@ -5,8 +5,8 @@
       <b-col class="w-write-off-form-col" lg="3" md="12" offset-lg="1" align-self="start">
         <w-form
           @form-submitted="onSubmit"
+          :TTNId="TTNId"
           :controller="userInfo"
-          :registrationDate="registrationDate"
         ></w-form>
         <b-button
           variant="link"
@@ -49,8 +49,7 @@
         },
         data() {
             return {
-                writeOffGoods: [],
-                registrationDate: '23-10-2019'
+                writeOffGoods: []
             };
         },
         computed: {
@@ -58,9 +57,12 @@
                 'userInfo',
                 'goods'
             ]),
-            dispatcher: function () {
+            dispatcher() {
                 return this.userInfo.firstName;
-            }
+            },
+            TTNId() {
+                return +this.$route.params.TTNId;
+            },
         },
         methods: {
             ...mapActions({
@@ -84,11 +86,11 @@
                     variant: toast.variant,
                     solid: true
                 });
-            },
+            }
         },
         created: async function () {
             await this.fetchUserInfo();
-            await this.fetchGoodsList();
+            await this.fetchGoodsList(this.TTNId);
         }
     };
 </script>
