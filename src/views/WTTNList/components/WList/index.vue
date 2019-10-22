@@ -23,7 +23,8 @@
         v-if="hasCheckAction(data.item)"
         class="w-table-check-button"
         variant="dark"
-        size="sm">
+        size="sm"
+        @click="clickedCheckButton(data.item)">
         Check
       </b-button>
       <b-button
@@ -39,7 +40,6 @@
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
     import { BButton } from 'bootstrap-vue';
 
     import router from '../../../../router';
@@ -69,7 +69,7 @@
             };
         },
         computed: {
-            items: function() {
+            items: function () {
                 this.TTN.forEach(item => {
                     item.registrationDate = `${item.registrationDate.slice(0, 10)} ${item.registrationDate.slice(11, 19)}`;
                     item.Sender = item.Sender ? item.Sender.senderName : 'N/A';
@@ -82,16 +82,13 @@
             }
         },
         methods: {
-            ...mapActions({
-                getUpdatedTTNData: 'getUpdatedTTN'
-            }),
             hasUpdateAction(item) {
                 return item.status === statuses.REGISTERED_STATUS &&
-                this.hasPermissions(this.routesPermissions.TTN.update);
+                    this.hasPermissions(this.routesPermissions.TTN.update);
             },
             hasDeleteAction(item) {
                 return item.status === statuses.REGISTERED_STATUS &&
-                this.hasPermissions(this.routesPermissions.TTN.delete);
+                    this.hasPermissions(this.routesPermissions.TTN.delete);
             },
             hasCheckAction(item) {
                 return (item.status === statuses.REGISTERED_STATUS ||
@@ -118,7 +115,9 @@
             deleteTTN(item) {
                 this.$emit('delete-button-clicked', item);
             },
-
+            clickedCheckButton(item) {
+                router.push(`/ttn/${item.id}/check`);
+            }
         }
     };
 </script>

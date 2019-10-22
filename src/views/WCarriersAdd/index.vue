@@ -50,6 +50,7 @@
             },
             async sendData(newCarrier) {
                 const res = await this.sendNewCarrierData(newCarrier);
+
                 !res.error && this.redirect();
             }
         }

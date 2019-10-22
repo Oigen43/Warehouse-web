@@ -301,6 +301,14 @@ export default {
   [types.USER_INFO](state, userInfo) {
     state.userInfo = userInfo;
   },
+
+  [types.GOODS](state, goods) {
+    state.goods = goods;
+  },
+  [types.CREATE_WRITE_OFF](state, writeOff) {
+    state.writeOff = writeOff;
+  },
+
   [types.SET_TOAST](state, toast) {
     state.toast = toast;
   },

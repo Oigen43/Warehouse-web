@@ -64,7 +64,9 @@
             },
             async sendData(newStorage) {
                 newStorage.warehouseId = this.warehouseId;
+
                 const res = await this.sendNewStorageData(newStorage);
+
                 !res.error && this.redirect();
             }
         },

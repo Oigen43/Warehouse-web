@@ -84,6 +84,9 @@ export default new Vuex.Store({
     updatedTTN: {},
     userInfo: {},
 
+    goods: [],
+    writeOff: {},
+
     toast: {},
     loading: false
   },

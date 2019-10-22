@@ -68,6 +68,7 @@
             },
             async login() {
                 const res = await this.loginUser(this.form);
+
                 !res.error && this.getCurrentUser() && this.redirect();
             }
         }

@@ -5,5 +5,9 @@ export default {
 
   isItemsExists: (items) => {
     return items.length > 0;
+  },
+
+  isArrayEmpty: (arr) => {
+    return arr.length === 0;
   }
 };

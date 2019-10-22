@@ -50,6 +50,7 @@
             },
             async sendData(newSender) {
                 const res = await this.sendNewSenderData(newSender);
+
                 !res.error && this.redirect();
             }
         }

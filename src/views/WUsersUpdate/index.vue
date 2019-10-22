@@ -50,6 +50,11 @@
             WForm,
             BButton
         },
+        data() {
+            return {
+                isDataFetched: false
+            };
+        },
         computed: {
             ...mapState([
                 'updatedUser',
@@ -108,7 +113,7 @@
                     return false;
                 }
 
-                return !(!this.warehousesNames.length && this.updatedUser.roles &&
+                return !(!this.isDataFetched && this.updatedUser.roles &&
                     this.updatedUser.roles.some(item => userRoles.WAREHOUSE_ROLES.includes(item.title)));
             }
         },
@@ -127,12 +132,14 @@
             },
             async sendData(user) {
                 const res = await this.sendUpdatedUserData(user);
+
                 !res.error && this.redirect();
             }
         },
         created: async function () {
             await this.getUpdatedUserData(this.userId);
             this.hasWarehousesRole && await this.fetchWarehousesNames({ companyId: this.updatedUser.companyId });
+            this.isDataFetched = true;
         }
     };
 </script>

@@ -65,6 +65,7 @@
             },
             async sendData(transport) {
                 const res = await this.sendUpdatedTransportData(transport);
+
                 !res.error && this.redirect();
             }
         },
