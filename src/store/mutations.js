@@ -312,6 +312,10 @@ export default {
     state.storagesComputedCapacity = [ ...state.storagesComputedCapacity.map(item => item.id === storage.id ? Object.assign({}, item, { currentCapacity: storage.capacity }) : item) ];
   },
 
+  [types.CREATE_WRITE_OFF](state, writeOff) {
+    state.writeOff = writeOff;
+  },
+
   [types.SET_TOAST](state, toast) {
     state.toast = toast;
   },

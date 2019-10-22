@@ -75,7 +75,9 @@
             async sendData(newUser) {
                 this.changeDisableState();
                 newUser.user.data.companyId = this.userInfo.companyId;
+
                 const res = await this.sendNewUserData(newUser);
+
                 res.error && this.changeDisableState();
                 !res.error && this.redirect();
             }

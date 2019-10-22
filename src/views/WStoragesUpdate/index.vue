@@ -71,6 +71,7 @@
             },
             async sendData(storage) {
                 const res = await this.sendUpdatedStorageData(storage);
+
                 !res.error && this.redirect();
             }
         },

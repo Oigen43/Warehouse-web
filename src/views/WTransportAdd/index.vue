@@ -56,7 +56,9 @@
             },
             async sendData(newTransport) {
                 newTransport.carrierId = this.carrierId;
+
                 const res = await this.sendNewTransportData(newTransport);
+
                 !res.error && this.redirect();
             }
         }

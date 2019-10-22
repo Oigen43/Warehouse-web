@@ -87,6 +87,7 @@ export default new Vuex.Store({
     goodsItemInit: {},
     goodsItemComputedVolume: 0,
     storagesComputedCapacity: [],
+    writeOff: {},
 
     toast: {},
     loading: false

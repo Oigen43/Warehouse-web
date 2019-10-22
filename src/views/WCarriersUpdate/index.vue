@@ -66,6 +66,7 @@
             },
             async sendData(carrier) {
                 const res = await this.sendUpdatedCarrierData(carrier);
+
                 !res.error && this.redirect();
             }
         },
