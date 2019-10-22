@@ -5,12 +5,12 @@
       <b-card-body>
         <b-card-title class="mb-0 w-goods-card-text">{{good.name}}</b-card-title>
         <hr>
-        <b-card-text class="w-goods-card-text"><span class="w-goods-card-text-bold">Size:</span>
-          {{good.size}} m<sup><small>2</small></sup>
+        <b-card-text class="w-goods-card-text"><span class="w-goods-card-text-bold">Volume:</span>
+          {{good.volume}} m<sup><small>2</small></sup>
         </b-card-text>
         <b-card-text class="w-goods-card-text"><span
           class="w-goods-card-text-bold">Recommended storage type:</span>
-          {{good.storageType}}
+          {{good.recomendation}}
         </b-card-text>
         <b-card-text v-if="good.storage.length" class="w-goods-card-text"><span
           class="w-goods-card-text-bold">Storages:</span>

@@ -1,23 +1,23 @@
 <template>
   <b-row class="w-goods-storage-card-container">
-    <b-col v-if="goodsItemInit.name" lg="4" offset-lg="1">
+    <b-col v-if="goodsItemInit.id" lg="4" offset-lg="1">
       <b-card no-body class="overflow-hidden w-goods-storage-card">
         <b-card-body>
           <b-card-title class="mb-0 w-goods-storage-card-text">{{goodsItemInit.name}}</b-card-title>
           <hr>
           <b-card-text class="w-goods-storage-card-text"><span
-            class="w-goods-storage-card-text-bold">Size:</span>
-            {{goodsSize}} / {{goodsItemInit.size}} m<sup><small>2</small></sup>
+            class="w-goods-storage-card-text-bold">Volume:</span>
+            {{goodsVolume}} / {{goodsItemInit.volume}} m<sup><small>3</small></sup>
             <b-progress
-              :max="goodsItemInit.size"
-              :value="goodsSize"
+              :max="goodsItemInit.volume"
+              :value="goodsVolume"
               variant="info"
               striped>
             </b-progress>
           </b-card-text>
           <b-card-text class="w-goods-storage-card-text"><span
             class="w-goods-storage-card-text-bold">Recommended storage type:</span>
-            {{goodsItemInit.storageType}}
+            {{goodsItemInit.recommendation}}
           </b-card-text>
         </b-card-body>
       </b-card>
@@ -86,7 +86,7 @@
             goodsItemInit: {
                 type: Object
             },
-            goodsItemComputedSize: {
+            goodsItemComputedVolume: {
                 type: Number
             },
             storagesComputedCapacity: {
@@ -99,8 +99,8 @@
             };
         },
         computed: {
-            goodsSize() {
-                return this.goodsItemComputedSize;
+            goodsVolume() {
+                return this.goodsItemComputedVolume;
             },
             storagesComputed() {
                 return this.storagesComputedCapacity;
@@ -112,18 +112,18 @@
                 setStorageCurrentCapacity: 'SET_STORAGE_CURRENT_CAPACITY'
             }),
             clickedStorage(item) {
-                if (this.goodsSize < item.currentCapacity && !!this.goodsSize && !!item.currentCapacity) {
+                if (this.goodsVolume < item.currentCapacity && !!this.goodsVolume && !!item.currentCapacity) {
                     this.goodsStorageData.push({
                         goodsId: this.goodsId,
                         storageId: item.id,
-                        size: this.goodsSize
+                        size: this.goodsVolume
                     });
                     const size = 0;
                     this.goodsItemSize(size);
-                    const capacity = item.currentCapacity - this.goodsSize;
+                    const capacity = item.currentCapacity - this.goodsVolume;
                     const id = item.id;
                     this.setStorageCurrentCapacity({ id, capacity });
-                } else if (!!this.goodsSize && !!item.currentCapacity) {
+                } else if (!!this.goodsVolume && !!item.currentCapacity) {
                     this.goodsStorageData.push({
                         goodsId: this.goodsId,
                         storageId: item.id,

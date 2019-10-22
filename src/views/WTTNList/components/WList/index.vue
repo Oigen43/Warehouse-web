@@ -26,6 +26,13 @@
         size="sm">
         Check
       </b-button>
+      <b-button
+        v-if="hasStorageAction(data.item)"
+        variant="dark"
+        size="sm"
+        @click="clickedStorageButton(data.item)">
+        Storage
+      </b-button>
     </template>
   </w-table>
 </template>
@@ -89,6 +96,11 @@
                 item.status === statuses.RELEASE_ALLOWED_STATUS) &&
                 this.hasPermissions(this.routesPermissions.TTN.check);
             },
+            hasStorageAction(item) {
+                return (item.status === statuses.CONFIRMED_STATUS ||
+                    item.status === statuses.RELEASE_ALLOWED_STATUS) &&
+                    this.hasPermissions(this.routesPermissions.TTN.storage);
+            },
             hasTakeOutAction(item) {
                 return item.status === statuses.CONFIRMED_STATUS &&
                 this.hasPermissions(this.routesPermissions.TTN.takeOut);
@@ -112,6 +124,9 @@
                     ...modal.CONFIRM_MODAL_OPTIONS
                 })
                     .then(value => value && this.takeOutTTN(item));
+            },
+            clickedStorageButton(item) {
+                router.push(`/ttn/${item.id}/storage-goods`);
             },
             takeOutTTN(item) {
                 this.$emit('take-out-button-clicked', item);

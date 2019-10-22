@@ -230,7 +230,6 @@ export default {
       warehouseId: req.warehouseId
     });
 
-    console.log(res.data)
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.storagesTotal, req.perPage);
 
@@ -679,16 +678,14 @@ export default {
     commit(types.REQUEST);
     const res = await api.getUserInfo(url.USER_INFO_URL, req);
 
-    console.log(res.data)
     commit(types.USER_INFO, res.data);
     commit(types.SUCCESS);
   },
-  fetchGoodsList: async ({ commit }) => {
+  fetchGoodsList: async ({ commit }, TTNId) => {
     commit(types.REQUEST);
 
-    const res = await api.get(url.GOODS_URL);
+    const res = await api.get(url.GOODS_URL, { TTNId });
 
-    console.log(res.data)
     if (res.data) {
       commit(types.GOODS, res.data.goods);
     }
@@ -702,7 +699,7 @@ export default {
 
     if (res.data) {
       commit(types.GOODS_ITEM_INIT, res.data.goodsItem);
-      commit(types.GOODS_ITEM_COMPUTED_SIZE, res.data.goodsItem.size);
+      commit(types.GOODS_ITEM_COMPUTED_VOLUME, res.data.goodsItem.volume);
     }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);

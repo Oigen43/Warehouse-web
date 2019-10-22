@@ -37,7 +37,7 @@ import WTransportList from '../views/WTransportList';
 import WTransportAddForm from '../views/WTransportAdd';
 import WTransportUpdateForm from '../views/WTransportUpdate';
 import WTTNList from '../views/WTTNList';
-import WGoodsForm from '../views/WGoodsForm';
+import WGoodsStorageForm from '../views/WGoodsStorageForm';
 import WGoodsStorageAdd from '../views/WGoodsStorageAdd';
 import WNotFound from '../views/WNotFound';
 import WTTNAddForm from '../views/WTTNAdd';
@@ -310,12 +310,12 @@ export default new Router({
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/goods-form',
-      name: 'goods-form',
-      component: WGoodsForm
+      path: '/ttn/:TTNId/storage-goods',
+      name: 'goods-storage-form',
+      component: WGoodsStorageForm
     },
     {
-      path: '/goods-form/:goodsId/add',
+      path: '/ttn/:TTNId/storage-goods/:goodsId/add',
       name: 'choose-goods-storage-form',
       component: WGoodsStorageAdd
     },

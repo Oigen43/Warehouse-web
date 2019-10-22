@@ -6,12 +6,10 @@
         <b-row>
           <b-col class="w-goods-add-form-container" lg="3" md="12" offset-lg="1" align-self="start">
             <w-form
-              :number="data.number"
-              :registrationDate="data.registrationDate"
-              :warehouseManager="data.warehouseManager"
-              :date="data.date"
-              :addForm="false"
-              submitButtonName="Create"
+              :number="updatedTTN.number"
+              :registrationDate="updatedTTN.registrationDate"
+              :dispatcher="updatedTTN.User"
+              :manager="userInfo"
             ></w-form>
           </b-col>
           <b-col v-if="storages.length && goods.length" lg="6" md="12" offset-lg="1">
@@ -46,7 +44,7 @@
     import WCard from './components/WCard';
 
     export default {
-        name: 'WGoodsForm',
+        name: 'WGoodsStorageForm',
         components: {
             BRow,
             BCol,
@@ -66,13 +64,20 @@
         },
         computed: {
             ...mapState([
+                'updatedTTN',
+                'userInfo',
                 'storages',
                 'goods',
                 'toast'
-            ])
+            ]),
+            TTNId() {
+                return +this.$route.params.TTNId;
+            },
         },
         methods: {
             ...mapActions({
+                getUpdatedTTN: 'getUpdatedTTN',
+                fetchUserInfo: 'fetchUserInfo',
                 fetchStoragesList: 'fetchStoragesList',
                 fetchGoodsList: 'fetchGoodsList'
             }),
@@ -83,16 +88,18 @@
                 // console.log(this.goods);
             },
             clickedChooseGoodsStorage(item) {
-                router.push(`/goods-form/${item.id}/add`);
+                router.push(`/ttn/${this.TTNId}/storage-goods/${item.id}/add`);
             }
         },
-        created: function () {
-            this.fetchStoragesList({
+        created: async function () {
+            await this.fetchUserInfo();
+            await this.getUpdatedTTN(this.TTNId);
+            await this.fetchStoragesList({
                 page: 1,
                 perPage: 20,
-                warehouseId: 1
+                warehouseId: this.userInfo.warehouseId
             });
-            this.fetchGoodsList();
+            await this.fetchGoodsList(this.TTNId);
         }
     };
 </script>

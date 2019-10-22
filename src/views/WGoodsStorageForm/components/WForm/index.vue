@@ -18,7 +18,12 @@
     ></b-form-input>
     <b-form-input
       size="lg"
-      v-model="form.warehouseManager"
+      v-model="formattedDispatcherName"
+      class="w-goods-form-input"
+    ></b-form-input>
+    <b-form-input
+      size="lg"
+      v-model="formattedManagerName"
       class="w-goods-form-input"
     ></b-form-input>
     <b-form-input
@@ -48,26 +53,32 @@
             registrationDate: {
                 type: String
             },
-            warehouseManager: {
-                type: String
+            dispatcher: {
+                type: Object
             },
-            date: {
-                type: String
-            },
-            submitButtonName: {
-                type: String
-            },
+            manager: {
+                type: Object
+            }
         },
         data() {
             return {
                 form: {
                     number: this.number,
                     registrationDate: this.registrationDate,
-                    warehouseManager: this.warehouseManager,
+                    dispatcher: this.dispatcher,
+                    manager: this.manager,
                     date: this.date
                 }
             };
-        }
+        },
+        computed: {
+            formattedDispatcherName() {
+                return `${this.dispatcher.surname} ${this.dispatcher.firstName}`;
+            },
+            formattedManagerName() {
+                return `${this.manager.surname} ${this.manager.firstName}`;
+            }
+        },
     };
 </script>
 

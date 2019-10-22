@@ -7,7 +7,7 @@
         :goodsId="goodsId"
         :storages="storages"
         :goodsItemInit="goodsItemInit"
-        :goodsItemComputedSize="goodsItemComputedSize"
+        :goodsItemComputedVolume="goodsItemComputedVolume"
         :storagesComputedCapacity="storagesComputedCapacity"
       ></w-goods-storage-form>
     </b-col>
@@ -30,34 +30,41 @@
         },
         computed: {
             ...mapState([
+                'userInfo',
                 'storages',
                 'goodsItemInit',
-                'goodsItemComputedSize',
+                'goodsItemComputedVolume',
                 'storagesComputedCapacity'
             ]),
             goodsId() {
                 return +this.$route.params.goodsId;
             },
+            TTNId() {
+                return +this.$route.params.TTNId;
+            }
         },
         methods: {
             ...mapActions({
+                fetchUserInfo: 'fetchUserInfo',
                 fetchStoragesList: 'fetchStoragesList',
                 fetchGoodsItemData: 'fetchGoodsItemData',
                 sendGoodsStorage: 'sendGoodsStorage'
             }),
             redirect() {
-                router.push('/goods-form');
+                router.push(`/ttn/${this.TTNId}/storage-goods/`);
             },
             async sendData(data) {
                 const res = await this.sendGoodsStorage(data);
+
                 !res.error && this.redirect();
             }
         },
-        created: function () {
-            this.fetchStoragesList({
+        created: async function () {
+            await this.fetchUserInfo();
+            await this.fetchStoragesList({
                 page: 1,
                 perPage: 20,
-                warehouseId: 1
+                warehouseId: this.userInfo.warehouseId
             });
             this.fetchGoodsItemData(this.goodsId);
         }

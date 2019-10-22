@@ -301,8 +301,8 @@ export default {
   [types.GOODS_ITEM_INIT](state, goodsItem) {
     state.goodsItemInit = goodsItem;
   },
-  [types.GOODS_ITEM_COMPUTED_SIZE](state, goodsItemSize) {
-    state.goodsItemComputedSize = goodsItemSize;
+  [types.GOODS_ITEM_COMPUTED_VOLUME](state, goodsItemVolume) {
+    state.goodsItemComputedVolume = goodsItemVolume;
   },
 
   [types.STORAGE_CURRENT_CAPACITY](state, storages) {
