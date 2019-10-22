@@ -2,18 +2,16 @@
   <b-form @submit.prevent="onSubmit" class="w-goods-form">
     <b-form-input
       size="lg"
-      v-model="form.number"
+      v-model="number"
       type="number"
       disabled
-      placeholder="TTN Number"
       class="w-goods-form-input"
     ></b-form-input>
     <b-form-input
       size="lg"
-      v-model="form.registrationDate"
+      v-model="formattedRegistrationDate"
       type="date"
       disabled
-      placeholder="Registration date"
       class="w-goods-form-input"
     ></b-form-input>
     <b-form-input
@@ -24,14 +22,6 @@
     <b-form-input
       size="lg"
       v-model="formattedManagerName"
-      class="w-goods-form-input"
-    ></b-form-input>
-    <b-form-input
-      size="lg"
-      v-model="form.date"
-      type="date"
-      required
-      placeholder="Storage date"
       class="w-goods-form-input"
     ></b-form-input>
   </b-form>
@@ -48,7 +38,7 @@
         },
         props: {
             number: {
-                type: String
+                type: Number
             },
             registrationDate: {
                 type: String
@@ -60,23 +50,15 @@
                 type: Object
             }
         },
-        data() {
-            return {
-                form: {
-                    number: this.number,
-                    registrationDate: this.registrationDate,
-                    dispatcher: this.dispatcher,
-                    manager: this.manager,
-                    date: this.date
-                }
-            };
-        },
         computed: {
             formattedDispatcherName() {
                 return `${this.dispatcher.surname} ${this.dispatcher.firstName}`;
             },
             formattedManagerName() {
                 return `${this.manager.surname} ${this.manager.firstName}`;
+            },
+            formattedRegistrationDate() {
+                return `${this.registrationDate.slice(0, 10)}`;
             }
         },
     };

@@ -234,7 +234,7 @@
                 this.form.transport = null;
                 this.$emit('carrier-selected', selectedOption.id);
             },
-            driverNameWithPassport({ firstName, surname, passportNumber }) {
+            driverNameWithPassport({ surname, passportNumber }) {
                 return `${surname} - passport: ${passportNumber}`;
             },
             transportTypeWithNumber({ transportType, transportNumber }) {

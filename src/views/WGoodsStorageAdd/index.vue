@@ -46,7 +46,7 @@
         methods: {
             ...mapActions({
                 fetchUserInfo: 'fetchUserInfo',
-                fetchStoragesList: 'fetchStoragesList',
+                fetchAllStorages: 'fetchAllStorages',
                 fetchGoodsItemData: 'fetchGoodsItemData',
                 sendGoodsStorage: 'sendGoodsStorage'
             }),
@@ -61,11 +61,7 @@
         },
         created: async function () {
             await this.fetchUserInfo();
-            await this.fetchStoragesList({
-                page: 1,
-                perPage: 20,
-                warehouseId: this.userInfo.warehouseId
-            });
+            await this.fetchAllStorages(this.userInfo.warehouseId);
             this.fetchGoodsItemData(this.goodsId);
         }
     };

@@ -238,6 +238,18 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
+  fetchAllStorages: async ({ commit }, warehouseId) => {
+    commit(types.REQUEST);
+
+    const res = await api.get(url.STORAGES_ALL_URL, { warehouseId });
+
+    if (res.data) {
+      commit(types.STORAGES, res.data.storages);
+      commit(types.STORAGE_CURRENT_CAPACITY, res.data.storages);
+    }
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
   fetchStorageTypes: async ({ commit }) => {
     commit(types.REQUEST);
 
@@ -685,6 +697,15 @@ export default {
     commit(types.REQUEST);
 
     const res = await api.put(url.TTN_CONFIRM_URL, id);
+
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  setInStorageTTN: async ({ commit }, id) => {
+    commit(types.REQUEST);
+
+    const res = await api.put(url.TTN_IN_STORAGE_URL, id);
 
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);

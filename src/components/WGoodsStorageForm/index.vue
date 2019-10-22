@@ -108,7 +108,7 @@
         },
         methods: {
             ...mapMutations({
-                goodsItemSize: 'GOODS_ITEM_COMPUTED_SIZE',
+                goodsItemVolume: 'GOODS_ITEM_COMPUTED_VOLUME',
                 setStorageCurrentCapacity: 'SET_STORAGE_CURRENT_CAPACITY'
             }),
             clickedStorage(item) {
@@ -119,7 +119,7 @@
                         size: this.goodsVolume
                     });
                     const size = 0;
-                    this.goodsItemSize(size);
+                    this.goodsItemVolume(size);
                     const capacity = item.currentCapacity - this.goodsVolume;
                     const id = item.id;
                     this.setStorageCurrentCapacity({ id, capacity });
@@ -129,8 +129,8 @@
                         storageId: item.id,
                         size: item.currentCapacity
                     });
-                    const size = this.goodsItemComputedSize - item.currentCapacity;
-                    this.goodsItemSize(size);
+                    const size = this.goodsItemComputedVolume - item.currentCapacity;
+                    this.goodsItemVolume(size);
                     const capacity = 0;
                     const id = item.id;
                     this.setStorageCurrentCapacity({ id, capacity });
@@ -141,8 +141,8 @@
             },
             clickedCancelButton() {
                 this.goodsStorageData = [];
-                const size = this.goodsItemInit.size;
-                this.goodsItemSize(size);
+                const size = this.goodsItemInit.volume;
+                this.goodsItemVolume(size);
                 this.storagesComputedCapacity.forEach(function (item) {
                     const id = item.id;
                     const capacity = this.storages.find(element => element.id === id).currentCapacity;
