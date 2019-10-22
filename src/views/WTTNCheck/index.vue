@@ -71,6 +71,7 @@
             }),
             async onSubmit() {
                 const res = await this.confirmTTN({ id: this.TTNId });
+
                 !res.error && this.redirect();
             },
             redirect() {

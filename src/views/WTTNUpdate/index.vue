@@ -110,6 +110,7 @@
             },
             async sendData(form) {
                 const res = await this.sendUpdatedTTNData({ TTN: form, goods: this.goods });
+
                 !res.error && router.push('/ttn');
             },
             getTransportsAndDrivers(id) {

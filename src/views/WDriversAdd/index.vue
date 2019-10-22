@@ -63,7 +63,9 @@
             },
             async sendData(newDriver) {
                 newDriver.carrierId = this.carrierId;
+
                 const res = await this.sendNewDriverData(newDriver);
+
                 !res.error && this.redirect();
             }
         }

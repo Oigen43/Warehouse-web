@@ -78,6 +78,7 @@
             },
             async sendData(form, goods) {
                 const res = await this.sendNewWriteOffForm({ writeOff: form, goods: goods });
+
                 !res.error && router.push('/ttn');
             },
             makeToast(toast) {

@@ -105,7 +105,9 @@
             },
             async sendData(form, goods) {
                 form.registrationDate = new Date();
+
                 const res = await this.sendNewTTN({ TTN: form, goods: goods });
+
                 !res.error && router.push('/ttn');
             },
             getTransportsAndDrivers(id) {

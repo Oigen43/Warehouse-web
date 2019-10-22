@@ -65,6 +65,7 @@
             },
             async sendData(warehouse) {
                 const res = await this.sendUpdatedWarehouseData(warehouse);
+
                 !res.error && this.redirect();
             }
         },
