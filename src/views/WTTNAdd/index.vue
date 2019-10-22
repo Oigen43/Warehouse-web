@@ -116,7 +116,7 @@
           },
         },
         created: async function() {
-            this.TTNId ? this.type = 'outcoming' && this.status = 'release allowed' : this.type = 'incoming';
+            this.TTNId ? this.type = 'outcoming' : this.type = 'incoming';
             this.clearSenders();
             this.clearReceivers();
             this.clearDrivers();
