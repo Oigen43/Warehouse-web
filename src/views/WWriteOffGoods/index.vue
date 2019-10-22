@@ -17,7 +17,7 @@
       </b-col>
       <b-col v-if="goods.length" class="w-write-off-form-col" lg="6" md="12" offset-lg="1">
         <w-goods
-          @updated-good="updateGood"
+          @write-off-good="writeOffGood"
           :goods="goods"
         ></w-goods>
       </b-col>
@@ -70,7 +70,7 @@
                 fetchGoodsList: 'fetchGoodsList',
                 sendNewWriteOffForm: 'createWriteOff'
             }),
-            updateGood(good, index) {
+            writeOffGood(good, index) {
                 this.writeOffGoods.splice(index, 1, good);
             },
             onSubmit(form) {
@@ -88,7 +88,7 @@
                 });
             }
         },
-        created: async function () {
+        created: async function() {
             await this.fetchUserInfo();
             await this.fetchGoodsList(this.TTNId);
         }

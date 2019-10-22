@@ -66,7 +66,9 @@ export default {
 
     const res = await api.getById(url.COMPANIES_URL, id);
 
-    commit(types.SET_UPDATED_COMPANY, res.data.companies);
+    if (res.data) {
+      commit(types.SET_UPDATED_COMPANY, res.data.companies);
+    }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -133,7 +135,9 @@ export default {
 
     const res = await api.getById(url.WAREHOUSES_URL, id);
 
-    commit(types.SET_UPDATED_WAREHOUSE, res.data.warehouse);
+    if (res.data) {
+      commit(types.SET_UPDATED_WAREHOUSE, res.data.warehouse);
+    }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -189,7 +193,9 @@ export default {
 
     const res = await api.getById(url.USERS_URL, id);
 
-    commit(types.SET_UPDATED_USER, res.data.user);
+    if (res.data) {
+      commit(types.SET_UPDATED_USER, res.data.user);
+    }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -266,7 +272,9 @@ export default {
 
     const res = await api.getById(url.STORAGES_URL, id);
 
-    commit(types.SET_UPDATED_STORAGE, res.data.storage);
+    if (res.data) {
+      commit(types.SET_UPDATED_STORAGE, res.data.storage);
+    }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -329,7 +337,9 @@ export default {
 
     const res = await api.getById(url.SENDERS_URL, id);
 
-    commit(types.SET_UPDATED_SENDER, res.data.sender);
+    if (res.data) {
+      commit(types.SET_UPDATED_SENDER, res.data.sender);
+    }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -385,7 +395,9 @@ export default {
 
     const res = await api.getById(url.RECEIVERS_URL, id);
 
-    commit(types.SET_UPDATED_RECEIVER, res.data.receiver);
+    if (res.data) {
+      commit(types.SET_UPDATED_RECEIVER, res.data.receiver);
+    }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -448,7 +460,9 @@ export default {
 
     const res = await api.getById(url.CARRIERS_URL, id);
 
-    commit(types.SET_UPDATED_CARRIER, res.data.carrier);
+    if (res.data) {
+      commit(types.SET_UPDATED_CARRIER, res.data.carrier);
+    }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -517,7 +531,9 @@ export default {
 
     const res = await api.getById(url.DRIVERS_URL, id);
 
-    commit(types.SET_UPDATED_DRIVER, res.data.driver);
+    if (res.data) {
+      commit(types.SET_UPDATED_DRIVER, res.data.driver);
+    }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -584,7 +600,9 @@ export default {
 
     const res = await api.getById(url.TRANSPORT_URL, id);
 
-    commit(types.SET_UPDATED_TRANSPORT, res.data.transport);
+    if (res.data) {
+      commit(types.SET_UPDATED_TRANSPORT, res.data.transport);
+    }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -640,7 +658,9 @@ export default {
 
     const res = await api.getById(url.TTN_URL, id);
 
-    commit(types.SET_UPDATED_TTN, res.data.TTN);
+    if (res.data) {
+      commit(types.SET_UPDATED_TTN, res.data.TTN);
+    }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -670,7 +690,9 @@ export default {
 
     const res = await api.getUserInfo(url.USER_INFO_URL, req);
 
-    commit(types.USER_INFO, res.data);
+    if (res.data) {
+      commit(types.USER_INFO, res.data);
+    }
     commit(types.SUCCESS);
   },
   fetchGoodsList: async ({ commit }, TTNId) => {

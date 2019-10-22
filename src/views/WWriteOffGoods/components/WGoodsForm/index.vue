@@ -108,7 +108,7 @@
                 type: String
             },
             count: {
-              type: String
+                type: String
             },
             weight: {
                 type: String

@@ -67,7 +67,7 @@
                 'TTN',
                 'TTNPageLimit'
             ]),
-            routesPermissions: function() {
+            routesPermissions: function () {
                 return routesPermissions;
             }
         },

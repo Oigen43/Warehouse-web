@@ -25,7 +25,7 @@
         variant="dark"
         size="sm"
         @click="clickedCheckButton(data.item)">
-      Check
+        Check
       </b-button>
     </template>
   </w-table>
@@ -61,7 +61,7 @@
             };
         },
         computed: {
-            items: function() {
+            items: function () {
                 this.TTN.forEach(item => {
                     item.registrationDate = `${item.registrationDate.slice(0, 10)} ${item.registrationDate.slice(11, 19)}`;
                 });
@@ -69,22 +69,22 @@
                 return this.TTN;
             },
             routesPermissions: function () {
-              return routesPermissions;
+                return routesPermissions;
             },
         },
         methods: {
             hasUpdateAction(item) {
                 return item.status === statuses.REGISTERED_STATUS &&
-                this.hasPermissions(this.routesPermissions.TTN.update);
+                    this.hasPermissions(this.routesPermissions.TTN.update);
             },
             hasDeleteAction(item) {
                 return item.status === statuses.REGISTERED_STATUS &&
-                this.hasPermissions(this.routesPermissions.TTN.delete);
+                    this.hasPermissions(this.routesPermissions.TTN.delete);
             },
             hasCheckAction(item) {
                 return (item.status === statuses.REGISTERED_STATUS ||
-                item.status === statuses.RELEASE_ALLOWED_STATUS) &&
-                this.hasPermissions(this.routesPermissions.TTN.check);
+                    item.status === statuses.RELEASE_ALLOWED_STATUS) &&
+                    this.hasPermissions(this.routesPermissions.TTN.check);
             },
             clickedUpdateButton(item) {
                 router.push(`/ttn/${item.id}/update`);

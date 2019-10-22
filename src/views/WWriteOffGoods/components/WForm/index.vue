@@ -1,29 +1,29 @@
 <template>
-    <b-form @submit.prevent="onSubmit" class="w-write-off-form">
-      <b-form-input
-        size="lg"
-        v-model="form.number"
-        type="number"
-        min="1"
-        number
-        required
-        placeholder="Write-Off Number"
-        class="w-write-off-form-input"
-      ></b-form-input>
-      <b-form-input
-        size="lg"
-        :value="`${controller.surname} ${controller.firstName}`"
-        disabled
-        class="w-write-off-form-input"
-      ></b-form-input>
-      <b-button
-        type="submit"
-        variant="outline-dark"
-        size="lg"
-        class="w-write-off-form-button">
-        CONFIRM
-      </b-button>
-    </b-form>
+  <b-form @submit.prevent="onSubmit" class="w-write-off-form">
+    <b-form-input
+      size="lg"
+      v-model="form.number"
+      type="number"
+      min="1"
+      number
+      required
+      placeholder="Write-Off Number"
+      class="w-write-off-form-input"
+    ></b-form-input>
+    <b-form-input
+      size="lg"
+      :value="formattedControllerName"
+      disabled
+      class="w-write-off-form-input"
+    ></b-form-input>
+    <b-button
+      type="submit"
+      variant="outline-dark"
+      size="lg"
+      class="w-write-off-form-button">
+      CONFIRM
+    </b-button>
+  </b-form>
 </template>
 
 <script>
@@ -55,6 +55,11 @@
                     TTNId: this.TTNId
                 }
             };
+        },
+        computed: {
+            formattedControllerName() {
+                return `${this.controller.surname} ${this.controller.firstName}`;
+            },
         },
         methods: {
             onSubmit() {

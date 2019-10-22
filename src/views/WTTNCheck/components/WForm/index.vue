@@ -4,7 +4,6 @@
       size="lg"
       v-model="form.number"
       disabled
-      placeholder="Number"
       class="w-ttn-check-form-input"
     ></b-form-input>
     <b-form-input
@@ -73,7 +72,7 @@
       variant="outline-dark"
       size="lg"
       @click="clickedWriteOffButton"
-    class="w-ttn-check-form-button">
+      class="w-ttn-check-form-button">
       WRITE-OFF
     </b-button>
     <b-button

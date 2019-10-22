@@ -120,7 +120,7 @@
                 });
             },
         },
-        created: async function () {
+        created: async function() {
             this.clearDrivers();
             this.clearTransport();
             await this.fetchUserInfo();

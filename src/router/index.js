@@ -319,7 +319,9 @@ export default new Router({
     {
       path: '/ttn/:TTNId/write-off',
       name: 'WriteOffGoodsForm',
-      component: WWriteOffGoodsForm
+      component: WWriteOffGoodsForm,
+      meta: { authorize: routesPermissions.writeOffs.create },
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '*',
