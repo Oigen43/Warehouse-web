@@ -9,10 +9,10 @@ export default {
   newCompany: {},
   updatedCompany: {},
   deletedCompany: {},
-  currentCompany: null,
 
   warehouses: [],
   warehousesPageLimit: 1,
+  warehousesNames: [],
   newWarehouse: {},
   updatedWarehouse: {},
   deletedWarehouse: {},
@@ -23,5 +23,51 @@ export default {
   updatedUser: {},
   deletedUser: {},
 
-  toast: {}
+  storages: [],
+  storagesPageLimit: 1,
+  newStorage: {},
+  updatedStorage: {},
+  deletedStorage: {},
+  currentStorage: {},
+  storageTypes: [],
+
+  senders: [],
+  sendersPageLimit: 1,
+  newSender: {},
+  updatedSender: {},
+  deletedSender: {},
+
+  receivers: [],
+  receiversPageLimit: 1,
+  newReceiver: {},
+  updatedReceiver: {},
+  deletedReceiver: {},
+
+  carriers: [],
+  carriersPageLimit: 1,
+  newCarrier: {},
+  updatedCarrier: {},
+  deletedCarrier: {},
+  currentCarrier: {},
+
+  drivers: [],
+  driversPageLimit: 1,
+  newDriver: {},
+  updatedDriver: {},
+  deletedDriver: {},
+
+  transport: [],
+  transportPageLimit: 1,
+  newTransport: {},
+  updatedTransport: {},
+  deletedTransport: {},
+
+  TTN: [],
+  TTNPageLimit: 1,
+  newTTN: {},
+  updatedTTN: {},
+  userInfo: {},
+
+  toast: {},
+  loading: false
 };

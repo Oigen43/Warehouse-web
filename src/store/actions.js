@@ -32,6 +32,7 @@ export default {
   },
   logout: async ({ commit }) => {
     localStorage.removeItem(constant.TOKEN_KEY);
+    localStorage.removeItem(constant.REFRESH_TOKEN_KEY);
     localStorage.removeItem(constant.ROLES_LIST);
     commit(types.LOGOUT, initialState);
   },
@@ -108,6 +109,13 @@ export default {
     }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  fetchWarehousesNames: async ({ commit }, req) => {
+    const res = await api.get(url.WAREHOUSES_URL_NAMES, { companyId: req.companyId });
+
+    if (res.data) {
+      commit(types.WAREHOUSES_NAMES, res.data.warehouses);
+    }
   },
   createWarehouse: async ({ commit }, req) => {
     commit(types.REQUEST);
@@ -222,6 +230,7 @@ export default {
       warehouseId: req.warehouseId
     });
 
+    console.log(res.data)
     if (res.data) {
       const pageLimit = helpers.calculatePageLimit(res.data.storagesTotal, req.perPage);
 
@@ -298,6 +307,13 @@ export default {
     }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  fetchSendersNames: async ({ commit }, req) => {
+    const res = await api.get(url.SENDERS_URL_NAMES);
+
+    if (res.data) {
+      commit(types.SENDERS_NAMES, res.data.senders);
+    }
   },
   createSender: async ({ commit }, req) => {
     commit(types.REQUEST);
@@ -411,6 +427,13 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
+  fetchCarriersNames: async ({ commit }, req) => {
+    const res = await api.get(url.CARRIERS_URL_NAMES);
+
+    if (res.data) {
+      commit(types.CARRIERS_NAMES, res.data.carriers);
+    }
+  },
   createCarrier: async ({ commit }, req) => {
     commit(types.REQUEST);
     commit(types.CREATE_CARRIER, req);
@@ -454,6 +477,7 @@ export default {
   },
 
   fetchDriversList: async ({ commit }, req) => {
+    commit(types.CLEAN_DRIVERS);
     commit(types.REQUEST);
 
     const res = await api.get(url.DRIVERS_URL, {
@@ -470,6 +494,13 @@ export default {
     }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  fetchDriversNames: async ({ commit }, req) => {
+    const res = await api.get(url.DRIVERS_URL_NAMES, { carrierId: req.carrierId });
+
+    if (res.data) {
+      commit(types.DRIVERS_NAMES, res.data.drivers);
+    }
   },
   sendDeletedDriver: async ({ commit }, driverId) => {
     commit(types.REQUEST);
@@ -514,6 +545,7 @@ export default {
   },
 
   fetchTransportList: async ({ commit }, req) => {
+    commit(types.CLEAN_TRANSPORT);
     commit(types.REQUEST);
 
     const res = await api.get(url.TRANSPORT_URL, {
@@ -530,6 +562,13 @@ export default {
     }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  fetchTransportNames: async ({ commit }, req) => {
+    const res = await api.get(url.TRANSPORT_URL_NAMES, { carrierId: req.carrierId });
+
+    if (res.data) {
+      commit(types.TRANSPORT_NAMES, res.data.transport);
+    }
   },
   createTransport: async ({ commit }, req) => {
     commit(types.REQUEST);
@@ -587,6 +626,16 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
+  createTTN: async ({ commit }, req) => {
+    commit(types.REQUEST);
+    commit(types.CREATE_TTN, req);
+
+    const res = await api.post(url.TTN_URL, req);
+
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
   getUpdatedTTN: async ({ commit }, id) => {
     commit(types.CLEAN_UPDATED_TTN);
     commit(types.REQUEST);
@@ -594,6 +643,15 @@ export default {
     const res = await api.getById(url.TTN_URL, id);
 
     commit(types.SET_UPDATED_TTN, res.data.TTN);
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  sendUpdatedTTN: async ({ commit }, req) => {
+    commit(types.REQUEST);
+
+    const res = await api.put(url.TTN_URL, req);
+
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -612,16 +670,25 @@ export default {
   takeOutTTN: async ({ commit }, req) => {
     commit(types.REQUEST);
 
-    const res = await api.put(url.TTN_URL, req);
+    const res = await api.put(url.TTN_CHANGE_STATUS_URL, req);
 
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  fetchUserInfo: async ({ commit }, req) => {
+    commit(types.REQUEST);
+    const res = await api.getUserInfo(url.USER_INFO_URL, req);
+
+    console.log(res.data)
+    commit(types.USER_INFO, res.data);
+    commit(types.SUCCESS);
   },
   fetchGoodsList: async ({ commit }) => {
     commit(types.REQUEST);
 
     const res = await api.get(url.GOODS_URL);
 
+    console.log(res.data)
     if (res.data) {
       commit(types.GOODS, res.data.goods);
     }

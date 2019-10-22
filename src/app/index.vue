@@ -13,6 +13,7 @@
 <script>
     import Vue from 'vue';
     import { BContainer, ModalPlugin } from 'bootstrap-vue';
+    import { mapActions, mapGetters } from 'vuex';
 
     import WNavigation from '../components/WNavigation';
     import WToastNotification from '../components/WToastNotification';
@@ -30,6 +31,19 @@
             WToastNotification,
             WFooter
         },
+        computed: {
+            ...mapGetters([
+                'isAuthorized'
+            ])
+        },
+        methods: {
+            ...mapActions({
+                getCurrentUser: 'fetchUserInfo'
+            })
+        },
+        created() {
+            this.isAuthorized && this.getCurrentUser();
+        }
     };
 
 </script>

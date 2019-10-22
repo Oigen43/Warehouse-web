@@ -17,7 +17,7 @@
         <div class="warehouses-list">
           <w-list
             @delete-button-clicked="clickedDeleteButton"
-            :warehousesList="warehouses"
+            :warehouses="warehouses"
           ></w-list>
         </div>
         <b-row>

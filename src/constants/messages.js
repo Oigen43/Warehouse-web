@@ -105,6 +105,7 @@ export default {
   'transport.delete.success': 'Transport deleted!',
   'transport.delete.error': 'Can not delete transport',
 
+  'ttn.number.conflict': 'TNN is already exists',
   'ttn.list.get.error': 'Can not get TTN list',
   'ttn.get.unknown': 'This TTN does not exist',
   'ttn.name.conflict': 'This TTN already exists!',
@@ -114,8 +115,12 @@ export default {
   'ttn.update.error': 'Can not update TTN',
   'ttn.delete.success': 'TTN deleted!',
   'ttn.delete.error': 'Can not delete TTN',
+  'ttn.status.update.success': 'TTN status updated',
+  'ttn.status.update.error': 'Can no update TTN status',
 
+  'goods.create.error': 'Can not create goods',
   'goods.list.get.error': 'Can not get goods list',
+  'goods.delete.error': 'Can not delete goods',
   'goods.get.unknown': 'This goods does not exist',
 
   'goods.storage.create.success': 'Storage was selected for the goods!',

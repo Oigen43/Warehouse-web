@@ -53,6 +53,9 @@ export default {
   [types.WAREHOUSES](state, warehouses) {
     state.warehouses = warehouses;
   },
+  [types.WAREHOUSES_NAMES](state, warehousesNames) {
+    state.warehousesNames = warehousesNames;
+  },
   [types.WAREHOUSES_PAGE_LIMIT](state, warehousesPageLimit) {
     state.warehousesPageLimit = warehousesPageLimit;
   },
@@ -101,6 +104,9 @@ export default {
   [types.CARRIERS](state, carriers) {
     state.carriers = carriers;
   },
+  [types.CARRIERS_NAMES](state, carriersNames) {
+    state.carriersNames = carriersNames;
+  },
   [types.CARRIERS_PAGE_LIMIT](state, carriersPageLimit) {
     state.carriersPageLimit = carriersPageLimit;
   },
@@ -125,6 +131,9 @@ export default {
   [types.DRIVERS](state, drivers) {
     state.drivers = drivers;
   },
+  [types.DRIVERS_NAMES](state, driversNames) {
+    state.driversNames = driversNames;
+  },
   [types.DRIVERS_PAGE_LIMIT](state, driversPageLimit) {
     state.driversPageLimit = driversPageLimit;
   },
@@ -144,6 +153,12 @@ export default {
   },
   [types.CLEAN_UPDATED_DRIVER](state) {
     state.updatedDriver = {};
+  },
+  [types.CLEAN_DRIVERS](state) {
+    state.drivers = [];
+  },
+  [types.CLEAN_DRIVERS_NAMES](state) {
+    state.driversNames = [];
   },
 
   [types.STORAGES](state, storages) {
@@ -175,6 +190,9 @@ export default {
 
   [types.SENDERS](state, senders) {
     state.senders = senders;
+  },
+  [types.SENDERS_NAMES](state, sendersNames) {
+    state.sendersNames = sendersNames;
   },
   [types.SENDERS_PAGE_LIMIT](state, sendersPageLimit) {
     state.sendersPageLimit = sendersPageLimit;
@@ -224,6 +242,9 @@ export default {
   [types.TRANSPORT](state, transport) {
     state.transport = transport;
   },
+  [types.TRANSPORT_NAMES](state, transportNames) {
+    state.transportNames = transportNames;
+  },
   [types.TRANSPORT_PAGE_LIMIT](state, transportPageLimit) {
     state.transportPageLimit = transportPageLimit;
   },
@@ -244,9 +265,18 @@ export default {
   [types.CLEAN_UPDATED_TRANSPORT](state) {
     state.updatedTransport = {};
   },
+  [types.CLEAN_TRANSPORT](state) {
+    state.transport = [];
+  },
+  [types.CLEAN_TRANSPORT_NAMES](state) {
+    state.transportNames = [];
+  },
 
   [types.TTN](state, TTN) {
     state.TTN = TTN;
+  },
+  [types.CREATE_TTN](state, TTN) {
+    state.newTTN = TTN;
   },
   [types.TTN_PAGE_LIMIT](state, TTNPageLimit) {
     state.TTNPageLimit = TTNPageLimit;
@@ -260,6 +290,9 @@ export default {
   },
   [types.CLEAN_UPDATED_TTN](state) {
     state.updatedTTN = {};
+  },
+  [types.USER_INFO](state, userInfo) {
+    state.userInfo = userInfo;
   },
 
   [types.GOODS](state, goods) {

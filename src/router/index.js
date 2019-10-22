@@ -40,15 +40,15 @@ import WTTNList from '../views/WTTNList';
 import WGoodsForm from '../views/WGoodsForm';
 import WGoodsStorageAdd from '../views/WGoodsStorageAdd';
 import WNotFound from '../views/WNotFound';
+import WTTNAddForm from '../views/WTTNAdd';
+import WTTNUpdateForm from '../views/WTTNUpdate';
 
 Vue.use(Router);
 
 const ifAuthenticated = (to, from, next) => {
   const { authorize } = to.meta;
 
-  if (store.state.token) {
-    next();
-  } else {
+  if (!store.state.token) {
     next('/login');
     return;
   }
@@ -290,8 +290,24 @@ export default new Router({
     },
     {
       path: '/ttn',
-      name: 'ttn',
-      component: WTTNList
+      name: 'TTN',
+      component: WTTNList,
+      meta: { authorize: routesPermissions.TTN.read },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/ttn/add',
+      name: 'TTNAddForm',
+      component: WTTNAddForm,
+      meta: { authorize: routesPermissions.TTN.create },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/ttn/:TTNId/update',
+      name: 'TTNUpdateForm',
+      component: WTTNUpdateForm,
+      meta: { authorize: routesPermissions.TTN.update },
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/goods-form',
@@ -306,6 +322,6 @@ export default new Router({
     {
       path: '*',
       component: WNotFound,
-    }
+    },
   ]
 });
