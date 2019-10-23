@@ -1,6 +1,6 @@
 <template>
     <b-row>
-      <b-col v-if="hasValidType()" xl ="4" lg="6" sm="4">
+      <b-col v-if="hasValidType" xl ="4" lg="6" sm="4">
         <b-card no-body class="overflow-hidden w-goods-card w-goods-add-card">
           <b-button
             v-b-modal.modal-add-goods
@@ -40,7 +40,7 @@
               {{good.recommendation}}
             </b-card-text>
           </b-card-body>
-          <b-card-footer v-if="hasValidType()" class="w-goods-card-footer">
+          <b-card-footer v-if="hasValidType" class="w-goods-card-footer">
             <b-button
               v-b-modal.modal-update-goods
               class="w-goods-update-card-button"
@@ -87,6 +87,7 @@
         BButton
     } from 'bootstrap-vue';
 
+    import types from '../../constants/TTNtypes';
     import WForm from '../../components/WGoodsForm';
 
     export default {
@@ -109,6 +110,10 @@
           };
         },
         props: ['goods', 'type'],
+        computed: {
+          hasValidType() {
+            return this.type === types.INCOMING_TYPE
+        },
         methods: {
           addGood(form) {
             this.$emit('added-good', form);
@@ -124,14 +129,8 @@
           },
           clickedDeleteButton(good) {
             this.$emit('deleted-good', this.goods.indexOf(good));
-          },
-          hasValidType() {
-            if (this.type === 'incoming') {
-              return true;
-            }
-            return false;
-        },
-      }
+          }
+        }
     };
 </script>
 
