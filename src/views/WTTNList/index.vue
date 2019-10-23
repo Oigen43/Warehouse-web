@@ -1,9 +1,9 @@
 <template>
-  <b-row>
+  <b-row v-if="TTN">
     <b-col>
       <div class='w-ttn-list-page'>
         <h1>List of TTN</h1>
-        <b-row>
+        <b-row v-if="hasPermissions(routesPermissions.TTN.create)">
           <b-col>
             <b-button
               variant="dark"
@@ -42,9 +42,9 @@
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
     import { validation } from '../../components/mixins/validation';
-    import routesPermissions from '../../constants/routesPermissions';
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
+    import routesPermissions from '../../constants/routesPermissions';
 
     export default {
         name: 'WTTNListPage',

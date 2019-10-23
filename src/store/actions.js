@@ -111,7 +111,7 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
   fetchWarehousesNames: async ({ commit }, req) => {
-    const res = await api.get(url.WAREHOUSES_URL_NAMES, { companyId: req.companyId });
+    const res = await api.get(url.WAREHOUSES_NAMES_URL, { companyId: req.companyId });
 
     res.data && commit(types.WAREHOUSES_NAMES, res.data.warehouses);
   },
@@ -303,7 +303,7 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
   fetchSendersNames: async ({ commit }, req) => {
-    const res = await api.get(url.SENDERS_URL_NAMES);
+    const res = await api.get(url.SENDERS_NAMES_URL);
 
     res.data && commit(types.SENDERS_NAMES, res.data.senders);
   },
@@ -363,6 +363,11 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
+  fetchReceiversNames: async ({ commit }, req) => {
+    const res = await api.get(url.RECEIVERS_NAMES_URL);
+
+    res.data && commit(types.RECEIVERS_NAMES, res.data.receivers);
+  },
   createReceiver: async ({ commit }, req) => {
     commit(types.REQUEST);
     commit(types.CREATE_RECEIVER, req);
@@ -420,7 +425,7 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
   fetchCarriersNames: async ({ commit }, req) => {
-    const res = await api.get(url.CARRIERS_URL_NAMES);
+    const res = await api.get(url.CARRIERS_NAMES_URL);
 
     res.data && commit(types.CARRIERS_NAMES, res.data.carriers);
   },
@@ -486,7 +491,7 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
   fetchDriversNames: async ({ commit }, req) => {
-    const res = await api.get(url.DRIVERS_URL_NAMES, { carrierId: req.carrierId });
+    const res = await api.get(url.DRIVERS_NAMES_URL, { carrierId: req.carrierId });
 
     res.data && commit(types.DRIVERS_NAMES, res.data.drivers);
   },
@@ -552,7 +557,7 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
   fetchTransportNames: async ({ commit }, req) => {
-    const res = await api.get(url.TRANSPORT_URL_NAMES, { carrierId: req.carrierId });
+    const res = await api.get(url.TRANSPORT_NAMES_URL, { carrierId: req.carrierId });
 
     res.data && commit(types.TRANSPORT_NAMES, res.data.transport);
   },

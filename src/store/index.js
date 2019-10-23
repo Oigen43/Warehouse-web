@@ -51,6 +51,7 @@ export default new Vuex.Store({
 
     receivers: [],
     receiversPageLimit: 1,
+    receiversNames: [],
     newReceiver: {},
     updatedReceiver: {},
     deletedReceiver: {},
