@@ -28,6 +28,14 @@
         Check
       </b-button>
       <b-button
+        v-if="hasOutAction(data.item)"
+        class="w-ttn-out-button"
+        variant="dark"
+        size="sm"
+        @click="clickedOutButton(data.item)">
+        Out
+      </b-button>
+      <b-button
         v-if="hasStorageAction(data.item)"
         variant="dark"
         size="sm"
@@ -61,9 +69,9 @@
                 fields: [
                     'number', 'registrationDate', 'type', 'status',
                     { key: 'Carrier.name', label: 'Carrier' },
-                    { key: 'Sender.senderName', label: 'Sender' },
-                    { key: 'buttons', label: '', class: 'w-list-button' },
-                    { key: 'blank', label: '', class: 'w-blank-column' }
+                    { key: 'Sender', label: 'Sender' },
+                    { key: 'Receiver', label: 'Receiver' },
+                    { key: 'buttons', label: '' },
                 ]
             };
         },
@@ -71,27 +79,32 @@
             items: function () {
                 this.TTN.forEach(item => {
                     item.registrationDate = `${item.registrationDate.slice(0, 10)} ${item.registrationDate.slice(11, 19)}`;
+                    item.Sender = item.Sender ? item.Sender.senderName : 'N/A';
+                    item.Receiver = item.Receiver ? item.Receiver.receiverName : 'N/A';
                 });
-
                 return this.TTN;
             },
             routesPermissions: function () {
-                return routesPermissions;
-            },
+              return routesPermissions;
+            }
         },
         methods: {
             hasUpdateAction(item) {
-                return item.status === statuses.REGISTERED_STATUS &&
+                return (item.status === statuses.REGISTERED_STATUS || item.status === statuses.RELEASE_ALLOWED_STATUS) &&
                     this.hasPermissions(this.routesPermissions.TTN.update);
             },
             hasDeleteAction(item) {
-                return item.status === statuses.REGISTERED_STATUS &&
+                return (item.status === statuses.REGISTERED_STATUS || item.status === statuses.RELEASE_ALLOWED_STATUS) &&
                     this.hasPermissions(this.routesPermissions.TTN.delete);
             },
             hasCheckAction(item) {
                 return (item.status === statuses.REGISTERED_STATUS ||
-                    item.status === statuses.RELEASE_ALLOWED_STATUS) &&
-                    this.hasPermissions(this.routesPermissions.TTN.check);
+                item.status === statuses.RELEASE_ALLOWED_STATUS) &&
+                this.hasPermissions(this.routesPermissions.TTN.check);
+            },
+            hasOutAction(item) {
+                return (item.status === statuses.IN_STORAGE_STATUS &&
+                this.hasPermissions(this.routesPermissions.TTN.out));
             },
             hasStorageAction(item) {
                 return item.status === statuses.CONFIRMED_STATUS &&
@@ -107,6 +120,9 @@
                 })
                     .then(value => value && this.deleteTTN(item));
             },
+            clickedOutButton(item) {
+                router.push(`/ttn/${item.id}/addOut`);
+            },
             deleteTTN(item) {
                 this.$emit('delete-button-clicked', item);
             },
@@ -119,3 +135,7 @@
         }
     };
 </script>
+
+<style lang="scss" scoped>
+  @import './styles.scss';
+</style>

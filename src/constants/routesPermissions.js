@@ -78,6 +78,7 @@ export default {
     update: [roles.WAREHOUSE_DISPATCHER_ROLE],
     delete: [roles.WAREHOUSE_DISPATCHER_ROLE],
     check: [roles.WAREHOUSE_CONTROLLER_ROLE, roles.WAREHOUSE_MANAGER_ROLE],
+    out: [roles.WAREHOUSE_DISPATCHER_ROLE],
     storage: [roles.WAREHOUSE_MANAGER_ROLE]
   },
   writeOffs: {
