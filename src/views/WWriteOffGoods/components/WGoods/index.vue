@@ -20,7 +20,7 @@
         </b-card-body>
         <b-card-footer class="w-goods-card-footer">
           <b-button
-            v-b-modal.modal-update-goods
+            v-b-modal.modal-write-off-goods
             class="w-goods-update-card-button"
             variant="dark"
             size="sm"

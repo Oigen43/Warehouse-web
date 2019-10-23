@@ -11,6 +11,7 @@
               :registrationDate="updatedTTN.registrationDate"
               :dispatcher="updatedTTN.User"
               :manager="userInfo"
+              @form-submitted="clickedSubmitButton"
             ></w-form>
           </b-col>
           <b-col lg="6" md="12" offset-lg="1">
@@ -19,12 +20,6 @@
               :goods="goods"
               :storages="storages"
             ></w-card>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col>
-            <b-button class="w-goods-form-button" variant="dark" size="lg" @click="clickedSubmitButton">Submit
-            </b-button>
           </b-col>
         </b-row>
       </div>
@@ -38,7 +33,6 @@
     import {
         BRow,
         BCol,
-        BButton,
         ToastPlugin
     } from 'bootstrap-vue';
 
@@ -54,7 +48,6 @@
         components: {
             BRow,
             BCol,
-            BButton,
             WForm,
             WCard
         },
@@ -82,7 +75,7 @@
                 setToast: 'SET_TOAST'
             }),
             clickedSubmitButton() {
-                this.goods.some(item => !!item.storage.length) ? this.makeToast(customToasts.emptyStorageGoodsForm) : this.sendData();
+                this.goods.some(item => !item.storage.length) ? this.makeToast(customToasts.emptyStorageGoodsForm) : this.sendData();
             },
             makeToast(toast) {
                 this.$bvToast.toast(toast.message, {

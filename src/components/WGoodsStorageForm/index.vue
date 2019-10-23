@@ -111,43 +111,42 @@
                 goodsItemVolume: 'GOODS_ITEM_COMPUTED_VOLUME',
                 setStorageCurrentCapacity: 'SET_STORAGE_CURRENT_CAPACITY'
             }),
-            clickedStorage(item) {
-                if (this.goodsVolume < item.currentCapacity && !!this.goodsVolume && !!item.currentCapacity) {
+            clickedStorage({ id, currentCapacity }) {
+                if (this.goodsVolume < currentCapacity && !!this.goodsVolume && !!currentCapacity) {
+                    const capacity = currentCapacity - this.goodsVolume;
+
                     this.goodsStorageData.push({
                         goodsId: this.goodsId,
-                        storageId: item.id,
+                        storageId: id,
                         size: this.goodsVolume
                     });
-                    const size = 0;
-                    this.goodsItemVolume(size);
-                    const capacity = item.currentCapacity - this.goodsVolume;
-                    const id = item.id;
+                    this.goodsItemVolume(0);
                     this.setStorageCurrentCapacity({ id, capacity });
-                } else if (!!this.goodsVolume && !!item.currentCapacity) {
+                } else if (!!this.goodsVolume && !!currentCapacity) {
+                    const size = this.goodsItemComputedVolume - currentCapacity;
+
                     this.goodsStorageData.push({
                         goodsId: this.goodsId,
-                        storageId: item.id,
-                        size: item.currentCapacity
+                        storageId: id,
+                        size: currentCapacity
                     });
-                    const size = this.goodsItemComputedVolume - item.currentCapacity;
                     this.goodsItemVolume(size);
-                    const capacity = 0;
-                    const id = item.id;
-                    this.setStorageCurrentCapacity({ id, capacity });
+                    this.setStorageCurrentCapacity({ id, capacity: 0 });
                 }
             },
             clickedSaveButton() {
                 this.$emit('sendData', { goodsData: this.goodsStorageData, storageData: this.storagesComputedCapacity });
             },
             clickedCancelButton() {
-                this.goodsStorageData = [];
                 const size = this.goodsItemInit.volume;
+
+                this.goodsStorageData = [];
                 this.goodsItemVolume(size);
-                this.storagesComputedCapacity.forEach(function (item) {
-                    const id = item.id;
+                this.storagesComputedCapacity.forEach(({ id }) => {
                     const capacity = this.storages.find(element => element.id === id).currentCapacity;
+
                     this.setStorageCurrentCapacity({ id, capacity });
-                }.bind(this));
+                });
                 this.storagesComputedCapacity = this.storages;
             }
         }

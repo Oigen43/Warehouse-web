@@ -16,25 +16,35 @@
     ></b-form-input>
     <b-form-input
       size="lg"
+      disabled
       v-model="formattedDispatcherName"
       class="w-goods-form-input"
     ></b-form-input>
     <b-form-input
       size="lg"
+      disabled
       v-model="formattedManagerName"
       class="w-goods-form-input"
     ></b-form-input>
+    <b-button
+      type="submit"
+      class="w-goods-form-button"
+      variant="outline-dark"
+      size="lg">
+      SUBMIT
+    </b-button>
   </b-form>
 </template>
 
 <script>
-    import { BForm, BFormInput } from 'bootstrap-vue';
+    import { BForm, BFormInput, BButton } from 'bootstrap-vue';
 
     export default {
         name: 'WForm',
         components: {
             BForm,
-            BFormInput
+            BFormInput,
+            BButton
         },
         props: {
             number: {
@@ -61,6 +71,11 @@
                 return `${this.registrationDate.slice(0, 10)}`;
             }
         },
+        methods: {
+            onSubmit() {
+                this.$emit('form-submitted');
+            }
+        }
     };
 </script>
 

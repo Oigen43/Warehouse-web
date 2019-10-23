@@ -309,7 +309,9 @@ export default {
     state.storagesComputedCapacity = storages;
   },
   [types.SET_STORAGE_CURRENT_CAPACITY](state, storage) {
-    state.storagesComputedCapacity = [ ...state.storagesComputedCapacity.map(item => item.id === storage.id ? Object.assign({}, item, { currentCapacity: storage.capacity }) : item) ];
+    state.storagesComputedCapacity = state.storagesComputedCapacity.map(item =>
+      item.id === storage.id ? { ...item, currentCapacity: storage.capacity } : item
+    );
   },
 
   [types.CREATE_WRITE_OFF](state, writeOff) {
