@@ -9,7 +9,7 @@
             {{good.count}}
           </b-card-text>
           <b-card-text class="w-goods-card-text"><span class="w-goods-card-text-bold">Volume:</span>
-            {{good.volume}} m<sup><small>2</small></sup>
+            {{good.volume}} m<sup><small>3</small></sup>
           </b-card-text>
           <b-card-text class="w-goods-card-text"><span class="w-goods-card-text-bold">Weight:</span>
             {{good.weight}} kg

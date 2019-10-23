@@ -37,7 +37,7 @@
       type="number"
       min="1"
       required
-      placeholder="Volume(m²)"
+      placeholder="Volume(m³)"
       class="w-goods-form-input"
     ></b-form-input>
     <b-form-input
