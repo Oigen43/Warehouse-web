@@ -328,12 +328,16 @@ export default new Router({
     {
       path: '/ttn/:TTNId/storage-goods',
       name: 'goods-storage-form',
-      component: WGoodsStorageForm
+      component: WGoodsStorageForm,
+      meta: { authorize: routesPermissions.goodsStorage.read },
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '/ttn/:TTNId/storage-goods/:goodsId/add',
       name: 'choose-goods-storage-form',
-      component: WGoodsStorageAdd
+      component: WGoodsStorageAdd,
+      meta: { authorize: routesPermissions.goodsStorage.create },
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '*',

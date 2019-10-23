@@ -88,5 +88,9 @@ export default {
       roles.WAREHOUSE_CONTROLLER_ROLE,
       roles.WAREHOUSE_DISPATCHER_ROLE
     ]
+  },
+  goodsStorage: {
+    create: [roles.WAREHOUSE_MANAGER_ROLE],
+    read: [roles.WAREHOUSE_MANAGER_ROLE]
   }
 };

@@ -94,8 +94,7 @@
                     this.hasPermissions(this.routesPermissions.TTN.check);
             },
             hasStorageAction(item) {
-                return (item.status === statuses.CONFIRMED_STATUS ||
-                    item.status === statuses.RELEASE_ALLOWED_STATUS) &&
+                return item.status === statuses.CONFIRMED_STATUS &&
                     this.hasPermissions(this.routesPermissions.TTN.storage);
             },
             clickedUpdateButton(item) {
