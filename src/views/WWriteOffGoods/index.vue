@@ -31,6 +31,7 @@
     import { mapActions, mapState } from 'vuex';
 
     import router from '../../router';
+    import TTNTypes from '../../constants/TTNtypes';
     import customToasts from '../../constants/customToasts';
     import helpers from '../../utils/helpers';
     import WForm from './components/WForm';
@@ -54,6 +55,7 @@
         },
         computed: {
             ...mapState([
+                'updatedTTN',
                 'userInfo',
                 'goods'
             ]),
@@ -63,12 +65,17 @@
             TTNId() {
                 return +this.$route.params.TTNId;
             },
+            isReleaseAllowed() {
+                return this.updatedTTN.type === TTNTypes.OUTCOMING_TYPE;
+            }
         },
         methods: {
             ...mapActions({
                 fetchUserInfo: 'fetchUserInfo',
                 fetchGoodsList: 'fetchGoodsList',
-                sendNewWriteOffForm: 'createWriteOff'
+                sendNewWriteOffForm: 'createWriteOff',
+                getUpdatedTTNData: 'getUpdatedTTN',
+                verifyTTN: 'verifyTTN'
             }),
             writeOffGood(good, index) {
                 this.writeOffGoods.splice(index, 1, good);
@@ -77,7 +84,8 @@
                 helpers.isArrayEmpty(this.writeOffGoods) ? this.makeToast(customToasts.emptyWriteOffGoodsList) : this.sendData(form, this.writeOffGoods);
             },
             async sendData(form, goods) {
-                const res = await this.sendNewWriteOffForm({ writeOff: form, goods: goods });
+                let res = this.isReleaseAllowed ? await this.verifyTTN({ id: this.TTNId }) : await this.confirmTTN({ id: this.TTNId });
+                res = !res.error && await this.sendNewWriteOffForm({ writeOff: form, goods: goods });
 
                 !res.error && router.push('/ttn');
             },
@@ -90,6 +98,7 @@
             }
         },
         created: async function() {
+            await this.getUpdatedTTNData(this.TTNId);
             await this.fetchUserInfo();
             await this.fetchGoodsList(this.TTNId);
         }

@@ -1,6 +1,6 @@
 <template>
   <b-row>
-    <b-col class="w-goods-storage-update" lg="10" offset-lg="1">
+    <b-col class="w-goods-storage-add" lg="10" offset-lg="1">
       <h1>Choose Storage for Goods</h1>
       <w-goods-storage-form
         @sendData="sendData"

@@ -10,6 +10,7 @@
               :number="updatedTTN.number"
               :registrationDate="updatedTTN.registrationDate"
               :dispatcher="updatedTTN.User"
+              :isReleaseAllowed="isReleaseAllowed"
               :manager="userInfo"
               @form-submitted="clickedSubmitButton"
             ></w-form>
@@ -36,6 +37,7 @@
         ToastPlugin
     } from 'bootstrap-vue';
 
+    import TTNTypes from '../../constants/TTNtypes';
     import customToasts from '../../constants/customToasts';
     import router from '../../router';
     import WForm from './components/WForm';
@@ -57,11 +59,15 @@
                 'userInfo',
                 'storages',
                 'goods',
-                'toast'
+                'toast',
+                'storagesComputedCapacity'
             ]),
             TTNId() {
                 return +this.$route.params.TTNId;
             },
+            isReleaseAllowed() {
+                return this.updatedTTN.type === TTNTypes.OUTCOMING_TYPE;
+            }
         },
         methods: {
             ...mapActions({
@@ -69,10 +75,11 @@
                 fetchUserInfo: 'fetchUserInfo',
                 fetchAllStorages: 'fetchAllStorages',
                 fetchGoodsList: 'fetchGoodsList',
-                setInStorageStatus: 'setInStorageTTN'
+                setInStorageStatus: 'setInStorageTTN',
+                releaseGoods: 'releaseGoods'
             }),
             ...mapMutations({
-                setToast: 'SET_TOAST'
+                setStorageCurrentCapacity: 'SET_STORAGE_CURRENT_CAPACITY'
             }),
             clickedSubmitButton() {
                 this.goods.some(item => !item.storage.length) ? this.makeToast(customToasts.emptyStorageGoodsForm) : this.sendData();
@@ -87,10 +94,23 @@
             redirect() {
                 router.push('/ttn');
             },
-            sendData() {
-                const res = this.setInStorageStatus({ id: this.TTNId });
+            async sendData() {
+                const res = this.isReleaseAllowed ? await this.releaseGoodsStorage(this.TTNId) : await this.setInStorageStatus({ id: this.TTNId });
 
                 !res.error && this.redirect();
+            },
+            changeStorageCurrentCapacity() {
+                this.goods.forEach(item => {
+                    item.storage.forEach(item => {
+                        const capacity = item.GoodsStorage.size + item.currentCapacity;
+
+                        this.setStorageCurrentCapacity({ id: item.id, capacity });
+                    });
+                });
+            },
+            async releaseGoodsStorage(TTNId) {
+                await this.changeStorageCurrentCapacity();
+                return this.releaseGoods({ goodsData: this.goods, storageData: this.storagesComputedCapacity, id: TTNId });
             },
             clickedChooseGoodsStorage(item) {
                 router.push(`/ttn/${this.TTNId}/storage-goods/${item.id}/add`);

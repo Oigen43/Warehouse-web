@@ -90,8 +90,8 @@
                 this.fetchTTNList(this.currentPage);
             }
         },
-        created: function () {
-            this.fetchTTNList();
+        created: async function () {
+            await this.fetchTTNList();
         }
     };
 </script>

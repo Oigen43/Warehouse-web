@@ -27,11 +27,20 @@
       class="w-goods-form-input"
     ></b-form-input>
     <b-button
+      v-if="!isReleaseAllowed"
       type="submit"
       class="w-goods-form-button"
       variant="outline-dark"
       size="lg">
       SUBMIT
+    </b-button>
+    <b-button
+      v-if="isReleaseAllowed"
+      type="submit"
+      class="w-goods-form-button"
+      variant="outline-dark"
+      size="lg">
+      RELEASE
     </b-button>
   </b-form>
 </template>
@@ -58,6 +67,9 @@
             },
             manager: {
                 type: Object
+            },
+            isReleaseAllowed: {
+                type: Boolean
             }
         },
         computed: {

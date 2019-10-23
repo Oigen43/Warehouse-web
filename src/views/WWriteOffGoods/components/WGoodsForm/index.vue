@@ -85,7 +85,7 @@
       variant="outline-dark"
       size="lg"
       class="w-goods-form-button">
-      UPDATE ITEM
+      WRITE-OFF ITEM
     </b-button>
   </b-form>
 </template>
@@ -105,13 +105,13 @@
                 type: String
             },
             volume: {
-                type: String
+                type: Number
             },
             count: {
-                type: String
+                type: Number
             },
             weight: {
-                type: String
+                type: Number
             },
             price: {
                 type: String

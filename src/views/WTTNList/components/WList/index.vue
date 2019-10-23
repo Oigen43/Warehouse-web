@@ -99,7 +99,7 @@
             },
             hasCheckAction(item) {
                 return (item.status === statuses.REGISTERED_STATUS ||
-                item.status === statuses.RELEASE_ALLOWED_STATUS) &&
+                item.status === statuses.TAKEN_OUT_OF_STORAGE_STATUS) &&
                 this.hasPermissions(this.routesPermissions.TTN.check);
             },
             hasOutAction(item) {
@@ -107,7 +107,7 @@
                 this.hasPermissions(this.routesPermissions.TTN.out));
             },
             hasStorageAction(item) {
-                return item.status === statuses.CONFIRMED_STATUS &&
+                return (item.status === statuses.CONFIRMED_STATUS || statuses.RELEASE_ALLOWED_STATUS) &&
                     this.hasPermissions(this.routesPermissions.TTN.storage);
             },
             clickedUpdateButton(item) {

@@ -7,7 +7,8 @@
           @form-submitted="onSubmit"
           :number="updatedTTN.number"
           :dischargeDate="updatedTTN.dischargeDate"
-          :sender="updatedTTN.Sender.senderName"
+          :sender="updatedTTN.Sender"
+          :receiver="updatedTTN.Receiver"
           :carrier="updatedTTN.Carrier.name"
           :transport="updatedTTN.Transport"
           :driver="updatedTTN.Driver"
@@ -39,6 +40,7 @@
     import { mapState, mapActions } from 'vuex';
 
     import router from '../../router';
+    import TTNTypes from '../../constants/TTNtypes';
     import WForm from './components/WForm';
     import WGoods from './components/WGoods';
 
@@ -61,16 +63,20 @@
             },
             goods() {
                 return this.updatedTTN.goods.data.goods;
+            },
+            isReleaseAllowed() {
+                return this.updatedTTN.type === TTNTypes.OUTCOMING_TYPE;
             }
         },
         methods: {
             ...mapActions({
                 getUpdatedTTNData: 'getUpdatedTTN',
                 fetchUserInfo: 'fetchUserInfo',
-                confirmTTN: 'confirmTTN'
+                confirmTTN: 'confirmTTN',
+                verifyTTN: 'verifyTTN'
             }),
             async onSubmit() {
-                const res = await this.confirmTTN({ id: this.TTNId });
+                const res = this.isReleaseAllowed ? await this.verifyTTN({ id: this.TTNId }) : await this.confirmTTN({ id: this.TTNId });
 
                 !res.error && this.redirect();
             },

@@ -34,7 +34,7 @@
               {{good.weight}} kg
             </b-card-text>
             <b-card-text class="w-goods-card-text"><span class="w-goods-card-text-bold">Price:</span>
-              {{good.volume}} $
+              {{good.price}} $
             </b-card-text>
             <b-card-text class="w-goods-card-text"><span class="w-goods-card-text-bold">Recommendation:</span>
               {{good.recommendation}}
