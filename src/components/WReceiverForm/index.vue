@@ -16,7 +16,7 @@
     <label
       class="w-receivers-form-input-label"
       for="receiver-tin-input">
-      Receiver TIN:
+      Receiver TIN (taxpayer identification number):
     </label>
     <b-form-input
       id="receiver-tin-input"

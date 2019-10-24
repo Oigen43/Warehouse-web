@@ -65,7 +65,7 @@
               variant="light"
               to='/ttn'
               class="w-navigation-link">
-              TTN
+              GCN
             </b-button>
           </b-nav-item>
         </b-navbar-nav>

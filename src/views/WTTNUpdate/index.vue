@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="transportNames.length">
-    <h1 class="w-ttn-update-form-h1">Update TTN</h1>
+    <h1 class="w-ttn-update-form-h1">Update Goods Consignment Note</h1>
     <b-row>
       <b-col v-if='sendersNames' class="w-ttn-update-form-col" lg="3" md="12" offset-lg="1" align-self="start">
         <w-form

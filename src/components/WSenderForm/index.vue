@@ -16,7 +16,7 @@
     <label
       class="w-senders-form-input-label"
       for="sender-tin-input">
-      Sender TIN:
+      Sender TIN (taxpayer identification number):
     </label>
     <b-form-input
       id="sender-tin-input"

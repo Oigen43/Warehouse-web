@@ -3,7 +3,7 @@
       <label
         class="w-ttn-form-input-label"
         for="ttn-number">
-        TTN number:
+        GCN number:
       </label>
       <b-form-input
         id="ttn-number"
@@ -156,7 +156,7 @@
       <label
         class="w-ttn-form-input-label"
         for="ttn-type">
-        TTN type:
+        GCN type:
       </label>
       <b-form-input
         id="ttn-type"

@@ -2,7 +2,7 @@
   <b-row v-if="TTN">
     <b-col>
       <div class='w-ttn-list-page'>
-        <h1>List of TTN</h1>
+        <h1>List of GCN</h1>
         <b-row v-if="hasPermissions(routesPermissions.TTN.create)">
           <b-col>
             <b-button
@@ -10,7 +10,7 @@
               to="/ttn/add"
               v-if="hasPermissions(routesPermissions.TTN.create)"
               class="w-ttn-add-button"
-            >add TTN
+            >add GCN
             </b-button>
           </b-col>
         </b-row>

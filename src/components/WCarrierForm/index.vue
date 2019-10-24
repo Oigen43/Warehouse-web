@@ -16,7 +16,7 @@
       <label
         class="w-carriers-form-input-label"
         for="carrier-tin-input">
-        Carrier TIN:
+        Carrier TIN (taxpayer identification number):
       </label>
       <b-form-input
         id="carrier-tin-input"

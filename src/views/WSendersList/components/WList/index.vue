@@ -48,7 +48,9 @@
         data: function () {
             return {
                 fields: [
-                    'senderName', 'upn', 'countryCode',
+                    'senderName',
+                    { key: 'upn', label: 'TIN' },
+                    'countryCode',
                     {
                         key: 'date',
                         label: 'Date',

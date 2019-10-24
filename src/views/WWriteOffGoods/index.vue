@@ -10,7 +10,7 @@
         ></w-form>
         <b-button
           variant="link"
-          to="/ttn"
+          :to="toGCNCheckLink"
           class="w-write-off-form-go-back-link"
         >Go Back
         </b-button>
@@ -67,6 +67,9 @@
             },
             isReleaseAllowed() {
                 return this.updatedTTN.type === TTNTypes.OUTCOMING_TYPE;
+            },
+            toGCNCheckLink() {
+                return `/ttn/${this.TTNId}/check`;
             }
         },
         methods: {

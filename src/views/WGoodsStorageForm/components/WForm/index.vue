@@ -3,7 +3,7 @@
     <label
       class="w-goods-form-input-label"
       for="goods-ttn-number">
-      TTN number:
+      GCN number:
     </label>
     <b-form-input
       id="goods-ttn-number"
@@ -17,7 +17,7 @@
     <label
       class="w-goods-form-input-label"
       for="goods-ttn-registration-date">
-      TTN registration date:
+      GCN registration date:
     </label>
     <b-form-input
       id="goods-ttn-registration-date"

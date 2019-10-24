@@ -1,6 +1,6 @@
 <template>
   <div v-if="updatedTTN.id" class="w-ttn-check-form-page">
-    <h1 class="w-ttn-check-form-h1">Check TTN</h1>
+    <h1 class="w-ttn-check-form-h1">Check Goods Consignment Note</h1>
     <b-row>
       <b-col class="w-ttn-check-form-col" lg="3" md="12" offset-lg="1" align-self="start">
         <w-form

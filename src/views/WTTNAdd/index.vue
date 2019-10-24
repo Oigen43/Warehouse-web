@@ -1,6 +1,6 @@
 <template>
   <div v-if='carriersNames.length'>
-    <h1 class="w-ttn-add-form-h1">Create TTN</h1>
+    <h1 class="w-ttn-add-form-h1">Create Goods Consignment Note</h1>
     <b-row>
       <b-col class="w-ttn-add-form-col" lg="3" md="12" offset-lg="1" align-self="start">
         <w-form
