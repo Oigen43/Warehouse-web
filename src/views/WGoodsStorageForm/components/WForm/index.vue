@@ -1,26 +1,53 @@
 <template>
   <b-form @submit.prevent="onSubmit" class="w-goods-form">
+    <label
+      class="w-goods-form-input-label"
+      for="goods-ttn-number">
+      TTN number:
+    </label>
     <b-form-input
+      id="goods-ttn-number"
       size="lg"
       v-model="number"
       type="number"
       disabled
       class="w-goods-form-input"
     ></b-form-input>
+
+    <label
+      class="w-goods-form-input-label"
+      for="goods-ttn-registration-date">
+      TTN registration date:
+    </label>
     <b-form-input
+      id="goods-ttn-registration-date"
       size="lg"
       v-model="formattedRegistrationDate"
       type="date"
       disabled
       class="w-goods-form-input"
     ></b-form-input>
+
+    <label
+      class="w-goods-form-input-label"
+      for="goods-ttn-dispatcher">
+      Dispatcher:
+    </label>
     <b-form-input
+      id="goods-ttn-dispatcher"
       size="lg"
       disabled
       v-model="formattedDispatcherName"
       class="w-goods-form-input"
     ></b-form-input>
+
+    <label
+      class="w-goods-form-input-label"
+      for="goods-ttn-manager">
+      Manager:
+    </label>
     <b-form-input
+      id="goods-ttn-manager"
       size="lg"
       disabled
       v-model="formattedManagerName"

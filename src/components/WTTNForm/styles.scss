@@ -1,10 +1,15 @@
 .w-ttn-form {
-  padding: 0 1rem;
+  padding: 1rem 1rem 0 1rem;
 }
 
 .w-ttn-form-input {
   width: 100%;
-  margin: 1rem 0;
+  margin-bottom: 1rem;
+}
+
+.w-ttn-form-input-label {
+  color: #6c757d;
+  font-weight: bold;
 }
 
 .w-ttn-form-button {

@@ -75,7 +75,8 @@
                 fetchGoodsList: 'fetchGoodsList',
                 sendNewWriteOffForm: 'createWriteOff',
                 getUpdatedTTNData: 'getUpdatedTTN',
-                verifyTTN: 'verifyTTN'
+                verifyTTN: 'verifyTTN',
+                confirmTTN: 'confirmTTN'
             }),
             writeOffGood(good, index) {
                 this.writeOffGoods.splice(index, 1, good);

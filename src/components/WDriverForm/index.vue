@@ -1,38 +1,54 @@
 <template>
   <b-form @submit.prevent="onSubmit" class="w-drivers-form">
+    <label
+      class="w-drivers-form-input-label"
+      for="driver-name-input">
+      Driver first name:
+    </label>
     <b-form-input
       id="driver-name-input"
       size="lg"
       v-model="form.firstName"
       required
-      placeholder="Driver first name"
-      class="w-driver-form-input"
+      class="w-drivers-form-input"
     ></b-form-input>
 
+    <label
+      class="w-drivers-form-input-label"
+      for="driver-surname-input">
+      Driver surname:
+    </label>
     <b-form-input
       id="driver-surname-input"
       size="lg"
       v-model="form.surname"
-      placeholder="Driver surname"
       class="w-drivers-form-input"
     ></b-form-input>
 
+    <label
+      class="w-drivers-form-input-label"
+      for="driver-passport-number-input">
+      Driver passport number:
+    </label>
     <b-form-input
       id="driver-passport-number-input"
       size="lg"
       v-model="form.passportNumber"
       required
-      placeholder="Driver passport number"
       class="w-drivers-form-input"
     ></b-form-input>
 
+    <label
+      class="w-drivers-form-input-label"
+      for="driver-licence-issuing-date-input">
+      Driver licence issuing dat:
+    </label>
     <b-form-input
-      id="driver-issuing-date-input"
+      id="driver-licence-issuing-date-input"
       size="lg"
       v-model="form.issuingDate"
       type="date"
       required
-      placeholder="Driver issuing date"
       class="w-drivers-form-input"
     ></b-form-input>
 

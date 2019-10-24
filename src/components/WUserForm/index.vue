@@ -1,85 +1,129 @@
 <template>
     <b-form @submit.prevent="onSubmit" class="w-users-form">
-      <div
-        v-if="addUser">
+      <div v-if="addUser">
+        <label
+          class="w-user-form-input-label"
+          for="company-user-first-name-input">
+          User first name:
+        </label>
         <b-form-input
           id="company-user-first-name-input"
           size="lg"
           v-model="form.firstName"
           required
-          placeholder="User first name"
           class="w-users-form-input"
         ></b-form-input>
+
+        <label
+          class="w-user-form-input-label"
+          for="company-user-email-input">
+          User email:
+        </label>
         <b-form-input
           id="company-user-email-input"
           size="lg"
           v-model="form.email"
           required
           type="email"
-          placeholder="User email"
           class="w-users-form-input"
         ></b-form-input>
       </div>
       <div v-else>
+        <label
+          class="w-user-form-input-label"
+          for="user-first-name-input">
+          User first name:
+        </label>
         <b-form-input
         id="user-first-name-input"
         size="lg"
         v-model="form.firstName"
         required
-        placeholder="User first name"
         class="w-users-form-input"
         ></b-form-input>
 
+        <label
+          class="w-user-form-input-label"
+          for="user-surname-input">
+          User surname:
+        </label>
         <b-form-input
           id="user-surname-input"
           size="lg"
           v-model="form.surname"
-          placeholder="User surname"
           class="w-users-form-input"
         ></b-form-input>
 
+        <label
+          class="w-user-form-input-label"
+          for="user-patronymic-input">
+          User patronymic:
+        </label>
         <b-form-input
           id="user-patronymic-input"
           size="lg"
           v-model="form.patronymic"
-          placeholder="User patronymic"
           class="w-users-form-input"
         ></b-form-input>
 
+        <label
+          class="w-user-form-input-label"
+          for="user-email-input">
+          User email:
+        </label>
         <b-form-input
           id="user-email-input"
           size="lg"
           v-model="form.email"
           required
           type="email"
-          placeholder="User email"
           class="w-users-form-input"
         ></b-form-input>
 
+        <label
+          class="w-user-form-input-label"
+          for="user-address-input">
+          User address (city, street, house, flat):
+        </label>
         <b-form-input
+          id="user-address-input"
           size="lg"
           v-model="form.address"
-          placeholder="User address (city, street, house, flat)"
           class="w-users-form-input"
         ></b-form-input>
 
+        <label
+          class="w-user-form-input-label"
+          for="user-birth-date-input">
+          User birth date:
+        </label>
         <b-form-input
+          id="user-birth-date-input"
           size="lg"
           v-model="form.birthDate"
           type="date"
-          placeholder="User birth date"
           class="w-users-form-input"
         ></b-form-input>
 
+        <label
+          class="w-user-form-input-label"
+          for="user-login-input">
+          User login:
+        </label>
         <b-form-input
           id="user-login-input"
           size="lg"
           v-model="form.login"
           required
-          placeholder="User login"
           class="w-users-form-input"
         ></b-form-input>
 
+        <label
+          v-if="passwordDisplay"
+          class="w-user-form-input-label"
+          for="user-password-input">
+          User password:
+        </label>
         <b-form-input
           v-if="passwordDisplay"
           id="user-password-input"
@@ -87,12 +131,17 @@
           v-model="form.password"
           type="password"
           required
-          placeholder="User password"
           class="w-users-form-input"
         ></b-form-input>
       </div>
 
+      <label
+        class="w-user-form-input-label"
+        for="user-role-input">
+        User role:
+      </label>
       <w-multiselect
+        id="user-role-input"
         :value="selectedRoles"
         :options="checkRolesForCompanyUsers ? rolesForCreatingCompanyUsers : rolesForCreating"
         :multiple="true"
@@ -104,7 +153,14 @@
         class="w-users-form-input"
       ></w-multiselect>
 
+      <label
+        v-if="isWarehousesRoleSelected"
+        class="w-user-form-input-label"
+        for="user-warehouse-input">
+        User warehouse:
+      </label>
       <w-multiselect
+        id="user-warehouse-input"
         v-if="isWarehousesRoleSelected"
         v-model="selectedWarehouseData"
         :options="warehousesNames"

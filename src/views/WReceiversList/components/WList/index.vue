@@ -1,5 +1,6 @@
 <template>
   <w-table
+    :insert="true"
     :items="receivers"
     :fields="fields">
     <template

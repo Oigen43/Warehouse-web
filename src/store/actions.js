@@ -131,7 +131,7 @@ export default {
 
     const res = await api.getById(url.WAREHOUSES_URL, id);
 
-    res.data && commit(types.SET_UPDATED_WAREHOUSE, res.data.warehouse);
+    res.data && commit(types.SET_UPDATED_WAREHOUSE, res.data.warehouses);
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;

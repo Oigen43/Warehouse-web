@@ -1,16 +1,28 @@
 <template>
   <b-form @submit.prevent="onSubmit" class="w-write-off-form">
+    <label
+      class="w-write-off-form-input-label"
+      for="write-off-number">
+      Write-off number:
+    </label>
     <b-form-input
+      id="write-off-number"
       size="lg"
       v-model="form.number"
       type="number"
       min="1"
-      number
       required
       placeholder="Write-Off Number"
       class="w-write-off-form-input"
     ></b-form-input>
+
+    <label
+      class="w-write-off-form-input-label"
+      for="write-off-controller">
+      Controller:
+    </label>
     <b-form-input
+      id="write-off-controller"
       size="lg"
       :value="formattedControllerName"
       disabled

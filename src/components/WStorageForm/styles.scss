@@ -1,16 +1,21 @@
-.w-storages-form {
+.w-storage-form {
   padding: 0 1rem;
 }
 
-.w-storages-form-input {
+.w-storage-form-input {
   width: 100%;
-  margin: 1rem 0;
+  margin-bottom: 1rem;
 }
 
-.w-storages-form-button {
+.w-storage-form-input-label {
+  color: #6c757d;
+  font-weight: bold;
+}
+
+.w-storage-form-button {
   width: 100%;
 }
 
-.w-storages-form-button:hover {
+.w-storage-form-button:hover {
   background-color: #2C3E50;
 }

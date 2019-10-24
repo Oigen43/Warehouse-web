@@ -3,23 +3,31 @@
         <b-col class="w-login-form" lg="4" offset-lg="4">
           <h1 class="w-login-form-h1">Login</h1>
           <b-form @submit.prevent="login">
+            <label
+              class="w-login-form-input-label"
+              for="login-email">
+              Email:
+            </label>
             <b-form-input
-              id="user-email-input"
+              id="login-email"
               size="lg"
               type="email"
               v-model="form.email"
               required
-              placeholder="User email"
               class="w-login-form-input"
             ></b-form-input>
 
+            <label
+              class="w-login-form-input-label"
+              for="login-password">
+              Password:
+            </label>
             <b-form-input
               id="user-password-input"
               size="lg"
               type="password"
               v-model="form.password"
               required
-              placeholder="User password"
               class="w-login-form-input"
             ></b-form-input>
 

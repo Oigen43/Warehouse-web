@@ -1,26 +1,41 @@
 <template>
   <b-form @submit.prevent="onSubmit" class="w-receivers-form">
+    <label
+      class="w-receivers-form-input-label"
+      for="receiver-name-input">
+      Receiver name:
+    </label>
     <b-form-input
+      id="receiver-name-input"
       size="lg"
       v-model="form.receiverName"
       required
-      placeholder="Receiver name"
       class="w-receivers-form-input"
     ></b-form-input>
 
+    <label
+      class="w-receivers-form-input-label"
+      for="receiver-tin-input">
+      Receiver TIN:
+    </label>
     <b-form-input
+      id="receiver-tin-input"
       size="lg"
       v-model="form.upn"
       required
-      placeholder="Receiver UPN"
       class="w-receivers-form-input"
     ></b-form-input>
 
+    <label
+      class="w-receivers-form-input-label"
+      for="receiver-country-code-input">
+      Receiver country code:
+    </label>
     <b-form-input
+      id="receiver-country-code-input"
       size="lg"
       v-model="form.countryCode"
       required
-      placeholder="Receiver country code"
       class="w-receivers-form-input"
     ></b-form-input>
 

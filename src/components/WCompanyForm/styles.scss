@@ -4,7 +4,12 @@
 
 .w-companies-form-input {
   width: 100%;
-  margin: 1rem 0;
+  margin-bottom: 1rem;
+}
+
+.w-companies-form-input-label {
+  color: #6c757d;
+  font-weight: bold;
 }
 
 .w-companies-form-button {
@@ -15,12 +20,13 @@
   background-color: #2C3E50;
 }
 
-.w-companies-admin {
+.w-companies-admin-h1 {
   text-align: center;
-  margin-top: 5rem;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 .w-companies-admin-form-input {
   width: 100%;
-  margin: 1rem 0;
+  margin-bottom: 1rem;
 }

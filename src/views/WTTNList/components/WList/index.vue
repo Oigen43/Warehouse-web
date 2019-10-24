@@ -1,5 +1,6 @@
 <template>
   <w-table
+    :insert="hasPermissions(this.routesPermissions.TTN.create)"
     :items="items"
     :fields="fields">
     <template
