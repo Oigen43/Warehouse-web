@@ -43,6 +43,13 @@
         @click="clickedStorageButton(data.item)">
         Storage
       </b-button>
+      <b-button
+        v-if="hasOpenAction(data.item)"
+        variant="dark"
+        size="sm"
+        @click="clickedOpenButton(data.item)">
+        Open
+      </b-button>
     </template>
   </w-table>
 </template>
@@ -111,6 +118,10 @@
                 return (item.status === statuses.CONFIRMED_STATUS || statuses.RELEASE_ALLOWED_STATUS) &&
                     this.hasPermissions(this.routesPermissions.TTN.storage);
             },
+            hasOpenAction(item) {
+                return (item.status === statuses.ARCHIVED_STATUS || statuses.VERIFICATION_COMPLETED_STATUS) &&
+                    this.hasPermissions(this.routesPermissions.TTN.getById);
+            },
             clickedUpdateButton(item) {
                 router.push(`/ttn/${item.id}/update`);
             },
@@ -132,6 +143,9 @@
             },
             clickedCheckButton(item) {
                 router.push(`/ttn/${item.id}/check`);
+            },
+            clickedOpenButton(item) {
+                router.push(`/ttn/${item.id}`);
             }
         }
     };
