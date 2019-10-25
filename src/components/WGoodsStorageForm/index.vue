@@ -103,7 +103,7 @@
                 return this.goodsItemComputedVolume;
             },
             storagesComputed() {
-                return this.storagesComputedCapacity;
+                return this.storagesComputedCapacity.filter(item => item.currentCapacity);
             }
         },
         methods: {

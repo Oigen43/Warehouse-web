@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="transportNames.length">
-    <h1 class="w-ttn-update-form-h1">Update TTN</h1>
+    <h1 class="w-ttn-update-form-h1">Update Goods Consignment Note</h1>
     <b-row>
       <b-col v-if='sendersNames' class="w-ttn-update-form-col" lg="3" md="12" offset-lg="1" align-self="start">
         <w-form
@@ -101,10 +101,10 @@
                 sendUpdatedTTNData: 'sendUpdatedTTN'
             }),
             ...mapMutations({
-              clearDrivers: types.CLEAN_DRIVERS_NAMES,
-              clearTransport: types.CLEAN_TRANSPORT_NAMES,
-              clearSenders: types.CLEAN_SENDERS_NAMES,
-              clearReceivers: types.CLEAN_RECEIVERS_NAMES,
+                clearDrivers: types.CLEAN_DRIVERS_NAMES,
+                clearTransport: types.CLEAN_TRANSPORT_NAMES,
+                clearSenders: types.CLEAN_SENDERS_NAMES,
+                clearReceivers: types.CLEAN_RECEIVERS_NAMES,
             }),
             addGood(good) {
                 this.goods.push(good);
@@ -116,9 +116,22 @@
                 this.goods.splice(index, 1);
             },
             async sendData(form) {
-                const res = await this.sendUpdatedTTNData({ TTN: form, goods: this.goods });
+                const TTNForm = {
+                    id: form.id,
+                    number: form.number,
+                    dischargeDate: form.dischargeDate,
+                    senderId: form.sender ? form.sender.id : null,
+                    receiverId: form.receiver ? form.receiver.id : null,
+                    carrierId: form.carrier.id,
+                    transportId: form.transport.id,
+                    driverId: form.driver ? form.driver.id : null,
+                    description: form.description,
+                    warehouseId: form.warehouse.id
+                };
 
-                !res.error && router.push('/ttn');
+                const res = await this.sendUpdatedTTNData({ TTN: TTNForm, goods: this.goods });
+
+                !res.error && router.push('/gcn');
             },
             getTransportsAndDrivers(id) {
                 this.fetchTransportNames({ carrierId: id });

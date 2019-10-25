@@ -1,5 +1,6 @@
 <template>
   <w-table
+    insert
     :items="carriers"
     :fields="fields">
     <template
@@ -67,7 +68,9 @@
         data: function () {
             return {
                 fields: [
-                    'name', 'upn', 'countryCode',
+                    'name',
+                    { key: 'upn', label: 'TIN' },
+                    'countryCode',
                     {
                         key: 'date',
                         label: 'Date',

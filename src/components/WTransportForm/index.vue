@@ -1,18 +1,28 @@
 <template>
   <b-form @submit.prevent="onSubmit" class="w-transport-form">
+    <label
+      class="w-transport-form-input-label"
+      for="transport-type-input">
+      Transport type:
+    </label>
     <b-form-input
+      id="transport-type-input"
       size="lg"
       v-model="form.transportType"
       required
-      placeholder="Transport type"
       class="w-transport-form-input"
     ></b-form-input>
 
+    <label
+      class="w-transport-form-input-label"
+      for="transport-number-input">
+      Transport number:
+    </label>
     <b-form-input
+      id="transport-number-input"
       size="lg"
       v-model="form.transportNumber"
       required
-      placeholder="Transport Number"
       class="w-transport-form-input"
     ></b-form-input>
 

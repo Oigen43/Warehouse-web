@@ -10,7 +10,7 @@
         ></w-form>
         <b-button
           variant="link"
-          to="/ttn"
+          :to="toGCNCheckLink"
           class="w-write-off-form-go-back-link"
         >Go Back
         </b-button>
@@ -31,6 +31,8 @@
     import { mapActions, mapState } from 'vuex';
 
     import router from '../../router';
+    import TTNTypes from '../../constants/TTNtypes';
+    import * as statusesTTN from '../../constants/statuses';
     import customToasts from '../../constants/customToasts';
     import helpers from '../../utils/helpers';
     import WForm from './components/WForm';
@@ -54,6 +56,7 @@
         },
         computed: {
             ...mapState([
+                'updatedTTN',
                 'userInfo',
                 'goods'
             ]),
@@ -63,12 +66,20 @@
             TTNId() {
                 return +this.$route.params.TTNId;
             },
+            isReleaseAllowed() {
+                return this.updatedTTN.type === TTNTypes.OUTCOMING_TYPE;
+            },
+            toGCNCheckLink() {
+                return `/gcn/${this.TTNId}/check`;
+            }
         },
         methods: {
             ...mapActions({
                 fetchUserInfo: 'fetchUserInfo',
                 fetchGoodsList: 'fetchGoodsList',
-                sendNewWriteOffForm: 'createWriteOff'
+                sendNewWriteOffForm: 'createWriteOff',
+                getUpdatedTTNData: 'getUpdatedTTN',
+                sendUpdatedTTNData: 'sendUpdatedTTN'
             }),
             writeOffGood(good, index) {
                 this.writeOffGoods.splice(index, 1, good);
@@ -77,9 +88,26 @@
                 helpers.isArrayEmpty(this.writeOffGoods) ? this.makeToast(customToasts.emptyWriteOffGoodsList) : this.sendData(form, this.writeOffGoods);
             },
             async sendData(form, goods) {
-                const res = await this.sendNewWriteOffForm({ writeOff: form, goods: goods });
+                let res = this.isReleaseAllowed ? await this.verifyTTN() : await this.confirmTTN();
+                res = !res.error && await this.sendNewWriteOffForm({ writeOff: form, goods: goods });
 
-                !res.error && router.push('/ttn');
+                !res.error && router.push('/gcn');
+            },
+            verifyTTN() {
+                const TTN = {
+                    id: this.TTNId,
+                    status: statusesTTN.VERIFICATION_COMPLETED_STATUS
+                };
+
+                return this.sendUpdatedTTNData({ TTN });
+            },
+            confirmTTN() {
+                const TTN = {
+                    id: this.TTNId,
+                    status: statusesTTN.CONFIRMED_STATUS
+                };
+
+                return this.sendUpdatedTTNData({ TTN });
             },
             makeToast(toast) {
                 this.$bvToast.toast(toast.message, {
@@ -90,6 +118,7 @@
             }
         },
         created: async function() {
+            await this.getUpdatedTTNData(this.TTNId);
             await this.fetchUserInfo();
             await this.fetchGoodsList(this.TTNId);
         }

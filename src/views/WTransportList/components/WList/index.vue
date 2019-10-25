@@ -1,5 +1,6 @@
 <template>
   <w-table
+    insert
     :items="transport"
     :fields="fields">
     <template

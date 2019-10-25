@@ -131,7 +131,7 @@ export default {
 
     const res = await api.getById(url.WAREHOUSES_URL, id);
 
-    res.data && commit(types.SET_UPDATED_WAREHOUSE, res.data.warehouse);
+    res.data && commit(types.SET_UPDATED_WAREHOUSE, res.data.warehouses);
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -698,19 +698,10 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
   },
-  confirmTTN: async ({ commit }, id) => {
+  releaseGoods: async ({ commit }, data) => {
     commit(types.REQUEST);
 
-    const res = await api.put(url.TTN_CONFIRM_URL, id);
-
-    commit(types.SUCCESS);
-    res.toast && commit(types.SET_TOAST, res.toast);
-    return res;
-  },
-  setInStorageTTN: async ({ commit }, id) => {
-    commit(types.REQUEST);
-
-    const res = await api.put(url.TTN_IN_STORAGE_URL, id);
+    const res = await api.put(url.RELEASE_GOODS_URL, data);
 
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);

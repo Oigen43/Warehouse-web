@@ -1,5 +1,6 @@
 <template>
   <w-table
+    :insert="hasPermissions(this.routesPermissions.TTN.create)"
     :items="items"
     :fields="fields">
     <template
@@ -99,7 +100,7 @@
             },
             hasCheckAction(item) {
                 return (item.status === statuses.REGISTERED_STATUS ||
-                item.status === statuses.RELEASE_ALLOWED_STATUS) &&
+                item.status === statuses.TAKEN_OUT_OF_STORAGE_STATUS) &&
                 this.hasPermissions(this.routesPermissions.TTN.check);
             },
             hasOutAction(item) {
@@ -107,11 +108,11 @@
                 this.hasPermissions(this.routesPermissions.TTN.out));
             },
             hasStorageAction(item) {
-                return item.status === statuses.CONFIRMED_STATUS &&
+                return (item.status === statuses.CONFIRMED_STATUS || statuses.RELEASE_ALLOWED_STATUS) &&
                     this.hasPermissions(this.routesPermissions.TTN.storage);
             },
             clickedUpdateButton(item) {
-                router.push(`/ttn/${item.id}/update`);
+                router.push(`/gcn/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.TTN_DELETE_TEXT, {
@@ -121,16 +122,16 @@
                     .then(value => value && this.deleteTTN(item));
             },
             clickedOutButton(item) {
-                router.push(`/ttn/${item.id}/addOut`);
+                router.push(`/gcn/${item.id}/addOut`);
             },
             deleteTTN(item) {
                 this.$emit('delete-button-clicked', item);
             },
             clickedStorageButton(item) {
-                router.push(`/ttn/${item.id}/storage-goods`);
+                router.push(`/gcn/${item.id}/storage-goods`);
             },
             clickedCheckButton(item) {
-                router.push(`/ttn/${item.id}/check`);
+                router.push(`/gcn/${item.id}/check`);
             }
         }
     };

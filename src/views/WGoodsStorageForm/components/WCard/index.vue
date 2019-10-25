@@ -58,6 +58,11 @@
                 type: Array
             }
         },
+        computed: {
+            TTNId() {
+                return +this.$route.params.TTNId;
+            }
+        },
         methods: {
             clickedChooseGoodsStorage(item) {
                 this.$emit('clickedChooseGoodsStorage', item);

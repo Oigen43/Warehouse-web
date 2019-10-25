@@ -1,68 +1,163 @@
 <template>
   <b-form @submit.prevent="onSubmit" class="w-ttn-check-form">
+    <label
+      class="w-ttn-check-form-input-label"
+      for="ttn-check-number">
+      GCN number:
+    </label>
     <b-form-input
+      id="ttn-check-number"
       size="lg"
-      v-model="form.number"
+      :value="number"
       disabled
       class="w-ttn-check-form-input"
     ></b-form-input>
+
+    <label
+      class="w-ttn-check-form-input-label"
+      for="ttn-check-discharge-date">
+      Discharge date:
+    </label>
     <b-form-input
+      id="ttn-check-discharge-date"
       size="lg"
-      v-model="form.dischargeDate"
+      :value="dischargeDate"
       type="date"
       disabled
       class="w-ttn-check-form-input"
     ></b-form-input>
+
+    <label
+      v-if="sender"
+      class="w-ttn-check-form-input-label"
+      for="ttn-check-sender">
+      Sender:
+    </label>
     <b-form-input
+      id="ttn-check-sender"
+      v-if="sender"
       size="lg"
-      v-model="form.sender"
+      :value="senderName"
       disabled
       class="w-ttn-check-form-input"
     ></b-form-input>
+
+    <label
+      v-if="receiver"
+      class="w-ttn-check-form-input-label"
+      for="ttn-check-receiver">
+      Receiver:
+    </label>
     <b-form-input
+      id="ttn-check-receiver"
+      v-if="receiver"
       size="lg"
-      v-model="form.carrier"
+      :value="receiverName"
       disabled
       class="w-ttn-check-form-input"
     ></b-form-input>
+
+    <label
+      v-if="carrier"
+      class="w-ttn-check-form-input-label"
+      for="ttn-check-carrier">
+      Carrier:
+    </label>
     <b-form-input
+      id="ttn-check-carrier"
       size="lg"
-      v-model="transportTypeWithNumber"
+      :value="carrier"
       disabled
       class="w-ttn-check-form-input"
     ></b-form-input>
+
+    <label
+      class="w-ttn-check-form-input-label"
+      for="ttn-check-transport">
+      Transport:
+    </label>
     <b-form-input
+      id="ttn-check-transport"
+      size="lg"
+      :value="transportTypeWithNumber"
+      disabled
+      class="w-ttn-check-form-input"
+    ></b-form-input>
+
+    <label
+      v-if="driver"
+      class="w-ttn-check-form-input-label"
+      for="ttn-check-driver">
+      Driver:
+    </label>
+    <b-form-input
+      id="ttn-check-driver"
       v-if="driver"
       size="lg"
-      v-model="driverNameWithPassport"
+      :value="driverNameWithPassport"
       disabled
       class="w-ttn-check-form-input"
     ></b-form-input>
+
+    <label
+      class="w-ttn-check-form-input-label"
+      for="ttn-check-warehouse">
+      Warehouse:
+    </label>
     <b-form-input
+      id="ttn-check-warehouse"
       size="lg"
-      v-model="form.warehouse"
+      :value="warehouse"
       disabled
       class="w-ttn-check-form-input"
     ></b-form-input>
+
+    <label
+      class="w-ttn-check-form-input-label"
+      for="ttn-check-description">
+      Description:
+    </label>
     <b-form-textarea
+      id="ttn-check-description"
       size="lg"
-      v-model="form.description"
+      :value="description"
       disabled
       class="w-ttn-check-form-input"
     ></b-form-textarea>
+
+    <label
+      class="w-ttn-check-form-input-label"
+      for="ttn-check-ttn-type">
+      GCN type:
+    </label>
     <b-form-input
+      id="ttn-check-ttn-type"
       size="lg"
-      v-model="form.type"
+      :value="type"
       disabled
       class="w-ttn-check-form-input"
     ></b-form-input>
+
+    <label
+      class="w-ttn-check-form-input-label"
+      for="ttn-check-dispatcher">
+      Dispatcher:
+    </label>
     <b-form-input
+      id="ttn-check-dispatcher"
       size="lg"
       :value="formattedDispatcherName"
       disabled
       class="w-ttn-check-form-input"
     ></b-form-input>
+
+    <label
+      class="w-ttn-check-form-input-label"
+      for="ttn-check-controller">
+      Controller:
+    </label>
     <b-form-input
+      id="ttn-check-controller"
       size="lg"
       :value="formattedControllerName"
       disabled
@@ -106,7 +201,10 @@
                 type: String
             },
             sender: {
-                type: String
+                type: Object
+            },
+            receiver: {
+                type: Object
             },
             carrier: {
                 type: String
@@ -136,25 +234,6 @@
                 type: String
             }
         },
-        data() {
-            return {
-                form: {
-                    number: this.number,
-                    dischargeDate: this.dischargeDate,
-                    sender: this.sender,
-                    carrier: this.carrier,
-                    transport: this.transport,
-                    driver: this.driver,
-                    dispatcher: this.dispatcher,
-                    controller: this.controller,
-                    registrationDate: this.registrationDate,
-                    description: this.description,
-                    type: this.type,
-                    warehouse: this.warehouse,
-                    status: 'checked'
-                }
-            };
-        },
         computed: {
             formattedRegistrationDate() {
                 return `${this.form.registrationDate.slice(0, 10)} ${this.form.registrationDate.slice(11, 19)}`;
@@ -171,6 +250,12 @@
             driverNameWithPassport() {
                 return `${this.driver.surname} - passport: ${this.driver.passportNumber}`;
             },
+            senderName() {
+                return this.sender.senderName;
+            },
+            receiverName() {
+                return this.receiver.receiverName;
+            },
             TTNId() {
                 return +this.$route.params.TTNId;
             }
@@ -180,7 +265,7 @@
                 this.$emit('form-submitted');
             },
             clickedWriteOffButton() {
-                router.push(`/ttn/${this.TTNId}/write-off`);
+                router.push(`/gcn/${this.TTNId}/write-off`);
             },
         },
     };

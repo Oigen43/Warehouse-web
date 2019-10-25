@@ -10,6 +10,7 @@
               :number="updatedTTN.number"
               :registrationDate="updatedTTN.registrationDate"
               :dispatcher="updatedTTN.User"
+              :isReleaseAllowed="isReleaseAllowed"
               :manager="userInfo"
               @form-submitted="clickedSubmitButton"
             ></w-form>
@@ -36,6 +37,8 @@
         ToastPlugin
     } from 'bootstrap-vue';
 
+    import * as statusesTTN from '../../constants/statuses';
+    import TTNTypes from '../../constants/TTNtypes';
     import customToasts from '../../constants/customToasts';
     import router from '../../router';
     import WForm from './components/WForm';
@@ -57,11 +60,15 @@
                 'userInfo',
                 'storages',
                 'goods',
-                'toast'
+                'toast',
+                'storagesComputedCapacity'
             ]),
             TTNId() {
                 return +this.$route.params.TTNId;
             },
+            isReleaseAllowed() {
+                return this.updatedTTN.type === TTNTypes.OUTCOMING_TYPE;
+            }
         },
         methods: {
             ...mapActions({
@@ -69,10 +76,11 @@
                 fetchUserInfo: 'fetchUserInfo',
                 fetchAllStorages: 'fetchAllStorages',
                 fetchGoodsList: 'fetchGoodsList',
-                setInStorageStatus: 'setInStorageTTN'
+                sendUpdatedTTNData: 'sendUpdatedTTN',
+                releaseGoods: 'releaseGoods'
             }),
             ...mapMutations({
-                setToast: 'SET_TOAST'
+                setStorageCurrentCapacity: 'SET_STORAGE_CURRENT_CAPACITY'
             }),
             clickedSubmitButton() {
                 this.goods.some(item => !item.storage.length) ? this.makeToast(customToasts.emptyStorageGoodsForm) : this.sendData();
@@ -85,15 +93,41 @@
                 });
             },
             redirect() {
-                router.push('/ttn');
+                router.push('/gcn');
             },
-            sendData() {
-                const res = this.setInStorageStatus({ id: this.TTNId });
+            async sendData() {
+                const res = this.isReleaseAllowed ? await this.releaseGoodsStorage() : await this.setInStorageStatus();
 
                 !res.error && this.redirect();
             },
+            setInStorageStatus() {
+                const TTN = {
+                    id: this.TTNId,
+                    status: statusesTTN.IN_STORAGE_STATUS
+                };
+
+                return this.sendUpdatedTTNData({ TTN });
+            },
+            changeStorageCurrentCapacity() {
+                this.goods.forEach(item => {
+                    item.storage.forEach(item => {
+                        const capacity = item.GoodsStorage.size + item.currentCapacity;
+
+                        this.setStorageCurrentCapacity({ id: item.id, capacity });
+                    });
+                });
+            },
+            async releaseGoodsStorage() {
+                await this.changeStorageCurrentCapacity();
+                const TTN = {
+                    id: this.TTNId,
+                    status: statusesTTN.TAKEN_OUT_OF_STORAGE_STATUS
+                };
+
+                return this.releaseGoods({ goodsData: this.goods, storageData: this.storagesComputedCapacity, TTN });
+            },
             clickedChooseGoodsStorage(item) {
-                router.push(`/ttn/${this.TTNId}/storage-goods/${item.id}/add`);
+                router.push(`/gcn/${this.TTNId}/storage-goods/${item.id}/add`);
             }
         },
         created: async function () {

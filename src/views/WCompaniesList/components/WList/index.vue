@@ -1,5 +1,6 @@
 <template>
   <w-table
+    :insert="hasPermissions(routesPermissions.companies.create)"
     :items="companiesList"
     :fields="fields">
     <template

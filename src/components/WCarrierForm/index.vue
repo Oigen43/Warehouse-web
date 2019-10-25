@@ -1,29 +1,41 @@
 <template>
     <b-form @submit.prevent="onSubmit" class="w-carriers-form">
+      <label
+        class="w-carriers-form-input-label"
+        for="carrier-name-input">
+        Carrier name:
+      </label>
       <b-form-input
         id="carrier-name-input"
         size="lg"
         v-model="form.name"
         required
-        placeholder="Carrier name"
         class="w-carriers-form-input"
       ></b-form-input>
 
+      <label
+        class="w-carriers-form-input-label"
+        for="carrier-tin-input">
+        Carrier TIN (taxpayer identification number):
+      </label>
       <b-form-input
-        id="carrier-upn-input"
+        id="carrier-tin-input"
         size="lg"
         v-model="form.upn"
         required
-        placeholder="Payer's account number"
         class="w-carriers-form-input"
       ></b-form-input>
 
+      <label
+        class="w-carriers-form-input-label"
+        for="carrier-country-code-input">
+        Carrier country code:
+      </label>
       <b-form-input
         id="carrier-country-code-input"
         size="lg"
         v-model="form.countryCode"
         required
-        placeholder="Carrier country code"
         class="w-carriers-form-input"
       ></b-form-input>
 

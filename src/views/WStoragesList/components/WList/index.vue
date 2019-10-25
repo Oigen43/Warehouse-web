@@ -4,7 +4,7 @@
         <b-card no-body class="overflow-hidden w-storage-card">
           <div class="rounded-0 w-storage-card-header">
             <div class="w-storage-card-header-text">
-              {{storage.storageCapacity}} m<sup><small>2</small></sup>
+              {{storage.currentCapacity}}/{{storage.storageCapacity}} m<sup><small>3</small></sup>
             </div>
           </div>
           <b-card-body>
@@ -29,7 +29,9 @@
         </b-card>
       </b-col>
     </b-row>
-    <w-empty-table v-else></w-empty-table>
+    <w-empty-table
+      :insert="hasPermissions(routesPermissions.storages.create)"
+      v-else></w-empty-table>
 </template>
 
 <script>
@@ -47,21 +49,21 @@
     import routesPermissions from '../../../../constants/routesPermissions';
     import router from '../../../../router';
     import * as modal from '../../../../constants/modal';
-    import WEmptyTable from '../../../../components/WEmptyTable';
     import helpers from '../../../../utils/helpers';
+    import WEmptyTable from '../../../../components/WEmptyTable';
 
     export default {
         name: 'WList',
         mixins: [validation],
         components: {
+            WEmptyTable,
             BRow,
             BCol,
             BCard,
             BCardTitle,
             BCardBody,
             BCardFooter,
-            BButton,
-            WEmptyTable
+            BButton
         },
         props: ['storagesList'],
         computed: {
