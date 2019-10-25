@@ -37,6 +37,7 @@
         ToastPlugin
     } from 'bootstrap-vue';
 
+    import * as statusesTTN from '../../constants/statuses';
     import TTNTypes from '../../constants/TTNtypes';
     import customToasts from '../../constants/customToasts';
     import router from '../../router';
@@ -75,7 +76,7 @@
                 fetchUserInfo: 'fetchUserInfo',
                 fetchAllStorages: 'fetchAllStorages',
                 fetchGoodsList: 'fetchGoodsList',
-                setInStorageStatus: 'setInStorageTTN',
+                sendUpdatedTTNData: 'sendUpdatedTTN',
                 releaseGoods: 'releaseGoods'
             }),
             ...mapMutations({
@@ -95,9 +96,17 @@
                 router.push('/ttn');
             },
             async sendData() {
-                const res = this.isReleaseAllowed ? await this.releaseGoodsStorage(this.TTNId) : await this.setInStorageStatus({ id: this.TTNId });
+                const res = this.isReleaseAllowed ? await this.releaseGoodsStorage() : await this.setInStorageStatus();
 
                 !res.error && this.redirect();
+            },
+            setInStorageStatus() {
+                const TTN = {
+                    id: this.TTNId,
+                    status: statusesTTN.IN_STORAGE_STATUS
+                };
+
+                return this.sendUpdatedTTNData({ TTN });
             },
             changeStorageCurrentCapacity() {
                 this.goods.forEach(item => {
@@ -108,9 +117,14 @@
                     });
                 });
             },
-            async releaseGoodsStorage(TTNId) {
+            async releaseGoodsStorage() {
                 await this.changeStorageCurrentCapacity();
-                return this.releaseGoods({ goodsData: this.goods, storageData: this.storagesComputedCapacity, id: TTNId });
+                const TTN = {
+                    id: this.TTNId,
+                    status: statusesTTN.TAKEN_OUT_OF_STORAGE_STATUS
+                };
+
+                return this.releaseGoods({ goodsData: this.goods, storageData: this.storagesComputedCapacity, TTN });
             },
             clickedChooseGoodsStorage(item) {
                 router.push(`/ttn/${this.TTNId}/storage-goods/${item.id}/add`);

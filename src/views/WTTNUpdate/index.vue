@@ -101,10 +101,10 @@
                 sendUpdatedTTNData: 'sendUpdatedTTN'
             }),
             ...mapMutations({
-              clearDrivers: types.CLEAN_DRIVERS_NAMES,
-              clearTransport: types.CLEAN_TRANSPORT_NAMES,
-              clearSenders: types.CLEAN_SENDERS_NAMES,
-              clearReceivers: types.CLEAN_RECEIVERS_NAMES,
+                clearDrivers: types.CLEAN_DRIVERS_NAMES,
+                clearTransport: types.CLEAN_TRANSPORT_NAMES,
+                clearSenders: types.CLEAN_SENDERS_NAMES,
+                clearReceivers: types.CLEAN_RECEIVERS_NAMES,
             }),
             addGood(good) {
                 this.goods.push(good);
@@ -116,7 +116,20 @@
                 this.goods.splice(index, 1);
             },
             async sendData(form) {
-                const res = await this.sendUpdatedTTNData({ TTN: form, goods: this.goods });
+                const TTNForm = {
+                    id: form.id,
+                    number: form.number,
+                    dischargeDate: form.dischargeDate,
+                    senderId: form.sender ? form.sender.id : null,
+                    receiverId: form.receiver ? form.receiver.id : null,
+                    carrierId: form.carrier.id,
+                    transportId: form.transport.id,
+                    driverId: form.driver ? form.driver.id : null,
+                    description: form.description,
+                    warehouseId: form.warehouse.id
+                };
+
+                const res = await this.sendUpdatedTTNData({ TTN: TTNForm, goods: this.goods });
 
                 !res.error && router.push('/ttn');
             },

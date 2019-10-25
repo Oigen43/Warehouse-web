@@ -39,6 +39,7 @@
     import { BRow, BCol, BButton } from 'bootstrap-vue';
     import { mapState, mapActions } from 'vuex';
 
+    import * as statusesTTN from '../../constants/statuses';
     import router from '../../router';
     import TTNTypes from '../../constants/TTNtypes';
     import WForm from './components/WForm';
@@ -72,13 +73,28 @@
             ...mapActions({
                 getUpdatedTTNData: 'getUpdatedTTN',
                 fetchUserInfo: 'fetchUserInfo',
-                confirmTTN: 'confirmTTN',
-                verifyTTN: 'verifyTTN'
+                sendUpdatedTTNData: 'sendUpdatedTTN'
             }),
             async onSubmit() {
-                const res = this.isReleaseAllowed ? await this.verifyTTN({ id: this.TTNId }) : await this.confirmTTN({ id: this.TTNId });
+                const res = this.isReleaseAllowed ? await this.verifyTTN() : await this.confirmTTN();
 
                 !res.error && this.redirect();
+            },
+            verifyTTN() {
+                const TTN = {
+                    id: this.TTNId,
+                    status: statusesTTN.VERIFICATION_COMPLETED_STATUS
+                };
+
+                return this.sendUpdatedTTNData({ TTN });
+            },
+            confirmTTN() {
+                const TTN = {
+                    id: this.TTNId,
+                    status: statusesTTN.CONFIRMED_STATUS
+                };
+
+                return this.sendUpdatedTTNData({ TTN });
             },
             redirect() {
                 router.push('/ttn');

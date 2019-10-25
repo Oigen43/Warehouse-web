@@ -32,6 +32,7 @@
 
     import router from '../../router';
     import TTNTypes from '../../constants/TTNtypes';
+    import * as statusesTTN from '../../constants/statuses';
     import customToasts from '../../constants/customToasts';
     import helpers from '../../utils/helpers';
     import WForm from './components/WForm';
@@ -78,8 +79,7 @@
                 fetchGoodsList: 'fetchGoodsList',
                 sendNewWriteOffForm: 'createWriteOff',
                 getUpdatedTTNData: 'getUpdatedTTN',
-                verifyTTN: 'verifyTTN',
-                confirmTTN: 'confirmTTN'
+                sendUpdatedTTNData: 'sendUpdatedTTN'
             }),
             writeOffGood(good, index) {
                 this.writeOffGoods.splice(index, 1, good);
@@ -88,10 +88,26 @@
                 helpers.isArrayEmpty(this.writeOffGoods) ? this.makeToast(customToasts.emptyWriteOffGoodsList) : this.sendData(form, this.writeOffGoods);
             },
             async sendData(form, goods) {
-                let res = this.isReleaseAllowed ? await this.verifyTTN({ id: this.TTNId }) : await this.confirmTTN({ id: this.TTNId });
+                let res = this.isReleaseAllowed ? await this.verifyTTN() : await this.confirmTTN();
                 res = !res.error && await this.sendNewWriteOffForm({ writeOff: form, goods: goods });
 
                 !res.error && router.push('/ttn');
+            },
+            verifyTTN() {
+                const TTN = {
+                    id: this.TTNId,
+                    status: statusesTTN.VERIFICATION_COMPLETED_STATUS
+                };
+
+                return this.sendUpdatedTTNData({ TTN });
+            },
+            confirmTTN() {
+                const TTN = {
+                    id: this.TTNId,
+                    status: statusesTTN.CONFIRMED_STATUS
+                };
+
+                return this.sendUpdatedTTNData({ TTN });
             },
             makeToast(toast) {
                 this.$bvToast.toast(toast.message, {

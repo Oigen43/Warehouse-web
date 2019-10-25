@@ -698,37 +698,10 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
   },
-  confirmTTN: async ({ commit }, id) => {
-    commit(types.REQUEST);
-
-    const res = await api.put(url.TTN_CONFIRM_URL, id);
-
-    commit(types.SUCCESS);
-    res.toast && commit(types.SET_TOAST, res.toast);
-    return res;
-  },
-  setInStorageTTN: async ({ commit }, id) => {
-    commit(types.REQUEST);
-
-    const res = await api.put(url.TTN_IN_STORAGE_URL, id);
-
-    commit(types.SUCCESS);
-    res.toast && commit(types.SET_TOAST, res.toast);
-    return res;
-  },
   releaseGoods: async ({ commit }, data) => {
     commit(types.REQUEST);
 
     const res = await api.put(url.RELEASE_GOODS_URL, data);
-
-    commit(types.SUCCESS);
-    res.toast && commit(types.SET_TOAST, res.toast);
-    return res;
-  },
-  verifyTTN: async ({ commit }, id) => {
-    commit(types.REQUEST);
-
-    const res = await api.put(url.TTN_VERIFY_URL, id);
 
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
