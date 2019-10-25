@@ -160,6 +160,7 @@ export default {
   [types.CLEAN_DRIVERS_NAMES](state) {
     state.driversNames = [];
   },
+
   [types.STORAGES](state, storages) {
     state.storages = storages;
   },
@@ -279,6 +280,7 @@ export default {
   [types.CLEAN_TRANSPORT_NAMES](state) {
     state.transportNames = [];
   },
+
   [types.TTN](state, TTN) {
     state.TTN = TTN;
   },
@@ -305,6 +307,22 @@ export default {
   [types.GOODS](state, goods) {
     state.goods = goods;
   },
+  [types.GOODS_ITEM_INIT](state, goodsItem) {
+    state.goodsItemInit = goodsItem;
+  },
+  [types.GOODS_ITEM_COMPUTED_VOLUME](state, goodsItemVolume) {
+    state.goodsItemComputedVolume = goodsItemVolume;
+  },
+
+  [types.STORAGE_CURRENT_CAPACITY](state, storages) {
+    state.storagesComputedCapacity = storages;
+  },
+  [types.SET_STORAGE_CURRENT_CAPACITY](state, storage) {
+    state.storagesComputedCapacity = state.storagesComputedCapacity.map(item =>
+      item.id === storage.id ? { ...item, currentCapacity: storage.capacity } : item
+    );
+  },
+
   [types.CREATE_WRITE_OFF](state, writeOff) {
     state.writeOff = writeOff;
   },

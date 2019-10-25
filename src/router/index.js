@@ -37,6 +37,8 @@ import WTransportList from '../views/WTransportList';
 import WTransportAddForm from '../views/WTransportAdd';
 import WTransportUpdateForm from '../views/WTransportUpdate';
 import WTTNList from '../views/WTTNList';
+import WGoodsStorageForm from '../views/WGoodsStorageForm';
+import WGoodsStorageAdd from '../views/WGoodsStorageAdd';
 import WNotFound from '../views/WNotFound';
 import WTTNAddForm from '../views/WTTNAdd';
 import WTTNUpdateForm from '../views/WTTNUpdate';
@@ -328,6 +330,20 @@ export default new Router({
       name: 'WriteOffGoodsForm',
       component: WWriteOffGoodsForm,
       meta: { authorize: routesPermissions.writeOffs.create },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/ttn/:TTNId/storage-goods',
+      name: 'goods-storage-form',
+      component: WGoodsStorageForm,
+      meta: { authorize: routesPermissions.goodsStorage.read },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/ttn/:TTNId/storage-goods/:goodsId/add',
+      name: 'choose-goods-storage-form',
+      component: WGoodsStorageAdd,
+      meta: { authorize: routesPermissions.goodsStorage.create },
       beforeEnter: ifAuthenticated,
     },
     {

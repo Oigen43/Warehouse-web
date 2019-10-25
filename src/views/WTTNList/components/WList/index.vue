@@ -35,6 +35,13 @@
         @click="clickedOutButton(data.item)">
         Out
       </b-button>
+      <b-button
+        v-if="hasStorageAction(data.item)"
+        variant="dark"
+        size="sm"
+        @click="clickedStorageButton(data.item)">
+        Storage
+      </b-button>
     </template>
   </w-table>
 </template>
@@ -99,6 +106,10 @@
                 return (item.status === statuses.IN_STORAGE_STATUS &&
                 this.hasPermissions(this.routesPermissions.TTN.out));
             },
+            hasStorageAction(item) {
+                return item.status === statuses.CONFIRMED_STATUS &&
+                    this.hasPermissions(this.routesPermissions.TTN.storage);
+            },
             clickedUpdateButton(item) {
                 router.push(`/ttn/${item.id}/update`);
             },
@@ -114,6 +125,9 @@
             },
             deleteTTN(item) {
                 this.$emit('delete-button-clicked', item);
+            },
+            clickedStorageButton(item) {
+                router.push(`/ttn/${item.id}/storage-goods`);
             },
             clickedCheckButton(item) {
                 router.push(`/ttn/${item.id}/check`);

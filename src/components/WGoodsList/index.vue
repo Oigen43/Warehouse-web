@@ -111,8 +111,9 @@
         },
         props: ['goods', 'type'],
         computed: {
-          hasValidType() {
-            return this.type === types.INCOMING_TYPE
+            hasValidType() {
+                return this.type === types.INCOMING_TYPE;
+            }
         },
         methods: {
           addGood(form) {

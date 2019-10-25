@@ -14,7 +14,8 @@ export default {
       roles.COMPANY_ADMIN_ROLE,
       roles.WAREHOUSE_MANAGER_ROLE,
       roles.WAREHOUSE_DISPATCHER_ROLE,
-      roles.WAREHOUSE_CONTROLLER_ROLE],
+      roles.WAREHOUSE_CONTROLLER_ROLE
+    ],
     update: [roles.COMPANY_ADMIN_ROLE],
     delete: [roles.COMPANY_ADMIN_ROLE]
   },
@@ -25,7 +26,8 @@ export default {
       roles.COMPANY_ADMIN_ROLE,
       roles.WAREHOUSE_MANAGER_ROLE,
       roles.WAREHOUSE_DISPATCHER_ROLE,
-      roles.WAREHOUSE_CONTROLLER_ROLE],
+      roles.WAREHOUSE_CONTROLLER_ROLE
+    ],
     update: [roles.COMPANY_ADMIN_ROLE],
     delete: [roles.COMPANY_ADMIN_ROLE]
   },
@@ -71,11 +73,13 @@ export default {
       roles.COMPANY_ADMIN_ROLE,
       roles.WAREHOUSE_MANAGER_ROLE,
       roles.WAREHOUSE_CONTROLLER_ROLE,
-      roles.WAREHOUSE_DISPATCHER_ROLE],
+      roles.WAREHOUSE_DISPATCHER_ROLE
+    ],
     update: [roles.WAREHOUSE_DISPATCHER_ROLE],
     delete: [roles.WAREHOUSE_DISPATCHER_ROLE],
     check: [roles.WAREHOUSE_CONTROLLER_ROLE, roles.WAREHOUSE_MANAGER_ROLE],
-    out: [roles.WAREHOUSE_DISPATCHER_ROLE]
+    out: [roles.WAREHOUSE_DISPATCHER_ROLE],
+    storage: [roles.WAREHOUSE_MANAGER_ROLE]
   },
   writeOffs: {
     create: [roles.WAREHOUSE_CONTROLLER_ROLE],
@@ -83,6 +87,11 @@ export default {
       roles.COMPANY_ADMIN_ROLE,
       roles.WAREHOUSE_MANAGER_ROLE,
       roles.WAREHOUSE_CONTROLLER_ROLE,
-      roles.WAREHOUSE_DISPATCHER_ROLE]
+      roles.WAREHOUSE_DISPATCHER_ROLE
+    ]
+  },
+  goodsStorage: {
+    create: [roles.WAREHOUSE_MANAGER_ROLE],
+    read: [roles.WAREHOUSE_MANAGER_ROLE]
   }
 };

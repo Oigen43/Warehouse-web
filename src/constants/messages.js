@@ -121,6 +121,11 @@ export default {
   'goods.create.error': 'Can not create goods',
   'goods.list.get.error': 'Can not get goods list',
   'goods.delete.error': 'Can not delete goods',
+  'goods.get.unknown': 'This goods does not exist',
+
+  'goods.storage.create.success': 'Storage was selected for the goods!',
+  'goods.storage.create.error': 'Can not select this storage',
+  'goods.storage.get.unknown': 'This goods does not exist',
 
   'write.off.name.conflict': 'This write-off already exists!',
   'write.off.create.success': 'Write-off created',

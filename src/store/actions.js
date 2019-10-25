@@ -232,7 +232,20 @@ export default {
       const pageLimit = helpers.calculatePageLimit(res.data.storagesTotal, req.perPage);
 
       commit(types.STORAGES, res.data.storages);
+      commit(types.STORAGE_CURRENT_CAPACITY, res.data.storages);
       commit(types.STORAGES_PAGE_LIMIT, pageLimit);
+    }
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  fetchAllStorages: async ({ commit }, warehouseId) => {
+    commit(types.REQUEST);
+
+    const res = await api.get(url.STORAGES_ALL_URL, { warehouseId });
+
+    if (res.data) {
+      commit(types.STORAGES, res.data.storages);
+      commit(types.STORAGE_CURRENT_CAPACITY, res.data.storages);
     }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
@@ -689,6 +702,36 @@ export default {
     commit(types.REQUEST);
 
     const res = await api.put(url.TTN_CONFIRM_URL, id);
+
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  setInStorageTTN: async ({ commit }, id) => {
+    commit(types.REQUEST);
+
+    const res = await api.put(url.TTN_IN_STORAGE_URL, id);
+
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  fetchGoodsItemData: async ({ commit }, id) => {
+    commit(types.REQUEST);
+
+    const res = await api.getById(url.GOODS_URL, id);
+
+    if (res.data) {
+      commit(types.GOODS_ITEM_INIT, res.data.goodsItem);
+      commit(types.GOODS_ITEM_COMPUTED_VOLUME, res.data.goodsItem.volume);
+    }
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  sendGoodsStorage: async ({ commit }, req) => {
+    commit(types.REQUEST);
+
+    const res = await api.post(url.GOODS_STORAGE_URL, req);
 
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);

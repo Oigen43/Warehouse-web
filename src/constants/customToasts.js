@@ -13,5 +13,10 @@ export default {
     message: 'Please, add goods',
     title: 'Error!',
     variant: 'danger'
+  },
+  emptyStorageGoodsForm: {
+    message: 'Please, select storage places for all goods',
+    title: 'Error!',
+    variant: 'danger'
   }
 };
