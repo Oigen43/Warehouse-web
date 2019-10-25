@@ -154,6 +154,7 @@
       type="submit"
       variant="outline-dark"
       size="lg"
+      @click="clickedDownloadButton"
       class="w-ttn-form-button">
       DOWNLOAD
     </b-button>
@@ -241,6 +242,11 @@
                 return +this.$route.params.TTNId;
             }
         },
+        methods: {
+            clickedDownloadButton() {
+                this.$emit('click-download');
+            }
+        }
     };
 </script>
 
