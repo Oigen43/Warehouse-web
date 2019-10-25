@@ -131,7 +131,7 @@
 
                 const res = await this.sendUpdatedTTNData({ TTN: TTNForm, goods: this.goods });
 
-                !res.error && router.push('/ttn');
+                !res.error && router.push('/gcn');
             },
             getTransportsAndDrivers(id) {
                 this.fetchTransportNames({ carrierId: id });

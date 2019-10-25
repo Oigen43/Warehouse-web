@@ -265,7 +265,7 @@
                 this.$emit('form-submitted');
             },
             clickedWriteOffButton() {
-                router.push(`/ttn/${this.TTNId}/write-off`);
+                router.push(`/gcn/${this.TTNId}/write-off`);
             },
         },
     };

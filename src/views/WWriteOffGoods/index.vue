@@ -70,7 +70,7 @@
                 return this.updatedTTN.type === TTNTypes.OUTCOMING_TYPE;
             },
             toGCNCheckLink() {
-                return `/ttn/${this.TTNId}/check`;
+                return `/gcn/${this.TTNId}/check`;
             }
         },
         methods: {
@@ -91,7 +91,7 @@
                 let res = this.isReleaseAllowed ? await this.verifyTTN() : await this.confirmTTN();
                 res = !res.error && await this.sendNewWriteOffForm({ writeOff: form, goods: goods });
 
-                !res.error && router.push('/ttn');
+                !res.error && router.push('/gcn');
             },
             verifyTTN() {
                 const TTN = {

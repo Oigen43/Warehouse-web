@@ -93,7 +93,7 @@
                 });
             },
             redirect() {
-                router.push('/ttn');
+                router.push('/gcn');
             },
             async sendData() {
                 const res = this.isReleaseAllowed ? await this.releaseGoodsStorage() : await this.setInStorageStatus();
@@ -127,7 +127,7 @@
                 return this.releaseGoods({ goodsData: this.goods, storageData: this.storagesComputedCapacity, TTN });
             },
             clickedChooseGoodsStorage(item) {
-                router.push(`/ttn/${this.TTNId}/storage-goods/${item.id}/add`);
+                router.push(`/gcn/${this.TTNId}/storage-goods/${item.id}/add`);
             }
         },
         created: async function () {

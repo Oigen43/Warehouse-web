@@ -112,7 +112,7 @@
                     this.hasPermissions(this.routesPermissions.TTN.storage);
             },
             clickedUpdateButton(item) {
-                router.push(`/ttn/${item.id}/update`);
+                router.push(`/gcn/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.TTN_DELETE_TEXT, {
@@ -122,16 +122,16 @@
                     .then(value => value && this.deleteTTN(item));
             },
             clickedOutButton(item) {
-                router.push(`/ttn/${item.id}/addOut`);
+                router.push(`/gcn/${item.id}/addOut`);
             },
             deleteTTN(item) {
                 this.$emit('delete-button-clicked', item);
             },
             clickedStorageButton(item) {
-                router.push(`/ttn/${item.id}/storage-goods`);
+                router.push(`/gcn/${item.id}/storage-goods`);
             },
             clickedCheckButton(item) {
-                router.push(`/ttn/${item.id}/check`);
+                router.push(`/gcn/${item.id}/check`);
             }
         }
     };

@@ -7,7 +7,7 @@
           <b-col>
             <b-button
               variant="dark"
-              to="/ttn/add"
+              to="/gcn/add"
               v-if="hasPermissions(routesPermissions.TTN.create)"
               class="w-ttn-add-button"
             >add GCN

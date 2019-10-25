@@ -51,7 +51,7 @@
                 sendGoodsStorage: 'sendGoodsStorage'
             }),
             redirect() {
-                router.push(`/ttn/${this.TTNId}/storage-goods/`);
+                router.push(`/gcn/${this.TTNId}/storage-goods/`);
             },
             async sendData(data) {
                 const res = await this.sendGoodsStorage(data);

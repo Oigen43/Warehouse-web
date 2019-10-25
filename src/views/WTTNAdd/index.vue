@@ -21,7 +21,7 @@
         ></w-form>
         <b-button
           variant="link"
-          to="/ttn"
+          to="/gcn"
           class="w-ttn-go-back-link"
         >Go Back
         </b-button>
@@ -145,7 +145,7 @@
 
                 const res = form.type === TTNTypes.INCOMING_TYPE ? await this.sendNewTTN({ newTTN: form, goods: goods }) : await this.sendNewTTN({ newTTN: form, TTN, goods: goods });
 
-                !res.error && router.push('/ttn');
+                !res.error && router.push('/gcn');
             },
             makeToast(toast) {
                 this.$bvToast.toast(toast.message, {
