@@ -150,11 +150,18 @@
       disabled
       class="w-ttn-form-input"
     ></b-form-input>
+    <b-button
+      type="submit"
+      variant="outline-dark"
+      size="lg"
+      class="w-ttn-form-button">
+      DOWNLOAD
+    </b-button>
   </b-form>
 </template>
 
 <script>
-    import { BForm, BFormInput, BFormTextarea } from 'bootstrap-vue';
+    import { BForm, BFormInput, BFormTextarea, BButton } from 'bootstrap-vue';
 
     export default {
         name: 'WForm',
@@ -162,6 +169,7 @@
             BForm,
             BFormInput,
             BFormTextarea,
+            BButton
         },
         props: {
             id: {

@@ -21,7 +21,7 @@
         ></w-form>
         <b-button
           variant="link"
-          to="/ttn"
+          to="/gcn"
           class="w-ttn-check-go-back-link"
         >Go Back
         </b-button>
@@ -97,7 +97,7 @@
                 return this.sendUpdatedTTNData({ TTN });
             },
             redirect() {
-                router.push('/ttn');
+                router.push('/gcn');
             }
         },
         created: async function () {

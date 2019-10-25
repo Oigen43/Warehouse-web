@@ -7,7 +7,7 @@
       v-slot:cell(buttons)="data">
       <b-button
         v-if="hasUpdateAction(data.item)"
-        class="w-table-update-button"
+        class="w-ttn-button"
         variant="dark"
         size="sm"
         @click="clickedUpdateButton(data.item)">
@@ -22,7 +22,7 @@
       </b-button>
       <b-button
         v-if="hasCheckAction(data.item)"
-        class="w-table-check-button"
+        class="w-ttn-button"
         variant="dark"
         size="sm"
         @click="clickedCheckButton(data.item)">
@@ -30,7 +30,7 @@
       </b-button>
       <b-button
         v-if="hasOutAction(data.item)"
-        class="w-ttn-out-button"
+        class="w-ttn-button"
         variant="dark"
         size="sm"
         @click="clickedOutButton(data.item)">
@@ -38,6 +38,7 @@
       </b-button>
       <b-button
         v-if="hasStorageAction(data.item)"
+        class="w-ttn-button"
         variant="dark"
         size="sm"
         @click="clickedStorageButton(data.item)">
@@ -45,6 +46,7 @@
       </b-button>
       <b-button
         v-if="hasOpenAction(data.item)"
+        class="w-ttn-button"
         variant="dark"
         size="sm"
         @click="clickedOpenButton(data.item)">
@@ -123,7 +125,7 @@
                     this.hasPermissions(this.routesPermissions.TTN.getById);
             },
             clickedUpdateButton(item) {
-                router.push(`/ttn/${item.id}/update`);
+                router.push(`/gcn/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.TTN_DELETE_TEXT, {
@@ -133,19 +135,19 @@
                     .then(value => value && this.deleteTTN(item));
             },
             clickedOutButton(item) {
-                router.push(`/ttn/${item.id}/addOut`);
+                router.push(`/gcn/${item.id}/addOut`);
             },
             deleteTTN(item) {
                 this.$emit('delete-button-clicked', item);
             },
             clickedStorageButton(item) {
-                router.push(`/ttn/${item.id}/storage-goods`);
+                router.push(`/gcn/${item.id}/storage-goods`);
             },
             clickedCheckButton(item) {
-                router.push(`/ttn/${item.id}/check`);
+                router.push(`/gcn/${item.id}/check`);
             },
             clickedOpenButton(item) {
-                router.push(`/ttn/${item.id}`);
+                router.push(`/gcn/${item.id}`);
             }
         }
     };

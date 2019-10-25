@@ -63,7 +63,7 @@
           <b-nav-item v-if="hasPermissions(routesPermissions.TTN.read)">
             <b-button
               variant="light"
-              to='/ttn'
+              to='/gcn'
               class="w-navigation-link">
               GCN
             </b-button>

@@ -20,7 +20,7 @@
         ></w-form>
         <b-button
           variant="link"
-          to="/ttn"
+          to="/gcn"
           class="w-ttn-go-back-link"
         >Go Back
         </b-button>
