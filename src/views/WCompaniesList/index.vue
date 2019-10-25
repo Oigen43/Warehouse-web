@@ -17,6 +17,7 @@
         <div class="companies-list">
           <w-list
             @delete-button-clicked="clickedDeleteButton"
+            @active-button-clicked="clickedActiveButton"
             :companies="companies"
           ></w-list>
         </div>
@@ -74,11 +75,16 @@
             ...mapActions({
                 fetchCompaniesList: 'fetchCompaniesList',
                 sendDeletedCompanyData: 'sendDeletedCompany',
-                deletedCompanyData: 'deleteCompany'
+                deletedCompanyData: 'deleteCompany',
+                updateCompanyActive: 'updateActiveCompany'
             }),
             sendRequest(page) {
                 this.currentPage = page;
                 this.fetchCompaniesList(this.currentPage);
+            },
+            async clickedActiveButton(item) {
+                await this.updateCompanyActive(item);
+                await this.fetchCompaniesList(this.currentPage);
             },
             async clickedDeleteButton(item) {
                 await this.sendDeletedCompanyData(item.id);
@@ -91,6 +97,7 @@
         },
         created: function () {
             this.fetchCompaniesList();
+            console.log(this.companies);
         }
     };
 </script>

@@ -5,7 +5,8 @@ export default {
     create: [roles.SYSTEM_ADMIN_ROLE],
     read: [roles.SYSTEM_ADMIN_ROLE, roles.COMPANY_ADMIN_ROLE],
     update: [roles.COMPANY_ADMIN_ROLE],
-    delete: [roles.SYSTEM_ADMIN_ROLE]
+    delete: [roles.SYSTEM_ADMIN_ROLE],
+    updateActive: [roles.SYSTEM_ADMIN_ROLE]
   },
   warehouses: {
     create: [roles.COMPANY_ADMIN_ROLE],
@@ -61,5 +62,8 @@ export default {
     update: [roles.WAREHOUSE_DISPATCHER_ROLE],
     delete: [roles.WAREHOUSE_DISPATCHER_ROLE],
     check: [roles.WAREHOUSE_CONTROLLER_ROLE, roles.WAREHOUSE_MANAGER_ROLE]
+  },
+  chart: {
+    read: [roles.SYSTEM_ADMIN_ROLE]
   }
 };

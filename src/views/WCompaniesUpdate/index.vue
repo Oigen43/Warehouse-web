@@ -13,6 +13,7 @@
         :companyName="companyName"
         :address="address"
         :description="description"
+        :price="price"
       ></w-form>
       <b-button
         variant="link"
@@ -54,6 +55,9 @@
             },
             description() {
                 return this.updatedCompany.description;
+            },
+            price() {
+                return this.updatedCompany.price;
             }
         },
         methods: {

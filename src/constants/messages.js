@@ -120,5 +120,10 @@ export default {
 
   'goods.create.error': 'Can not create goods',
   'goods.list.get.error': 'Can not get goods list',
-  'goods.delete.error': 'Can not delete goods'
+  'goods.delete.error': 'Can not delete goods',
+
+  'history.price.create.success': 'History price created',
+  'history.price.update.success': 'Can not update history price',
+  'history.price.create.error': 'Can not create history price'
+
 };

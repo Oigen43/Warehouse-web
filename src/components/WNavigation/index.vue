@@ -68,6 +68,14 @@
               TTN
             </b-button>
           </b-nav-item>
+          <b-nav-item v-if="hasPermissions(routesPermissions.chart.read)">
+            <b-button
+              variant="light"
+              to='/chart'
+              class="w-navigation-link">
+              Chart
+            </b-button>
+          </b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto" v-if="!registrationToken">

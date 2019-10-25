@@ -6,7 +6,9 @@
       v-slot:cell(active)="data">
       <b-form-checkbox
         v-model="data.value"
-        disabled>
+        @input="activeButtonClicked(data)"
+        :disabled="!hasPermissions(routesPermissions.companies.updateActive)"
+        >
       </b-form-checkbox>
     </template>
     <template
@@ -91,6 +93,10 @@
                 getUpdatedCompanyData: 'getUpdatedCompany',
                 sendDeletedCompanyData: 'deleteCompany'
             }),
+            activeButtonClicked(data) {
+                data.item.active = data.value;
+                this.$emit('active-button-clicked', data.item);
+            },
             clickedWarehousesButton(item) {
                 router.push(`companies/${item.id}/warehouses`);
             },

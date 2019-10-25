@@ -1,5 +1,7 @@
 export const BASE_URL = 'http://localhost:3030';
 export const COMPANIES_URL = '/companies';
+export const COMPANIES_CHANGE_ACTIVE_URL = '/companies/changeActive';
+export const COMPANIES_GET_PRICES_URL = '/companies/getPrices';
 export const WAREHOUSES_URL = '/warehouses';
 export const WAREHOUSES_URL_NAMES = '/warehouses/names';
 export const USERS_URL = '/users';

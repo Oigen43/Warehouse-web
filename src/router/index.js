@@ -40,6 +40,7 @@ import WTTNList from '../views/WTTNList';
 import WNotFound from '../views/WNotFound';
 import WTTNAddForm from '../views/WTTNAdd';
 import WTTNUpdateForm from '../views/WTTNUpdate';
+import WChart from '../views/WChart';
 
 Vue.use(Router);
 
@@ -305,6 +306,13 @@ export default new Router({
       name: 'TTNUpdateForm',
       component: WTTNUpdateForm,
       meta: { authorize: routesPermissions.TTN.update },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/chart',
+      name: 'WChart',
+      component: WChart,
+      meta: { authorize: routesPermissions.chart.read },
       beforeEnter: ifAuthenticated,
     },
     {
