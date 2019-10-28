@@ -1,5 +1,5 @@
 <template>
-  <b-form class="w-ttn-form">
+  <b-form @submit.prevent="clickedDownloadButton" class="w-ttn-form">
     <label
       class="w-ttn-form-input-label"
       for="ttn-number">
@@ -43,7 +43,7 @@
     ></b-form-input>
 
     <label
-      v-if="receiverName"
+      v-if="receiver"
       class="w-ttn-form-input-label"
       for="ttn-receiver">
       Receiver:
@@ -154,7 +154,6 @@
       type="submit"
       variant="outline-dark"
       size="lg"
-      @click="clickedDownloadButton"
       class="w-ttn-form-button">
       DOWNLOAD
     </b-button>
