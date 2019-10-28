@@ -9,6 +9,8 @@ export default {
   newCompany: {},
   updatedCompany: {},
   deletedCompany: {},
+  companiesArrayDate: [],
+  companiesArrayPrices: [],
 
   warehouses: [],
   warehousesPageLimit: 1,

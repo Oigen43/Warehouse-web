@@ -27,26 +27,28 @@
       class="w-companies-form-input"
     ></b-form-input>
 
-    <b-form-input
-      id="company-price-input"
-      size="lg"
-      v-model="priceForm.dailyPrice"
-      required
-      placeholder="Company price"
-      class="w-companies-form-input"
-    ></b-form-input>
+    <div
+      v-if="addCompany">
+      <b-form-input
+        id="company-price-input"
+        size="lg"
+        v-model="priceForm.dailyPrice"
+        required
+        placeholder="Company price"
+        class="w-companies-form-input"
+      ></b-form-input>
 
-    <b-form-input
-      v-if="addCompany"
-      id="company-begin-date-input"
-      size="lg"
-      v-model="priceForm.activeDate"
-      type="date"
-      :min="minDate"
-      required
-      placeholder="Company price"
-      class="w-companies-form-input"
-    ></b-form-input>
+      <b-form-input
+        id="company-begin-date-input"
+        size="lg"
+        v-model="priceForm.activeDate"
+        type="date"
+        :min="minDate"
+        required
+        placeholder="Company price"
+        class="w-companies-form-input"
+      ></b-form-input>
+    </div>
 
     <div v-if="withAdminFields"
          class="w-companies-admin">

@@ -1,6 +1,7 @@
 <template>
   <div>
       <chart
+        v-if="isFormShown"
         :options="chartOptions"
       ></chart>
       <b-row>
@@ -16,9 +17,9 @@
 </template>
 
 <script>
-    import {Chart} from 'highcharts-vue'
+    import { Chart } from 'highcharts-vue';
     import { BRow, BCol } from 'bootstrap-vue';
-    import { mapActions } from 'vuex';
+    import { mapActions, mapState } from 'vuex';
 
     import WChartOptionsForm from '../../components/WChartOptionsForm/index';
 
@@ -37,22 +38,18 @@
                         type: 'column'
                     },
                     title: {
-                        text: 'Fruit Consumption'
+                        text: ''
                     },
                     xAxis: {
-                        categories: ['Apples', 'Bananas', 'Oranges']
+                        categories: this.categories
                     },
                     yAxis: {
                         title: {
-                            text: 'Fruit eaten'
+                            text: 'Companies prices'
                         }
                     },
                     series: [{
-                        name: 'Jane',
-                        data: [1, 0, 4]
-                    }, {
-                        name: 'John',
-                        data: [5, 7, 3]
+                        data: this.price
                     }]
                 },
                 date: {
@@ -61,12 +58,34 @@
                 }
             };
         },
+        computed: {
+            ...mapState([
+                'companiesArrayDate',
+                'companiesArrayPrices'
+            ]),
+            price() {
+                return this.companiesArrayPrices;
+            },
+            categories() {
+                return this.companiesArrayDate;
+            },
+            isFormShown() {
+                return this.companiesArrayDate.length > 0;
+            }
+        },
+        watch: {
+            companiesArrayDate() {
+                this.chartOptions.xAxis.categories = this.companiesArrayDate;
+            },
+            companiesArrayPrices() {
+                this.chartOptions.series[0].data = this.companiesArrayPrices;
+            }
+        },
         methods: {
             ...mapActions({
                 getPrices: 'getPrices'
             }),
             async sendData(date) {
-                console.log(date);
                 await this.getPrices(date);
             }
         }

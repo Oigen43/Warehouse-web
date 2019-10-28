@@ -71,6 +71,9 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
   },
+  setCurrentCompanyId: async ({ commit }, req) => {
+    commit(types.CURRENT_COMPANY_ID, req);
+  },
   updateActiveCompany: async ({ commit }, req) => {
     commit(types.REQUEST);
 
@@ -85,8 +88,18 @@ export default {
     const res = await api.get(url.COMPANIES_GET_PRICES_URL, req);
 
     if (res.data) {
-      //commit(types.WAREHOUSES_NAMES, res.data.warehouses);
+      commit(types.COMPANIES_DATE_ARRAY, res.data.arrayDate);
+      commit(types.COMPANIES_PRICES_ARRAY, res.data.arrayData);
     }
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  changeCompanyPrice: async ({ commit }, req) => {
+    commit(types.REQUEST);
+
+    const res = await api.put(url.COMPANIES_CHANGE_PRICE, req);
+
+    commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
   sendUpdatedCompany: async ({ commit }, req) => {

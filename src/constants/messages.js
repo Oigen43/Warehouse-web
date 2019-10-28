@@ -7,6 +7,7 @@ export default {
   'company.update.error': 'Can not update company',
   'company.delete.success': 'Company deleted!',
   'company.delete.error': 'Can not delete company',
+  'company.get.prices.error': 'Can not get companies prices',
 
   'user.get.error': 'Can not get user',
   'users.list.get.error': 'Can not get users list',
@@ -123,7 +124,8 @@ export default {
   'goods.delete.error': 'Can not delete goods',
 
   'history.price.create.success': 'History price created',
-  'history.price.update.success': 'Can not update history price',
+  'history.price.update.success': 'History price updated',
+  'history.price.update.error': 'Can not update history price',
   'history.price.create.error': 'Can not create history price'
 
 };

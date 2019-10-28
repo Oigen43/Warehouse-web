@@ -23,6 +23,14 @@
     <template
       v-slot:cell(buttons)="data">
       <b-button
+        class="w-table-change-price-button"
+        variant="dark"
+        size="sm"
+        @click="clickedChangePriceButton(data.item)"
+        v-if="hasPermissions(routesPermissions.companies.delete)">
+        Change price
+      </b-button>
+      <b-button
         class="w-table-update-button"
         variant="dark"
         size="sm"
@@ -109,6 +117,9 @@
                     ...modal.CONFIRM_MODAL_OPTIONS
                 })
                     .then(value => value && this.deleteCompany(item));
+            },
+            clickedChangePriceButton(item) {
+                this.$emit('change-price-button-clicked', item);
             },
             deleteCompany(item) {
                 this.$emit('delete-button-clicked', item);
