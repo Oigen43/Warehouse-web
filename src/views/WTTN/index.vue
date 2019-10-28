@@ -120,6 +120,8 @@
                 };
             },
             clickedDownloadButton() {
+                const docName = `gcn_${this.updatedTTN.number}.pdf`;
+
                 pdfMake.vfs = pdfFonts.pdfMake.vfs;
                 const docDefinition = {
                     content: [
@@ -239,7 +241,7 @@
                     }
                 };
 
-                pdfMake.createPdf(docDefinition).open();
+                pdfMake.createPdf(docDefinition).download(docName);
             }
         },
         created: async function () {
