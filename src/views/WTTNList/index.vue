@@ -1,5 +1,5 @@
 <template>
-  <b-row v-if="TTN.length">
+  <b-row v-if="TTN">
     <b-col>
       <div class='w-ttn-list-page'>
         <h1>List of GCN</h1>
