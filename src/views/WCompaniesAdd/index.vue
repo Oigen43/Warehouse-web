@@ -8,10 +8,12 @@
         :companyName="companyName"
         :address="address"
         :description="description"
+        :dailyPrice="dailyPrice"
         :adminName="adminName"
         :adminEmail="adminEmail"
         :disableState="disableState"
         with-admin-fields
+        add-company
       ></w-form>
       <b-button
         variant="link"
@@ -43,6 +45,8 @@
                 companyName: '',
                 address: '',
                 description: '',
+                dailyPrice: null,
+                activeDate: '',
                 adminName: '',
                 adminEmail: '',
                 disableState: false
@@ -61,7 +65,7 @@
             async sendData(newCompany) {
                 this.changeDisableState();
 
-                const res = await this.sendNewCompanyData({ company: newCompany.company, user: newCompany.user });
+                const res = await this.sendNewCompanyData({ company: newCompany.company, priceForm: newCompany.priceForm, user: newCompany.user });
 
                 res.error && this.changeDisableState();
                 !res.error && this.redirect();

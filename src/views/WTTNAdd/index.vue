@@ -134,9 +134,9 @@
                 this.fetchDriversNames({ carrierId: id });
             },
             onSubmit(form) {
-                helpers.isArrayEmpty(this.goods) ?
-                    this.makeToast(customToasts.emptyGoodsList) :
-                    this.sendData(form, this.goods);
+                helpers.isArrayEmpty(this.goods)
+                    ? this.makeToast(customToasts.emptyGoodsList)
+                    : this.sendData(form, this.goods);
             },
             async sendData(form, goods) {
                 form.registrationDate = new Date();
@@ -145,9 +145,9 @@
                     status: statusesTTN.ARCHIVED_STATUS
                 };
 
-                const res = form.type === TTNTypes.INCOMING_TYPE ?
-                    await this.sendNewTTN({ newTTN: form, goods: goods }) :
-                    await this.sendNewTTN({ newTTN: form, TTN, goods: goods });
+                const res = (form.type === TTNTypes.INCOMING_TYPE)
+                    ? await this.sendNewTTN({ newTTN: form, goods: goods })
+                    : await this.sendNewTTN({ newTTN: form, TTN, goods: goods });
 
                 !res.error && router.push('/gcn');
             },

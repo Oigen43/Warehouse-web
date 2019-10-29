@@ -9,6 +9,8 @@ export default {
   newCompany: {},
   updatedCompany: {},
   deletedCompany: {},
+  companiesArrayDate: [],
+  companiesArrayPrices: [],
 
   warehouses: [],
   warehousesPageLimit: 1,
@@ -69,5 +71,6 @@ export default {
   userInfo: {},
 
   toast: {},
+  chartDateInterval: {},
   loading: false
 };

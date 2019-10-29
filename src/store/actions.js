@@ -71,6 +71,37 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
   },
+  setCurrentCompanyId: async ({ commit }, req) => {
+    commit(types.CURRENT_COMPANY_ID, req);
+  },
+  updateActiveCompany: async ({ commit }, req) => {
+    commit(types.REQUEST);
+
+    const res = await api.put(url.COMPANIES_CHANGE_ACTIVE_URL, req);
+
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  getPrices: async ({ commit }, req) => {
+    commit(types.REQUEST);
+
+    const res = await api.get(url.COMPANIES_GET_PRICES_URL, req);
+
+    if (res.data) {
+      commit(types.COMPANIES_DATE_ARRAY, res.data.arrayDate);
+      commit(types.COMPANIES_PRICES_ARRAY, res.data.arrayData);
+    }
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  changeCompanyPrice: async ({ commit }, req) => {
+    commit(types.REQUEST);
+
+    const res = await api.put(url.COMPANIES_CHANGE_PRICE, req);
+
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
   sendUpdatedCompany: async ({ commit }, req) => {
     commit(types.REQUEST);
 
@@ -111,9 +142,12 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
   fetchWarehousesNames: async ({ commit }, req) => {
-    const res = await api.get(url.WAREHOUSES_NAMES_URL, { companyId: req.companyId });
+    commit(types.REQUEST);
 
+    const res = await api.get(url.WAREHOUSES_NAMES_URL, { companyId: req.companyId });
     res.data && commit(types.WAREHOUSES_NAMES, res.data.warehouses);
+
+    commit(types.SUCCESS);
   },
   createWarehouse: async ({ commit }, req) => {
     commit(types.REQUEST);
@@ -727,5 +761,9 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
+  },
+
+  setChartDateInterval: async ({ commit }, req) => {
+    commit(types.SET_CHART_DATE, req);
   }
 };

@@ -17,6 +17,8 @@
         <div class="companies-list">
           <w-list
             @delete-button-clicked="clickedDeleteButton"
+            @active-button-clicked="clickedActiveButton"
+            @change-price-button-clicked="clickedChangePriceButton"
             :companies="companies"
           ></w-list>
         </div>
@@ -32,6 +34,21 @@
             </div>
           </b-col>
         </b-row>
+        <b-row>
+          <b-modal
+            ref="change-price"
+            id="modal-prevent-closing"
+            title="Enter price"
+            @ok="submitModal"
+          >
+            <b-form-input
+              id="name-input"
+              v-model="price"
+              placeholder="price"
+              required
+            ></b-form-input>
+          </b-modal>
+        </b-row>
       </div>
     </b-col>
   </b-row>
@@ -39,7 +56,7 @@
 
 <script>
     import { mapActions, mapState } from 'vuex';
-    import { BRow, BCol, BButton } from 'bootstrap-vue';
+    import { BRow, BCol, BButton, BFormInput, BModal } from 'bootstrap-vue';
 
     import { validation } from '../../components/mixins/validation';
     import routesPermissions from '../../constants/routesPermissions';
@@ -54,17 +71,21 @@
             BCol,
             BButton,
             WList,
-            WPagination
+            WPagination,
+            BFormInput,
+            BModal
         },
         data: function () {
             return {
-                currentPage: 1
+                currentPage: 1,
+                price: null
             };
         },
         computed: {
             ...mapState([
                 'companies',
-                'companiesPageLimit'
+                'companiesPageLimit',
+                'currentCompanyId'
             ]),
             routesPermissions: function() {
               return routesPermissions;
@@ -74,11 +95,21 @@
             ...mapActions({
                 fetchCompaniesList: 'fetchCompaniesList',
                 sendDeletedCompanyData: 'sendDeletedCompany',
-                deletedCompanyData: 'deleteCompany'
+                deletedCompanyData: 'deleteCompany',
+                updateCompanyActive: 'updateActiveCompany',
+                setCurrentCompanyId: 'setCurrentCompanyId',
+                changeCompanyPrice: 'changeCompanyPrice'
             }),
             sendRequest(page) {
                 this.currentPage = page;
                 this.fetchCompaniesList(this.currentPage);
+            },
+            async submitModal() {
+                await this.changeCompanyPrice({ companyId: this.currentCompanyId, price: this.price });
+            },
+            async clickedActiveButton(item) {
+                await this.updateCompanyActive(item);
+                await this.fetchCompaniesList(this.currentPage);
             },
             async clickedDeleteButton(item) {
                 await this.sendDeletedCompanyData(item.id);
@@ -87,6 +118,10 @@
                     this.currentPage -= 1;
                 }
                 this.fetchCompaniesList(this.currentPage);
+            },
+            async clickedChangePriceButton(item) {
+                await this.setCurrentCompanyId(item.id);
+                this.$refs['change-price'].show();
             }
         },
         created: function () {

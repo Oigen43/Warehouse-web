@@ -7,7 +7,9 @@
       v-slot:cell(active)="data">
       <b-form-checkbox
         v-model="data.value"
-        disabled>
+        @input="activeButtonClicked(data)"
+        :disabled="!hasPermissions(routesPermissions.companies.delete)"
+        >
       </b-form-checkbox>
     </template>
     <template
@@ -21,6 +23,14 @@
     </template>
     <template
       v-slot:cell(buttons)="data">
+      <b-button
+        class="w-table-change-price-button"
+        variant="dark"
+        size="sm"
+        @click="clickedChangePriceButton(data.item)"
+        v-if="hasPermissions(routesPermissions.companies.delete)">
+        Change price
+      </b-button>
       <b-button
         class="w-table-update-button"
         variant="dark"
@@ -92,6 +102,10 @@
                 getUpdatedCompanyData: 'getUpdatedCompany',
                 sendDeletedCompanyData: 'deleteCompany'
             }),
+            activeButtonClicked(data) {
+                data.item.active = data.value;
+                this.$emit('active-button-clicked', data.item);
+            },
             clickedWarehousesButton(item) {
                 router.push(`companies/${item.id}/warehouses`);
             },
@@ -104,6 +118,9 @@
                     ...modal.CONFIRM_MODAL_OPTIONS
                 })
                     .then(value => value && this.deleteCompany(item));
+            },
+            clickedChangePriceButton(item) {
+                this.$emit('change-price-button-clicked', item);
             },
             deleteCompany(item) {
                 this.$emit('delete-button-clicked', item);

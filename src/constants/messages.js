@@ -7,6 +7,7 @@ export default {
   'company.update.error': 'Can not update company',
   'company.delete.success': 'Company deleted!',
   'company.delete.error': 'Can not delete company',
+  'company.get.prices.error': 'Can not get companies prices',
 
   'user.get.error': 'Can not get user',
   'users.list.get.error': 'Can not get users list',
@@ -129,5 +130,11 @@ export default {
 
   'write.off.name.conflict': 'This write-off already exists!',
   'write.off.create.success': 'Write-off created',
-  'write.off.create.error': 'Can not create write-off'
+  'write.off.create.error': 'Can not create write-off',
+
+  'history.price.create.success': 'History price created',
+  'history.price.update.success': 'History price updated',
+  'history.price.update.error': 'Can not update history price',
+  'history.price.create.error': 'Can not create history price'
+
 };
