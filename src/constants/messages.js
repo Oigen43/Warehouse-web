@@ -105,7 +105,7 @@ export default {
   'transport.delete.success': 'Transport deleted!',
   'transport.delete.error': 'Can not delete transport',
 
-  'ttn.number.conflict': 'GCN is already exists',
+  'ttn.number.conflict': 'GCN with this number already exists',
   'ttn.list.get.error': 'Can not get GCN list',
   'ttn.get.unknown': 'This GCN does not exist',
   'ttn.name.conflict': 'This GCN already exists!',

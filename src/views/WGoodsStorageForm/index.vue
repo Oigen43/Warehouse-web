@@ -111,7 +111,8 @@
             changeStorageCurrentCapacity() {
                 this.goods.forEach(item => {
                     item.storage.forEach(item => {
-                        const capacity = item.GoodsStorage.size + item.currentCapacity;
+                        const currentCapacity = this.storagesComputedCapacity.find(element => element.id === item.id).currentCapacity;
+                        const capacity = item.GoodsStorage.size + currentCapacity;
 
                         this.setStorageCurrentCapacity({ id: item.id, capacity });
                     });
