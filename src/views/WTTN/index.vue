@@ -56,11 +56,6 @@
             WForm,
             WGoods
         },
-        data() {
-            return {
-                name: ''
-            };
-        },
         computed: {
             ...mapState([
                 'updatedTTN',
@@ -96,7 +91,6 @@
                 let body = [];
 
                 body.push(header);
-
                 data.forEach(row => {
                     let dataRow = [];
 
@@ -106,10 +100,9 @@
 
                     body.push(dataRow);
                 });
-
                 return body;
             },
-            table(data, header, columns) {
+            buildTable(data, header, columns) {
                 return {
                     style: 'table',
                     table: {
@@ -123,6 +116,7 @@
                 const docName = `gcn_${this.updatedTTN.number}.pdf`;
 
                 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
                 const docDefinition = {
                     content: [
                         {
@@ -223,7 +217,7 @@
                         },
 
                         'Goods',
-                        this.table(
+                        this.buildTable(
                             this.goods,
                             ['Name', 'Volume (m³)', 'Count', 'Weight (kg)', 'Price ($)', 'Storage Recommendation'],
                             ['name', 'volume', 'count', 'weight', 'price', 'recommendation']
