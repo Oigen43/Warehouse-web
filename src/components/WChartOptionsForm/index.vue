@@ -1,9 +1,8 @@
 <template>
-  <b-form @submit.prevent="onSubmit" class="w-chart-form">
-    <div>
-      <h3 class="w-chart-form-h3">Time period</h3>
-      <b-row>
-        <b-col>
+    <b-row>
+      <b-col class="w-chart-form">
+        <h3 class="w-chart-form-h3">Time period</h3>
+        <b-form @submit.prevent="onSubmit">
           <label
             class="w-chart-form-input-label"
             for="start-date-input">
@@ -18,11 +17,7 @@
             type="date"
             class="w-chart-form-input"
           ></b-form-input>
-        </b-col>
-      </b-row>
 
-      <b-row>
-        <b-col>
           <label
             class="w-chart-form-input-label"
             for="end-date-input">
@@ -37,11 +32,7 @@
             type="date"
             class="w-chart-form-input"
           ></b-form-input>
-        </b-col>
-      </b-row>
 
-      <b-row>
-        <b-col>
           <b-button
             type="submit"
             variant="outline-dark"
@@ -49,10 +40,9 @@
             class="w-chart-form-button">
             Draw chart
           </b-button>
-        </b-col>
-      </b-row>
-    </div>
-  </b-form>
+        </b-form>
+      </b-col>
+    </b-row>
 </template>
 
 <script>
