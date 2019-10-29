@@ -43,6 +43,7 @@ import WNotFound from '../views/WNotFound';
 import WTTNAddForm from '../views/WTTNAdd';
 import WTTNUpdateForm from '../views/WTTNUpdate';
 import WTTNCheckForm from '../views/WTTNCheck';
+import WTTN from '../views/WTTN';
 import WWriteOffGoodsForm from '../views/WWriteOffGoods';
 import WChart from '../views/WChart';
 
@@ -293,7 +294,7 @@ export default new Router({
     },
     {
       path: '/gcn',
-      name: 'TTN',
+      name: 'TTNList',
       component: WTTNList,
       meta: { authorize: routesPermissions.TTN.read },
       beforeEnter: ifAuthenticated,
@@ -345,6 +346,13 @@ export default new Router({
       name: 'choose-goods-storage-form',
       component: WGoodsStorageAdd,
       meta: { authorize: routesPermissions.goodsStorage.create },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/gcn/:TTNId',
+      name: 'TTN',
+      component: WTTN,
+      meta: { authorize: routesPermissions.TTN.getById },
       beforeEnter: ifAuthenticated,
     },
     {

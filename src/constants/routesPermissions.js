@@ -75,6 +75,7 @@ export default {
       roles.WAREHOUSE_CONTROLLER_ROLE,
       roles.WAREHOUSE_DISPATCHER_ROLE
     ],
+    getById: [roles.COMPANY_ADMIN_ROLE],
     update: [roles.WAREHOUSE_DISPATCHER_ROLE],
     delete: [roles.WAREHOUSE_DISPATCHER_ROLE],
     check: [roles.WAREHOUSE_CONTROLLER_ROLE, roles.WAREHOUSE_MANAGER_ROLE],

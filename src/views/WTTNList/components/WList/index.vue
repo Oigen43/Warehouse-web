@@ -7,7 +7,7 @@
       v-slot:cell(buttons)="data">
       <b-button
         v-if="hasUpdateAction(data.item)"
-        class="w-table-update-button"
+        class="w-ttn-button"
         variant="dark"
         size="sm"
         @click="clickedUpdateButton(data.item)">
@@ -22,7 +22,7 @@
       </b-button>
       <b-button
         v-if="hasCheckAction(data.item)"
-        class="w-table-check-button"
+        class="w-ttn-button"
         variant="dark"
         size="sm"
         @click="clickedCheckButton(data.item)">
@@ -30,7 +30,7 @@
       </b-button>
       <b-button
         v-if="hasOutAction(data.item)"
-        class="w-ttn-out-button"
+        class="w-ttn-button"
         variant="dark"
         size="sm"
         @click="clickedOutButton(data.item)">
@@ -38,10 +38,19 @@
       </b-button>
       <b-button
         v-if="hasStorageAction(data.item)"
+        class="w-ttn-button"
         variant="dark"
         size="sm"
         @click="clickedStorageButton(data.item)">
         Storage
+      </b-button>
+      <b-button
+        v-if="hasShowAction(data.item)"
+        class="w-ttn-button"
+        variant="dark"
+        size="sm"
+        @click="clickedShowButton(data.item)">
+        Show
       </b-button>
     </template>
   </w-table>
@@ -111,6 +120,10 @@
                 return (item.status === statuses.CONFIRMED_STATUS || statuses.RELEASE_ALLOWED_STATUS) &&
                     this.hasPermissions(this.routesPermissions.TTN.storage);
             },
+            hasShowAction(item) {
+                return (item.status === statuses.ARCHIVED_STATUS || statuses.VERIFICATION_COMPLETED_STATUS) &&
+                    this.hasPermissions(this.routesPermissions.TTN.getById);
+            },
             clickedUpdateButton(item) {
                 router.push(`/gcn/${item.id}/update`);
             },
@@ -132,6 +145,9 @@
             },
             clickedCheckButton(item) {
                 router.push(`/gcn/${item.id}/check`);
+            },
+            clickedShowButton(item) {
+                router.push(`/gcn/${item.id}`);
             }
         }
     };
