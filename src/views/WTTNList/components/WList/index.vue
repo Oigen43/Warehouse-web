@@ -45,12 +45,12 @@
         Storage
       </b-button>
       <b-button
-        v-if="hasOpenAction(data.item)"
+        v-if="hasShowAction(data.item)"
         class="w-ttn-button"
         variant="dark"
         size="sm"
-        @click="clickedOpenButton(data.item)">
-        Open
+        @click="clickedShowButton(data.item)">
+        Show
       </b-button>
     </template>
   </w-table>
@@ -120,7 +120,7 @@
                 return (item.status === statuses.CONFIRMED_STATUS || statuses.RELEASE_ALLOWED_STATUS) &&
                     this.hasPermissions(this.routesPermissions.TTN.storage);
             },
-            hasOpenAction(item) {
+            hasShowAction(item) {
                 return (item.status === statuses.ARCHIVED_STATUS || statuses.VERIFICATION_COMPLETED_STATUS) &&
                     this.hasPermissions(this.routesPermissions.TTN.getById);
             },
@@ -146,7 +146,7 @@
             clickedCheckButton(item) {
                 router.push(`/gcn/${item.id}/check`);
             },
-            clickedOpenButton(item) {
+            clickedShowButton(item) {
                 router.push(`/gcn/${item.id}`);
             }
         }

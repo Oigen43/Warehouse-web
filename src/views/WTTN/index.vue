@@ -160,7 +160,6 @@
                             style: 'table',
                             table: {
                                 widths: [200, 200, 90],
-                                height: [200, 200, 90],
                                 body: [
                                     ['Name', 'TIN', 'Country Code'],
                                     [
@@ -195,7 +194,10 @@
                                 widths: [250, 250],
                                 body: [
                                     ['Type', 'Number'],
-                                    [`${this.updatedTTN.Transport.transportType}`, `${this.updatedTTN.Transport.transportNumber}`]
+                                    [
+                                        `${this.updatedTTN.Transport.transportType}`,
+                                        `${this.updatedTTN.Transport.transportNumber}`
+                                    ]
                                 ]
                             }
                         },
