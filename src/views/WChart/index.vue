@@ -4,6 +4,11 @@
         v-if="isChartShown"
         :options="chartOptions"
       ></chart>
+      <h1
+        v-else
+        class="w-chart-h1">
+        System income chart for a certain period
+      </h1>
       <b-row>
        <b-col class="w-chart-form" lg="4" offset-lg="4">
           <w-chart-options-form
@@ -60,10 +65,11 @@
                     },
                     yAxis: {
                         title: {
-                            text: 'Companies prices'
+                            text: 'Daily system income'
                         }
                     },
                     series: [{
+                        name: 'Daily income',
                         data: this.companiesArrayPrices
                     }]
                 };

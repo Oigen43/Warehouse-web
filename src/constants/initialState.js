@@ -11,6 +11,7 @@ export default {
   deletedCompany: {},
   companiesArrayDate: [],
   companiesArrayPrices: [],
+  currentCompanyId: null,
 
   warehouses: [],
   warehousesPageLimit: 1,
