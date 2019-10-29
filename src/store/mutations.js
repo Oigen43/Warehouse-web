@@ -35,6 +35,9 @@ export default {
   [types.CREATE_COMPANY](state, company) {
     state.newCompany = company;
   },
+  [types.CURRENT_COMPANY_ID](state, companyId) {
+    state.currentCompanyId = companyId;
+  },
   [types.SET_UPDATED_COMPANY](state, company) {
     state.updatedCompany = company;
   },
@@ -48,6 +51,12 @@ export default {
   },
   [types.CLEAN_UPDATED_COMPANY](state) {
     state.updatedCompany = {};
+  },
+  [types.COMPANIES_DATE_ARRAY](state, companiesArrayDate) {
+    state.companiesArrayDate = companiesArrayDate;
+  },
+  [types.COMPANIES_PRICES_ARRAY](state, companiesArrayPrices) {
+    state.companiesArrayPrices = companiesArrayPrices;
   },
 
   [types.WAREHOUSES](state, warehouses) {
@@ -329,6 +338,10 @@ export default {
 
   [types.SET_TOAST](state, toast) {
     state.toast = toast;
+  },
+
+  [types.SET_CHART_DATE](state, date) {
+    state.chartDateInterval = date;
   },
 
   [types.REQUEST](state) {

@@ -40,6 +40,37 @@
       class="w-companies-form-input"
     ></b-form-textarea>
 
+    <div
+      v-if="addCompany">
+      <label
+        class="w-companies-form-input-label"
+        for="company-price-input">
+        Company price:
+      </label>
+      <b-form-input
+        id="company-price-input"
+        size="lg"
+        v-model="priceForm.dailyPrice"
+        required
+        class="w-companies-form-input"
+      ></b-form-input>
+
+      <label
+        class="w-companies-form-input-label"
+        for="company-begin-date-input">
+        Start of activity:
+      </label>
+      <b-form-input
+        id="company-begin-date-input"
+        size="lg"
+        v-model="priceForm.activeDate"
+        type="date"
+        :min="minDate"
+        required
+        class="w-companies-form-input"
+      ></b-form-input>
+    </div>
+
     <div v-if="withAdminFields">
       <h3 class="w-companies-admin-h1">Add company admin</h3>
       <label
@@ -113,6 +144,14 @@
                 type: String,
                 default: '',
             },
+            dailyPrice: {
+                type: Number,
+                default: 0
+            },
+            activeDate: {
+                type: String,
+                default: ''
+            },
             adminName: {
                 type: String,
                 default: ''
@@ -128,6 +167,10 @@
             withAdminFields: {
                 type: Boolean,
                 default: false
+            },
+            addCompany: {
+                type: Boolean,
+                default: false
             }
         },
         data: function () {
@@ -141,13 +184,28 @@
                 adminForm: {
                     firstName: this.adminName,
                     email: this.adminEmail
+                },
+                priceForm: {
+                    dailyPrice: this.dailyPrice,
+                    activeDate: this.activeDate
                 }
             };
+        },
+        computed: {
+            minDate() {
+                const date = new Date();
+                const year = date.getFullYear();
+                const month = (date.getMonth() + 1) < 10 ? '0' + (date.getMonth() + 1) : (date.getMonth() + 1);
+                const day = (date.getDate() + 1) < 10 ? '0' + (date.getDate()) : (date.getDate());
+
+                return `${year}-${month}-${day}`;
+            }
         },
         methods: {
             onSubmit() {
                 this.$emit('form-submitted', {
                     company: this.companyForm,
+                    priceForm: this.priceForm,
                     user: {
                         data: this.adminForm,
                         roles: [userRoles.COMPANY_ADMIN_ROLE]

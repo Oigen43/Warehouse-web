@@ -36,7 +36,7 @@
       </b-card>
     </b-col>
   </b-row>
-  <w-empty-table :insert="true" v-else></w-empty-table>
+  <w-empty-table insert v-else></w-empty-table>
 </template>
 
 <script>

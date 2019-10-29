@@ -45,6 +45,7 @@ import WTTNUpdateForm from '../views/WTTNUpdate';
 import WTTNCheckForm from '../views/WTTNCheck';
 import WTTN from '../views/WTTN';
 import WWriteOffGoodsForm from '../views/WWriteOffGoods';
+import WChart from '../views/WChart';
 
 Vue.use(Router);
 
@@ -352,6 +353,13 @@ export default new Router({
       name: 'TTN',
       component: WTTN,
       meta: { authorize: routesPermissions.TTN.getById },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/chart',
+      name: 'WChart',
+      component: WChart,
+      meta: { authorize: routesPermissions.chart.read },
       beforeEnter: ifAuthenticated,
     },
     {

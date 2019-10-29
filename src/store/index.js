@@ -20,6 +20,9 @@ export default new Vuex.Store({
     newCompany: {},
     updatedCompany: {},
     deletedCompany: {},
+    companiesArrayDate: [],
+    companiesArrayPrices: [],
+    currentCompanyId: null,
 
     warehouses: [],
     warehousesPageLimit: 1,
@@ -91,6 +94,7 @@ export default new Vuex.Store({
     writeOff: {},
 
     toast: {},
+    chartDateInterval: {},
     loading: false
   },
   getters,

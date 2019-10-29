@@ -93,6 +93,10 @@ export default {
   },
   goodsStorage: {
     create: [roles.WAREHOUSE_MANAGER_ROLE],
-    read: [roles.WAREHOUSE_MANAGER_ROLE]
+    read: [roles.WAREHOUSE_MANAGER_ROLE],
+    check: [roles.WAREHOUSE_CONTROLLER_ROLE, roles.WAREHOUSE_MANAGER_ROLE]
+  },
+  chart: {
+    read: [roles.SYSTEM_ADMIN_ROLE]
   }
 };
