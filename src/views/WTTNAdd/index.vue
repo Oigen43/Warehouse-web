@@ -117,7 +117,7 @@
                     this.type = TTNTypes.OUTCOMING_TYPE;
                     this.status = statusesTTN.RELEASE_ALLOWED_STATUS;
                     await this.getUpdatedTTNData(this.id);
-                    this.goods = this.updatedTTN.goods.data.goods;
+                    this.goods = this.updatedTTN.Goods;
                 }
             },
             addGood(good) {

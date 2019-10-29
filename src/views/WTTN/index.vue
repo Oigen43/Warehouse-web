@@ -114,7 +114,7 @@
                     style: 'table',
                     table: {
                         headerRows: 1,
-                        widths: [100, 50, 80, 50, 70, 115],
+                        widths: [100, 60, 65, 65, 65, 110],
                         body: this.buildTableBody(data, header, columns)
                     }
                 };
@@ -225,7 +225,7 @@
                         'Goods',
                         this.table(
                             this.goods,
-                            ['Name', 'Volume', 'Count', 'Weight', 'Price', 'Storage Recommendation'],
+                            ['Name', 'Volume (m³)', 'Count', 'Weight (kg)', 'Price ($)', 'Storage Recommendation'],
                             ['name', 'volume', 'count', 'weight', 'price', 'recommendation']
                         )
                     ],
