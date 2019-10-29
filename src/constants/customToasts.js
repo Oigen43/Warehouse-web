@@ -18,5 +18,10 @@ export default {
     message: 'Please, select storage places for all goods',
     title: 'Error!',
     variant: 'danger'
+  },
+  wrongStorageCapacity: {
+    message: 'Storage capacity can not be less than',
+    title: 'Error!',
+    variant: 'danger'
   }
 };
