@@ -110,6 +110,7 @@ export const STORAGE_CURRENT_CAPACITY = 'STORAGE_CURRENT_CAPACITY';
 export const CREATE_WRITE_OFF = 'CREATE_WRITE_OFF';
 
 export const SET_TOAST = 'SET_TOAST';
+export const SET_CHART_DATE = 'SET_CHART_DATE';
 
 export const REQUEST = 'REQUEST';
 export const SUCCESS = 'SUCCESS';

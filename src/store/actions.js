@@ -761,5 +761,9 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
+  },
+
+  setChartDateInterval: async ({ commit }, req) => {
+    commit(types.SET_CHART_DATE, req);
   }
 };

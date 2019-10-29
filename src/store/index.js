@@ -94,6 +94,7 @@ export default new Vuex.Store({
     writeOff: {},
 
     toast: {},
+    chartDateInterval: {},
     loading: false
   },
   getters,

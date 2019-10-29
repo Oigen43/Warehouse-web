@@ -340,6 +340,10 @@ export default {
     state.toast = toast;
   },
 
+  [types.SET_CHART_DATE](state, date) {
+    state.chartDateInterval = date;
+  },
+
   [types.REQUEST](state) {
     state.loading = true;
   },

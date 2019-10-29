@@ -1,64 +1,85 @@
 <template>
   <b-form @submit.prevent="onSubmit" class="w-chart-form">
     <div>
-      <b-col>
-      <b-form-input
-        id="start-date-input"
-        size="lg"
-        :max="maxDate"
-        v-model="form.startDate"
-        required
-        type="date"
-        class="w-chart-form-input"
-      ></b-form-input>
-      </b-col>
+      <h3 class="w-chart-form-h3">Time period</h3>
+      <b-row>
+        <b-col>
+          <label
+            class="w-chart-form-input-label"
+            for="start-date-input">
+            Start date:
+          </label>
+          <b-form-input
+            id="start-date-input"
+            size="lg"
+            :max="maxDate"
+            v-model="form.startDate"
+            required
+            type="date"
+            class="w-chart-form-input"
+          ></b-form-input>
+        </b-col>
+      </b-row>
 
-      <b-col>
-      <b-form-input
-        id="end-date-input"
-        size="lg"
-        :max="maxDate"
-        v-model="form.finalDate"
-        required
-        type="date"
-        class="w-chart-form-input"
-      ></b-form-input>
-      </b-col>
+      <b-row>
+        <b-col>
+          <label
+            class="w-chart-form-input-label"
+            for="end-date-input">
+            Final date:
+          </label>
+          <b-form-input
+            id="end-date-input"
+            size="lg"
+            :max="maxDate"
+            v-model="form.finalDate"
+            required
+            type="date"
+            class="w-chart-form-input"
+          ></b-form-input>
+        </b-col>
+      </b-row>
 
-      <b-col>
-      <b-button
-        type="submit"
-        variant="outline-dark"
-        size="lg"
-        class="w-chart-form-button">
-        Draw chart
-      </b-button>
-      </b-col>
+      <b-row>
+        <b-col>
+          <b-button
+            type="submit"
+            variant="outline-dark"
+            size="lg"
+            class="w-chart-form-button">
+            Draw chart
+          </b-button>
+        </b-col>
+      </b-row>
     </div>
   </b-form>
 </template>
 
 <script>
-    import { BForm, BFormInput, BButton, BCol } from 'bootstrap-vue';
+    import { BForm, BFormInput, BButton, BRow, BCol } from 'bootstrap-vue';
 
     export default {
         name: 'WChartOptions',
         components: {
+            BRow,
             BCol,
             BForm,
             BFormInput,
             BButton
         },
         props: {
-            date: {
-                type: Object
+            startDate: {
+                type: String
+            },
+            finalDate: {
+                type: String
             }
         },
         data() {
             return {
                 form: {
-                    startDate: this.date.startDate,
-                    finalDate: this.date.finalDate
+                    startDate: this.startDate,
+                    finalDate: this.finalDate
                 }
             };
         },

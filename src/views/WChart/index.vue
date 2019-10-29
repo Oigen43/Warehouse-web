@@ -1,14 +1,15 @@
 <template>
   <div>
       <chart
-        v-if="isFormShown"
+        v-if="isChartShown"
         :options="chartOptions"
       ></chart>
       <b-row>
        <b-col class="w-chart-form" lg="4" offset-lg="4">
           <w-chart-options-form
             @form-submitted="sendData"
-            :date="date"
+            :startDate="startDate"
+            :finalDate="finalDate"
           >
           </w-chart-options-form>
         </b-col>
@@ -52,16 +53,14 @@
                         data: this.price
                     }]
                 },
-                date: {
-                    startDate: '',
-                    finalDate: ''
-                }
+
             };
         },
         computed: {
             ...mapState([
                 'companiesArrayDate',
-                'companiesArrayPrices'
+                'companiesArrayPrices',
+                'chartDateInterval'
             ]),
             price() {
                 return this.companiesArrayPrices;
@@ -69,8 +68,14 @@
             categories() {
                 return this.companiesArrayDate;
             },
-            isFormShown() {
+            isChartShown() {
                 return this.companiesArrayDate.length > 0;
+            },
+            startDate() {
+                return this.chartDateInterval.startDate;
+            },
+            finalDate() {
+                return this.chartDateInterval.finalDate;
             }
         },
         watch: {
@@ -83,9 +88,11 @@
         },
         methods: {
             ...mapActions({
-                getPrices: 'getPrices'
+                getPrices: 'getPrices',
+                setChartDateInterval: 'setChartDateInterval'
             }),
             async sendData(date) {
+                this.setChartDateInterval(date);
                 await this.getPrices(date);
             }
         }

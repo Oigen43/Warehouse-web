@@ -71,5 +71,6 @@ export default {
   userInfo: {},
 
   toast: {},
+  chartDateInterval: {},
   loading: false
 };
