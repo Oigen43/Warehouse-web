@@ -1,5 +1,6 @@
 <template>
   <w-table
+    :insert="hasPermissions(this.routesPermissions.TTN.create)"
     :items="items"
     :fields="fields">
     <template
@@ -23,15 +24,30 @@
         v-if="hasCheckAction(data.item)"
         class="w-table-check-button"
         variant="dark"
-        size="sm">
+        size="sm"
+        @click="clickedCheckButton(data.item)">
         Check
+      </b-button>
+      <b-button
+        v-if="hasOutAction(data.item)"
+        class="w-ttn-out-button"
+        variant="dark"
+        size="sm"
+        @click="clickedOutButton(data.item)">
+        Out
+      </b-button>
+      <b-button
+        v-if="hasStorageAction(data.item)"
+        variant="dark"
+        size="sm"
+        @click="clickedStorageButton(data.item)">
+        Storage
       </b-button>
     </template>
   </w-table>
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
     import { BButton } from 'bootstrap-vue';
 
     import router from '../../../../router';
@@ -54,47 +70,49 @@
                 fields: [
                     'number', 'registrationDate', 'type', 'status',
                     { key: 'Carrier.name', label: 'Carrier' },
-                    { key: 'Sender.senderName', label: 'Sender' },
-                    { key: 'buttons', label: '', class: 'w-list-button' },
-                    { key: 'blank', label: '', class: 'w-blank-column' }
+                    { key: 'Sender', label: 'Sender' },
+                    { key: 'Receiver', label: 'Receiver' },
+                    { key: 'buttons', label: '' },
                 ]
             };
         },
         computed: {
-            items: function() {
+            items: function () {
                 this.TTN.forEach(item => {
                     item.registrationDate = `${item.registrationDate.slice(0, 10)} ${item.registrationDate.slice(11, 19)}`;
+                    item.Sender = item.Sender ? item.Sender.senderName : 'N/A';
+                    item.Receiver = item.Receiver ? item.Receiver.receiverName : 'N/A';
                 });
-
                 return this.TTN;
             },
             routesPermissions: function () {
               return routesPermissions;
-            },
+            }
         },
         methods: {
-            ...mapActions({
-                getUpdatedTTNData: 'getUpdatedTTN'
-            }),
             hasUpdateAction(item) {
-                return item.status === statuses.REGISTERED_STATUS &&
-                this.hasPermissions(this.routesPermissions.TTN.update);
+                return (item.status === statuses.REGISTERED_STATUS || item.status === statuses.RELEASE_ALLOWED_STATUS) &&
+                    this.hasPermissions(this.routesPermissions.TTN.update);
             },
             hasDeleteAction(item) {
-                return item.status === statuses.REGISTERED_STATUS &&
-                this.hasPermissions(this.routesPermissions.TTN.delete);
+                return (item.status === statuses.REGISTERED_STATUS || item.status === statuses.RELEASE_ALLOWED_STATUS) &&
+                    this.hasPermissions(this.routesPermissions.TTN.delete);
             },
             hasCheckAction(item) {
                 return (item.status === statuses.REGISTERED_STATUS ||
-                item.status === statuses.RELEASE_ALLOWED_STATUS) &&
+                item.status === statuses.TAKEN_OUT_OF_STORAGE_STATUS) &&
                 this.hasPermissions(this.routesPermissions.TTN.check);
             },
-            hasTakeOutAction(item) {
-                return item.status === statuses.CONFIRMED_STATUS &&
-                this.hasPermissions(this.routesPermissions.TTN.takeOut);
+            hasOutAction(item) {
+                return (item.status === statuses.IN_STORAGE_STATUS &&
+                this.hasPermissions(this.routesPermissions.TTN.out));
+            },
+            hasStorageAction(item) {
+                return (item.status === statuses.CONFIRMED_STATUS || statuses.RELEASE_ALLOWED_STATUS) &&
+                    this.hasPermissions(this.routesPermissions.TTN.storage);
             },
             clickedUpdateButton(item) {
-                router.push(`/ttn/${item.id}/update`);
+                router.push(`/gcn/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.TTN_DELETE_TEXT, {
@@ -103,19 +121,22 @@
                 })
                     .then(value => value && this.deleteTTN(item));
             },
+            clickedOutButton(item) {
+                router.push(`/gcn/${item.id}/addOut`);
+            },
             deleteTTN(item) {
                 this.$emit('delete-button-clicked', item);
             },
-            clickedTakeOutButton(item) {
-                this.$bvModal.msgBoxConfirm(modal.TTN_TAKE_OUT_TEXT, {
-                    title: `${modal.TTN_TAKE_OUT_TITLE} ${item.number} ${item.registrationDate}`,
-                    ...modal.CONFIRM_MODAL_OPTIONS
-                })
-                    .then(value => value && this.takeOutTTN(item));
+            clickedStorageButton(item) {
+                router.push(`/gcn/${item.id}/storage-goods`);
             },
-            takeOutTTN(item) {
-                this.$emit('take-out-button-clicked', item);
+            clickedCheckButton(item) {
+                router.push(`/gcn/${item.id}/check`);
             }
         }
     };
 </script>
+
+<style lang="scss" scoped>
+  @import './styles.scss';
+</style>

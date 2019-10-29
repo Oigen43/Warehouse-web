@@ -169,6 +169,7 @@ export default {
   [types.CLEAN_DRIVERS_NAMES](state) {
     state.driversNames = [];
   },
+
   [types.STORAGES](state, storages) {
     state.storages = storages;
   },
@@ -222,9 +223,15 @@ export default {
   [types.CLEAN_UPDATED_SENDER](state) {
     state.updatedSender = {};
   },
+  [types.CLEAN_SENDERS_NAMES](state) {
+    state.sendersNames = [];
+  },
 
   [types.RECEIVERS](state, receivers) {
     state.receivers = receivers;
+  },
+  [types.RECEIVERS_NAMES](state, receiversNames) {
+    state.receiversNames = receiversNames;
   },
   [types.RECEIVERS_PAGE_LIMIT](state, receiversPageLimit) {
     state.receiversPageLimit = receiversPageLimit;
@@ -245,6 +252,9 @@ export default {
   },
   [types.CLEAN_UPDATED_RECEIVER](state) {
     state.updatedReceiver = {};
+  },
+  [types.CLEAN_RECEIVERS_NAMES](state) {
+    state.receiversNames = [];
   },
 
   [types.TRANSPORT](state, transport) {
@@ -279,6 +289,7 @@ export default {
   [types.CLEAN_TRANSPORT_NAMES](state) {
     state.transportNames = [];
   },
+
   [types.TTN](state, TTN) {
     state.TTN = TTN;
   },
@@ -301,6 +312,30 @@ export default {
   [types.USER_INFO](state, userInfo) {
     state.userInfo = userInfo;
   },
+
+  [types.GOODS](state, goods) {
+    state.goods = goods;
+  },
+  [types.GOODS_ITEM_INIT](state, goodsItem) {
+    state.goodsItemInit = goodsItem;
+  },
+  [types.GOODS_ITEM_COMPUTED_VOLUME](state, goodsItemVolume) {
+    state.goodsItemComputedVolume = goodsItemVolume;
+  },
+
+  [types.STORAGE_CURRENT_CAPACITY](state, storages) {
+    state.storagesComputedCapacity = storages;
+  },
+  [types.SET_STORAGE_CURRENT_CAPACITY](state, storage) {
+    state.storagesComputedCapacity = state.storagesComputedCapacity.map(item =>
+      item.id === storage.id ? { ...item, currentCapacity: storage.capacity } : item
+    );
+  },
+
+  [types.CREATE_WRITE_OFF](state, writeOff) {
+    state.writeOff = writeOff;
+  },
+
   [types.SET_TOAST](state, toast) {
     state.toast = toast;
   },

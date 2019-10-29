@@ -37,9 +37,13 @@ import WTransportList from '../views/WTransportList';
 import WTransportAddForm from '../views/WTransportAdd';
 import WTransportUpdateForm from '../views/WTransportUpdate';
 import WTTNList from '../views/WTTNList';
+import WGoodsStorageForm from '../views/WGoodsStorageForm';
+import WGoodsStorageAdd from '../views/WGoodsStorageAdd';
 import WNotFound from '../views/WNotFound';
 import WTTNAddForm from '../views/WTTNAdd';
 import WTTNUpdateForm from '../views/WTTNUpdate';
+import WTTNCheckForm from '../views/WTTNCheck';
+import WWriteOffGoodsForm from '../views/WWriteOffGoods';
 import WChart from '../views/WChart';
 
 Vue.use(Router);
@@ -288,24 +292,59 @@ export default new Router({
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/ttn',
+      path: '/gcn',
       name: 'TTN',
       component: WTTNList,
       meta: { authorize: routesPermissions.TTN.read },
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/ttn/add',
+      path: '/gcn/add',
       name: 'TTNAddForm',
       component: WTTNAddForm,
       meta: { authorize: routesPermissions.TTN.create },
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/ttn/:TTNId/update',
+      path: '/gcn/:TTNId/update',
       name: 'TTNUpdateForm',
       component: WTTNUpdateForm,
       meta: { authorize: routesPermissions.TTN.update },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/gcn/:TTNId/addOut',
+      name: 'TTNAddOutForm',
+      component: WTTNAddForm,
+      meta: { authorize: routesPermissions.TTN.out },
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/gcn/:TTNId/check',
+      name: 'TTNCheckForm',
+      component: WTTNCheckForm,
+      meta: { authorize: routesPermissions.TTN.check },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/gcn/:TTNId/write-off',
+      name: 'WriteOffGoodsForm',
+      component: WWriteOffGoodsForm,
+      meta: { authorize: routesPermissions.writeOffs.create },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/gcn/:TTNId/storage-goods',
+      name: 'goods-storage-form',
+      component: WGoodsStorageForm,
+      meta: { authorize: routesPermissions.goodsStorage.read },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/gcn/:TTNId/storage-goods/:goodsId/add',
+      name: 'choose-goods-storage-form',
+      component: WGoodsStorageAdd,
+      meta: { authorize: routesPermissions.goodsStorage.create },
       beforeEnter: ifAuthenticated,
     },
     {

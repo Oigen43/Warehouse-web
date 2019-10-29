@@ -16,14 +16,14 @@
         </template>
       </b-table>
     </div>
-    <w-empty-table v-else></w-empty-table>
+    <w-empty-table :insert="insert" v-else></w-empty-table>
 </template>
 
 <script>
     import { BTable } from 'bootstrap-vue';
 
-    import WEmptyTable from '../../components/WEmptyTable';
     import helpers from '../../utils/helpers';
+    import WEmptyTable from '../WEmptyTable';
 
     export default {
         name: 'WTable',
@@ -31,6 +31,7 @@
             BTable,
             WEmptyTable
         },
+        props: ['insert'],
         computed: {
             isItemsExists() {
                 return helpers.isItemsExists(this.$attrs.items);

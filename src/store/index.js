@@ -54,6 +54,7 @@ export default new Vuex.Store({
 
     receivers: [],
     receiversPageLimit: 1,
+    receiversNames: [],
     newReceiver: {},
     updatedReceiver: {},
     deletedReceiver: {},
@@ -85,6 +86,12 @@ export default new Vuex.Store({
     newTTN: {},
     updatedTTN: {},
     userInfo: {},
+
+    goods: [],
+    goodsItemInit: {},
+    goodsItemComputedVolume: 0,
+    storagesComputedCapacity: [],
+    writeOff: {},
 
     toast: {},
     loading: false

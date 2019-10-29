@@ -1,6 +1,6 @@
 <template>
     <b-row>
-      <b-col xl ="4" lg="6" sm="4">
+      <b-col v-if="hasValidType" xl ="4" lg="6" sm="4">
         <b-card no-body class="overflow-hidden w-goods-card w-goods-add-card">
           <b-button
             v-b-modal.modal-add-goods
@@ -28,19 +28,19 @@
               {{good.count}}
             </b-card-text>
             <b-card-text class="w-goods-card-text"><span class="w-goods-card-text-bold">Volume:</span>
-              {{good.volume}} m<sup><small>2</small></sup>
+              {{good.volume}} m<sup><small>3</small></sup>
             </b-card-text>
             <b-card-text class="w-goods-card-text"><span class="w-goods-card-text-bold">Weight:</span>
               {{good.weight}} kg
             </b-card-text>
             <b-card-text class="w-goods-card-text"><span class="w-goods-card-text-bold">Price:</span>
-              {{good.volume}} $
+              {{good.price}} $
             </b-card-text>
             <b-card-text class="w-goods-card-text"><span class="w-goods-card-text-bold">Recommendation:</span>
               {{good.recommendation}}
             </b-card-text>
           </b-card-body>
-          <b-card-footer class="w-goods-card-footer">
+          <b-card-footer v-if="hasValidType" class="w-goods-card-footer">
             <b-button
               v-b-modal.modal-update-goods
               class="w-goods-update-card-button"
@@ -87,6 +87,7 @@
         BButton
     } from 'bootstrap-vue';
 
+    import types from '../../constants/TTNtypes';
     import WForm from '../../components/WGoodsForm';
 
     export default {
@@ -108,7 +109,12 @@
             currentGoodIndex: 0
           };
         },
-        props: ['goods'],
+        props: ['goods', 'type'],
+        computed: {
+            hasValidType() {
+                return this.type === types.INCOMING_TYPE;
+            }
+        },
         methods: {
           addGood(form) {
             this.$emit('added-good', form);

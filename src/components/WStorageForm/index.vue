@@ -1,16 +1,27 @@
 <template>
-  <b-form @submit.prevent="onSubmit" class="w-storages-form">
+  <b-form @submit.prevent="onSubmit" class="w-storage-form">
+    <label
+      class="w-storage-form-input-label"
+      for="storage-size-input">
+      Storage size (m³):
+    </label>
     <b-form-input
+      id="storage-size-input"
       size="lg"
       v-model="form.storageCapacity"
       type="number"
       min="1"
       required
-      placeholder="Storage Size"
-      class="w-storages-form-input"
+      class="w-storage-form-input"
     ></b-form-input>
 
+    <label
+      class="w-storage-form-input-label"
+      for="storage-type-input">
+      Storage type:
+    </label>
     <w-multiselect
+      id="storage-type-input"
       :options="storageTypes"
       :multiple="false"
       :searchable="false"
@@ -22,14 +33,14 @@
       :close-on-select="true"
       :placeholder="placeholder"
       v-model="form.storageType"
-      class="w-storages-form-input"
+      class="w-storage-form-input"
     ></w-multiselect>
 
     <b-button
       type="submit"
       variant="outline-dark"
       size="lg"
-      class="w-storages-form-button">
+      class="w-storage-form-button">
       {{ submitButtonName }}
     </b-button>
   </b-form>

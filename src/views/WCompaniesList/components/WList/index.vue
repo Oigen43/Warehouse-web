@@ -1,5 +1,6 @@
 <template>
   <w-table
+    :insert="hasPermissions(routesPermissions.companies.create)"
     :items="companiesList"
     :fields="fields">
     <template
@@ -7,7 +8,7 @@
       <b-form-checkbox
         v-model="data.value"
         @input="activeButtonClicked(data)"
-        :disabled="!hasPermissions(routesPermissions.companies.updateActive)"
+        :disabled="!hasPermissions(routesPermissions.companies.delete)"
         >
       </b-form-checkbox>
     </template>

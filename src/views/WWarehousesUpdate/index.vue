@@ -11,7 +11,7 @@
         submitButtonName="UPDATE WAREHOUSE"
         :id="warehouseId"
         :warehouseName="warehouseName"
-        :address="address"
+        :address="warehouseAddress"
       ></w-form>
       <b-button
         variant="link"
@@ -51,7 +51,7 @@
             warehouseName() {
                 return this.updatedWarehouse.warehouseName;
             },
-            address() {
+            warehouseAddress() {
                 return this.updatedWarehouse.address;
             }
         },
@@ -65,6 +65,7 @@
             },
             async sendData(warehouse) {
                 const res = await this.sendUpdatedWarehouseData(warehouse);
+
                 !res.error && this.redirect();
             }
         },

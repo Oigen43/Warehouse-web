@@ -66,7 +66,7 @@ export default {
 
     const res = await api.getById(url.COMPANIES_URL, id);
 
-    commit(types.SET_UPDATED_COMPANY, res.data.companies);
+    res.data && commit(types.SET_UPDATED_COMPANY, res.data.companies);
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -143,11 +143,10 @@ export default {
   },
   fetchWarehousesNames: async ({ commit }, req) => {
     commit(types.REQUEST);
-    const res = await api.get(url.WAREHOUSES_URL_NAMES, { companyId: req.companyId });
 
-    if (res.data) {
-      commit(types.WAREHOUSES_NAMES, res.data.warehouses);
-    }
+    const res = await api.get(url.WAREHOUSES_NAMES_URL, { companyId: req.companyId });
+    res.data && commit(types.WAREHOUSES_NAMES, res.data.warehouses);
+
     commit(types.SUCCESS);
   },
   createWarehouse: async ({ commit }, req) => {
@@ -166,7 +165,7 @@ export default {
 
     const res = await api.getById(url.WAREHOUSES_URL, id);
 
-    commit(types.SET_UPDATED_WAREHOUSE, res.data.warehouse);
+    res.data && commit(types.SET_UPDATED_WAREHOUSE, res.data.warehouses);
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -222,7 +221,7 @@ export default {
 
     const res = await api.getById(url.USERS_URL, id);
 
-    commit(types.SET_UPDATED_USER, res.data.user);
+    res.data && commit(types.SET_UPDATED_USER, res.data.user);
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -267,7 +266,20 @@ export default {
       const pageLimit = helpers.calculatePageLimit(res.data.storagesTotal, req.perPage);
 
       commit(types.STORAGES, res.data.storages);
+      commit(types.STORAGE_CURRENT_CAPACITY, res.data.storages);
       commit(types.STORAGES_PAGE_LIMIT, pageLimit);
+    }
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  fetchAllStorages: async ({ commit }, warehouseId) => {
+    commit(types.REQUEST);
+
+    const res = await api.get(url.STORAGES_ALL_URL, { warehouseId });
+
+    if (res.data) {
+      commit(types.STORAGES, res.data.storages);
+      commit(types.STORAGE_CURRENT_CAPACITY, res.data.storages);
     }
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
@@ -277,9 +289,7 @@ export default {
 
     const res = await api.get(url.STORAGE_TYPES_URL);
 
-    if (res.data) {
-      commit(types.STORAGE_TYPES, res.data.storageTypes);
-    }
+    res.data && commit(types.STORAGE_TYPES, res.data.storageTypes);
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
@@ -299,7 +309,7 @@ export default {
 
     const res = await api.getById(url.STORAGES_URL, id);
 
-    commit(types.SET_UPDATED_STORAGE, res.data.storage);
+    res.data && commit(types.SET_UPDATED_STORAGE, res.data.storage);
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -340,11 +350,9 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
   fetchSendersNames: async ({ commit }, req) => {
-    const res = await api.get(url.SENDERS_URL_NAMES);
+    const res = await api.get(url.SENDERS_NAMES_URL);
 
-    if (res.data) {
-      commit(types.SENDERS_NAMES, res.data.senders);
-    }
+    res.data && commit(types.SENDERS_NAMES, res.data.senders);
   },
   createSender: async ({ commit }, req) => {
     commit(types.REQUEST);
@@ -362,7 +370,7 @@ export default {
 
     const res = await api.getById(url.SENDERS_URL, id);
 
-    commit(types.SET_UPDATED_SENDER, res.data.sender);
+    res.data && commit(types.SET_UPDATED_SENDER, res.data.sender);
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -402,6 +410,11 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
+  fetchReceiversNames: async ({ commit }, req) => {
+    const res = await api.get(url.RECEIVERS_NAMES_URL);
+
+    res.data && commit(types.RECEIVERS_NAMES, res.data.receivers);
+  },
   createReceiver: async ({ commit }, req) => {
     commit(types.REQUEST);
     commit(types.CREATE_RECEIVER, req);
@@ -418,7 +431,7 @@ export default {
 
     const res = await api.getById(url.RECEIVERS_URL, id);
 
-    commit(types.SET_UPDATED_RECEIVER, res.data.receiver);
+    res.data && commit(types.SET_UPDATED_RECEIVER, res.data.receiver);
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -459,11 +472,9 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
   fetchCarriersNames: async ({ commit }, req) => {
-    const res = await api.get(url.CARRIERS_URL_NAMES);
+    const res = await api.get(url.CARRIERS_NAMES_URL);
 
-    if (res.data) {
-      commit(types.CARRIERS_NAMES, res.data.carriers);
-    }
+    res.data && commit(types.CARRIERS_NAMES, res.data.carriers);
   },
   createCarrier: async ({ commit }, req) => {
     commit(types.REQUEST);
@@ -481,7 +492,7 @@ export default {
 
     const res = await api.getById(url.CARRIERS_URL, id);
 
-    commit(types.SET_UPDATED_CARRIER, res.data.carrier);
+    res.data && commit(types.SET_UPDATED_CARRIER, res.data.carrier);
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -527,11 +538,9 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
   fetchDriversNames: async ({ commit }, req) => {
-    const res = await api.get(url.DRIVERS_URL_NAMES, { carrierId: req.carrierId });
+    const res = await api.get(url.DRIVERS_NAMES_URL, { carrierId: req.carrierId });
 
-    if (res.data) {
-      commit(types.DRIVERS_NAMES, res.data.drivers);
-    }
+    res.data && commit(types.DRIVERS_NAMES, res.data.drivers);
   },
   sendDeletedDriver: async ({ commit }, driverId) => {
     commit(types.REQUEST);
@@ -550,7 +559,7 @@ export default {
 
     const res = await api.getById(url.DRIVERS_URL, id);
 
-    commit(types.SET_UPDATED_DRIVER, res.data.driver);
+    res.data && commit(types.SET_UPDATED_DRIVER, res.data.driver);
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -595,11 +604,9 @@ export default {
     res.toast && commit(types.SET_TOAST, res.toast);
   },
   fetchTransportNames: async ({ commit }, req) => {
-    const res = await api.get(url.TRANSPORT_URL_NAMES, { carrierId: req.carrierId });
+    const res = await api.get(url.TRANSPORT_NAMES_URL, { carrierId: req.carrierId });
 
-    if (res.data) {
-      commit(types.TRANSPORT_NAMES, res.data.transport);
-    }
+    res.data && commit(types.TRANSPORT_NAMES, res.data.transport);
   },
   createTransport: async ({ commit }, req) => {
     commit(types.REQUEST);
@@ -617,7 +624,7 @@ export default {
 
     const res = await api.getById(url.TRANSPORT_URL, id);
 
-    commit(types.SET_UPDATED_TRANSPORT, res.data.transport);
+    res.data && commit(types.SET_UPDATED_TRANSPORT, res.data.transport);
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -672,7 +679,8 @@ export default {
     commit(types.REQUEST);
 
     const res = await api.getById(url.TTN_URL, id);
-    commit(types.SET_UPDATED_TTN, res.data.TTN);
+
+    res.data && commit(types.SET_UPDATED_TTN, res.data.TTN);
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
     return res;
@@ -697,19 +705,61 @@ export default {
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
-  takeOutTTN: async ({ commit }, req) => {
+  fetchUserInfo: async ({ commit }, req) => {
     commit(types.REQUEST);
 
-    const res = await api.put(url.TTN_CHANGE_STATUS_URL, req);
+    const res = await api.getUserInfo(url.USER_INFO_URL, req);
 
+    res.data && commit(types.USER_INFO, res.data);
+    commit(types.SUCCESS);
+  },
+  fetchGoodsList: async ({ commit }, TTNId) => {
+    commit(types.REQUEST);
+
+    const res = await api.get(url.GOODS_URL, { TTNId });
+
+    res.data && commit(types.GOODS, res.data.goods);
     commit(types.SUCCESS);
     res.toast && commit(types.SET_TOAST, res.toast);
   },
-  fetchUserInfo: async ({ commit }, req) => {
+  createWriteOff: async ({ commit }, req) => {
     commit(types.REQUEST);
-    const res = await api.getUserInfo(url.USER_INFO_URL, req);
+    commit(types.CREATE_WRITE_OFF, req);
 
-    commit(types.USER_INFO, res.data);
+    const res = await api.post(url.WRITE_OFF_URL, req);
+
     commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
   },
+  releaseGoods: async ({ commit }, data) => {
+    commit(types.REQUEST);
+
+    const res = await api.put(url.RELEASE_GOODS_URL, data);
+
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  },
+  fetchGoodsItemData: async ({ commit }, id) => {
+    commit(types.REQUEST);
+
+    const res = await api.getById(url.GOODS_URL, id);
+
+    if (res.data) {
+      commit(types.GOODS_ITEM_INIT, res.data.goodsItem);
+      commit(types.GOODS_ITEM_COMPUTED_VOLUME, res.data.goodsItem.volume);
+    }
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+  },
+  sendGoodsStorage: async ({ commit }, req) => {
+    commit(types.REQUEST);
+
+    const res = await api.post(url.GOODS_STORAGE_URL, req);
+
+    commit(types.SUCCESS);
+    res.toast && commit(types.SET_TOAST, res.toast);
+    return res;
+  }
 };

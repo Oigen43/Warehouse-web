@@ -1,15 +1,16 @@
 <template>
-  <b-row>
+  <b-row v-if="TTN">
     <b-col>
       <div class='w-ttn-list-page'>
-        <h1>List of TTN</h1>
-        <b-row>
+        <h1>List of GCN</h1>
+        <b-row v-if="hasPermissions(routesPermissions.TTN.create)">
           <b-col>
             <b-button
               variant="dark"
-              to="/ttn/add"
+              to="/gcn/add"
+              v-if="hasPermissions(routesPermissions.TTN.create)"
               class="w-ttn-add-button"
-            >add TTN
+            >add GCN
             </b-button>
           </b-col>
         </b-row>
@@ -17,7 +18,6 @@
           <w-list
             :TTN="TTN"
             @delete-button-clicked="clickedDeleteButton"
-            @take-out-button-clicked="clickedTakeOutButton"
           ></w-list>
         </div>
         <b-row>
@@ -41,11 +41,14 @@
     import { mapActions, mapState } from 'vuex';
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
+    import { validation } from '../../components/mixins/validation';
     import WList from './components/WList';
     import WPagination from '../../components/WPagination';
+    import routesPermissions from '../../constants/routesPermissions';
 
     export default {
         name: 'WTTNListPage',
+        mixins: [validation],
         components: {
             BRow,
             BCol,
@@ -63,14 +66,16 @@
             ...mapState([
                 'TTN',
                 'TTNPageLimit'
-            ])
+            ]),
+            routesPermissions: function () {
+                return routesPermissions;
+            }
         },
         methods: {
             ...mapActions({
                 fetchTTNList: 'fetchTTNList',
                 sendDeletedTTNData: 'sendDeletedTTN',
-                deletedTTNData: 'deleteTTN',
-                sendTakeOutTTNData: 'takeOutTTN'
+                deletedTTNData: 'deleteTTN'
             }),
             sendRequest(page) {
                 this.currentPage = page;
@@ -83,10 +88,6 @@
                     this.currentPage -= 1;
                 }
                 this.fetchTTNList(this.currentPage);
-            },
-            async clickedTakeOutButton(item) {
-                await this.sendTakeOutTTNData(item);
-                this.fetchTTNList();
             }
         },
         created: async function () {

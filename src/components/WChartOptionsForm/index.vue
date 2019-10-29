@@ -39,8 +39,7 @@
 </template>
 
 <script>
-    import { BForm, BFormInput, BButton } from 'bootstrap-vue';
-    import { BCol } from 'bootstrap-vue';
+    import { BForm, BFormInput, BButton, BCol } from 'bootstrap-vue';
 
     export default {
         name: 'WChartOptions',

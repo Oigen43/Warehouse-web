@@ -73,6 +73,7 @@
             },
             async sendData(driver) {
                 const res = await this.sendUpdatedDriverData(driver);
+
                 !res.error && this.redirect();
             }
         },

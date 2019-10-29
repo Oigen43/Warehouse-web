@@ -37,7 +37,7 @@
         </b-card>
       </b-col>
     </b-row>
-    <w-empty-table v-else></w-empty-table>
+    <w-empty-table insert v-else></w-empty-table>
 </template>
 
 <script>
@@ -56,12 +56,13 @@
 
     import router from '../../../../router';
     import * as modal from '../../../../constants/modal';
-    import WEmptyTable from '../../../../components/WEmptyTable';
     import helpers from '../../../../utils/helpers';
+    import WEmptyTable from '../../../../components/WEmptyTable';
 
     export default {
         name: 'WList',
         components: {
+            WEmptyTable,
             BRow,
             BCol,
             BCard,
@@ -70,8 +71,7 @@
             BCardText,
             BCardBody,
             BCardFooter,
-            BButton,
-            WEmptyTable
+            BButton
         },
         props: ['users'],
         computed: {

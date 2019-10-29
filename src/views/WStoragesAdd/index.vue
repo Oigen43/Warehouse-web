@@ -1,9 +1,8 @@
 <template>
   <b-row>
-    <b-col class="w-storages-add-form" lg="4" offset-lg="4">
+    <b-col v-if="storageTypes.length" class="w-storages-add-form" lg="4" offset-lg="4">
       <h1 class="w-storages-add-form-h1">Add a New Storage</h1>
       <w-form
-        v-if="!loading"
         @form-submitted="sendData"
         submitButtonName="ADD STORAGE"
         :storageTypes="storageTypes"
@@ -43,7 +42,6 @@
         },
         computed: {
             ...mapState([
-                'loading',
                 'currentWarehouse',
                 'storageTypes'
             ]),
@@ -64,7 +62,9 @@
             },
             async sendData(newStorage) {
                 newStorage.warehouseId = this.warehouseId;
+
                 const res = await this.sendNewStorageData(newStorage);
+
                 !res.error && this.redirect();
             }
         },

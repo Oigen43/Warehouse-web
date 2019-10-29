@@ -1,52 +1,87 @@
 <template>
   <b-form @submit.prevent="onSubmit" class="w-storages-form">
-    <h1 class="w-goods-add-form-h1">{{ headerName }}</h1>
+    <h1 class="w-goods-form-h1">{{ headerName }}</h1>
+    <label
+      class="w-goods-form-input-label"
+      for="goods-name">
+      Goods name:
+    </label>
     <b-form-input
+      id="goods-name"
       size="lg"
       v-model="form.name"
       required
-      placeholder="Name"
       class="w-goods-form-input"
     ></b-form-input>
+
+    <label
+      class="w-goods-form-input-label"
+      for="goods-count">
+      Count:
+    </label>
     <b-form-input
+      id="goods-count"
       size="lg"
       v-model="form.count"
       required
-      placeholder="Count"
       class="w-goods-form-input"
     ></b-form-input>
+
+    <label
+      class="w-goods-form-input-label"
+      for="goods-volume">
+      Volume (m³):
+    </label>
     <b-form-input
+      id="goods-volume"
       size="lg"
       v-model="form.volume"
       type="number"
       min="1"
       required
-      placeholder="Volume(m²)"
       class="w-goods-form-input"
     ></b-form-input>
+
+    <label
+      class="w-goods-form-input-label"
+      for="goods-weight">
+      Weight (kg):
+    </label>
     <b-form-input
+      id="goods-weight"
       size="lg"
       v-model="form.weight"
       type="number"
       min="1"
       required
-      placeholder="Weight(kg)"
       class="w-goods-form-input"
     ></b-form-input>
+
+    <label
+      class="w-goods-form-input-label"
+      for="goods-price">
+      Price ($):
+    </label>
     <b-form-input
+      id="goods-price"
       size="lg"
       v-model="form.price"
       type="number"
       min="1"
       required
-      placeholder="Price($)"
       class="w-goods-form-input"
     ></b-form-input>
+
+    <label
+      class="w-goods-form-input-label"
+      for="goods-recommendation">
+      Storage type recommendation:
+    </label>
     <b-form-input
+      id="goods-recommendation"
       size="lg"
       v-model="form.recommendation"
       required
-      placeholder="Recommendation"
       class="w-goods-form-input"
     ></b-form-input>
     <b-button
