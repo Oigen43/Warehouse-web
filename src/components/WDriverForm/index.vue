@@ -41,7 +41,7 @@
     <label
       class="w-drivers-form-input-label"
       for="driver-licence-issuing-date-input">
-      Driver licence issuing dat:
+      Driver licence issuing date:
     </label>
     <b-form-input
       id="driver-licence-issuing-date-input"

@@ -37,7 +37,7 @@
         data() {
             return {
                 name: '',
-                upn: '',
+                upn: null,
                 countryCode: ''
             };
         },

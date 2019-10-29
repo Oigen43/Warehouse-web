@@ -23,5 +23,10 @@ export default {
     message: 'Storage capacity can not be less than',
     title: 'Error!',
     variant: 'danger'
+  },
+  goodsNotStorage: {
+    message: 'Goods should be fully distributed',
+    title: 'Error!',
+    variant: 'danger'
   }
 };

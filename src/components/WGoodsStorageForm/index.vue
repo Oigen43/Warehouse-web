@@ -135,7 +135,7 @@
                 }
             },
             clickedSaveButton() {
-                this.$emit('sendData', { goodsData: this.goodsStorageData, storageData: this.storagesComputedCapacity });
+                this.$emit('sendData', { goodsData: this.goodsStorageData, storageData: this.storagesComputedCapacity }, this.goodsItemComputedVolume);
             },
             clickedCancelButton() {
                 const size = this.goodsItemInit.volume;

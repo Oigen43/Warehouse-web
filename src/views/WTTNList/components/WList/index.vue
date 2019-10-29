@@ -7,7 +7,7 @@
       v-slot:cell(buttons)="data">
       <b-button
         v-if="hasUpdateAction(data.item)"
-        class="w-ttn-button"
+        class="w-ttn-button w-table-update-button"
         variant="dark"
         size="sm"
         @click="clickedUpdateButton(data.item)">
@@ -81,7 +81,8 @@
                     { key: 'Carrier.name', label: 'Carrier' },
                     { key: 'Sender', label: 'Sender' },
                     { key: 'Receiver', label: 'Receiver' },
-                    { key: 'buttons', label: '' },
+                    { key: 'buttons', label: '', class: 'w-list-button' },
+                    { key: 'blank', label: '', class: 'w-blank-column' }
                 ]
             };
         },
