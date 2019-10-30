@@ -47,13 +47,10 @@
 </template>
 
 <script>
-    import Vue from 'vue';
-    import { BForm, BFormInput, BButton, ToastPlugin } from 'bootstrap-vue';
+    import { BForm, BFormInput, BButton } from 'bootstrap-vue';
 
     import customToasts from '../../constants/customToasts';
     import WMultiselect from '../WMultiselect';
-
-    Vue.use(ToastPlugin);
 
     export default {
         name: 'WStorageForm',
@@ -108,13 +105,13 @@
                 this.$emit('form-submitted', this.form);
             },
             capacityCheck() {
-                if(this.currentCapacityCheck){
+                if (this.currentCapacityCheck) {
                     const fulledPlace = this.storageCapacity - this.currentCapacity;
 
                     this.form.storageCapacity < fulledPlace ? this.makeToast(customToasts.wrongStorageCapacity) : this.onSubmit();
                 } else {
                     this.form.currentCapacity = this.form.storageCapacity;
-                    this.onSubmit()
+                    this.onSubmit();
                 }
             },
             makeToast(toast, number) {

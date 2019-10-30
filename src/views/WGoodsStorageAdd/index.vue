@@ -15,15 +15,12 @@
 </template>
 
 <script>
-    import Vue from 'vue';
-    import { BRow, BCol, ToastPlugin } from 'bootstrap-vue';
+    import { BRow, BCol } from 'bootstrap-vue';
     import { mapState, mapActions } from 'vuex';
 
     import customToasts from '../../constants/customToasts';
     import router from '../../router';
     import WGoodsStorageForm from '../../components/WGoodsStorageForm/index';
-
-    Vue.use(ToastPlugin);
 
     export default {
         name: 'WGoodsStorageAddForm',
@@ -58,7 +55,7 @@
                 router.push(`/gcn/${this.TTNId}/storage-goods/`);
             },
             checkGoodsVolume(data, goods) {
-                goods ? this.makeToast(customToasts.goodsNotStorage) : this.sendData(data)
+                goods ? this.makeToast(customToasts.goodsNotStorage) : this.sendData(data);
             },
             async sendData(data) {
                 const res = await this.sendGoodsStorage(data);
