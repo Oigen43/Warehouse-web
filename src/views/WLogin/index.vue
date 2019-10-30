@@ -19,7 +19,7 @@
 
             <label
               class="w-login-form-input-label"
-              for="login-password">
+              for="user-password-input">
               Password:
             </label>
             <b-form-input

@@ -203,6 +203,7 @@
         },
         methods: {
             onSubmit() {
+                this.companyForm.price = this.priceForm.dailyPrice;
                 this.$emit('form-submitted', {
                     company: this.companyForm,
                     priceForm: this.priceForm,

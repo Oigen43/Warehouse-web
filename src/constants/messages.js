@@ -8,6 +8,7 @@ export default {
   'company.delete.success': 'Company deleted!',
   'company.delete.error': 'Can not delete company',
   'company.get.prices.error': 'Can not get companies prices',
+  'company.not.active': 'Your company is inactive',
 
   'user.get.error': 'Can not get user',
   'users.list.get.error': 'Can not get users list',

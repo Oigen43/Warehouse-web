@@ -300,7 +300,7 @@
             },
 
             onSubmit() {
-                this.form.warehouseId = this.selectedWarehouseData.id;
+                this.form.warehouseId = this.selectedWarehouseData ? this.selectedWarehouseData.id : null;
                 this.$emit('form-submitted', { user: {
                     data: this.form,
                     selectedRoles: this.selectedRoles
