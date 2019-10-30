@@ -18,7 +18,7 @@
     <label
       class="w-goods-form-input-label"
       for="goods-ttn-count">
-      Count according to TTN:
+      Count according to GCN:
     </label>
     <b-form-input
       id="goods-ttn-count"
@@ -38,8 +38,6 @@
       id="goods-count"
       size="lg"
       v-model="form.updatedCount"
-      type="number"
-      min="1"
       required
       class="w-goods-form-input"
     ></b-form-input>
@@ -47,7 +45,7 @@
     <label
       class="w-goods-form-input-label"
       for="goods-ttn-volume">
-      Volume according to TTN (m³):
+      Volume according to GCN (m³):
     </label>
     <b-form-input
       id="goods-ttn-volume"
@@ -76,7 +74,7 @@
     <label
       class="w-goods-form-input-label"
       for="goods-ttn-weight">
-      Weight according to TTN (kg):
+      Weight according to GCN (kg):
     </label>
     <b-form-input
       id="goods-ttn-weight"
@@ -105,7 +103,7 @@
     <label
       class="w-goods-form-input-label"
       for="goods-ttn-price">
-      Price according to TTN ($):
+      Price according to GCN ($):
     </label>
     <b-form-input
       id="goods-ttn-price"
@@ -125,8 +123,6 @@
       id="goods-price"
       size="lg"
       v-model="form.updatedPrice"
-      type="number"
-      min="1"
       required
       class="w-goods-form-input"
     ></b-form-input>
@@ -172,7 +168,7 @@
                 type: Number
             },
             count: {
-                type: Number
+                type: String
             },
             weight: {
                 type: Number
@@ -186,11 +182,11 @@
                 form: {
                     name: this.name,
                     volume: this.volume,
-                    updatedVolume: '',
+                    updatedVolume: null,
                     count: this.count,
                     updatedCount: '',
                     weight: this.weight,
-                    updatedWeight: '',
+                    updatedWeight: null,
                     price: this.price,
                     updatedPrice: '',
                     status: ''
