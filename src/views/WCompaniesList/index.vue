@@ -41,12 +41,14 @@
             title="Enter price"
             @ok="submitModal"
           >
-            <b-form-input
-              id="name-input"
-              v-model="price"
-              placeholder="price"
-              required
-            ></b-form-input>
+          <b-form-input
+            id="name-input"
+            v-model="price"
+            placeholder="price"
+            type="number"
+            min="1"
+            required
+          ></b-form-input>
           </b-modal>
         </b-row>
       </div>
@@ -105,6 +107,7 @@
                 this.fetchCompaniesList(this.currentPage);
             },
             async submitModal() {
+                this.price &&
                 await this.changeCompanyPrice({ companyId: this.currentCompanyId, price: this.price });
             },
             async clickedActiveButton(item) {
