@@ -1,5 +1,5 @@
 <template>
-  <b-form @submit.prevent="onSubmit" class="w-storage-form">
+  <b-form @submit.prevent="capacityCheck" class="w-storage-form">
     <label
       class="w-storage-form-input-label"
       for="storage-size-input">
@@ -49,6 +49,7 @@
 <script>
     import { BForm, BFormInput, BButton } from 'bootstrap-vue';
 
+    import customToasts from '../../constants/customToasts';
     import WMultiselect from '../WMultiselect';
 
     export default {
@@ -67,8 +68,13 @@
                 type: Number
             },
             storageCapacity: {
-                type: String,
-                default: ''
+                type: Number
+            },
+            currentCapacity: {
+                type: Number
+            },
+            currentCapacityCheck: {
+                type: Boolean
             },
             selectedStorageType: {
                 type: Object,
@@ -88,6 +94,7 @@
                 form: {
                     id: this.id,
                     storageCapacity: this.storageCapacity,
+                    currentCapacity: this.currentCapacity,
                     storageType: this.selectedStorageType
                 },
                 placeholder: 'Please select storage type'
@@ -96,7 +103,24 @@
         methods: {
             onSubmit() {
                 this.$emit('form-submitted', this.form);
-            }
+            },
+            capacityCheck() {
+                if (this.currentCapacityCheck) {
+                    const fulledPlace = this.storageCapacity - this.currentCapacity;
+
+                    this.form.storageCapacity < fulledPlace ? this.makeToast(customToasts.wrongStorageCapacity) : this.onSubmit();
+                } else {
+                    this.form.currentCapacity = this.form.storageCapacity;
+                    this.onSubmit();
+                }
+            },
+            makeToast(toast, number) {
+                this.$bvToast.toast(`${toast.message} ${number}`, {
+                    title: toast.title,
+                    variant: toast.variant,
+                    solid: true
+                });
+            },
         }
     };
 </script>

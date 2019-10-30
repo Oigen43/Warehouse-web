@@ -37,7 +37,7 @@
         data: function () {
             return {
                 senderName: '',
-                upn: '',
+                upn: null,
                 countryCode: ''
             };
         },

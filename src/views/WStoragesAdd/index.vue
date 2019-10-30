@@ -5,9 +5,11 @@
       <w-form
         @form-submitted="sendData"
         submitButtonName="ADD STORAGE"
+        :currentCapacityCheck="false"
         :storageTypes="storageTypes"
         :selectedStorageType="selectedStorageType"
         :storageCapacity="storageCapacity"
+        :currentCapacity="currentCapacity"
       ></w-form>
       <b-button
         variant="link"
@@ -36,7 +38,8 @@
         },
         data: function () {
             return {
-                storageCapacity: '',
+                storageCapacity: null,
+                currentCapacity: null,
                 selectedStorageType: null
             };
         },

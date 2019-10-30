@@ -3,7 +3,7 @@
     <b-col class="w-goods-storage-add" lg="10" offset-lg="1">
       <h1>Choose Storage for Goods</h1>
       <w-goods-storage-form
-        @sendData="sendData"
+        @sendData="checkGoodsVolume"
         :goodsId="goodsId"
         :storages="storages"
         :goodsItemInit="goodsItemInit"
@@ -18,6 +18,7 @@
     import { BRow, BCol } from 'bootstrap-vue';
     import { mapState, mapActions } from 'vuex';
 
+    import customToasts from '../../constants/customToasts';
     import router from '../../router';
     import WGoodsStorageForm from '../../components/WGoodsStorageForm/index';
 
@@ -53,10 +54,20 @@
             redirect() {
                 router.push(`/gcn/${this.TTNId}/storage-goods/`);
             },
+            checkGoodsVolume(data, goods) {
+                goods ? this.makeToast(customToasts.goodsNotStorage) : this.sendData(data);
+            },
             async sendData(data) {
                 const res = await this.sendGoodsStorage(data);
 
                 !res.error && this.redirect();
+            },
+            makeToast(toast) {
+                this.$bvToast.toast(toast.message, {
+                    title: toast.title,
+                    variant: toast.variant,
+                    solid: true
+                });
             }
         },
         created: async function () {

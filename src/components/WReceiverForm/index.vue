@@ -22,6 +22,8 @@
       id="receiver-tin-input"
       size="lg"
       v-model="form.upn"
+      type="number"
+      min="1"
       required
       class="w-receivers-form-input"
     ></b-form-input>
@@ -71,8 +73,8 @@
                 default: '',
             },
             upn: {
-                type: String,
-                default: '',
+                type: Number,
+                default: null,
             },
             countryCode: {
                 type: String,

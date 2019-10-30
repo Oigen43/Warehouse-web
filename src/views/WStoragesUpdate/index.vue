@@ -9,10 +9,12 @@
       <w-form
         @form-submitted="sendData"
         submitButtonName="UPDATE STORAGE"
+        :currentCapacityCheck="true"
         :id="storageId"
         :storageTypes="storageTypes"
         :selectedStorageType="storageType"
         :storageCapacity="storageCapacity"
+        :currentCapacity="currentCapacity"
       ></w-form>
       <b-button
         variant="link"
@@ -58,6 +60,9 @@
             },
             storageCapacity() {
                 return this.updatedStorage.storageCapacity;
+            },
+            currentCapacity() {
+                return this.updatedStorage.currentCapacity;
             }
         },
         methods: {
