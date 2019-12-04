@@ -1,19 +1,35 @@
 .w-warehouses-list-page {
-    margin-top: 2rem;
-    text-align: center;
+  margin-top: 2rem;
+  text-align: center;
 }
 
 .w-warehouses-add-button {
-    float: left;
-    margin: 2.5rem 0 1rem 3rem;
-    text-transform: uppercase;
+  background-color: #2C3E50;
+  float: left;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
 }
 
 .warehouses-list {
-    margin: 1rem 3rem;
+  margin: 0;
 }
 
 .warehouses-list-pagination {
-    margin-right: 12rem;
-    margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 53rem) {
+  .w-warehouses-add-button {
+    margin-bottom: 0.5rem;
+    margin-left: 2rem;
+  }
+
+  .warehouses-list {
+    margin: 1rem 2rem;
+  }
+
+  .warehouses-list-pagination {
+    margin-top: 1rem;
+  }
 }

@@ -1,29 +1,38 @@
 <template>
   <b-row>
-    <b-col lg="12" sm="12">
-    <div class="w-users-list-page">
-      <h1>List of Users</h1>
-      <b-button
-        to="/users/add"
-        class="w-users-add-button"
-        variant="success">
-        add user
-      </b-button>
-      <div class="users-list-pagination">
-        <w-pagination
-          v-if="usersPageLimit > 1"
-          :current="currentPage"
-          :pageLimit="usersPageLimit"
-          @page-changed="sendRequest"
-        ></w-pagination>
+    <b-col>
+      <div class="w-users-list-page">
+        <h1>List of Users</h1>
+        <b-row>
+          <b-col>
+            <b-button
+              to="/users/add"
+              class="w-users-add-button"
+              variant="dark">
+              add user
+            </b-button>
+
+          </b-col>
+        </b-row>
+        <div class="users-list">
+          <w-list
+            :users="users"
+            @delete-button-clicked="clickedDeleteButton"
+          ></w-list>
+        </div>
+        <b-row>
+          <b-col>
+            <div class="users-list-pagination">
+              <w-pagination
+                v-if="usersPageLimit > 1"
+                :current="currentPage"
+                :pageLimit="usersPageLimit"
+                @page-changed="sendRequest"
+              ></w-pagination>
+            </div>
+          </b-col>
+        </b-row>
       </div>
-      <div class="users-list">
-        <w-list
-          :usersList="users"
-          @delete-button-clicked="clickedDeleteButton"
-        ></w-list>
-      </div>
-    </div>
     </b-col>
   </b-row>
 </template>
@@ -46,7 +55,7 @@
         },
         data() {
             return {
-              currentPage: 1
+                currentPage: 1
             };
         },
         computed: {
@@ -66,8 +75,11 @@
                 this.fetchUsersList(this.currentPage);
             },
             async clickedDeleteButton(item) {
-                await this.sendDeletedUserData(item);
+                await this.sendDeletedUserData(item.id);
                 this.deletedUserData(item);
+                if (this.users.length === 0 && this.currentPage > 1) {
+                    this.currentPage -= 1;
+                }
                 this.fetchUsersList(this.currentPage);
             }
         },

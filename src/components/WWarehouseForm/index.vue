@@ -4,7 +4,6 @@
         id="warehouse-name-input"
         size="lg"
         v-model="form.warehouseName"
-        :disabled="submitButtonName === 'UPDATE WAREHOUSE'"
         required
         placeholder="Warehouse name"
         class="w-warehouses-form-input"
@@ -19,18 +18,9 @@
         class="w-warehouses-form-input"
       ></b-form-input>
 
-      <b-form-input
-        id="warehouse-type-input"
-        size="lg"
-        v-model="form.type"
-        required
-        placeholder="Warehouse type"
-        class="w-warehouses-form-input"
-      ></b-form-input>
-
       <b-button
         type="submit"
-        variant="outline-success"
+        variant="outline-dark"
         size="lg"
         class="w-warehouses-form-button"
       >
@@ -53,6 +43,9 @@
             submitButtonName: {
                 type: String,
             },
+            id: {
+                type: Number
+            },
             warehouseName: {
                 type: String,
                 default: '',
@@ -60,18 +53,14 @@
             address: {
                 type: String,
                 default: '',
-            },
-            type: {
-                type: String,
-                default: '',
             }
         },
         data: function () {
             return {
                 form: {
+                    id: this.id,
                     warehouseName: this.warehouseName,
-                    address: this.address,
-                    type: this.type
+                    address: this.address
                 }
             };
         },
@@ -84,5 +73,5 @@
 </script>
 
 <style lang="scss" scoped>
-  @import 'styles';
+  @import './styles.scss';
 </style>

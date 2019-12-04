@@ -1,0 +1,33 @@
+.w-transport-list-page {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.w-transport-add-button {
+  background-color: #2C3E50;
+  float: left;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.w-transport-list {
+  margin: 0;
+}
+
+.w-transport-list-pagination {
+  margin-bottom: 1rem;
+}
+
+@media screen and (min-width: 53rem) {
+  .w-transport-add-button {
+    margin-bottom: 0.5rem;
+    margin-left: 2rem;
+  }
+  .w-transport-list {
+    margin: 1rem 2rem;
+  }
+  .w-transport-list-pagination {
+    margin-top: 1rem;
+  }
+}

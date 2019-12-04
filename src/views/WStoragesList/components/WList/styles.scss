@@ -1,0 +1,44 @@
+.w-storage-card {
+  margin-bottom: 1rem;
+}
+
+.w-storage-card-header {
+  height: 10rem;
+  background-color: #6B7F93;
+  border-bottom: 1px solid #DCDCDC;
+}
+
+.w-storage-card-header-text {
+  margin-top: 3rem;
+  color: #F0F8FF;
+  font-size: 3rem;
+}
+
+.w-storage-card-text {
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+}
+
+.w-storage-card-text-bold {
+  font-weight: bold;
+}
+
+.w-storage-card-footer {
+  bottom: 0;
+  background-color: #FFFFFF;
+}
+
+.w-storage-update-card-button {
+  background-color: #2C3E50;
+  margin: 0.5rem 1rem 0.5rem 0;
+  font-size: 1rem;
+}
+
+@media screen and (min-width: 53rem) {
+  .w-storage-card {
+    margin-bottom: 2rem;
+  }
+}

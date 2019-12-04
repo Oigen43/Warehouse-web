@@ -4,7 +4,7 @@
         id="user-first-name-input"
         size="lg"
         v-model="form.firstName"
-        :disabled="submitButtonName === 'UPDATE USER'"
+        required
         placeholder="User first name"
         class="w-users-form-input"
       ></b-form-input>
@@ -13,7 +13,6 @@
         id="user-surname-input"
         size="lg"
         v-model="form.surname"
-        required
         placeholder="User surname"
         class="w-users-form-input"
       ></b-form-input>
@@ -22,7 +21,6 @@
         id="user-patronymic-input"
         size="lg"
         v-model="form.patronymic"
-        required
         placeholder="User patronymic"
         class="w-users-form-input"
       ></b-form-input>
@@ -37,21 +35,17 @@
         class="w-users-form-input"
       ></b-form-input>
 
-        <b-form-input
-          id="user-city-input"
-          size="lg"
-          v-model="form.address"
-          required
-          placeholder="User address (city, street, house, flat)"
-          class="w-users-form-input"
-        ></b-form-input>
+      <b-form-input
+        size="lg"
+        v-model="form.address"
+        placeholder="User address (city, street, house, flat)"
+        class="w-users-form-input"
+      ></b-form-input>
 
       <b-form-input
-        id="user-birth-input"
         size="lg"
         v-model="form.birthDate"
         type="date"
-        required
         placeholder="User birth date"
         class="w-users-form-input"
       ></b-form-input>
@@ -66,6 +60,7 @@
       ></b-form-input>
 
       <b-form-input
+        v-if="passwordDisplay"
         id="user-password-input"
         size="lg"
         v-model="form.password"
@@ -75,9 +70,19 @@
         class="w-users-form-input"
       ></b-form-input>
 
+      <w-multiselect
+        :value="selectedRoles"
+        :options="roles"
+        :multiple="true"
+        :close-on-select="false"
+        :placeholder="placeholder"
+        @input="updateValue"
+        class="w-users-form-input"
+      ></w-multiselect>
+
       <b-button
         type="submit"
-        variant="outline-success"
+        variant="outline-dark"
         size="lg"
         class="w-users-form-button"
       >
@@ -88,17 +93,23 @@
 
 <script>
     import { BForm, BFormInput, BButton } from 'bootstrap-vue';
+    import * as userRoles from '../../constants/roles';
+    import WMultiselect from '../WMultiselect';
 
     export default {
         name: 'WUserForm',
         components: {
             BForm,
             BFormInput,
-            BButton
+            BButton,
+            WMultiselect
         },
         props: {
             submitButtonName: {
                 type: String
+            },
+            id: {
+                type: Number
             },
             firstName: {
                 type: String
@@ -122,12 +133,24 @@
                 type: String
             },
             password: {
-                type: Number
+                type: String,
+                default: ''
+            },
+            passwordDisplay: {
+                type: Boolean,
+                default: true
+            },
+            userRoles: {
+                type: Array,
+                default: function () {
+                    return [];
+                }
             }
         },
         data() {
             return {
                 form: {
+                    id: this.id,
                     firstName: this.firstName,
                     surname: this.surname,
                     patronymic: this.patronymic,
@@ -136,17 +159,28 @@
                     birthDate: this.birthDate,
                     login: this.login,
                     password: this.password
-                }
+                },
+
+                roles: userRoles.ROLES_FOR_CREATING,
+                selectedRoles: this.userRoles,
+                placeholder: 'Add a role'
+
             };
         },
         methods: {
+            updateValue(newRoles) {
+              this.selectedRoles = newRoles;
+            },
             onSubmit() {
-                this.$emit('form-submitted', this.form);
+                this.$emit('form-submitted', { user: {
+                    data: this.form,
+                    roles: this.selectedRoles
+                } });
             }
         }
     };
 </script>
 
 <style lang="scss" scoped>
-  @import 'styles';
+  @import './styles.scss';
 </style>

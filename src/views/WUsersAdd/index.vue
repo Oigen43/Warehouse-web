@@ -1,6 +1,6 @@
 <template>
   <b-row>
-    <b-col lg="3" sm="12" offset-lg="4">
+    <b-col class="w-users-add-form" lg="3" sm="12" offset-lg="4">
       <h1 class="w-user-add-form-h1">Add User</h1>
       <w-form
         @form-submitted="sendData"
@@ -25,11 +25,11 @@
 </template>
 
 <script>
+    import router from '../../router';
     import { mapActions } from 'vuex';
     import { BRow, BCol, BButton } from 'bootstrap-vue';
 
     import WForm from '../../components/WUserForm';
-    import router from '../../router';
 
     export default {
         name: 'WUsersAddForm',
@@ -48,7 +48,7 @@
                 address: '',
                 birthDate: '',
                 login: '',
-                password: null
+                password: ''
             };
         },
         methods: {
@@ -62,7 +62,7 @@
                 const res = await this.sendNewUserData(newUser);
                 !res.error && this.redirect();
             }
-        }
+        },
     };
 </script>
 

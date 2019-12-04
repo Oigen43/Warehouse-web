@@ -1,0 +1,36 @@
+.w-drivers-card {
+  margin-bottom: 1rem;
+}
+
+.w-drivers-card-img {
+  height: 10rem;
+  object-fit: cover;
+}
+
+.w-drivers-card-text {
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.w-drivers-card-text-bold {
+  font-weight: bold;
+}
+
+.w-drivers-card-footer {
+  bottom: 0;
+  background-color: #FFFFFF;
+}
+
+.w-drivers-update-card-button {
+  background-color: #2C3E50;
+  margin: 0.5rem 1rem 0.5rem 0;
+  font-size: 1rem;
+}
+
+@media screen and (min-width: 53rem) {
+  .w-drivers-card {
+    margin-bottom: 2rem;
+  }
+}

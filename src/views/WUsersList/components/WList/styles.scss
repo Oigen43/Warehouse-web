@@ -1,0 +1,50 @@
+.w-users-card {
+  margin-bottom: 1rem;
+}
+
+.w-users-card-img {
+  height: 10rem;
+  object-fit: cover;
+}
+
+.w-users-card-role-container {
+  position: absolute;
+}
+
+.w-users-card-role-label {
+  margin-top: 0.5rem;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  text-shadow: 0 0 0.2rem #000;
+  color: #F8F9FA;
+  background: rgba(44, 62, 80, 0.6);
+}
+
+.w-users-card-text {
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.w-users-card-text-bold {
+  font-weight: bold;
+}
+
+.w-users-card-footer {
+  bottom: 0;
+  background-color: #FFFFFF;
+}
+
+.w-users-update-card-button {
+  background-color: #2C3E50;
+  margin: 0.5rem 1rem 0.5rem 0;
+  font-size: 1rem;
+}
+
+@media screen and (min-width: 53rem) {
+  .w-users-card {
+    margin-bottom: 2rem;
+  }
+}

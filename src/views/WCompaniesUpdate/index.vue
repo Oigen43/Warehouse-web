@@ -1,20 +1,21 @@
 <template>
   <b-row>
-    <b-col lg="3" sm="12" offset-lg="4">
-    <h1 class="w-company-update-form-h1">Update Company</h1>
-    <w-form
-      @form-submitted="sendData"
-      submitButtonName="UPDATE COMPANY"
-      :companyName="companyName"
-      :address="address"
-      :description="description"
-    ></w-form>
-    <b-button
-      variant="link"
-      to="/companies"
-      class="w-companies-go-back-link"
-    >Go Back
-    </b-button>
+    <b-col class="w-companies-update-form" lg="3" sm="12" offset-lg="4">
+      <h1 class="w-company-update-form-h1">Update Company</h1>
+      <w-form
+        @form-submitted="sendData"
+        submitButtonName="UPDATE COMPANY"
+        :id="companyId"
+        :companyName="companyName"
+        :address="address"
+        :description="description"
+      ></w-form>
+      <b-button
+        variant="link"
+        to="/companies"
+        class="w-companies-go-back-link"
+      >Go Back
+      </b-button>
     </b-col>
   </b-row>
 </template>
@@ -38,13 +39,16 @@
             ...mapState([
                 'updatedCompany'
             ]),
-            companyName () {
+            companyId() {
+                return this.updatedCompany.id;
+            },
+            companyName() {
                 return this.updatedCompany.companyName;
             },
-            address () {
+            address() {
                 return this.updatedCompany.address;
             },
-            description () {
+            description() {
                 return this.updatedCompany.description;
             }
         },
@@ -56,8 +60,8 @@
                 router.push('/companies');
             },
             async sendData(company) {
-                await this.sendUpdatedCompanyData(company);
-                this.redirect();
+                const res = await this.sendUpdatedCompanyData(company.company);
+                !res.error && this.redirect();
             }
         },
     };

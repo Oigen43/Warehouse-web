@@ -1,6 +1,6 @@
 <template>
     <b-row>
-      <b-col lg="3" sm="12" offset-lg="4">
+      <b-col class="w-companies-add-form" lg="3" sm="12" offset-lg="4">
         <h1 class="w-company-add-form-h1">Add a New Company</h1>
         <w-form
           @form-submitted="sendData"
@@ -8,6 +8,10 @@
           :companyName="companyName"
           :address="address"
           :description="description"
+          :adminName="adminName"
+          :adminEmail="adminEmail"
+          :disableState="disableState"
+          with-admin-fields
         ></w-form>
         <b-button
           variant="link"
@@ -38,7 +42,10 @@
             return {
                 companyName: '',
                 address: '',
-                description: ''
+                description: '',
+                adminName: '',
+                adminEmail: '',
+                disableState: false
             };
         },
         methods: {
@@ -48,8 +55,13 @@
             redirect() {
                 router.push('/companies');
             },
+            changeDisableState() {
+              this.disableState = !this.disableState;
+            },
             async sendData(newCompany) {
-                const res = await this.sendNewCompanyData(newCompany);
+                this.changeDisableState();
+                const res = await this.sendNewCompanyData({ company: newCompany.company, user: newCompany.user });
+                res.error && this.changeDisableState();
                 !res.error && this.redirect();
             }
         }

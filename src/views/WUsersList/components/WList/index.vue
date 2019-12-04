@@ -1,68 +1,102 @@
 <template>
-  <b-table
-   head-variant="dark"
-   borderless
-   hover
-   responsive
-   :items="usersList"
-   :fields="fields"
-  >
-    <template
-      slot="[delete]"
-      slot-scope="data">
-      <b-button
-        variant="outline-dark"
-        size="sm"
-        @click="clickedDeleteButton(data.item)">
-        ✕
-      </b-button>
-    </template>
-    <template
-      slot="[update]"
-      slot-scope="data">
-      <b-button
-        variant="warning"
-        size="sm"
-        @click="clickedUpdateButton(data.item)">
-        Update
-      </b-button>
-    </template>
-  </b-table>
+  <b-row v-if="isItemsExists">
+    <b-col lg="3" sm="6" v-for="user in users" v-bind:key="user.id">
+      <b-card no-body class="overflow-hidden w-users-card">
+        <div class="w-users-card-role-container">
+          <div v-for="role in user.roles" class="w-users-card-role-label" v-bind:key="role.id">{{role.title}}</div>
+        </div>
+        <b-card-img src="https://www.zayedhotel.com/addons/default/themes/yoona/img/user.jpg"
+                    class="rounded-0 w-users-card-img"
+                    alt="User image"></b-card-img>
+        <b-card-body>
+          <b-card-title class="mb-0 w-users-card-text">{{user.firstName}} {{user.surname}}</b-card-title>
+          <hr>
+          <b-card-text class="w-users-card-text"><span class="w-users-card-text-bold">Date of Birth:</span>
+            {{user.birthDate}}
+          </b-card-text>
+          <b-card-text class="w-users-card-text"><span class="w-users-card-text-bold">Email:</span> {{user.email}}
+          </b-card-text>
+          <b-card-text class="w-users-card-text"><span class="w-users-card-text-bold">Address:</span> {{user.address}}
+          </b-card-text>
+        </b-card-body>
+        <b-card-footer class="w-users-card-footer">
+          <b-button
+            class="w-users-update-card-button"
+            variant="dark"
+            size="sm"
+            @click="clickedUpdateButton(user)">
+            Update
+          </b-button>
+          <b-button
+            variant="light"
+            size="sm"
+            @click="clickedDeleteButton(user)">
+            ✕
+          </b-button>
+        </b-card-footer>
+      </b-card>
+    </b-col>
+  </b-row>
+  <w-empty-table v-else></w-empty-table>
 </template>
 
 <script>
     import { mapActions } from 'vuex';
-    import { BTable, BButton } from 'bootstrap-vue';
+    import {
+        BRow,
+        BCol,
+        BCard,
+        BCardImg,
+        BCardTitle,
+        BCardBody,
+        BCardText,
+        BCardFooter,
+        BButton
+    } from 'bootstrap-vue';
 
     import router from '../../../../router';
+    import * as modal from '../../../../constants/modal';
+    import WEmptyTable from '../../../../components/WEmptyTable';
+    import helpers from '../../../../utils/helpers';
 
     export default {
         name: 'WList',
         components: {
-            BTable,
-            BButton
+            BRow,
+            BCol,
+            BCard,
+            BCardImg,
+            BCardTitle,
+            BCardText,
+            BCardBody,
+            BCardFooter,
+            BButton,
+            WEmptyTable
         },
-        props: ['usersList'],
-        data() {
-            return {
-                fields: [
-                    'firstName', 'surname', 'patronymic', 'birthDate', 'email', 'address',
-                    { key: 'update', label: '' },
-                    { key: 'delete', label: '' }
-                ]
-            };
+        props: ['users'],
+        computed: {
+            isItemsExists() {
+                return helpers.isItemsExists(this.users);
+            }
         },
         methods: {
             ...mapActions({
                 getUpdatedUserData: 'getUpdatedUser',
-                sendDeletedUserData: 'deleteUser'
+                sendDeletedUserData: 'deleteUser',
             }),
             clickedUpdateButton(item) {
                 this.getUpdatedUserData(item);
                 router.push('/users/update');
             },
             clickedDeleteButton(item) {
-               this.$emit('delete-button-clicked', item);
+                this.$bvModal.msgBoxConfirm(modal.USER_TEXT, {
+                    title: `${modal.USER_TITLE} ${item.firstName} ${item.surname}`,
+                    ...modal.CONFIRM_MODAL_OPTIONS
+                })
+                    .then(value => value && this.deleteUser(item));
+            },
+            deleteUser(item) {
+                this.$emit('delete-button-clicked', item);
             }
         }
     };

@@ -1,13 +1,12 @@
 <template>
   <b-row>
-    <b-col lg="3" sm="12" offset-lg="4">
+    <b-col class="w-warehouses-add-form" lg="3" sm="12" offset-lg="4">
     <h1 class="w-warehouses-add-form-h1">Add a New Warehouse</h1>
     <w-form
       @form-submitted="sendData"
       submitButtonName="ADD WAREHOUSE"
       :warehouseName="warehouseName"
       :address="address"
-      :type="type"
     ></w-form>
     <b-button
       variant="link"
@@ -31,14 +30,15 @@
         components: {
             BRow,
             BCol,
+            BButton,
             WForm,
-            BButton
         },
         data: function () {
             return {
                 warehouseName: '',
                 address: '',
-                type: ''
+                adminName: '',
+                adminEmail: ''
             };
         },
         computed: {
@@ -54,7 +54,7 @@
                 router.push('/warehouses');
             },
             async sendData(newWarehouse) {
-                newWarehouse.companyName = this.currentCompany;
+                newWarehouse.companyInfo = this.currentCompany;
                 const res = await this.sendNewWarehouseData(newWarehouse);
                 !res.error && this.redirect();
             }

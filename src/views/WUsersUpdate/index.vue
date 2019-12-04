@@ -5,17 +5,16 @@
     <w-form
       @form-submitted="sendData"
       submitButtonName="UPDATE USER"
+      :id="userId"
       :firstName="firstName"
       :surname="surname"
       :patronymic="patronymic"
       :email="email"
-      :city="city"
-      :street="street"
-      :house="house"
-      :flat="flat"
+      :address="address"
       :birthDate="birthDate"
       :login="login"
-      :password="password"
+      :userRoles="roles"
+      :passwordDisplay="false"
     ></w-form>
     <b-button
       variant="link"
@@ -46,6 +45,9 @@
             ...mapState([
                 'updatedUser'
             ]),
+            userId() {
+                return this.updatedUser.id;
+            },
             firstName() {
                 return this.updatedUser.firstName;
             },
@@ -58,17 +60,8 @@
             email() {
                 return this.updatedUser.email;
             },
-            city() {
-                return this.updatedUser.address.city;
-            },
-            street() {
-                return this.updatedUser.address.street;
-            },
-            house() {
-                return this.updatedUser.address.house;
-            },
-            flat() {
-                return this.updatedUser.address.flat;
+            address() {
+                return this.updatedUser.address;
             },
             birthDate() {
                 return this.updatedUser.birthDate;
@@ -76,20 +69,20 @@
             login() {
                 return this.updatedUser.login;
             },
-            password() {
-                return this.updatedUser.password;
+            roles() {
+                return this.updatedUser.roles.map(role => role.title);
             }
         },
         methods: {
             ...mapActions({
-               sendUpdatedUserData: 'sendUpdatedUser'
+                sendUpdatedUserData: 'sendUpdatedUser'
             }),
             redirect() {
                 router.push('/users');
             },
             async sendData(user) {
-                await this.sendUpdatedUserData(user);
-                this.redirect();
+                const res = await this.sendUpdatedUserData(user);
+                !res.error && this.redirect();
             }
         }
     };

@@ -11,19 +11,23 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     token: localStorage.getItem(constant.TOKEN_KEY) || null,
+    refreshToken: localStorage.getItem(constant.REFRESH_TOKEN_KEY) || null,
+    registrationToken: null,
+    roles: JSON.parse(localStorage.getItem(constant.ROLES_LIST)) || null,
 
     companies: [],
     companiesPageLimit: 1,
     newCompany: {},
     updatedCompany: {},
     deletedCompany: {},
-    currentCompany: null,
+    currentCompany: {},
 
     warehouses: [],
     warehousesPageLimit: 1,
     newWarehouse: {},
     updatedWarehouse: {},
     deletedWarehouse: {},
+    currentWarehouse: {},
 
     users: [],
     usersPageLimit: 1,
@@ -31,8 +35,47 @@ export default new Vuex.Store({
     updatedUser: {},
     deletedUser: {},
 
+    storages: [],
+    storagesPageLimit: 1,
+    newStorage: {},
+    updatedStorage: {},
+    deletedStorage: {},
+    currentStorage: {},
+    storageTypes: [],
+
+    senders: [],
+    sendersPageLimit: 1,
+    newSender: {},
+    updatedSender: {},
+    deletedSender: {},
+
+    carriers: [],
+    carriersPageLimit: 1,
+    newCarrier: {},
+    updatedCarrier: {},
+    deletedCarrier: {},
+    currentCarrier: {},
+
+    drivers: [],
+    driversPageLimit: 1,
+    newDriver: {},
+    updatedDriver: {},
+    deletedDriver: {},
+    currentDriver: {},
+
+    transport: [],
+    transportPageLimit: 1,
+    newTransport: {},
+    updatedTransport: {},
+    deletedTransport: {},
+
+    TTN: [],
+    TTNPageLimit: 1,
+    newTTN: {},
+    updatedTTN: {},
+
     toast: {}
-  },
+    },
   getters,
   mutations,
   actions
