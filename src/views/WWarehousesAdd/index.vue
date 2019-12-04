@@ -1,6 +1,6 @@
 <template>
   <b-row>
-    <b-col class="w-warehouses-add-form" lg="3" sm="12" offset-lg="4">
+    <b-col class="w-warehouses-add-form" lg="4" offset-lg="4">
     <h1 class="w-warehouses-add-form-h1">Add a New Warehouse</h1>
     <w-form
       @form-submitted="sendData"
@@ -10,7 +10,7 @@
     ></w-form>
     <b-button
       variant="link"
-      to="/warehouses"
+      @click="redirect"
       class="w-warehouses-go-back-link"
     >Go Back
     </b-button>
@@ -20,7 +20,7 @@
 
 <script>
     import { BRow, BCol, BButton } from 'bootstrap-vue';
-    import { mapActions, mapState } from 'vuex';
+    import { mapActions } from 'vuex';
 
     import WForm from '../../components/WWarehouseForm';
     import router from '../../router';
@@ -42,20 +42,22 @@
             };
         },
         computed: {
-            ...mapState([
-                'currentCompany'
-            ])
+            companyId: function() {
+                return this.$route.params.companyId;
+            }
         },
         methods: {
             ...mapActions({
                 sendNewWarehouseData: 'createWarehouse'
             }),
             redirect() {
-                router.push('/warehouses');
+                router.push(`/companies/${this.companyId}/warehouses`);
             },
             async sendData(newWarehouse) {
-                newWarehouse.companyInfo = this.currentCompany;
+                newWarehouse.companyId = this.companyId;
+
                 const res = await this.sendNewWarehouseData(newWarehouse);
+
                 !res.error && this.redirect();
             }
         }

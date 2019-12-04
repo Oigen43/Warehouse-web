@@ -1,5 +1,6 @@
 <template>
     <w-table
+      :insert="hasPermissions(routesPermissions.warehouses.create)"
       :items="warehousesList"
       :fields="fields">
       <template
@@ -56,7 +57,7 @@
             BFormCheckbox,
             BButton
         },
-        props: ['warehousesList'],
+        props: ['warehouses'],
         data: function () {
             return {
                 clickedWarehouse: {}
@@ -65,34 +66,41 @@
         computed: {
             fields: function() {
                 const fieldList = [
-                    'active', 'warehouseName', 'companyName', 'address',
+                    'active', 'warehouseName',
+                    { key: 'Company.companyName', label: 'Company Name' },
+                    'address',
                     { key: 'storages', label: '', class: 'w-list-button' },
                     { key: 'blank', label: '', class: 'w-blank-column' }
                 ];
 
                 if (this.hasPermissions(routesPermissions.warehouses.update)) {
-                    fieldList.push({ key: 'buttons', label: '', class: 'w-list-button' });
+                    fieldList.splice(fieldList.length - 1, 0, { key: 'buttons', label: '', class: 'w-list-button' });
                 }
 
                 return fieldList;
             },
+            warehousesList: function() {
+                if (!(Array.isArray(this.warehouses))) {
+                    return new Array(this.warehouses);
+                }
+                return this.warehouses;
+            },
             routesPermissions: function() {
                 return routesPermissions;
+            },
+            companyId: function() {
+                return this.$route.params.companyId;
             }
         },
         methods: {
             ...mapActions({
-                getUpdatedWarehouseData: 'getUpdatedWarehouse',
-                sendDeletedWarehouseData: 'deleteWarehouse',
-                setCurrentWarehouse: 'setCurrentWarehouse'
+                sendDeletedWarehouseData: 'deleteWarehouse'
             }),
             clickedStoragesButton(item) {
-                this.setCurrentWarehouse({ id: item.id, warehouseName: item.warehouseName });
-                router.push('/storages');
+                router.push(`warehouses/${item.id}/storages`);
             },
             clickedUpdateButton(item) {
-                this.getUpdatedWarehouseData(item);
-                router.push('/warehouses/update');
+                router.push(`warehouses/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.WAREHOUSE_TEXT, {

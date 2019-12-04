@@ -20,14 +20,16 @@ export default new Vuex.Store({
     newCompany: {},
     updatedCompany: {},
     deletedCompany: {},
-    currentCompany: {},
+    companiesArrayDate: [],
+    companiesArrayPrices: [],
+    currentCompanyId: null,
 
     warehouses: [],
     warehousesPageLimit: 1,
+    warehousesNames: [],
     newWarehouse: {},
     updatedWarehouse: {},
     deletedWarehouse: {},
-    currentWarehouse: {},
 
     users: [],
     usersPageLimit: 1,
@@ -45,12 +47,21 @@ export default new Vuex.Store({
 
     senders: [],
     sendersPageLimit: 1,
+    sendersNames: [],
     newSender: {},
     updatedSender: {},
     deletedSender: {},
 
+    receivers: [],
+    receiversPageLimit: 1,
+    receiversNames: [],
+    newReceiver: {},
+    updatedReceiver: {},
+    deletedReceiver: {},
+
     carriers: [],
     carriersPageLimit: 1,
+    carriersNames: [],
     newCarrier: {},
     updatedCarrier: {},
     deletedCarrier: {},
@@ -58,13 +69,14 @@ export default new Vuex.Store({
 
     drivers: [],
     driversPageLimit: 1,
+    driversNames: [],
     newDriver: {},
     updatedDriver: {},
     deletedDriver: {},
-    currentDriver: {},
 
     transport: [],
     transportPageLimit: 1,
+    transportNames: [],
     newTransport: {},
     updatedTransport: {},
     deletedTransport: {},
@@ -73,9 +85,18 @@ export default new Vuex.Store({
     TTNPageLimit: 1,
     newTTN: {},
     updatedTTN: {},
+    userInfo: {},
 
-    toast: {}
-    },
+    goods: [],
+    goodsItemInit: {},
+    goodsItemComputedVolume: 0,
+    storagesComputedCapacity: [],
+    writeOff: {},
+
+    toast: {},
+    chartDateInterval: {},
+    loading: false
+  },
   getters,
   mutations,
   actions

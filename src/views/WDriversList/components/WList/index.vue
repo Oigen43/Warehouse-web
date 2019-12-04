@@ -36,11 +36,10 @@
       </b-card>
     </b-col>
   </b-row>
-  <w-empty-table v-else></w-empty-table>
+  <w-empty-table insert v-else></w-empty-table>
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
     import {
         BRow,
         BCol,
@@ -55,12 +54,13 @@
 
     import router from '../../../../router';
     import * as modal from '../../../../constants/modal';
-    import WEmptyTable from '../../../../components/WEmptyTable';
     import helpers from '../../../../utils/helpers';
+    import WEmptyTable from '../../../../components/WEmptyTable';
 
     export default {
         name: 'WList',
         components: {
+            WEmptyTable,
             BRow,
             BCol,
             BCard,
@@ -69,8 +69,7 @@
             BCardText,
             BCardBody,
             BCardFooter,
-            BButton,
-            WEmptyTable
+            BButton
         },
         props: ['drivers'],
         data() {
@@ -88,12 +87,8 @@
             }
         },
         methods: {
-            ...mapActions({
-                getUpdatedDriverData: 'getUpdatedDriver'
-            }),
             clickedUpdateButton(item) {
-                this.getUpdatedDriverData(item);
-                router.push('/drivers/update');
+                router.push(`drivers/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.DRIVER_TEXT, {

@@ -1,12 +1,13 @@
 <template>
   <w-table
+    :insert="hasPermissions(this.routesPermissions.TTN.create)"
     :items="items"
     :fields="fields">
     <template
       v-slot:cell(buttons)="data">
       <b-button
         v-if="hasUpdateAction(data.item)"
-        class="w-table-update-button"
+        class="w-ttn-button w-table-update-button"
         variant="dark"
         size="sm"
         @click="clickedUpdateButton(data.item)">
@@ -19,37 +20,49 @@
         @click="clickedDeleteButton(data.item)">
         ✕
       </b-button>
-    </template>
-    <template
-      v-slot:cell(options)="data">
       <b-button
         v-if="hasCheckAction(data.item)"
-        class="w-table-check-button"
+        class="w-ttn-button"
         variant="dark"
         size="sm"
-      >
+        @click="clickedCheckButton(data.item)">
         Check
       </b-button>
       <b-button
-        v-if="hasTakeOutAction(data.item)"
-        class="w-table-take-out-button"
+        v-if="hasOutAction(data.item)"
+        class="w-ttn-button"
         variant="dark"
         size="sm"
-        @click="clickedTakeOutButton(data.item)">
-        Take out
+        @click="clickedOutButton(data.item)">
+        Out
+      </b-button>
+      <b-button
+        v-if="hasStorageAction(data.item)"
+        class="w-ttn-button"
+        variant="dark"
+        size="sm"
+        @click="clickedStorageButton(data.item)">
+        Storage
+      </b-button>
+      <b-button
+        v-if="hasShowAction(data.item)"
+        class="w-ttn-button"
+        variant="dark"
+        size="sm"
+        @click="clickedShowButton(data.item)">
+        Show
       </b-button>
     </template>
   </w-table>
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
     import { BButton } from 'bootstrap-vue';
 
+    import router from '../../../../router';
     import { validation } from '../../../../components/mixins/validation';
     import routesPermissions from '../../../../constants/routesPermissions';
     import WTable from '../../../../components/WTable';
-    import router from '../../../../router';
     import * as modal from '../../../../constants/modal';
     import * as statuses from '../../../../constants/statuses';
 
@@ -61,69 +74,59 @@
             WTable
         },
         props: ['TTN'],
+        data() {
+            return {
+                fields: [
+                    'number', 'registrationDate', 'type', 'status',
+                    { key: 'Carrier.name', label: 'Carrier' },
+                    { key: 'Sender', label: 'Sender' },
+                    { key: 'Receiver', label: 'Receiver' },
+                    { key: 'buttons', label: '', class: 'w-list-button' },
+                    { key: 'blank', label: '', class: 'w-blank-column' }
+                ]
+            };
+        },
         computed: {
-            fields: function () {
-                const fieldsList = [
-                    'number', 'registrationDate', 'type', 'status', 'carrier', 'sender_receiver',
-                  { key: 'blank', label: '', class: 'w-blank-column' }
-                ];
-
-                this.hasOptionsColumn && fieldsList.splice(fieldsList.length - 1, 0, { key: 'options', label: '', class: 'w-list-button' });
-
-                this.hasButtonsColumn && fieldsList.splice(fieldsList.length - 1, 0, { key: 'buttons', label: '', class: 'w-list-button' });
-
-                return fieldsList;
-            },
-            hasButtonsColumn() {
-                return this.TTN.some(item => {
-                    return item.status === statuses.REGISTERED_STATUS &&
-                        this.hasPermissions(this.routesPermissions.TTN.update) &&
-                        this.hasPermissions(this.routesPermissions.TTN.delete);
-                });
-            },
-            hasOptionsColumn() {
-                return this.TTN.some(item => {
-                    return item.status === statuses.CONFIRMED_STATUS ||
-                        item.status === statuses.RELEASE_ALLOWED_STATUS;
-                });
-            },
-
-            items: function() {
+            items: function () {
                 this.TTN.forEach(item => {
-                    item.registrationDate = item.registrationDate.slice(0, 10);
+                    item.registrationDate = `${item.registrationDate.slice(0, 10)} ${item.registrationDate.slice(11, 19)}`;
+                    item.Sender = item.Sender ? item.Sender.senderName : 'N/A';
+                    item.Receiver = item.Receiver ? item.Receiver.receiverName : 'N/A';
                 });
-
                 return this.TTN;
             },
-
             routesPermissions: function () {
               return routesPermissions;
-            },
+            }
         },
         methods: {
-            ...mapActions({
-                getUpdatedTTNData: 'getUpdatedTTN'
-            }),
             hasUpdateAction(item) {
-              return item.status === statuses.REGISTERED_STATUS &&
-                this.hasPermissions(this.routesPermissions.TTN.update);
+                return (item.status === statuses.REGISTERED_STATUS || item.status === statuses.RELEASE_ALLOWED_STATUS) &&
+                    this.hasPermissions(this.routesPermissions.TTN.update);
             },
             hasDeleteAction(item) {
-              return item.status === statuses.REGISTERED_STATUS &&
-                this.hasPermissions(this.routesPermissions.TTN.delete);
+                return (item.status === statuses.REGISTERED_STATUS || item.status === statuses.RELEASE_ALLOWED_STATUS) &&
+                    this.hasPermissions(this.routesPermissions.TTN.delete);
             },
             hasCheckAction(item) {
-              return (item.status === statuses.REGISTERED_STATUS ||
-                item.status === statuses.RELEASE_ALLOWED_STATUS) &&
+                return (item.status === statuses.REGISTERED_STATUS ||
+                item.status === statuses.TAKEN_OUT_OF_STORAGE_STATUS) &&
                 this.hasPermissions(this.routesPermissions.TTN.check);
             },
-            hasTakeOutAction(item) {
-              return item.status === statuses.CONFIRMED_STATUS &&
-                this.hasPermissions(this.routesPermissions.TTN.takeOut);
+            hasOutAction(item) {
+                return (item.status === statuses.IN_STORAGE_STATUS &&
+                this.hasPermissions(this.routesPermissions.TTN.out));
+            },
+            hasStorageAction(item) {
+                return (item.status === statuses.CONFIRMED_STATUS || statuses.RELEASE_ALLOWED_STATUS) &&
+                    this.hasPermissions(this.routesPermissions.TTN.storage);
+            },
+            hasShowAction(item) {
+                return (item.status === statuses.ARCHIVED_STATUS || statuses.VERIFICATION_COMPLETED_STATUS) &&
+                    this.hasPermissions(this.routesPermissions.TTN.getById);
             },
             clickedUpdateButton(item) {
-                this.getUpdatedTTNData(item);
-                router.push('/ttn/update');
+                router.push(`/gcn/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.TTN_DELETE_TEXT, {
@@ -132,19 +135,25 @@
                 })
                     .then(value => value && this.deleteTTN(item));
             },
+            clickedOutButton(item) {
+                router.push(`/gcn/${item.id}/addOut`);
+            },
             deleteTTN(item) {
                 this.$emit('delete-button-clicked', item);
             },
-            clickedTakeOutButton(item) {
-                this.$bvModal.msgBoxConfirm(modal.TTN_TAKE_OUT_TEXT, {
-                    title: `${modal.TTN_TAKE_OUT_TITLE} ${item.number} ${item.registrationDate}`,
-                    ...modal.CONFIRM_MODAL_OPTIONS
-                })
-                    .then(value => value && this.takeOutTTN(item));
+            clickedStorageButton(item) {
+                router.push(`/gcn/${item.id}/storage-goods`);
             },
-            takeOutTTN(item) {
-                this.$emit('take-out-button-clicked', item);
+            clickedCheckButton(item) {
+                router.push(`/gcn/${item.id}/check`);
+            },
+            clickedShowButton(item) {
+                router.push(`/gcn/${item.id}`);
             }
         }
     };
 </script>
+
+<style lang="scss" scoped>
+  @import './styles.scss';
+</style>

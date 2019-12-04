@@ -7,7 +7,7 @@
           <b-col>
             <b-button
               variant="dark"
-              to="/warehouses/add"
+              to="warehouses/add"
               class="w-warehouses-add-button"
               v-if="hasPermissions(routesPermissions.warehouses.create)"
             >add warehouse
@@ -17,7 +17,7 @@
         <div class="warehouses-list">
           <w-list
             @delete-button-clicked="clickedDeleteButton"
-            :warehousesList="warehouses"
+            :warehouses="warehouses"
           ></w-list>
         </div>
         <b-row>
@@ -65,11 +65,13 @@
         computed: {
             ...mapState([
                 'warehouses',
-                'warehousesPageLimit',
-                'currentCompany'
+                'warehousesPageLimit'
             ]),
             routesPermissions: function() {
               return routesPermissions;
+            },
+            companyId: function() {
+                return this.$route.params.companyId;
             }
         },
         methods: {
@@ -83,7 +85,7 @@
                 this.fetchWarehousesList({
                     page: this.currentPage,
                     perPage: this.perPage,
-                    companyId: this.currentCompany.id
+                    companyId: this.companyId
                 });
             },
             async clickedDeleteButton(item) {
@@ -95,7 +97,7 @@
                 this.fetchWarehousesList({
                     page: this.currentPage,
                     perPage: this.perPage,
-                    companyId: this.currentCompany.id
+                    companyId: this.companyId
                 });
             }
         },
@@ -103,7 +105,7 @@
             this.fetchWarehousesList({
                 page: this.currentPage,
                 perPage: this.perPage,
-                companyId: this.currentCompany.id
+                companyId: this.companyId
             });
         }
     };

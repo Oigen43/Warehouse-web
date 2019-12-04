@@ -1,17 +1,21 @@
 <template>
   <b-row>
-    <b-col class="w-warehouses-update-form" lg="3" sm="12" offset-lg="4">
+    <b-col
+      v-if="updatedWarehouse.id"
+      class="w-warehouses-update-form"
+      lg="4"
+      offset-lg="4">
       <h1 class="w-warehouses-update-form-h1">Update Warehouse</h1>
       <w-form
         @form-submitted="sendData"
         submitButtonName="UPDATE WAREHOUSE"
         :id="warehouseId"
         :warehouseName="warehouseName"
-        :address="address"
+        :address="warehouseAddress"
       ></w-form>
       <b-button
         variant="link"
-        to="/warehouses"
+        @click="redirect"
         class="w-warehouses-go-back-link"
       >Go Back
       </b-button>
@@ -38,28 +42,36 @@
             ...mapState([
                 'updatedWarehouse'
             ]),
+            companyId() {
+              return this.$route.params.companyId;
+            },
             warehouseId() {
-                return this.updatedWarehouse.id;
+                return +this.$route.params.warehouseId;
             },
             warehouseName() {
                 return this.updatedWarehouse.warehouseName;
             },
-            address() {
+            warehouseAddress() {
                 return this.updatedWarehouse.address;
             }
         },
         methods: {
             ...mapActions({
+                getUpdatedWarehouseData: 'getUpdatedWarehouse',
                 sendUpdatedWarehouseData: 'sendUpdatedWarehouse'
             }),
             redirect() {
-                router.push('/warehouses');
+                router.push(`/companies/${this.companyId}/warehouses`);
             },
             async sendData(warehouse) {
                 const res = await this.sendUpdatedWarehouseData(warehouse);
+
                 !res.error && this.redirect();
             }
         },
+        created: function() {
+            this.getUpdatedWarehouseData(this.warehouseId);
+        }
     };
 </script>
 

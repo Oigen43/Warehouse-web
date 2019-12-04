@@ -1,6 +1,10 @@
 <template>
   <b-row>
-    <b-col class="w-companies-update-form" lg="3" sm="12" offset-lg="4">
+    <b-col
+      v-if="updatedCompany.id"
+      class="w-companies-update-form"
+      lg="4"
+      offset-lg="4">
       <h1 class="w-company-update-form-h1">Update Company</h1>
       <w-form
         @form-submitted="sendData"
@@ -40,7 +44,7 @@
                 'updatedCompany'
             ]),
             companyId() {
-                return this.updatedCompany.id;
+                return +this.$route.params.companyId;
             },
             companyName() {
                 return this.updatedCompany.companyName;
@@ -54,6 +58,7 @@
         },
         methods: {
             ...mapActions({
+                getUpdatedCompanyData: 'getUpdatedCompany',
                 sendUpdatedCompanyData: 'sendUpdatedCompany'
             }),
             redirect() {
@@ -61,9 +66,13 @@
             },
             async sendData(company) {
                 const res = await this.sendUpdatedCompanyData(company.company);
+
                 !res.error && this.redirect();
             }
         },
+        created: function() {
+            this.getUpdatedCompanyData(this.companyId);
+        }
     };
 </script>
 

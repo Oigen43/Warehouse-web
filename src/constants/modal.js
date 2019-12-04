@@ -8,16 +8,16 @@ export const STORAGE_TEXT = 'Please confirm that you want to delete the storage.
 export const STORAGE_TITLE = 'Delete storage';
 export const SENDER_TEXT = 'Please confirm that you want to delete the sender.';
 export const SENDER_TITLE = 'Delete sender';
+export const RECEIVER_TEXT = 'Please confirm that you want to delete the receiver.';
+export const RECEIVER_TITLE = 'Delete receiver';
 export const CARRIER_TEXT = 'Please confirm that you want to delete the carrier.';
 export const CARRIER_TITLE = 'Delete carrier';
 export const DRIVER_TEXT = 'Please confirm that you want to delete the driver.';
 export const DRIVER_TITLE = 'Delete driver';
 export const TRANSPORT_TEXT = 'Please confirm that you want to delete the transport.';
 export const TRANSPORT_TITLE = 'Delete transport';
-export const TTN_DELETE_TEXT = 'Please confirm that you want to delete the TTN.';
-export const TTN_DELETE_TITLE = 'Delete TTN';
-export const TTN_TAKE_OUT_TEXT = 'Please confirm that you want to set TTN as taken out';
-export const TTN_TAKE_OUT_TITLE = 'Take out TTN';
+export const TTN_DELETE_TEXT = 'Please confirm that you want to delete the GCN.';
+export const TTN_DELETE_TITLE = 'Delete GCN';
 
 export const CONFIRM_MODAL_OPTIONS = {
   size: 'md',

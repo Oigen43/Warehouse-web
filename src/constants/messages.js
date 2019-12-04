@@ -7,6 +7,8 @@ export default {
   'company.update.error': 'Can not update company',
   'company.delete.success': 'Company deleted!',
   'company.delete.error': 'Can not delete company',
+  'company.get.prices.error': 'Can not get companies prices',
+  'company.not.active': 'Your company is inactive',
 
   'user.get.error': 'Can not get user',
   'users.list.get.error': 'Can not get users list',
@@ -34,7 +36,7 @@ export default {
 
   'user.get.confirmation.form.success': 'Success, you have permissions',
   'user.get.confirmation.form.error': 'Fail, you have not permissions',
-  'user.roles.get.error': 'Can nor get user roles',
+  'user.roles.get.error': 'Can not get user roles',
   'user.registration.success': 'Registration completed',
   'user.log.in': 'Login successful!',
   'user.find.error': 'Can not find user',
@@ -55,7 +57,7 @@ export default {
 
   'storage.types.list.get.error': 'Can not get storage types list!',
 
-  'sender.list.get.error': 'Can not get senders list!',
+  'senders.list.get.error': 'Can not get senders list!',
   'sender.name.conflict': 'This sender already exists!',
   'sender.get.unknown': 'This sender does not exist!',
   'sender.create.success': 'Sender created!',
@@ -64,6 +66,16 @@ export default {
   'sender.update.error': 'Can not update sender!',
   'sender.delete.success': 'Sender deleted!',
   'sender.delete.error': 'Can not delete sender!',
+
+  'receivers.list.get.error': 'Can not get receivers list!',
+  'receiver.name.conflict': 'This receiver already exists!',
+  'receiver.get.unknown': 'This receiver does not exist!',
+  'receiver.create.success': 'Receiver created!',
+  'receiver.create.error': 'Can not create receiver!',
+  'receiver.update.success': 'Receiver updated!',
+  'receiver.update.error': 'Can not update receiver!',
+  'receiver.delete.success': 'Receiver deleted!',
+  'receiver.delete.error': 'Can not delete receiver!',
 
   'carriers.list.get.error': 'Can not get carriers list',
   'carrier.get.unknown': 'This carrier does not exist',
@@ -95,13 +107,35 @@ export default {
   'transport.delete.success': 'Transport deleted!',
   'transport.delete.error': 'Can not delete transport',
 
-  'ttn.list.get.error': 'Can not get TTN list',
-  'ttn.get.unknown': 'This TTN does not exist',
-  'ttn.name.conflict': 'This TTN already exists!',
-  'ttn.create.success': 'TTN created!',
-  'ttn.create.error': 'Can not create TTN',
-  'ttn.update.success': 'TTN updated!',
-  'ttn.update.error': 'Can not update TTN',
-  'ttn.delete.success': 'TTN deleted!',
-  'ttn.delete.error': 'Can not delete TTN',
+  'ttn.number.conflict': 'GCN with this number already exists',
+  'ttn.list.get.error': 'Can not get GCN list',
+  'ttn.get.unknown': 'This GCN does not exist',
+  'ttn.name.conflict': 'This GCN already exists!',
+  'ttn.create.success': 'GCN created!',
+  'ttn.create.error': 'Can not create GCN',
+  'ttn.update.success': 'GCN updated!',
+  'ttn.update.error': 'Can not update GCN',
+  'ttn.delete.success': 'GCN deleted!',
+  'ttn.delete.error': 'Can not delete GCN',
+  'ttn.status.update.success': 'GCN status updated',
+  'ttn.status.update.error': 'Can not update GCN status',
+
+  'goods.create.error': 'Can not create goods',
+  'goods.list.get.error': 'Can not get goods list',
+  'goods.delete.error': 'Can not delete goods',
+  'goods.get.unknown': 'This goods does not exist',
+
+  'goods.storage.create.success': 'Storage was selected for the goods!',
+  'goods.storage.create.error': 'Can not select this storage',
+  'goods.storage.get.unknown': 'This goods does not exist',
+
+  'write.off.name.conflict': 'This write-off already exists!',
+  'write.off.create.success': 'Write-off created',
+  'write.off.create.error': 'Can not create write-off',
+
+  'history.price.create.success': 'History price created',
+  'history.price.update.success': 'History price updated',
+  'history.price.update.error': 'Can not update history price',
+  'history.price.create.error': 'Can not create history price'
+
 };

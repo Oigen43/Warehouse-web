@@ -1,6 +1,10 @@
 <template>
   <b-row>
-    <b-col class="w-drivers-update-form" lg="3" sm="12" offset-lg="4">
+    <b-col
+      v-if="updatedDriver.id"
+      class="w-drivers-update-form"
+      lg="4"
+      offset-lg="4">
       <h1 class="w-drivers-update-form-h1">Update Driver</h1>
       <w-form
         @form-submitted="sendData"
@@ -13,7 +17,7 @@
       ></w-form>
       <b-button
         variant="link"
-        to="/drivers"
+        @click="redirect"
         class="w-drivers-go-back-link"
       >Go Back
       </b-button>
@@ -40,8 +44,11 @@
             ...mapState([
                 'updatedDriver'
             ]),
+            carrierId() {
+                return +this.$route.params.carrierId;
+            },
             driverId() {
-                return this.updatedDriver.id;
+                return +this.$route.params.driverId;
             },
             firstName() {
                 return this.updatedDriver.firstName;
@@ -58,15 +65,20 @@
         },
         methods: {
             ...mapActions({
+                getUpdatedDriverData: 'getUpdatedDriver',
                 sendUpdatedDriverData: 'sendUpdatedDriver'
             }),
             redirect() {
-                router.push('/drivers');
+                router.push(`/carriers/${this.carrierId}/drivers`);
             },
             async sendData(driver) {
                 const res = await this.sendUpdatedDriverData(driver);
+
                 !res.error && this.redirect();
             }
+        },
+        created: function() {
+            this.getUpdatedDriverData(this.driverId);
         }
     };
 </script>

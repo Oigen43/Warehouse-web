@@ -24,6 +24,9 @@ import WStoragesUpdateForm from '../views/WStoragesUpdate';
 import WSendersList from '../views/WSendersList';
 import WSendersAddForm from '../views/WSendersAdd';
 import WSendersUpdateForm from '../views/WSendersUpdate';
+import WReceiversList from '../views/WReceiversList';
+import WReceiversAddForm from '../views/WReceiversAdd';
+import WReceiversUpdateForm from '../views/WReceiversUpdate';
 import WCarriersList from '../views/WCarriersList';
 import WCarriersAddForm from '../views/WCarriersAdd';
 import WCarriersUpdateForm from '../views/WCarriersUpdate';
@@ -34,16 +37,22 @@ import WTransportList from '../views/WTransportList';
 import WTransportAddForm from '../views/WTransportAdd';
 import WTransportUpdateForm from '../views/WTransportUpdate';
 import WTTNList from '../views/WTTNList';
+import WGoodsStorageForm from '../views/WGoodsStorageForm';
+import WGoodsStorageAdd from '../views/WGoodsStorageAdd';
 import WNotFound from '../views/WNotFound';
+import WTTNAddForm from '../views/WTTNAdd';
+import WTTNUpdateForm from '../views/WTTNUpdate';
+import WTTNCheckForm from '../views/WTTNCheck';
+import WTTN from '../views/WTTN';
+import WWriteOffGoodsForm from '../views/WWriteOffGoods';
+import WChart from '../views/WChart';
 
 Vue.use(Router);
 
 const ifAuthenticated = (to, from, next) => {
   const { authorize } = to.meta;
 
-  if (store.state.token) {
-    next();
-  } else {
+  if (!store.state.token) {
     next('/login');
     return;
   }
@@ -109,28 +118,28 @@ export default new Router({
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/companies/update',
+      path: '/companies/:companyId/update',
       name: 'companiesUpdateForm',
       component: WCompaniesUpdateForm,
       meta: { authorize: routesPermissions.companies.update },
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/warehouses',
+      path: '/companies/:companyId/warehouses',
       name: 'warehouses',
       component: WWarehousesList,
       meta: { authorize: routesPermissions.warehouses.read },
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/warehouses/add',
+      path: '/companies/:companyId/warehouses/add',
       name: 'warehousesAddForm',
       component: WWarehousesAddForm,
       meta: { authorize: routesPermissions.warehouses.create },
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/warehouses/update',
+      path: '/companies/:companyId/warehouses/:warehouseId/update',
       name: 'warehousesUpdateForm',
       component: WWarehousesUpdateForm,
       meta: { authorize: routesPermissions.warehouses.update },
@@ -151,7 +160,7 @@ export default new Router({
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/users/update',
+      path: '/users/:userId/update',
       name: 'usersUpdateForm',
       meta: { authorize: routesPermissions.users.update },
       component: WUsersUpdateForm,
@@ -172,49 +181,49 @@ export default new Router({
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/carriers/update',
+      path: '/carriers/:carrierId/update',
       name: 'carriersUpdateForm',
       component: WCarriersUpdateForm,
       meta: { authorize: routesPermissions.carriers.update },
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/drivers',
+      path: '/carriers/:carrierId/drivers',
       name: 'drivers',
       component: WDriversList,
       meta: { authorize: routesPermissions.drivers.read },
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/drivers/add',
+      path: '/carriers/:carrierId/drivers/add',
       name: 'driversAddForm',
       component: WDriversAddForm,
       meta: { authorize: routesPermissions.drivers.create },
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/drivers/update',
+      path: '/carriers/:carrierId/drivers/:driverId/update',
       name: 'driversUpdateForm',
       component: WDriversUpdateForm,
       meta: { authorize: routesPermissions.drivers.update },
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/storages',
+      path: '/companies/:companyId/warehouses/:warehouseId/storages',
       name: 'storages',
       component: WStoragesList,
       meta: { authorize: routesPermissions.storages.read },
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/storages/add',
+      path: '/companies/:companyId/warehouses/:warehouseId/storages/add',
       name: 'WStoragesAddForm',
       component: WStoragesAddForm,
       meta: { authorize: routesPermissions.storages.create },
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/storages/update',
+      path: '/companies/:companyId/warehouses/:warehouseId/storages/:storageId/update',
       name: 'WStoragesUpdateForm',
       component: WStoragesUpdateForm,
       meta: { authorize: routesPermissions.storages.update },
@@ -235,41 +244,127 @@ export default new Router({
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/senders/update',
+      path: '/senders/:senderId/update',
       name: 'sendersUpdateForm',
       component: WSendersUpdateForm,
       meta: { authorize: routesPermissions.senders.update },
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/transport',
+      path: '/receivers',
+      name: 'receivers',
+      component: WReceiversList,
+      meta: { authorize: routesPermissions.receivers.read },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/receivers/add',
+      name: 'receiversAddForm',
+      component: WReceiversAddForm,
+      meta: { authorize: routesPermissions.receivers.create },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/receivers/:receiverId/update',
+      name: 'receiversUpdateForm',
+      component: WReceiversUpdateForm,
+      meta: { authorize: routesPermissions.receivers.update },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/carriers/:carrierId/transport',
       name: 'transport',
       component: WTransportList,
       meta: { authorize: routesPermissions.transport.read },
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/transport/add',
+      path: '/carriers/:carrierId/transport/add',
       name: 'transportAddForm',
       component: WTransportAddForm,
       meta: { authorize: routesPermissions.transport.create },
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/transport/update',
+      path: '/carriers/:carrierId/transport/:transportId/update',
       name: 'transportUpdateForm',
       component: WTransportUpdateForm,
       meta: { authorize: routesPermissions.transport.update },
       beforeEnter: ifAuthenticated,
     },
     {
-      path: '/ttn',
-      name: 'ttn',
-      component: WTTNList
+      path: '/gcn',
+      name: 'TTNList',
+      component: WTTNList,
+      meta: { authorize: routesPermissions.TTN.read },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/gcn/add',
+      name: 'TTNAddForm',
+      component: WTTNAddForm,
+      meta: { authorize: routesPermissions.TTN.create },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/gcn/:TTNId/update',
+      name: 'TTNUpdateForm',
+      component: WTTNUpdateForm,
+      meta: { authorize: routesPermissions.TTN.update },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/gcn/:TTNId/addOut',
+      name: 'TTNAddOutForm',
+      component: WTTNAddForm,
+      meta: { authorize: routesPermissions.TTN.out },
+      beforeEnter: ifAuthenticated
+    },
+    {
+      path: '/gcn/:TTNId/check',
+      name: 'TTNCheckForm',
+      component: WTTNCheckForm,
+      meta: { authorize: routesPermissions.TTN.check },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/gcn/:TTNId/write-off',
+      name: 'WriteOffGoodsForm',
+      component: WWriteOffGoodsForm,
+      meta: { authorize: routesPermissions.writeOffs.create },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/gcn/:TTNId/storage-goods',
+      name: 'goods-storage-form',
+      component: WGoodsStorageForm,
+      meta: { authorize: routesPermissions.goodsStorage.read },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/gcn/:TTNId/storage-goods/:goodsId/add',
+      name: 'choose-goods-storage-form',
+      component: WGoodsStorageAdd,
+      meta: { authorize: routesPermissions.goodsStorage.create },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/gcn/:TTNId',
+      name: 'TTN',
+      component: WTTN,
+      meta: { authorize: routesPermissions.TTN.getById },
+      beforeEnter: ifAuthenticated,
+    },
+    {
+      path: '/chart',
+      name: 'WChart',
+      component: WChart,
+      meta: { authorize: routesPermissions.chart.read },
+      beforeEnter: ifAuthenticated,
     },
     {
       path: '*',
       component: WNotFound,
-    }
+    },
   ]
 });

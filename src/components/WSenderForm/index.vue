@@ -1,26 +1,43 @@
 <template>
   <b-form @submit.prevent="onSubmit" class="w-senders-form">
+    <label
+      class="w-senders-form-input-label"
+      for="sender-name-input">
+      Sender name:
+    </label>
     <b-form-input
+      id="sender-name-input"
       size="lg"
       v-model="form.senderName"
       required
-      placeholder="Sender name"
       class="w-senders-form-input"
     ></b-form-input>
 
+    <label
+      class="w-senders-form-input-label"
+      for="sender-tin-input">
+      Sender TIN (taxpayer identification number):
+    </label>
     <b-form-input
+      id="sender-tin-input"
       size="lg"
       v-model="form.upn"
+      type="number"
+      min="1"
       required
-      placeholder="Sender UPN"
       class="w-senders-form-input"
     ></b-form-input>
 
+    <label
+      class="w-senders-form-input-label"
+      for="sender-country-code-input">
+      Sender country code:
+    </label>
     <b-form-input
+      id="sender-country-code-input"
       size="lg"
       v-model="form.countryCode"
       required
-      placeholder="Sender country code"
       class="w-senders-form-input"
     ></b-form-input>
 
@@ -56,8 +73,8 @@
                 default: '',
             },
             upn: {
-                type: String,
-                default: '',
+                type: Number,
+                default: null
             },
             countryCode: {
                 type: String,

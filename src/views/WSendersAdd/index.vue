@@ -1,6 +1,6 @@
 <template>
   <b-row>
-    <b-col class="w-senders-add-form" lg="3" sm="12" offset-lg="4">
+    <b-col class="w-senders-add-form" lg="4" offset-lg="4">
       <h1 class="w-senders-add-form-h1">Add a New Sender</h1>
       <w-form
         @form-submitted="sendData"
@@ -37,7 +37,7 @@
         data: function () {
             return {
                 senderName: '',
-                upn: '',
+                upn: null,
                 countryCode: ''
             };
         },
@@ -50,6 +50,7 @@
             },
             async sendData(newSender) {
                 const res = await this.sendNewSenderData(newSender);
+
                 !res.error && this.redirect();
             }
         }

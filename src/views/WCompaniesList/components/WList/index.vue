@@ -1,12 +1,15 @@
 <template>
   <w-table
+    :insert="hasPermissions(routesPermissions.companies.create)"
     :items="companiesList"
     :fields="fields">
     <template
       v-slot:cell(active)="data">
       <b-form-checkbox
         v-model="data.value"
-        disabled>
+        @input="activeButtonClicked(data)"
+        :disabled="!hasPermissions(routesPermissions.companies.delete)"
+        >
       </b-form-checkbox>
     </template>
     <template
@@ -16,11 +19,18 @@
         size="sm"
         @click="clickedWarehousesButton(data.item)">
         Warehouses
-      </b-button
-      >
+      </b-button>
     </template>
     <template
       v-slot:cell(buttons)="data">
+      <b-button
+        class="w-table-change-price-button"
+        variant="dark"
+        size="sm"
+        @click="clickedChangePriceButton(data.item)"
+        v-if="hasPermissions(routesPermissions.companies.delete)">
+        Change price
+      </b-button>
       <b-button
         class="w-table-update-button"
         variant="dark"
@@ -90,16 +100,17 @@
         methods: {
             ...mapActions({
                 getUpdatedCompanyData: 'getUpdatedCompany',
-                sendDeletedCompanyData: 'deleteCompany',
-                setCurrentCompany: 'setCurrentCompany',
+                sendDeletedCompanyData: 'deleteCompany'
             }),
+            activeButtonClicked(data) {
+                data.item.active = data.value;
+                this.$emit('active-button-clicked', data.item);
+            },
             clickedWarehousesButton(item) {
-                this.setCurrentCompany({ id: item.id, companyName: item.companyName });
-                router.push('/warehouses');
+                router.push(`companies/${item.id}/warehouses`);
             },
             clickedUpdateButton(item) {
-                this.getUpdatedCompanyData(item);
-                router.push('/companies/update');
+                router.push(`/companies/${item.id}/update`);
             },
             clickedDeleteButton(item) {
                 this.$bvModal.msgBoxConfirm(modal.COMPANY_TEXT, {
@@ -107,6 +118,9 @@
                     ...modal.CONFIRM_MODAL_OPTIONS
                 })
                     .then(value => value && this.deleteCompany(item));
+            },
+            clickedChangePriceButton(item) {
+                this.$emit('change-price-button-clicked', item);
             },
             deleteCompany(item) {
                 this.$emit('delete-button-clicked', item);

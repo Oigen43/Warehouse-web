@@ -1,17 +1,19 @@
 <template>
   <b-row>
-    <b-col class="w-storages-add-form" lg="3" sm="12" offset-lg="4">
+    <b-col v-if="storageTypes.length" class="w-storages-add-form" lg="4" offset-lg="4">
       <h1 class="w-storages-add-form-h1">Add a New Storage</h1>
       <w-form
         @form-submitted="sendData"
         submitButtonName="ADD STORAGE"
+        :currentCapacityCheck="false"
         :storageTypes="storageTypes"
         :selectedStorageType="selectedStorageType"
         :storageCapacity="storageCapacity"
+        :currentCapacity="currentCapacity"
       ></w-form>
       <b-button
         variant="link"
-        to="/storages"
+        @click="redirect"
         class="w-storages-go-back-link"
       >Go Back
       </b-button>
@@ -36,7 +38,8 @@
         },
         data: function () {
             return {
-                storageCapacity: '',
+                storageCapacity: null,
+                currentCapacity: null,
                 selectedStorageType: null
             };
         },
@@ -44,20 +47,32 @@
             ...mapState([
                 'currentWarehouse',
                 'storageTypes'
-            ])
+            ]),
+            companyId() {
+                return +this.$route.params.companyId;
+            },
+            warehouseId() {
+                return +this.$route.params.warehouseId;
+            },
         },
         methods: {
             ...mapActions({
+                fetchStorageTypes: 'fetchStorageTypes',
                 sendNewStorageData: 'createStorage'
             }),
             redirect() {
-                router.push('/storages');
+                router.push(`/companies/${this.companyId}/warehouses/${this.warehouseId}/storages`);
             },
             async sendData(newStorage) {
-                newStorage.warehouseInfo = this.currentWarehouse;
+                newStorage.warehouseId = this.warehouseId;
+
                 const res = await this.sendNewStorageData(newStorage);
+
                 !res.error && this.redirect();
             }
+        },
+        created: function() {
+            this.fetchStorageTypes();
         }
     };
 </script>

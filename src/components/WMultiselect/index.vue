@@ -2,8 +2,6 @@
     <multiselect
         v-bind="$attrs"
         v-on="$listeners"
-        :taggable="true"
-        :searchable="false"
         @tag="addTag"
     ></multiselect>
 </template>

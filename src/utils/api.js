@@ -57,6 +57,12 @@ export default {
       params: params
     }));
   },
+  getById: function (customURL, id) {
+    return requestHelper(axios.get(`${url.BASE_URL}${customURL}/${id}`));
+  },
+  getUserInfo: function(customURL) {
+    return requestHelper(axios.get(`${url.BASE_URL}${customURL}`));
+  },
   post: function (customURL, req) {
     return requestHelper(axios.post(`${url.BASE_URL}${customURL}`, req));
   },

@@ -1,20 +1,28 @@
 <template>
     <b-form @submit.prevent="onSubmit" class="w-warehouses-form">
+      <label
+        class="w-warehouse-form-input-label"
+        for="warehouse-name-input">
+        Warehouse name:
+      </label>
       <b-form-input
         id="warehouse-name-input"
         size="lg"
         v-model="form.warehouseName"
         required
-        placeholder="Warehouse name"
         class="w-warehouses-form-input"
       ></b-form-input>
 
+      <label
+        class="w-warehouse-form-input-label"
+        for="warehouse-address-input">
+        Warehouse address:
+      </label>
       <b-form-input
         id="warehouse-address-input"
         size="lg"
         v-model="form.address"
         required
-        placeholder="Warehouse address"
         class="w-warehouses-form-input"
       ></b-form-input>
 
@@ -22,8 +30,7 @@
         type="submit"
         variant="outline-dark"
         size="lg"
-        class="w-warehouses-form-button"
-      >
+        class="w-warehouses-form-button">
         {{ submitButtonName }}
       </b-button>
     </b-form>
